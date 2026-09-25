@@ -1,0 +1,136 @@
+--- a/models/demos/audio/cosyvoice2/tt/flow/decoder.py
++++ b/models/demos/audio/cosyvoice2/tt/flow/decoder.py
+@@ -1099,12 +1099,24 @@
+         # it is a device tensor rather than a Python float -- otherwise its value would be
+         # baked into the trace and every replay would use the first step's dt.
+         self._dt_buf = ttnn.from_torch(
+-            torch.full((1, 1, 1), dt0, dtype=torch.float32),
++            torch.zeros(1, 1, 1),
+             dtype=ttnn.bfloat16,
+             layout=ttnn.TILE_LAYOUT,
+             device=self.device,
+             memory_config=ttnn.DRAM_MEMORY_CONFIG,
+         )
++        dt0_dev = self._dt_device(dt0)
++        ttnn.copy(dt0_dev, self._dt_buf)
++        ttnn.deallocate(dt0_dev)
++        # Compile, BEFORE capture, every `ttnn.copy` program the replay loop and `_reuse_trace`
++        # will run into these buffers (temb/dt/x above; the four conditioning refills here).
++        # A copy program first compiled after capture allocates a program-cache device buffer
++        # while the trace is live -- flagged by TT_METAL_TRACE_ALLOC_TRACKING=1 as liable to be
++        # overwritten by the next replay (found 2026-09-25: the per-step `dt` copy).
++        for buf in (self._mu2_buf, self._spks2_buf, self._cond2_buf, self._mask2_buf):
++            tmp = ttnn.clone(buf, memory_config=ttnn.DRAM_MEMORY_CONFIG)
++            ttnn.copy(tmp, buf)
++            ttnn.deallocate(tmp)
+ 
+         def body():
+             x2 = ttnn.concat([self._x_buf, self._x_buf], dim=0)
+@@ -1205,6 +1217,11 @@
+             traced = True
+         except Exception as e:  # noqa: BLE001
+             logger.warning(f"CFM trace capture unavailable, falling back to eager: {e}")
++            if self._mu2_buf is mu_dev:
++                # A failed `_capture` had already ADOPTED these as the trace's buffers; the eager
++                # fallback below still reads them (and frees them at the end), so they must not be
++                # released with the rest.
++                self._mu2_buf = self._spks2_buf = self._cond2_buf = self._mask2_buf = None
+             self._release_trace()
+ 
+         if traced and reused:
+@@ -1220,6 +1237,12 @@
+             ttnn.deallocate(mask_dev)
+ 
+         if traced:
++            # `z_dev` is only ever a copy source (into `_x_buf`, by `_reuse_trace` or `_capture`), so it
++            # is freed BEFORE the first replay: on a reuse it was allocated while this trace is live, and
++            # a buffer from that window still alive at `execute_trace` is one the replay may overwrite
++            # (TT_METAL_TRACE_ALLOC_TRACKING=1 flags it; found 2026-09-25).
++            ttnn.deallocate(z_dev)
++            z_dev = None
+             # The traced body ITSELF allocates nothing during replay -- every tensor `body()`
+             # touches is a persistent buffer. The per-step temb/dt UPLOAD (host -> device,
+             # `_temb_device`/`_dt_device`) is not part of that graph at all; seeing PCC ~0.6
+@@ -1263,7 +1286,8 @@
+                     dt = t_span[step + 1] - t
+             result = x
+ 
+-        ttnn.deallocate(z_dev)
++        if z_dev is not None:
++            ttnn.deallocate(z_dev)
+         if not traced:
+             ttnn.deallocate(mu_dev)
+             ttnn.deallocate(spks_dev)
+--- a/models/demos/audio/cosyvoice2/tests/pcc/test_flow_decoder.py
++++ b/models/demos/audio/cosyvoice2/tests/pcc/test_flow_decoder.py
+@@ -327,3 +327,70 @@
+     passed, pcc = comp_pcc(want, got, GATE_BF16)
+     print(f"\n  device CausalConditionalCFM traced ({n_timesteps}-step Euler) PCC {pcc}")
+     assert passed, pcc
++
++
++@needs_l1_small_trace
++def test_device_cfm_trace_capture_failure_falls_back_to_eager(device, monkeypatch):
++    """If trace capture fails, the solve must fall back to the eager loop on the conditioning tensors it
++    already uploaded -- which capture had ADOPTED as the trace's persistent buffers. Before 2026-09-25 the
++    failure path released the trace's buffers first, freeing exactly those tensors, and the fallback then
++    read freed tensors. Capture is forced to fail here; the fallback must match the torch reference, and a
++    later traced solve (capture working again) must still be correct."""
++    import ttnn
++    from models.demos.audio.cosyvoice2.tt.flow.decoder import (
++        CausalConditionalCFMRef,
++        CausalConditionalDecoderRef,
++        TtCausalConditionalCFM,
++        TtCausalConditionalDecoder,
++    )
++
++    torch.manual_seed(61)
++    dec = CausalConditionalDecoderRef()
++    dec.eval()
++    cfm = CausalConditionalCFMRef(dec)
++    tt_cfm = TtCausalConditionalCFM(device, TtCausalConditionalDecoder(device, dec), cfm.rand_noise, cfm)
++    t_len = 32
++    mu, cond = torch.randn(1, t_len, 80) * 0.1, torch.randn(1, t_len, 80) * 0.1
++    spks, mask = torch.randn(1, 80) * 0.1, torch.ones(1, t_len, 1)
++    with torch.no_grad():
++        want = cfm.forward(mu, mask, n_timesteps=4, spks=spks, cond=cond)
++
++    def failing_capture(*args, **kwargs):
++        raise RuntimeError("forced capture failure")
++
++    try:
++        with monkeypatch.context() as m:
++            m.setattr(ttnn, "begin_trace_capture", failing_capture)
++            got = tt_cfm.forward(mu, mask, 4, spks, cond, use_trace=True)
++        passed, pcc = comp_pcc(want, got, GATE_BF16)
++        print(f"\n  capture failed -> eager fallback PCC {pcc}")
++        assert passed, pcc
++        got = tt_cfm.forward(mu, mask, 4, spks, cond, use_trace=True)
++        passed, pcc = comp_pcc(want, got, GATE_BF16)
++        print(f"  next solve, capture working again (traced) PCC {pcc}")
++        assert passed, pcc
++    finally:
++        tt_cfm.release_cfm_trace()
++
++
++def test_device_cfm_traces_pass_allocation_tracker():
++    """Re-runs this file's traced CFM tests in a subprocess with `TT_METAL_TRACE_ALLOC_TRACKING=1`, under
++    which `ttnn.execute_trace` raises if any buffer allocated while a trace existed is still alive at replay
++    (a buffer the replay may overwrite). Covers the bug class found 2026-09-25 (a copy kernel compiled after
++    capture, the initial-noise upload kept alive across replays), which PCC checks alone did not catch.
++    A subprocess because the tracker is read once at process start (C++ runtime options and the Python
++    `execute_trace` wrapper), so it cannot be switched on inside this already-running process. Skipped when
++    the whole run is already under the tracker -- the traced tests then check it themselves."""
++    import os
++    import subprocess
++    import sys
++
++    if os.environ.get("TT_METAL_TRACE_ALLOC_TRACKING") == "1":
++        pytest.skip("already running under TT_METAL_TRACE_ALLOC_TRACKING=1")
++    env = dict(os.environ, TT_METAL_TRACE_ALLOC_TRACKING="1")
++    cmd = [sys.executable, "-m", "pytest", __file__, "-q", "-p", "no:cacheprovider"]
++    cmd += ["-k", "device_cfm and trace and not allocation_tracker"]
++    r = subprocess.run(cmd, env=env, capture_output=True, text=True, timeout=1800)
++    tail = r.stdout.strip().splitlines()[-1:] if r.stdout.strip() else []
++    print(f"\n  tracker subprocess: {tail}")
++    assert r.returncode == 0, r.stdout[-6000:] + r.stderr[-3000:]
