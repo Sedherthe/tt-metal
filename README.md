@@ -15,6 +15,10 @@ Also here:
 - `design/`: design proposals. `2026-09-27_pipeline_nonstreaming.md` (rev 2) is approved and built through step 5.
 - `reviews/`: checks of documents we were handed (`2026-09-27_cosyvoice1_lessons_verification.md`).
 - `scripts/2026-09-27/`: one-off checks and their logs behind today's FINDINGS entries (not part of the PR).
+- `scripts/perf_2026_09_21/` … `perf_2026_09_25/`, `scripts/vocoder_debug_2026_09_20/`: the dated one-off scripts that
+  used to live in the PR tree under `models/demos/audio/cosyvoice2/scripts/`. They moved here unchanged on 09-27
+  (R15), so their imports and absolute paths still name that old location. Docstrings in the PR cite them as
+  `notes/cosyvoice2:scripts/...`.
 - `history/`: the old status handoffs, unchanged. `BRINGUP_STATUS_25_sept.md` (includes the 09-27 additions and
   the 09-18→09-24 history) and `BRINGUP_STATUS_22_sept.md` (the copy committed on the PR branch, due to be
   removed from there).
