@@ -20,14 +20,14 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
 - The draft PR #56651 description is stale.
 - Action: push, post the progress comment, and apply the PR description. Drafts are in `drafts/`.
 
-### R2 — No streaming pipeline, which is the core deliverable (confirmed). Status: planned (order steps 2–3)
+### R2 — No streaming pipeline, which is the core deliverable (confirmed). Status: non-streaming built `0dbe9c44f4`; streaming planned after bucketing (D17)
 - There is no pipeline or text-to-speech entry point in `tt/`.
 - The frontend is `scripts/vocoder_debug_2026_09_20/cv2_frontend.py`, pulled in with `sys.path` edits.
 - `qwen2lm.generate` (`qwen2lm.py:564`) returns the whole list at the end.
 - `flow.inference` is non-streaming only.
 - `TtHiFTStreamingState` was lost (O3).
 
-### R3 — Stage 1 quality rests on n=1 (confirmed). Status: adjusted
+### R3 — Stage 1 quality rests on n=1 (confirmed). Status: in progress. There is now a fixed corpus (`scripts/corpus.py`, 2 speakers × 3 targets) and a PyTorch reference run, and D21 sets the scoring
 - Evidence:
   - WER 4.17% and SIM 0.889 come from one prompt/target pair (`REF_IDX=0, TGT_IDX=3`) in
     `hf-internal-testing/librispeech_asr_dummy`, validation split. It is not test-clean.
@@ -123,11 +123,11 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
 - The decode trace is scoped to one `generate()`. A trace kept alive across flow and vocoder hung the card (09-21).
 - Simplest option: release the LLM trace at each chunk boundary.
 
-### R13 — The upstream text frontend is missing (confirmed). Status: planned (pipeline step)
+### R13 — The upstream text frontend is missing (confirmed). Status: **fixed `d651a5edfc`** (`tt/text.py`, with parity tests against upstream)
 - Upstream `inference_zero_shot` normalizes text and splits it into segments of at most 80 tokens, calling
   `tts()` once per segment (`cosyvoice.py:93`, `frontend.py:157`).
 
-### R14 — The defaults differ from the reported configuration (confirmed). Status: decided (D14)
+### R14 — The defaults differ from the reported configuration (confirmed). Status: decided (D14). `CosyVoice2Config.reported()` makes it explicit, and the pipeline refuses environment switches (`0dbe9c44f4`)
 - The CFM trace (`decoder.py:639`) and the LLM decode trace are off by default.
 - The "warm" RTF is the same request repeated (see the STATUS checks).
 
@@ -151,12 +151,59 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
 ### R18 — `models/experimental` vs `models/demos/audio` (suspicion). Status: open
 - Ask the maintainers (question 2).
 
-### R19 — Coverage misses length-specific bugs (confirmed). Status: open
+### R19 — Coverage misses length-specific bugs (confirmed). Status: partly addressed. `test_pipeline_api.py` (`0dbe9c44f4`) is a real-weight end-to-end pytest over six lengths
 - The worst bugs so far were length-specific (X1, X2, R6).
 - 15 of 19 test files use random weights, and there is no real-weight end-to-end pytest.
 
 ### R20 — The non-streaming flow golden is our own reimplementation (confirmed gap, low risk). Status: open
 - Run upstream's own flow class once, the way the HiFT isolation test did.
+
+## B: build findings (09-27, steps 3–5)
+
+### B1 — Upstream's LLM reference ran broken under transformers 5.x (confirmed). Status: **fixed `0d687d840e`** (shims); D20 re-examines it with the pinned transformers
+- **The decode mask.** Upstream's `inference_wrapper` passes a length-1 all-ones mask at each decode step.
+  transformers 4.51 dropped it; 5.x right-pads it with zeros (`masking_utils.prepare_padding_mask`), so each step
+  attended to position 0 only.
+  - Measured (`scripts/2026-09-27/ref_mask_check.py`): max |d log p| of 16.4 against a no-cache forward, and 3.1e-5
+    with the mask spanning cache + input.
+  - Unshimmed, the first two corpus cases generated until `max_len` (180 and 440 tokens).
+- **The load dtype.** 5.x also loads `from_pretrained` in the config's dtype (bf16 for BlankEN) where 4.51 loaded
+  fp32. The first matmul failed on mixed dtypes.
+
+### B2 — Distinct-utterance RTF is dominated by first sight of each new length (confirmed). Status: planned (D17)
+- **Three regimes, N150, reported configuration** (`docs/VALIDATION.md`, `0dbe9c44f4`):
+
+  | regime | RTF |
+  |---|---|
+  | new length, kernels not compiled | 21–75 |
+  | new length, kernels on disk | 2.0–2.9 |
+  | a length the process already ran | 0.39–0.56 |
+
+- **Where the time goes, per regime:**
+  - Cold: HiFT 155–370 s and the flow 23–57 s. The LLM is 2–4 s in every regime.
+  - Steady state: HiFT 0.11–0.34 s, the flow 0.8–1.5 s, the LLM 0.9–3.2 s.
+- **Non-streaming lengths are exact**, so every distinct utterance is a new geometry. The earlier "warm RTF ≈ 0.5"
+  was a repeated request (D14).
+
+### B3 — The disk kernel cache is only partly reused across processes (confirmed; mechanism unknown). Status: open
+- **The same lengths, same seeds, same tokens.** The demo compiled them, yet the pytest processes recompiled HiFT
+  for every one.
+- **The flow was reused once:** 494 tokens. Two other lengths recompiled.
+- **Identical call sequences did reuse each other's kernels:** two pytest processes running the same sequence.
+- **All processes share one cache build key.** A hypothesis, unverified: something process-dependent, such as a
+  DRAM address, enters HiFT's conv kernel compile arguments.
+
+### B4 — Device memory across consecutive different-length utterances (confirmed). Status: closed
+- **L1_SMALL:** 0 B/bank for all nine calls of `test_pipeline_api.py`.
+- **DRAM:** grows 10–22 MiB/bank per new length (prepared conv weights), and stays flat on repeats. The
+  free-DRAM eviction bounds it; that eviction was not exercised.
+
+### B5 — The fp32 F0/source default costs nothing in warm RTF (confirmed). Status: closed (O6 follow-up)
+- Warm HiFT is equal within 4 ms for fp32 and bf16 (`scripts/2026-09-27/f0_dtype_rtf_check.py`).
+
+### B6 — TT and the PyTorch reference sample different token sequences under the same seed (expected). Status: note
+- The torch version is the same; the logits differ.
+- Token counts are within 8 % (for example, 176 vs 191).
 
 ## O: older open items
 
@@ -206,3 +253,4 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
 | X13 | Streaming encoder's final (non-aligned) chunk: key-padding term (R5) | `fe1e3dedb8` | `test_flow_checkpoint.py::test_device_streaming_encoder_final_chunk_real_checkpoint` (with control), `test_upsample_conformer_encoder.py::..._final_chunk_bucketed_matches_exact` |
 | X14 | HiFT dtype boundary, bf16 source path into fp32 decoder (O1) | `544d588018` | `test_hift_generator_inference.py::test_device_hift_generator_bf16_source_fp32_decoder` |
 | X15 | #57608 guard, not reproducible on Wormhole (R6) | `5e8ac6e433` (test only) | `test_flow_decoder.py::test_device_decoder_fused_sdpa_ignores_tile_padding_at_t_1_mod_32` |
+| X16 | The reference LLM under transformers 5.x: fp32 load, and the decode mask (B1) | `0d687d840e` | `scripts/2026-09-27/ref_mask_check.py` (notes) |

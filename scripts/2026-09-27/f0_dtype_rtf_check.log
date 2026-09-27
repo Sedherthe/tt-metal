@@ -1,0 +1,10 @@
+# python f0_dtype_rtf_check.py zero_shot_121-127105-0015,zero_shot_121-127105-0003,zero_shot_121-127105-0024 (N150, 2026-09-27, commit 0dbe9c44f4 tree)
+# per case: HiFT seconds per call, [first sight, warm, warm, warm], each dtype
+zero_shot_121-127105-0003 7.04 {'float32': [221.6, 0.182, 0.181, 0.182], 'bfloat16': [13.105, 0.179, 0.18, 0.181]}
+zero_shot_121-127105-0015 3.36 {'float32': [162.593, 0.108, 0.105, 0.106], 'bfloat16': [13.095, 0.107, 0.11, 0.11]}
+zero_shot_121-127105-0024 13.04 {'float32': [330.63, 0.323, 0.322, 0.323], 'bfloat16': [18.023, 0.323, 0.323, 0.324]}
+| case | audio s | HiFT first sight fp32 / bf16 s | HiFT warm fp32 / bf16 s | warm difference s | RTF difference |
+|---|---|---|---|---|---|
+| zero_shot_121-127105-0003 | 7.04 | 221.60 / 13.11 | 0.182 / 0.180 | +0.002 | +0.0003 |
+| zero_shot_121-127105-0015 | 3.36 | 162.59 / 13.09 | 0.106 / 0.110 | -0.004 | -0.0011 |
+| zero_shot_121-127105-0024 | 13.04 | 330.63 / 18.02 | 0.323 / 0.323 | -0.000 | -0.0000 |

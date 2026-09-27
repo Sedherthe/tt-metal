@@ -5,14 +5,15 @@ These are working notes for the CosyVoice2 TTNN bring-up: bounty tenstorrent/tt-
 
 Read these first:
 - `STATUS.md`: one page, rewritten each session. Current state, order of work, next actions.
-- `FINDINGS.md`: the numbered registry of findings and bugs (R = the 09-27 review, O = older open items,
-  X = fixed).
+- `FINDINGS.md`: the numbered registry of findings and bugs (R = the 09-27 review, B = build findings,
+  O = older open items, X = fixed).
 - `DECISIONS.md`: settled calls, with the reason for each and the condition for revisiting it.
 - `RUNBOOK.md`: new-pod checks, environment, run commands, safety rules.
 
 Also here:
 - `drafts/`: unposted texts (issue comments, the PR description).
-- `design/`: design proposals awaiting review (`2026-09-27_pipeline_nonstreaming.md`).
+- `design/`: design proposals. `2026-09-27_pipeline_nonstreaming.md` (rev 2) is approved and built through step 5.
+- `reviews/`: checks of documents we were handed (`2026-09-27_cosyvoice1_lessons_verification.md`).
 - `scripts/2026-09-27/`: one-off checks and their logs behind today's FINDINGS entries (not part of the PR).
 - `history/`: the old status handoffs, unchanged. `BRINGUP_STATUS_25_sept.md` (includes the 09-27 additions and
   the 09-18→09-24 history) and `BRINGUP_STATUS_22_sept.md` (the copy committed on the PR branch, due to be
