@@ -1,133 +1,206 @@
-# Design proposal: non-streaming `tt/pipeline.py` (2026-09-27, not built)
+# Design: CosyVoice2 pipeline, non-streaming first (rev 2, 2026-09-27; not built)
 
-This is order-of-work step 2 in STATUS. The streaming loop (step 3) will be built on the same objects, so the API
-leaves room for it.
+Rev 2 revises rev 1 against the merged CosyVoice1 port (`~/reference-cosyvoice1` = PR #52540's merged head
+`f8620f739c`, with no later changes on `main`): `tt/pipeline.py`, `tt/streaming.py`,
+`scripts/{prepare_inputs,run_reference,eval_wer_sim}.py`, `requirements-reference.txt`, `PERF.md` §7–9 and
+`tests/e2e/test_pipeline_api.py`.
 
-## Goals
+It also applies the user's decisions:
+- a separate frontend/reference venv;
+- only `inflect` added to `python_env`;
+- WER/SIM on a fixed set now, without waiting for the maintainers.
 
-- **One entry point** from text plus a speech prompt to 24 kHz audio, matching upstream's
-  `CosyVoice2.inference_zero_shot(stream=False)` segment for segment.
-- **Explicit configuration.** No environment variables change behaviour behind the caller's back, and every
-  result carries the configuration that produced it (D14).
-- **A timing breakdown per segment** (LLM, encoder, CFM, HiFT; device-synchronized), so RTF comes from distinct
-  utterances (D14).
-- **No new dependencies in the device venv** unless the user approves them. The heavy frontend stays behind a
-  boundary, following CosyVoice1's accepted precedent.
+`COSYVOICE1_LESSONS.md` has not been received yet; see "Open" at the end.
+
+## What changed from rev 1
+
+| rev 1 | rev 2 | why |
+|---|---|---|
+| Eval deferred to the maintainers | **In scope.** CosyVoice1's scorer, a fixed corpus, the PyTorch reference scored by the same command | user decision; CosyVoice1 precedent |
+| One `Prompt` class | `PromptContext.from_npz` (mode-aware) plus `RandomSources` | CosyVoice1 `pipeline.py`: randomness is injected, never drawn inside a forward pass |
+| Modes out of scope | zero-shot first; cross-lingual and `instruct2` as prompt construction; no SFT | #54104 names no modes (below); the checkpoint has no `spk2info.pt` |
+| Frontend: optional separate venv | **Separate venv, decided**, with a `requirements-reference.txt` like CosyVoice1's | user decision |
+| Streaming "later" | Session, trace and carry rules fixed now, so the non-streaming build doesn't block them | CosyVoice1 `streaming.py` / `synthesize_streaming` |
+
+## Two environments
+
+- **`python_env` (device).** Runs the pipeline, demo and tests. It gains only `inflect`, approved; anything
+  more needs asking. It imports torch, numpy, ttnn, transformers (the tokenizer) and librosa. It never imports
+  onnxruntime, whisper or the upstream `cosyvoice` package.
+- **`cosyvoice2_ref_env` (host-only, CPU).** Built from `requirements-reference.txt` next to an upstream
+  `FunAudioLLM/CosyVoice` checkout pinned to one commit (recursive, for Matcha-TTS). It does three jobs:
+  - `scripts/prepare_inputs.py`: runs the frontend over the fixed corpus and writes one flat `.npz` per case
+    (text ids, prompt text ids, LLM and flow prompt speech tokens, the 24 kHz prompt mel, the CAM++
+    embedding, mode and language, the checkpoint id);
+  - `scripts/run_reference.py`: the upstream PyTorch `CosyVoice2` over the same corpus, writing wavs plus
+    `results.json`;
+  - `scripts/eval_wer_sim.py`: scores any run directory (the reference and TT alike).
+- **Planned requirements** (pins chosen and measured at build time, then frozen with a header explaining each
+  pin, as CosyVoice1 does):
+  - `--extra-index-url https://download.pytorch.org/whl/cpu`, then `torch==X+cpu` and `torchaudio==X+cpu`
+    (same X);
+  - `openai-whisper`: the log-mel for the speech tokenizer, and Whisper large-v3 for WER;
+  - `onnxruntime`, **pinned**: CosyVoice1 measured a different token sequence for the same audio after an
+    upgrade;
+  - `transformers` (Qwen2 for the reference, `WavLMForXVector` for SIM), `inflect`, `librosa`, `soundfile`,
+    `wetext` (optional);
+  - whatever the upstream CosyVoice2 import closure needs (HyperPyYAML, conformer, diffusers, lightning,
+    hydra-core, omegaconf, ...), established by tracing imports and not copied blindly;
+  - no GPU packages.
+- **The torch version sets RAS's RNG stream.** CosyVoice1 found `torch.multinomial`'s single-sample path
+  changed between 2.6 and 2.8. The reference venv's torch and `python_env`'s 2.11 will therefore never agree on
+  seeded sampling. Cross-environment token comparisons are **teacher-forced** (R3/R8), and the reference's
+  goldens are tied to its pinned torch.
+
+## Package layout (mirroring CosyVoice1)
+
+```
+tt/pipeline.py        CosyVoice2TTNN (stage methods + synthesize; synthesize_streaming later)
+tt/prompt.py          PromptContext.from_npz, RandomSources, MODES, describe_mode
+tt/text.py            normalize() / split(): spell_out_number (inflect) + a verbatim split_paragraph port
+scripts/              prepare_inputs.py, run_reference.py, eval_wer_sim.py   (reference venv only)
+demo/demo.py          argparse CLI (below)
+tests/e2e/            test_pipeline_api.py (public API), test_text.py (host), test_scoring.py (normalizer)
+requirements-reference.txt, docs/VALIDATION.md, PERF.md, README.md
+```
+
+The dated `scripts/perf_*` and `vocoder_debug_*` move to the notes branch (R15).
 
 ## API
 
 ```python
-@dataclass(frozen=True)
-class CosyVoice2Config:
-    # model
-    repo_id: str = "FunAudioLLM/CosyVoice2-0.5B"  # checkpoints via HF_HOME
-    euler_steps: int = 10  # D4
-    flow_dtype: ttnn.DataType = ttnn.bfloat16
-    hift_decoder_dtype: ttnn.DataType = ttnn.float32  # D6
-    hift_source_dtype: ttnn.DataType = ttnn.bfloat16  # F0 predictor and NSF source (the item 4 boundary)
-    # performance switches; defaults = the configuration we report
-    llm_decode_trace: bool = True
-    cfm_trace: bool = True  # non-streaming only; keyed on exact length
-    flow_fused_sdpa: bool = True
-    flow_fused_qkv: bool = True
-    flow_matmul_accurate: bool = False
-    # LLM sampling (upstream defaults)
-    sampler: str = "ras"  # "ras" | "greedy"
-    top_p: float = 0.8
-    top_k: int = 25
-    win_size: int = 10
-    tau_r: float = 0.1
-    min_token_text_ratio: float = 2.0
-    max_token_text_ratio: float = 20.0
-    # context budget: sizes ModelArgs.max_seq_len once, at construction (R7)
-    max_prompt_speech_tokens: int = 750  # 30 s of prompt at 25 Hz (upstream's own prompt-length limit)
-    max_segment_text_tokens: int = 100  # split_paragraph's 80-token segments plus slack
-    # text frontend (upstream split_paragraph parameters)
-    text_frontend: bool = True
-    token_max_n: int = 80
-    token_min_n: int = 60
-    merge_len: int = 20
-    seed: int | None = None
+MODES = ("zero_shot", "cross_lingual", "instruct2")   # no "sft": CosyVoice2-0.5B ships no spk2info.pt
+
+@dataclass
+class RandomSources:          # CosyVoice2's draws; CFM noise is the model's fixed rand_noise buffer
+    sine_noise: torch.Tensor | None = None         # [1, T_audio, 9], SineGen2's per-call noise
+    llm_seed: int | None = None                    # RAS; seeded host sampling (see the torch-version note)
+    def sine_noise_for(self, audio_len): ...       # captured array if given, else a fresh draw
+    # SineGen2's rand_ini is not modelled: never read through the downsample (test_sine_gen2.py:111).
+
+@dataclass
+class PromptContext:          # one .npz from prepare_inputs.py; mode decides which fields are set
+    mode: str; lang: str
+    prompt_text_ids: torch.Tensor | None           # zero_shot: transcript; instruct2: instruct text; cross_lingual: None
+    llm_prompt_speech_tokens: torch.Tensor | None  # zero_shot only
+    flow_prompt_speech_tokens: torch.Tensor        # all three modes (flow always conditions on the prompt audio)
+    prompt_feat: torch.Tensor                      # 24 kHz mel, aligned so feat == 2 x tokens (upstream's rule)
+    embedding: torch.Tensor                        # CAM++ x-vector
+    @classmethod
+    def from_npz(cls, path) -> "PromptContext": ...
+
+class CosyVoice2TTNN:
+    def __init__(self, device, config: CosyVoice2Config): ...          # loads llm.pt / flow.pt / hift.pt
+    def text_to_tokens(self, ctx, text_ids, *, rng=None, on_token=None) -> list[int]
+    def tokens_to_mel(self, tokens, ctx) -> ttnn.Tensor                # non-streaming flow (finalize)
+    def mel_to_wav(self, mel, mel_frames, *, rng=None) -> ttnn.Tensor   # HiFT: F0/source fp32 by default (O6), decoder fp32
+    def synthesize(self, ctx, text, *, rng=None) -> Synthesis           # normalize + split + per-segment stages
+    def warmup(self, ctx, lengths) -> None                              # compile + resolve geometries before timing
+    def release(self) -> None
 ```
 
-- **Construction.** `CosyVoice2Pipeline(device, config)` loads `llm.pt`, `flow.pt`, `hift.pt` and the BlankEN
-  tokenizer. It builds `TtQwen2LM` with `max_seq_len = required_max_seq_len(prefix_budget, max_tokens_budget)`
-  from the config, and it builds the flow and HiFT modules.
-- **`prepare_prompt(prompt: PromptInputs) -> Prompt`.** Uploads the cached prompt features: prompt text ids,
-  speech tokens, 24 kHz mel `prompt_feat`, and the CAM++ embedding. The result is reused across many texts.
-  `Prompt.from_npz(path)` / `Prompt.save(path)` define the frontend boundary (below).
-- **`synthesize(text, prompt, *, seed=None) -> Synthesis`.**
-  - `Synthesis.audio`: np.float32, 24 kHz, all segments concatenated.
-  - `Synthesis.segments`: `[SegmentResult(text, tokens, mel_frames, audio, timings)]`.
-  - `Synthesis.config`: the config that produced it.
-  - `timings`: prefill, decode, encoder, CFM and HiFT seconds, with `llm_tokens` and `audio_s`.
-- **`warmup(lengths)`.** Optional: compiles kernels and resolves conv geometries for the given lengths, so
-  measured runs aren't first-sight runs (D7). Warm and cold are reported separately.
-- **`release()`.** Frees traces (LLM, CFM) and the geometry caches.
+- **`CosyVoice2Config`** is as in rev 1: every switch explicit, with a `reported()` preset. One change: the
+  F0/source dtype defaults to **fp32**. O6 measured bf16 F0 at about 3x the Hz error (0.70 vs 0.23 Hz mean) and
+  more voiced/unvoiced flips; bf16 remains selectable, and `544d588018` makes it work. Module constructors
+  get keyword arguments that default to today's environment-reading functions.
+- **`Synthesis`** carries the audio, per-segment tokens, mel frames and timings (LLM prefill and decode,
+  encoder, CFM, HiFT; device-synchronized), plus the config.
+- **`text_to_tokens`** sizes nothing itself. `max_seq_len` is fixed at construction from the config's budget,
+  and `generate()` refuses overruns (R7).
 
-## Mapping to upstream (`cosyvoice/cli/cosyvoice.py`, `frontend.py`, `model.py`, fetched 2026-09-27)
+**Modes are prompt construction, not networks** (CosyVoice1's table, adapted to upstream CosyVoice2's
+`frontend_*`):
 
-| Upstream | Pipeline |
-|---|---|
-| `frontend.text_normalize(prompt_text, split=False)` | `normalize(prompt_text)` |
-| `frontend.text_normalize(tts_text, split=True)`. English path: optional wetext `EnNormalizer`, then `spell_out_number` (inflect), then `split_paragraph(..., "en", token_max_n=80, token_min_n=60, merge_len=20, comma_split=False)`, then drop punctuation-only segments | `segments = split(normalize(text))`: a verbatim port of `split_paragraph` and `is_only_punctuation` from `cosyvoice/utils/frontend_utils.py` (pure Python), plus `spell_out_number` |
-| `frontend_zero_shot`: text tokens, prompt text tokens, speech tokens (`speech_tokenizer_v2.onnx` on whisper log-mel), `speech_feat` (24 kHz mel), CAM++ embedding; `token_len = min(feat//2, tokens)` alignment | `Prompt` (precomputed; the alignment happens in `prepare_prompt`) |
-| `model.tts(stream=False)` per segment: LLM `inference` with `min_len = 2·text_len`, `max_len = 20·text_len`, RAS | `TtQwen2LM.generate(..., min_tokens, max_tokens, sampler)` |
-| `token2wav(finalize=True)`: `flow.inference` (streaming=False), then `hift.inference` | `TtCausalMaskedDiffWithXvec.inference`, then `TtHiFTGenerator.inference` |
-| per-segment `yield` | `Synthesis.segments`, concatenated into `audio` |
+| mode | LLM prefix: prompt text / prompt speech | flow prompt (tokens + mel) | embedding |
+|---|---|---|---|
+| `zero_shot` | transcript / yes | yes | prompt audio |
+| `cross_lingual` | — (target text carries a `<\|en\|>`-style tag) / — | yes | prompt audio |
+| `instruct2` | `instruct_text` / — | yes | prompt audio |
 
-**Deviation, documented:** no `speed` argument (upstream's time-stretch of the mel). Cross-lingual and instruct
-modes are out of scope; the bounty doesn't ask for them.
+## Text normalization and splitting (English path = upstream's)
 
-## Frontend boundary and dependencies
+- The order is:
+  1. optional wetext `EnNormalizer` (skipped, as upstream skips it when wetext is absent);
+  2. `spell_out_number` (inflect);
+  3. `split_paragraph(tokenize, "en", token_max_n=80, token_min_n=60, merge_len=20, comma_split=False)`,
+     ported verbatim;
+  4. drop punctuation-only segments.
+- Upstream also returns the text unsplit when it contains `<|...|>` markers.
+- Chinese normalization (`contains_chinese` branch, wetext `ZhNormalizer`) is out of scope until a non-English
+  mode is taken on.
+- `test_text.py` checks the ported functions against upstream's own examples (host only).
 
-| Need | Package | In the device venv? |
-|---|---|---|
-| Qwen2 tokenizer | `transformers` | present |
-| mel basis, resampling | `librosa`, `soundfile` | present |
-| number spelling (`spell_out_number`) | `inflect` | **missing; small pure-Python install, needs approval** |
-| wetext English normalizer | `wetext` | missing. Optional upstream; propose skipping, as upstream does when it isn't installed |
-| speech tokens and CAM++ embedding | `onnxruntime` plus the two ONNX files | **missing; install needs approval**, or keep it outside the venv |
-| whisper log-mel for the tokenizer | `openai-whisper` | missing. Pulls in torch, so it would need the CPU index. Propose a torch/librosa reimplementation instead (checked once against whisper) |
-| kaldi fbank for CAM++ | `torchaudio` | missing. Must match torch 2.11.0+cpu from the CPU index. Or reimplement |
+## Evaluation (in scope now)
 
-**Proposal:** follow CosyVoice1.
-- Audio-prompt features are computed by `scripts/prepare_prompt.py`, which runs in a small separate venv with
-  `onnxruntime`, `openai-whisper` and `torchaudio` (CPU). It writes a `Prompt` `.npz`, and the device venv never
-  imports those packages.
-- Text normalization and splitting run at synthesis time inside the pipeline. That needs only `inflect`, which
-  requires your approval.
-- The alternative is to install `onnxruntime` and CPU `torchaudio` into `python_env` and reimplement the whisper
-  log-mel. That is one venv, but three installs.
+- **`scripts/eval_wer_sim.py`**, a port of CosyVoice1's scorer:
+  - Whisper **large-v3** ASR, and **`microsoft/wavlm-base-plus-sv`** (`WavLMForXVector`) cosine × 100 against
+    the prompt wav for SIM;
+  - CAM++ cosine reported **only as a diagnostic**: it is self-referential, because the model conditions on
+    CAM++;
+  - NFKC, lowercase, punctuation stripped, word-level edit distance;
+  - per-utterance and **corpus-level** WER, and `--baseline` to diff a TT run against the reference run.
+- **Corpus:** one fixed definition imported by both `prepare_inputs.py` and `run_reference.py`, as CosyVoice1
+  does. **Proposed:** two prompt speakers (upstream's `asset/zero_shot_prompt.wav` with its transcript, and
+  `asset/cross_lingual_prompt.wav`), a fixed list of English sentences, and one seed. This is pending
+  confirmation against the lessons doc's "fixed two-speaker set".
+- **Token accuracy:** teacher-forced top-1 agreement over full zero-shot sequences (with the speech prompt),
+  reference logits vs TT (R3/R8). CosyVoice1 reports 99.04% teacher-forced.
+- **Own-F0 waveform quality** uses energy-envelope PCC and RMS ratio (CosyVoice1: 0.9975 and within 6%) plus a
+  spectral distance (D16). Waveform PCC is used only with torch F0 injected.
 
-## Configuration: explicit, not environment variables
+## Room for streaming (decided now, built in step 3)
 
-- Today, `COSYVOICE2_FLOW_SDPA`, `COSYVOICE2_FLOW_FUSED_QKV`, `COSYVOICE2_FLOW_CFM_TRACE`,
-  `COSYVOICE2_FLOW_ENCODER_TRACE`, `COSYVOICE2_FLOW_MATMUL_CC` and `COSYVOICE2_CONV_CONFIG_IN_DRAM` are read inside
-  constructors, and `use_decode_trace` defaults to off.
-- **Proposal:** each module constructor gains keyword arguments (`fused_sdpa=`, `fused_qkv=`, `use_trace=`,
-  `matmul_accurate=`, ...) that default to the current environment-reading functions. Scripts keep working; the
-  pipeline passes every value from `CosyVoice2Config`, so the environment can't change a pipeline run.
-- `CosyVoice2Config.reported()` is the configuration behind published numbers. Each `Synthesis` carries its
-  config, and the demo prints it.
+1. **Warm before trace capture.** A streaming session starts with a throwaway pass over every mid-stream
+   geometry before `generate()` captures its decode trace:
+   - encoder and CFM buckets up to the configured maximum, and HiFT chunk shapes (8-frame cache + 2×hop);
+   - this compiles kernels and runs the conv resolver's per-geometry verification with no trace live.
+   - The final chunk runs after generation ends, when the LLM trace has already been released, so it needs no
+     warming.
+   - This is CosyVoice1's `synthesize_streaming` warm-up chunk. Their un-warmed geometries produced wrong audio.
+2. **Host-parked carried state.** The HiFT caches (8 mel frames, 3,840 source samples, 3,840 speech samples)
+   stay on the host between chunks. Nothing persistent is allocated on device while the decode trace is live,
+   and the Hamming crossfade is host work anyway (D8). The flow carries no state: each chunk recomputes the
+   growing prefix, and only the token list grows.
+   - CosyVoice1 instead used persistent device carry buffers allocated in the warm-up; its host variant wedged a
+     Blackhole perf test. A switch to device buffers is kept for that case.
+3. **Trace schedule.**
+   - Only the LLM decode trace is live during a stream; the streaming CFM runs eager (D5).
+   - The flow and HiFT run from the decode loop's `on_token` callback, as in CosyVoice1.
+   - Transient tensors are freed before the next decode replay. The conv resolver's first-sight verification
+     must not run during the stream (it is done in the warm-up; unexpected geometries raise instead of falling
+     back).
+   - This is the part CosyVoice1 still had open defects in, so it gets the most tests.
+4. **Public-API tests** (`tests/e2e/test_pipeline_api.py`, driven from `PromptContext.from_npz`):
+   - streaming generates the same tokens as batch (greedy);
+   - consecutive utterances with one flow length replay correctly;
+   - a stream leaves no trace alive;
+   - each mode's prefix assembly matches upstream's `frontend_*` field set.
 
-## Demo (`demo/demo.py`, argparse, like CosyVoice1)
+   These test the wiring, which per-stage tests can't see.
+
+## Demo
 
 ```bash
-python models/demos/audio/cosyvoice2/demo/demo.py \
-  --prompt prompts/librispeech_dummy_0.npz \
-  --text "Please close the door when you leave." --text-file more.txt \
-  --out out/ [--seed 0] [--warmup] [--config reported|eager] [--steps 10]
+python models/demos/audio/cosyvoice2/demo/demo.py --inputs <dir of .npz from prepare_inputs.py> --out out/ \
+    [--modes zero_shot,cross_lingual] [--seed N] [--warmup] [--config reported|eager]
 ```
 
-- **Writes:** one wav per input (segments concatenated), plus `summary.json` and a Markdown table: per-segment
-  text, tokens, audio seconds, per-stage timings, RTF per utterance (distinct utterances, D14), warm or cold, and
-  the full config.
-- **Default prompt:** a pre-built `Prompt` for LibriSpeech-dummy item 0 (the pair used so far), so the demo runs
-  without the frontend venv.
-- **Out of scope:** `--eval` (WER/SIM) waits for the maintainers' answer on the evaluation set (D13).
-- **Tests:**
-  - `test_pipeline.py`: normalization and splitting against upstream examples (host), and the budget
-    arithmetic (host).
-  - One real-weight device smoke test: a short text produces audio of the expected length, with per-stage
-    timings recorded.
+- Without `--inputs`, it uses one committed small prompt `.npz`, so it runs without the reference venv.
+- Output: wavs plus `results.json` (the schema `eval_wer_sim.py` reads) and a Markdown table of per-segment
+  timings and per-utterance RTF on distinct utterances (D14), warm or cold, and the config.
+
+## Build order (step 2)
+
+1. `inflect` into `python_env`.
+2. The reference venv, the requirements file and the pinned upstream checkout.
+3. `prepare_inputs.py` and `run_reference.py`, with the corpus.
+4. `tt/text.py` and `tt/prompt.py`, with host tests.
+5. `tt/pipeline.py` (non-streaming, zero-shot), the demo, and the public-API test for `synthesize`.
+6. `eval_wer_sim.py`: score the reference run, then the TT run, and diff them. Teacher-forced token accuracy.
+7. Cross-lingual and `instruct2` (prompt construction plus tests).
+
+## Open
+
+- **`COSYVOICE1_LESSONS.md` not received.** The corpus choice and any lesson not visible in CosyVoice1's code
+  are pending it.
+- The pins for the reference venv are measured at build time.

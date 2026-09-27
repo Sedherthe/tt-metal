@@ -171,7 +171,18 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
 - **O4 — The torch-CPU LLM reference isn't reproducible across processes** (119 vs 105 tokens with the same seed).
   Status: open (minor).
 - **O5 — The cumsum precision test only covers 250 mel frames.** Status: open (nice to have). Add 464 or more.
-- **O6 — HiFi4 + fp32 accumulation on Wormhole (suspicion, 09-27).** tt-metal warns: "On Wormhole with fp32
+- **O6 — HiFi4 + fp32 accumulation on Wormhole (09-27).** Status: **closed, not a lever**
+  (`scripts/2026-09-27/f0_fidelity_ab.py`). Real `hift.pt` F0 predictor, three real utterances (931 voiced
+  frames), against the fp32 torch F0:
+  - HiFi4 vs HiFi3 at fp32: mean |df| 0.228 vs 0.230 Hz, max 8.4 vs 7.2 Hz, phase drift 1.35 vs 1.38 cycles.
+    Within noise.
+  - **dtype matters instead:** bf16 gives 0.70 Hz mean, 31–33 Hz max, 2–5 voiced/unvoiced flips, 2.2–2.3 cycles
+    of drift. The pipeline defaults the F0/source path to fp32.
+  - Neither fidelity approaches the ~0.03 Hz needed for sub-0.1-cycle drift (CosyVoice1 PERF.md §7), which
+    confirms D16.
+  - Untested lever: the F0 classifier's `ttnn.linear` has no compute config.
+
+  The original concern: tt-metal warns: "On Wormhole with fp32
   accumulation, output accuracy can be worse with HiFi4 than HiFi3 due to a hardware bug." Our conv resolver's
   "accurate" config is HiFi4 + fp32 accumulation (`hifigan/conv.py`). Check the F0 predictor's and the
   decoder's accuracy with HiFi3; relevant to R9's F0 drift.
