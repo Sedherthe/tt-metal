@@ -1,0 +1,5 @@
+config tensors in DRAM, 0 MiB allocated first: conv1d 3.19 s, 21 new kernel binaries ['conv_bmm_tilize', 'halo_gather', 'pack_untilize', 'reader_conv_activations_padded_with_halo_3x3_weights_v2', 'reader_unary_sharded_blocks_interleaved_start_id', 'reader_writer_tiled_out_1d_mcast_receiver_conv_weights_tiled_col_to_rm_blocks', 'reader_writer_tiled_out_1d_mcast_sender_conv_weights_tiled_col_to_rm_blocks']
+config tensors in DRAM, 0 MiB allocated first: conv1d 0.06 s, 0 new kernel binaries []
+config tensors in DRAM, 1 MiB allocated first: conv1d 1.46 s, 4 new kernel binaries ['halo_gather', 'reader_conv_activations_padded_with_halo_3x3_weights_v2']
+config tensors in L1, 0 MiB allocated first: conv1d 1.46 s, 8 new kernel binaries ['halo_gather', 'reader_conv_activations_padded_with_halo_3x3_weights_v2', 'reader_writer_tiled_out_1d_mcast_receiver_conv_weights_tiled_col_to_rm_blocks', 'reader_writer_tiled_out_1d_mcast_sender_conv_weights_tiled_col_to_rm_blocks']
+config tensors in L1, 1 MiB allocated first: conv1d 0.06 s, 0 new kernel binaries []

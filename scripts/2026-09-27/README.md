@@ -13,3 +13,13 @@
 
 Paths in these scripts are those of 09-27: the model package was `models.demos.audio.cosyvoice2` until it moved to
 `models/experimental/cosyvoice2`.
+
+Later on 09-27 (after the move to `models/experimental/cosyvoice2`; paths in these scripts use the new location):
+
+| script | device | answers |
+|---|---|---|
+| `pin_shim_check.py` | no (reference venv) | D20: under transformers 4.51.3 with no shims, the backbone loads in fp32 and equals llm.pt, and upstream's own decode matches a no-cache forward within 3.1e-5. Both shims unnecessary. |
+| `osv_audit.py` (+ `osv_audit_tf451.log`, `ref_env_freeze_*.txt`) | no | The reference venv's OSV audit, before (5.12.1) and after (4.51.3) the pin |
+| `b3_deterministic_warmup.py` (+ log) | yes | B3 / item 4a: the same fixed warm-up in three fresh processes. The identical second process compiled 0 kernels (46 s vs 567 s); with 1 MiB allocated first, the third recompiled 1,132, all conv reader + halo. |
+| `repro_conv_dram_config_kernel_hash.py` (+ log) | yes | B3 minimal reproducer for the upstream issue draft (`drafts/2026-09-27_ttnn_issue_conv_dram_config_kernel_hash.md`) |
+

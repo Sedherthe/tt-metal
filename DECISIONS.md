@@ -139,3 +139,8 @@ Alongside steps 1–2, a timeboxed rebase trial on a side branch. Cleanup contin
 ### D20 — Reference venv: pin transformers to upstream's version (user, 09-27 evening)
 - Pin transformers to the version upstream CosyVoice2's `requirements.txt` specifies. Keep a compatibility patch
   only if the pin can't work, and document why.
+- **Outcome (09-27, `fcb2fd6110`):**
+  - Pinned 4.51.3, with tokenizers 0.21.4 and huggingface-hub 0.36.2.
+  - Both transformers shims were removed; `reference_env.py` refuses any other version.
+  - The reference output is unchanged bit for bit.
+  - Cost: 18 transformers CVEs to disposition (B8).

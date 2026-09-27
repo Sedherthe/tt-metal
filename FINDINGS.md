@@ -160,7 +160,7 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
 
 ## B: build findings (09-27, steps 3–5)
 
-### B1 — Upstream's LLM reference ran broken under transformers 5.x (confirmed). Status: **fixed `0d687d840e`** (shims); D20 re-examines it with the pinned transformers
+### B1 — Upstream's LLM reference ran broken under transformers 5.x (confirmed). Status: **resolved by the pin, `fcb2fd6110`** (D20). Under upstream's transformers 4.51.3 with no shims, upstream reproduces the shimmed run's tokens and audio bit for bit, 7 of 7 cases. The pin's cost is B8.
 - **The decode mask.** Upstream's `inference_wrapper` passes a length-1 all-ones mask at each decode step.
   transformers 4.51 dropped it; 5.x right-pads it with zeros (`masking_utils.prepare_padding_mask`), so each step
   attended to position 0 only.
@@ -185,13 +185,22 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
 - **Non-streaming lengths are exact**, so every distinct utterance is a new geometry. The earlier "warm RTF ≈ 0.5"
   was a repeated request (D14).
 
-### B3 — The disk kernel cache is only partly reused across processes (confirmed; mechanism unknown). Status: open
-- **The same lengths, same seeds, same tokens.** The demo compiled them, yet the pytest processes recompiled HiFT
-  for every one.
-- **The flow was reused once:** 494 tokens. Two other lengths recompiled.
-- **Identical call sequences did reuse each other's kernels:** two pytest processes running the same sequence.
-- **All processes share one cache build key.** A hypothesis, unverified: something process-dependent, such as a
-  DRAM address, enters HiFT's conv kernel compile arguments.
+### B3 — The disk kernel cache is only partly reused across processes (confirmed). Status: **mechanism identified; workaround confirmed; upstream issue drafted, not filed**
+- **Cause.** With `config_tensors_in_dram=True`, the conv reader kernels and the halo reader kernels take their config
+  tensors' DRAM addresses as compile-time args (`conv2d_op_sharded_program_factory.cpp:871`,
+  `conv2d_op_width_sharded_program_factory.cpp:562`, `untilize_with_halo_program_factory.cpp:307-316`, unchanged on
+  `main`). A binary on disk is reused only when the new process's config tensors land at the same DRAM addresses.
+- **Item 4a** (`scripts/2026-09-27/b3_deterministic_warmup.py`): three fresh processes run the same two-call warm-up.
+
+  | process | kernels compiled | process time |
+  |---|---|---|
+  | 1, cold | 2,373 | 566.5 s |
+  | 2, identical | **0** | 46.1 s |
+  | 3, identical except 1 MiB allocated first | **1,132**, all `halo_gather` + the two conv reader kernels | 464.6 s |
+
+- **Standalone reproducer** (`repro_conv_dram_config_kernel_hash.py`): a single conv1d. With the config in DRAM,
+  a 1 MiB shift recompiles; with the config in L1, it doesn't.
+- **Not reported upstream** (searched issues and PRs, 09-27). Draft: `drafts/2026-09-27_ttnn_issue_conv_dram_config_kernel_hash.md`.
 
 ### B4 — Device memory across consecutive different-length utterances (confirmed). Status: closed
 - **L1_SMALL:** 0 B/bank for all nine calls of `test_pipeline_api.py`.
@@ -204,6 +213,22 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
 ### B6 — TT and the PyTorch reference sample different token sequences under the same seed (expected). Status: note
 - The torch version is the same; the logits differ.
 - Token counts are within 8 % (for example, 176 vs 191).
+
+### B7 — WER and speaker similarity: TT indistinguishable from the PyTorch reference (confirmed). Status: measured (`126a7cca79`)
+- Six LibriSpeech utterances, 147 words, Whisper large-v3.
+
+  | | corpus WER | mean SIM (WavLM-base-plus-sv x 100) |
+  |---|---|---|
+  | TT | 0.68 % | 94.90 |
+  | reference | 0.68 % | 95.21 |
+
+- The single error is the same substitution in both. Scores are unchanged under the transformers pin.
+
+### B8 — The transformers pin reintroduces advisories (confirmed). Status: dispositioned (`fcb2fd6110`); the user's call
+- transformers 4.51.3 carries 18 distinct CVEs (30 OSV records), 3 of them HIGH; 5.12.1 carries none.
+- None is on the reference venv's code path. The one on `from_pretrained` (CVE-2026-4372) is ruled out by grepping
+  the two pinned configs.
+- The alternative, 5.12.1 plus two shims that are provably exact (B1), would remove all 18.
 
 ## O: older open items
 

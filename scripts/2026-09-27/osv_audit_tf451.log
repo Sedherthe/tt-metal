@@ -1,0 +1,33 @@
+109 packages queried
+| setuptools 81.0.0 | GHSA-h35f-9h28-mq5c | CVE-2026-59890 | MODERATE | fixed 83.0.0 | setuptools: MANIFEST.in exclusion bypass in sdist via Unicode normalization collision (NFC/NFD) on macOS APFS/ |
+| setuptools 81.0.0 | PYSEC-2026-3447 | CVE-2026-59890 | CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:L | fixed 83.0.0 |  |
+| torch 2.11.0 | GHSA-rrmf-rvhw-rf47 | CVE-2025-3000 | LOW | fixed 2.13.0 | PyTorch is vulnerable to memory corruption through its torch.jit.script function |
+| transformers 4.51.3 | GHSA-29pf-2h5f-8g72 | CVE-2026-4372 | HIGH | fixed 5.3.0 | HuggingFace transformers vulnerable to remote code execution |
+| transformers 4.51.3 | GHSA-37mw-44qp-f5jm | CVE-2025-3933 | MODERATE | fixed 4.52.1 | Transformers is vulnerable to ReDoS attack through its DonutProcessor class |
+| transformers 4.51.3 | GHSA-4w7r-h757-3r74 | CVE-2025-6921 | MODERATE | fixed 4.53.0 | Hugging Face Transformers vulnerable to Regular Expression Denial of Service (ReDoS) in the AdamWeightDecay op |
+| transformers 4.51.3 | GHSA-59p9-h35m-wg4g | CVE-2025-6638 | MODERATE | fixed 4.53.0 | Hugging Face Transformers is vulnerable to ReDoS through its MarianTokenizer |
+| transformers 4.51.3 | GHSA-69w3-r845-3855 | CVE-2026-1839 | MODERATE | fixed 5.0.0rc3 | HuggingFace Transformers allows for arbitrary code execution in the `Trainer` class |
+| transformers 4.51.3 | GHSA-9356-575x-2w9m | CVE-2025-5197 | MODERATE | fixed 4.53.0 | Hugging Face Transformers Regular Expression Denial of Service (ReDoS) vulnerability |
+| transformers 4.51.3 | GHSA-fgcw-684q-jj6r | CVE-2026-5241 | HIGH | fixed 5.5.0 | huggingface/transformers: Arbitrary Code Execution During Model Initialization in the LightGlue Model Loading  |
+| transformers 4.51.3 | GHSA-phhr-52qp-3mj4 | CVE-2025-3777 | LOW | fixed 4.52.1 | Transformers's Improper Input Validation vulnerability can be exploited through username injection |
+| transformers 4.51.3 | GHSA-rcv9-qm8p-9p6j | CVE-2025-6051 | MODERATE | fixed 4.53.0 | Hugging Face Transformers library has Regular Expression Denial of Service |
+| transformers 4.51.3 | GHSA-xrqw-3rrv-vx5w | CVE-2026-9856 | HIGH | fixed 5.10.0 | Transformers save_pretrained path traversal allows arbitrary file writes through chat template names |
+| transformers 4.51.3 | PYSEC-2025-211 | CVE-2025-14920 | CVSS:3.0/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H | fixed - |  |
+| transformers 4.51.3 | PYSEC-2025-212 | CVE-2025-14921 | CVSS:3.0/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H | fixed - |  |
+| transformers 4.51.3 | PYSEC-2025-213 | CVE-2025-14924 | CVSS:3.0/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H | fixed - |  |
+| transformers 4.51.3 | PYSEC-2025-214 | CVE-2025-14926 | CVSS:3.0/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H | fixed - |  |
+| transformers 4.51.3 | PYSEC-2025-215 | CVE-2025-14927 | CVSS:3.0/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H | fixed - |  |
+| transformers 4.51.3 | PYSEC-2025-216 | CVE-2025-14928 | CVSS:3.0/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H | fixed - |  |
+| transformers 4.51.3 | PYSEC-2025-217 | CVE-2025-14929 | CVSS:3.0/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H | fixed - |  |
+| transformers 4.51.3 | PYSEC-2025-218 | CVE-2025-14930 | CVSS:3.0/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H | fixed - |  |
+| transformers 4.51.3 | PYSEC-2026-1977 | CVE-2025-3933 | CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N | fixed 4.52.1 | Transformers is vulnerable to ReDoS attack through its DonutProcessor class |
+| transformers 4.51.3 | PYSEC-2026-1980 | CVE-2025-6921 | CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N | fixed 4.53.0 | Hugging Face Transformers vulnerable to Regular Expression Denial of Service (ReDoS) in the AdamWeightDecay op |
+| transformers 4.51.3 | PYSEC-2026-1981 | CVE-2025-6638 | CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N | fixed 4.53.0 | Hugging Face Transformers is vulnerable to ReDoS through its MarianTokenizer |
+| transformers 4.51.3 | PYSEC-2026-1983 | CVE-2025-5197 | CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N | fixed 4.53.0 | Hugging Face Transformers Regular Expression Denial of Service (ReDoS) vulnerability |
+| transformers 4.51.3 | PYSEC-2026-1986 | CVE-2025-3777 | CVSS:3.0/AV:N/AC:L/PR:L/UI:R/S:U/C:L/I:N | fixed 4.52.1 | Transformers's Improper Input Validation vulnerability can be exploited through username injection |
+| transformers 4.51.3 | PYSEC-2026-1988 | CVE-2025-6051 | CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N | fixed 4.53.0 | Hugging Face Transformers library has Regular Expression Denial of Service |
+| transformers 4.51.3 | PYSEC-2026-2288 | CVE-2026-1839 | CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H | fixed 5.0.0 |  |
+| transformers 4.51.3 | PYSEC-2026-2289 | CVE-2026-4372 | CVSS:3.0/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H | fixed 5.3.0 |  |
+| transformers 4.51.3 | PYSEC-2026-2290 | CVE-2026-5241 | CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:H/I:H | fixed - |  |
+| transformers 4.51.3 | PYSEC-2026-3929 | CVE-2026-9856 | CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:H | fixed 5.10.0 | Transformers save_pretrained path traversal allows arbitrary file writes through chat template names |
+31 advisories
