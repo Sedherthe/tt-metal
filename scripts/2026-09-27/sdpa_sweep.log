@@ -1,0 +1,39 @@
+2026-09-27 09:01:10.264 | DEBUG    | ttnn:<module>:45 - Initial ttnn.CONFIG:
+Config{cache_path=/home/user/.cache/ttnn,model_cache_path=/home/user/.cache/ttnn/models,tmp_dir=/tmp/ttnn,enable_model_cache=false,enable_fast_runtime_mode=true,validate_program_args=false,throw_exception_on_fallback=false,enable_logging=false,enable_graph_report=false,enable_graph_python_stack_traces=false,enable_detailed_buffer_report=false,enable_detailed_tensor_report=false,enable_comparison_mode=false,comparison_mode_should_raise_exception=false,comparison_mode_pcc=0.9999,root_report_path=generated/ttnn/reports,report_name=std::nullopt,std::nullopt}
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-09-27 09:01:12.040 | info     |          Device | Opening user mode device driver (tt_cluster.cpp:224)
+2026-09-27 09:01:12.040 | info     |             UMD | Cluster constructor started. (cluster.cpp:406)
+2026-09-27 09:01:12.040 | info     |             UMD | Creating TopologyDiscovery for architecture: wormhole_b0 (topology_discovery.cpp:96)
+2026-09-27 09:01:12.040 | info     |             UMD | Starting topology discovery. (topology_discovery.cpp:115)
+2026-09-27 09:01:12.042 | info     |             UMD | Established firmware bundle version: 19.11.0 (topology_discovery.cpp:576)
+2026-09-27 09:01:12.042 | info     |             UMD | Completed topology discovery. (topology_discovery.cpp:119)
+2026-09-27 09:01:12.123 | info     |             UMD | Opening local chip ids/PCIe ids: {0}/[1] and remote chip ids {} (cluster.cpp:173)
+2026-09-27 09:01:12.123 | info     |             UMD | IOMMU: disabled (cluster.cpp:147)
+2026-09-27 09:01:12.123 | info     |             UMD | KMD version: 2.3.0 (cluster.cpp:150)
+2026-09-27 09:01:12.123 | info     |             UMD | Cluster constructor completed. (cluster.cpp:665)
+2026-09-27 09:01:12.124 | info     |             UMD | Starting devices in cluster (cluster.cpp:1205)
+2026-09-27 09:01:12.127 | info     |             UMD | Starting devices in cluster completed. (cluster.cpp:1213)
+2026-09-27 09:01:12.240 | info     |     Distributed | Using auto discovery to generate mesh graph. (metal_env.cpp:422)
+2026-09-27 09:01:12.241 | info     |     Distributed | Constructing control plane using auto-discovery (no mesh graph descriptor). (metal_env.cpp:484)
+2026-09-27 09:01:12.241 | warning  |          Always | Unknown motherboard 'H12DSG-O-CPU' for chip_id=0 (bus_id=0x41) — falling back to bus_id as tray_id. Add this motherboard and its bus IDs to mobo_to_bus_ids in physical_system_discovery.cpp. (physical_system_discovery.cpp:119)
+2026-09-27 09:01:12.241 | info     |          Fabric | Logical multi-mesh adjacency: intermesh degree histogram {0:1}; intra-mesh degree histograms mesh0 {0:1} (topology_mapper_utils.cpp:3368)
+2026-09-27 09:01:12.241 | info     |          Fabric | Physical multi-mesh adjacency: intermesh degree histogram {0:1}; intra-mesh degree histograms mesh0 {0:1} (topology_mapper_utils.cpp:3376)
+| T | T mod 32 | fused SDPA vs torch: PCC / max|diff| | explicit chain vs torch | CONTROL fused + planted K/V padding | torch max|out| |
+|---|---|---|---|---|---|
+| 161 | 1 | 0.999261 / 0.4505 | 0.999248 / 0.7009 | 0.999261 / 0.4505 | 9.28 |
+| 289 | 1 | 0.998981 / 0.6977 | 0.998974 / 0.5551 | 0.998981 / 0.6977 | 9.16 |
+| 449 | 1 | 0.998770 / 0.7044 | 0.998742 / 0.8878 | 0.998770 / 0.7044 | 9.11 |
+| 577 | 1 | 0.999285 / 0.8061 | 0.999267 / 0.5777 | 0.999285 / 0.8061 | 9.2 |
+| 705 | 1 | 0.999542 / 0.6501 | 0.999479 / 0.696 | 0.999542 / 0.6501 | 9.33 |
+| 833 | 1 | 0.999156 / 0.8152 | 0.999058 / 0.9151 | 0.999156 / 0.8152 | 9.25 |
+| 1153 | 1 | 0.998165 / 1.271 | 0.997873 / 1.119 | 0.998165 / 1.271 | 9.61 |
+| 1537 | 1 | 0.999042 / 1.12 | 0.998629 / 1.051 | 0.999042 / 1.12 | 9.2 |
+| 448 | 0 | 0.997870 / 0.8311 | 0.998027 / 0.8402 | 0.997870 / 0.8311 | 9.36 |
+| 832 | 0 | 0.999420 / 0.6983 | 0.999283 / 0.908 | 0.999420 / 0.6983 | 9.58 |
+2026-09-27 09:06:06.597 | info     |    BuildKernels | JIT cache stats: 271/1274 hits (21.3%) [271 cached, 639 build-once dedup, 0 merged artifacts, 0 merged genfiles] (build_cache_telemetry.cpp:207)
+2026-09-27 09:06:06.598 | info     |    BuildKernels | JIT telemetry: 3 registered TelemetryTokens (build_cache_telemetry.cpp:230)
+2026-09-27 09:06:06.637 | info     |          Device | Closing user mode device drivers (tt_cluster.cpp:550)
+2026-09-27 09:06:06.637 | info     |             UMD | Closing devices in cluster (cluster.cpp:1218)
+2026-09-27 09:06:06.642 | info     |             UMD | Closing devices in cluster completed. (cluster.cpp:1227)
+2026-09-27 09:06:06.642 | info     |             UMD | Cluster destructor started. (cluster.cpp:933)
+2026-09-27 09:06:06.642 | info     |             UMD | Cluster destructor completed. (cluster.cpp:936)

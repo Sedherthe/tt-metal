@@ -8,9 +8,9 @@ Progress update on CosyVoice2. Work is in draft PR #56651 (branch `bringup/cosyv
 - **End-to-end zero-shot synthesis** (non-streaming) runs on N150.
   - Quality: WER 4.17% and speaker similarity 0.889 on one LibriSpeech prompt/target pair. On four more sentences, WER 0–2.8% and similarity 0.56–0.87 (Whisper `base.en`, CAM++ cosine).
   - Speed: RTF 0.43–0.52 for 4.4–11.4 s of audio, measured by repeating the same request in-process with the LLM decode and CFM traced. RTF on distinct utterances isn't measured yet.
-- 160 tests: 159 pass on N150, and 1 is opt-in.
+- 176 tests: 175 pass on N150, and 1 is opt-in.
 
-**In progress:** the streaming pipeline. That means incremental LLM generation, streaming flow calls (the chunk-causal encoder and CFM modes are built; the encoder's final-chunk padding case is next), and HiFT streaming (mel and source caches plus crossfade, which is where the chunked iSTFT overlap-add lives). After that, measured TTFP and RTF.
+**In progress:** the streaming pipeline. That means incremental LLM generation, streaming flow calls (the chunk-causal encoder and CFM modes are built, including the final, non-aligned chunk), and HiFT streaming (mel and source caches plus crossfade, which is where the chunked iSTFT overlap-add lives). After that, measured TTFP and RTF.
 
 **Three questions**
 1. **How will Stage 3 be judged?** From our measured component costs, at 10 Euler steps the CFM and LLM decode alone come to a streaming RTF of about 0.46–0.58. The first chunk takes about 0.67–0.9 s before the encoder and vocoder even run. So TTFP < 500 ms and RTF < 0.4 look out of reach without cutting steps, which changes the output. CosyVoice1 (#52540) was accepted with measured, partly met Stage 3 targets. Would a similar measured report be acceptable here, along with whatever step-count trade-off we can validate on WER? And is there a preferred definition of warm vs cold, and of which utterances to use?

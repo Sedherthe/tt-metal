@@ -88,6 +88,15 @@ Alongside steps 1–2, a timeboxed rebase trial on a side branch. Cleanup contin
 - Always state the configuration (traces on or off, steps, prompt length) and whether the kernel cache was warm.
 - Estimates never appear in results tables.
 
+### D16 — How HiFT is verified (09-27; the user's R9 plan, confirmed by measurement)
+- **Mechanism checks** (source module, decode, iSTFT, and later the streaming caches and splice) inject the torch
+  F0 and gate on PCC ≥ 0.99 plus max|diff| over the affected region. With torch F0, TT reaches PCC 0.9995–0.9999.
+- **The own-F0 path** is judged with spectral metrics (log-mel or multi-resolution STFT distance), never
+  waveform PCC. A few Hz of F0 deviation drives waveform PCC to 0.1–0.4 within 16–208 frames, and the 09-20
+  listening test found it inaudible.
+- **Revisit** if the F0 predictor's precision improves enough (O6: HiFi3 vs HiFi4) to make own-F0 waveform
+  comparisons meaningful.
+
 ### D15 — Where the notes live (09-27)
 - The orphan branch `notes/cosyvoice2`, never merged into the PR.
 - STATUS.md is rewritten each session; findings and decisions are updated in place.

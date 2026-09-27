@@ -45,13 +45,31 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
   384 are extrapolated.
 - CosyVoice1 (#52540) was accepted with measured, partly-met Stage 3 targets. Ask the maintainers (question 1).
 
-### R5 — The bucketed streaming encoder can't run the final chunk (confirmed). Status: planned (quick fix)
+### R5 — The bucketed streaming encoder can't run the final chunk (confirmed). Status: **fixed `fe1e3dedb8`** (09-27)
+- **09-27:** added `streaming_attn_bias_torch` (upstream's `masks & chunk_masks`) at both encoder stages and
+  removed the assert.
+  - Tests at non-aligned lengths, with large values in the padded rows. With real weights, over the last partial
+    chunk: fixed max|diff| is 0.016–0.067 against TT exact and the torch reference; the chunk-only control is
+    0.23–0.39 and fails the gate (PCC ≥ 0.999, max|diff| ≤ 0.125).
+  - The control's **whole-output PCC was 0.998–0.9998**, so a whole-output gate would have passed it.
+  - Random-init weights can't carry this control: the leak stays at bf16-noise level there.
+  - Bucketed and exact-length encoder runs are *not* bit-identical (2–4 bf16 ulps), unlike the CFM.
 - `tt/flow/encoder.py:858-861` asserts `valid_length % 25 == 0`, and the mask has no padding term.
 - Upstream's last call is `finalize=True` in streaming mode with an arbitrary length (`CosyVoice2Model.tts`).
 - Fix: add a padding term (mirror `decoder.py`), plus a test at a non-aligned length with a chunk-only negative
   control.
 
-### R6 — The non-streaming flow may be exposed to SDPA bug #57608 (suspicion). Status: planned (early)
+### R6 — The non-streaming flow may be exposed to SDPA bug #57608 (suspicion). Status: **closed on Wormhole; regression test `5e8ac6e433`** (09-27)
+- **09-27:** the only fused-SDPA call site in our code is `decoder.py` `_sdpa`. The LLM uses tt_transformers'
+  prefill SDPA with `is_causal` on sequences padded to a multiple of 128, plus the separate decode op.
+- Op level: 1e30 planted in K and V padding, by both methods and read back to confirm, leaves the output
+  bit-identical under every config, including #57608's own. **#57608 does not reproduce on this N150 build**;
+  it was reported only on Blackhole.
+- Real-weight estimator sweep at T ≡ 1 mod 32 from 161 to 1537: fused SDPA equals the explicit chain and the
+  torch reference (PCC 0.9982–0.9995). No fix.
+- The regression test at T=449 checks padding immunity, with a harness control that must change the output.
+  **On Blackhole this test would be expected to fail**; the fix there would be `fill_implicit_tile_padding`
+  (CosyVoice1 measured a 1.8% cost).
 - Fused SDPA is on by default (`decoder.py:654`), non-streaming passes `attn_mask=None` at arbitrary T
   (`decoder.py:756`), and nothing zero-fills tile padding.
 - CosyVoice1 saw PCC ≈ 0 at T ≡ 1 mod 32 when `conv1d` left garbage in the tile padding. None of our tested
@@ -59,15 +77,31 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
 - Action: sweep fused SDPA against the explicit chain at those lengths, then add
   `ttnn.fill_implicit_tile_padding(k/v, 0)` (CosyVoice1 measured a 1.8% cost).
 
-### R7 — `generate` has no context-limit guard (confirmed). Status: planned (quick fix)
+### R7 — `generate` has no context-limit guard (confirmed). Status: **fixed `026325a73d`** (09-27)
+- **09-27:** added `required_max_seq_len(prefix, max_tokens)` and `TtQwen2LM.prefix_len`. `generate()` raises
+  `ValueError` before prefill when a call doesn't fit.
+- Tests: the arithmetic, and a call sized exactly to the budget passes while one more token is refused. The
+  unfixed code does not raise.
+- The 09-23 clips' totals were 286 / 350 / 376 / **493** of 512, so the limit was never binding. It can't explain
+  R8, but clip 4 was 19 tokens from a silent overflow.
 - Nothing checks `pos` against `max_seq_len`. The scripts use 512 with `max_tokens` = 20 × text length.
 - Possibly the same problem as R8 and R13; see the recorded check in STATUS.
 
 ### R8 — The LLM diverges from torch in zero-shot use (confirmed). Status: open
+- **09-27:** it is *not* the context limit (R7). Clip 1, with the largest extra silence (+1.58 s), totals 286
+  tokens and could reach at most 337.
+- Re-running the 09-23 synthesis needs the frontend: `onnxruntime`, plus `torchaudio` and the whisper log-mel,
+  or reimplementations of both. That needs install approval (see the pipeline design doc).
 - 09-23: TT produced more trailing silence than torch in 3 of 4 clips (+1.58 s, +0.22 s, +0.52 s).
 - **Method (adjusted):** teacher-forced token accuracy over full sequences with the speech prompt.
 
-### R9 — The HiFT "0.977 gap" is almost certainly F0 phase drift (confirmed from history). Status: adjusted
+### R9 — The HiFT "0.977 gap" is F0 phase drift (confirmed 09-27). Status: **closed (not a bug); method in D16**
+- **09-27 run** (`scripts/2026-09-27/hift_torch_f0_injection.py`): real `hift.pt`, fp32, a real speech mel
+  (LibriSpeech-dummy item 3, the most voiced window), shared `sine_noise`.
+  - With torch F0 injected into the NSF source: PCC **0.99989** at 16 frames, 0.99962 at 108, 0.99953 at 208
+    (max|diff| 0.026–0.055 on waveforms peaking at 0.39–0.76). The composition is correct.
+  - With its own F0: PCC 0.40 / 0.35 / 0.115, from a max F0 deviation of 3.56 / 0.49 / 7.4 Hz. That is lower
+    than 09-24's 0.977 because this window is 15/16 voiced; the mechanism is the same.
 - 09-20: with device F0, waveform PCC is about 0.11 at 464 frames; with torch F0 injected it is 0.999, and the
   difference is inaudible.
 - **Adjusted plan:**
@@ -126,8 +160,10 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
 
 ## O: older open items
 
-- **O1 — HiFT dtype crash.** Status: planned (quick fix). A bf16 generator (F0 predictor and source) with an fp32
-  decoder fails with `TT_FATAL` in `TtStft`'s concat. Fix it at the boundary where the generator hands `s` over.
+- **O1 — HiFT dtype crash.** Status: **fixed `544d588018`** (09-27). `TtHiFTDecoder.decode` converts `mel` and
+  `s` to its dtype on entry. Test: bf16 generator with fp32 decoder, PCC 0.999994–0.999998 and max|diff|
+  0.0004–0.0012; the unfixed code fails with the concat same-dtype TT_FATAL. The original problem: a bf16
+  generator (F0 predictor and source) with an fp32 decoder failed with `TT_FATAL` in `TtStft`'s concat.
 - **O2 — PCIe drops on two pods.** Status: open (infra). Both ran KMD 2.9.0. The pod with KMD 2.3.0 was stable
   throughout 09-27. Root cause unknown.
 - **O3 — `TtHiFTStreamingState` lost on 09-24.** Status: planned (streaming step). Rebuild it per the design in
@@ -135,6 +171,10 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
 - **O4 — The torch-CPU LLM reference isn't reproducible across processes** (119 vs 105 tokens with the same seed).
   Status: open (minor).
 - **O5 — The cumsum precision test only covers 250 mel frames.** Status: open (nice to have). Add 464 or more.
+- **O6 — HiFi4 + fp32 accumulation on Wormhole (suspicion, 09-27).** tt-metal warns: "On Wormhole with fp32
+  accumulation, output accuracy can be worse with HiFi4 than HiFi3 due to a hardware bug." Our conv resolver's
+  "accurate" config is HiFi4 + fp32 accumulation (`hifigan/conv.py`). Check the F0 predictor's and the
+  decoder's accuracy with HiFi3; relevant to R9's F0 drift.
 
 ## X: fixed
 
@@ -151,3 +191,7 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
 | X9 | Tracker test could SIGKILL a device-holding child; now opt-in, no timeout | `f6fdbfcf93`, `08888a6eb0` | none |
 | X10 | Streaming CFM uses masked fused SDPA (2.2–7.1× faster than the explicit chain) | `97f702e0fd` | `test_flow_decoder.py` streaming tests |
 | X11 | The real-checkpoint check couldn't detect a missing padding term; now a max\|diff\| gate plus a negative control | `5f2aadfef4` | `cfm_streaming_real_checkpoint_check.py` verdict |
+| X12 | LLM context budget unchecked (R7) | `026325a73d` | `test_qwen2lm_generate.py::test_device_generate_refuses_request_over_context_budget`, `test_required_max_seq_len` |
+| X13 | Streaming encoder's final (non-aligned) chunk: key-padding term (R5) | `fe1e3dedb8` | `test_flow_checkpoint.py::test_device_streaming_encoder_final_chunk_real_checkpoint` (with control), `test_upsample_conformer_encoder.py::..._final_chunk_bucketed_matches_exact` |
+| X14 | HiFT dtype boundary, bf16 source path into fp32 decoder (O1) | `544d588018` | `test_hift_generator_inference.py::test_device_hift_generator_bf16_source_fp32_decoder` |
+| X15 | #57608 guard, not reproducible on Wormhole (R6) | `5e8ac6e433` (test only) | `test_flow_decoder.py::test_device_decoder_fused_sdpa_ignores_tile_padding_at_t_1_mod_32` |

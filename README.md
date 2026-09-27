@@ -12,6 +12,8 @@ Read these first:
 
 Also here:
 - `drafts/`: unposted texts (issue comments, the PR description).
+- `design/`: design proposals awaiting review (`2026-09-27_pipeline_nonstreaming.md`).
+- `scripts/2026-09-27/`: one-off checks and their logs behind today's FINDINGS entries (not part of the PR).
 - `history/`: the old status handoffs, unchanged. `BRINGUP_STATUS_25_sept.md` (includes the 09-27 additions and
   the 09-18→09-24 history) and `BRINGUP_STATUS_22_sept.md` (the copy committed on the PR branch, due to be
   removed from there).
