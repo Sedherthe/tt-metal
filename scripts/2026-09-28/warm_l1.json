@@ -1,0 +1,336 @@
+{
+ "summary": {
+  "label": "l1-bounded",
+  "config_tensors": "L1",
+  "l1_small_kib": 192,
+  "kernel_cache": "/home/user/data/cosyvoice2_runs/0928/kcache/tt-metal-cache*",
+  "error": "RuntimeError: L1_SMALL passed 160 KiB after hift_768",
+  "build_s": 12.4,
+  "warmup_s": 619.7,
+  "warmup_by_component_s": {},
+  "conv_safety_check_s": 169.6,
+  "conv_weight_prep_s": 11.4,
+  "dram_mib_per_bank": {
+   "after_build": 82.4,
+   "after_warmup": 198.9,
+   "free_after_warmup": 818.3
+  },
+  "conv_cache_puts": 2040,
+  "min_free_dram_mib_per_bank_at_put": 802.7,
+  "puts_below_default_threshold": 0,
+  "l1_small_bytes_per_bank": {
+   "allocated": 176768,
+   "free": 19840
+  },
+  "conv_cache_evictions": 0,
+  "kernels_compiled": 2537,
+  "process_s": 634.0
+ },
+ "per_bucket_s": {},
+ "per_geometry": {
+  "llm_prefill_128": {
+   "s": null,
+   "check_s": 0,
+   "prep_s": 0,
+   "new_binaries": 0,
+   "dram_mib": 82.45,
+   "l1_small_b": 0
+  },
+  "llm_lookup_128": {
+   "s": 0.82,
+   "check_s": 0,
+   "prep_s": 0,
+   "new_binaries": 0,
+   "dram_mib": 82.46,
+   "l1_small_b": 0
+  },
+  "llm_prefill_256": {
+   "s": 1.03,
+   "check_s": 0,
+   "prep_s": 0,
+   "new_binaries": 0,
+   "dram_mib": 82.49,
+   "l1_small_b": 0
+  },
+  "llm_lookup_256": {
+   "s": 0.82,
+   "check_s": 0,
+   "prep_s": 0,
+   "new_binaries": 0,
+   "dram_mib": 82.49,
+   "l1_small_b": 0
+  },
+  "llm_prefill_384": {
+   "s": 0.95,
+   "check_s": 0,
+   "prep_s": 0,
+   "new_binaries": 0,
+   "dram_mib": 82.53,
+   "l1_small_b": 0
+  },
+  "llm_lookup_384": {
+   "s": 0.81,
+   "check_s": 0,
+   "prep_s": 0,
+   "new_binaries": 0,
+   "dram_mib": 82.53,
+   "l1_small_b": 0
+  },
+  "llm_prefill_512": {
+   "s": 0.98,
+   "check_s": 0,
+   "prep_s": 0,
+   "new_binaries": 0,
+   "dram_mib": 82.56,
+   "l1_small_b": 0
+  },
+  "llm_lookup_512": {
+   "s": 0.81,
+   "check_s": 0,
+   "prep_s": 0,
+   "new_binaries": 0,
+   "dram_mib": 82.56,
+   "l1_small_b": 0
+  },
+  "llm_prefill_640": {
+   "s": 1.02,
+   "check_s": 0,
+   "prep_s": 0,
+   "new_binaries": 0,
+   "dram_mib": 82.6,
+   "l1_small_b": 0
+  },
+  "llm_lookup_640": {
+   "s": 0.84,
+   "check_s": 0,
+   "prep_s": 0,
+   "new_binaries": 0,
+   "dram_mib": 82.6,
+   "l1_small_b": 0
+  },
+  "llm_prefill_768": {
+   "s": 1.03,
+   "check_s": 0,
+   "prep_s": 0,
+   "new_binaries": 0,
+   "dram_mib": 82.63,
+   "l1_small_b": 0
+  },
+  "llm_lookup_768": {
+   "s": 0.82,
+   "check_s": 0,
+   "prep_s": 0,
+   "new_binaries": 0,
+   "dram_mib": 82.63,
+   "l1_small_b": 0
+  },
+  "llm_prefill_896": {
+   "s": 0.99,
+   "check_s": 0,
+   "prep_s": 0,
+   "new_binaries": 0,
+   "dram_mib": 82.67,
+   "l1_small_b": 0
+  },
+  "llm_lookup_896": {
+   "s": 0.82,
+   "check_s": 0,
+   "prep_s": 0,
+   "new_binaries": 0,
+   "dram_mib": 82.67,
+   "l1_small_b": 0
+  },
+  "llm_prefill_1024": {
+   "s": 1.01,
+   "check_s": 0,
+   "prep_s": 0,
+   "new_binaries": 0,
+   "dram_mib": 82.7,
+   "l1_small_b": 0
+  },
+  "llm_lookup_1024": {
+   "s": 0.81,
+   "check_s": 0,
+   "prep_s": 0,
+   "new_binaries": 0,
+   "dram_mib": 82.71,
+   "l1_small_b": 0
+  },
+  "llm_decode": {
+   "s": 1.36,
+   "check_s": 0,
+   "prep_s": 0,
+   "new_binaries": 0,
+   "dram_mib": 82.78,
+   "l1_small_b": 0
+  },
+  "flow_64": {
+   "s": 15.55,
+   "check_s": 5.07,
+   "prep_s": 0.33,
+   "new_binaries": 60,
+   "dram_mib": 84.64,
+   "l1_small_b": 1920
+  },
+  "flow_128": {
+   "s": 14.25,
+   "check_s": 5.09,
+   "prep_s": 0.33,
+   "new_binaries": 67,
+   "dram_mib": 86.45,
+   "l1_small_b": 3840
+  },
+  "flow_192": {
+   "s": 14.12,
+   "check_s": 5.21,
+   "prep_s": 0.34,
+   "new_binaries": 66,
+   "dram_mib": 88.36,
+   "l1_small_b": 5760
+  },
+  "flow_256": {
+   "s": 14.08,
+   "check_s": 5.28,
+   "prep_s": 0.33,
+   "new_binaries": 66,
+   "dram_mib": 90.24,
+   "l1_small_b": 7680
+  },
+  "flow_320": {
+   "s": 15.66,
+   "check_s": 5.42,
+   "prep_s": 0.34,
+   "new_binaries": 69,
+   "dram_mib": 92.26,
+   "l1_small_b": 9856
+  },
+  "flow_384": {
+   "s": 14.75,
+   "check_s": 5.45,
+   "prep_s": 0.33,
+   "new_binaries": 66,
+   "dram_mib": 94.21,
+   "l1_small_b": 12032
+  },
+  "flow_448": {
+   "s": 15.31,
+   "check_s": 5.39,
+   "prep_s": 0.32,
+   "new_binaries": 66,
+   "dram_mib": 96.31,
+   "l1_small_b": 14208
+  },
+  "flow_512": {
+   "s": 15.24,
+   "check_s": 5.48,
+   "prep_s": 0.34,
+   "new_binaries": 66,
+   "dram_mib": 98.32,
+   "l1_small_b": 16384
+  },
+  "flow_640": {
+   "s": 16.61,
+   "check_s": 5.46,
+   "prep_s": 0.32,
+   "new_binaries": 66,
+   "dram_mib": 100.39,
+   "l1_small_b": 18752
+  },
+  "flow_768": {
+   "s": 18.44,
+   "check_s": 5.55,
+   "prep_s": 0.33,
+   "new_binaries": 69,
+   "dram_mib": 102.53,
+   "l1_small_b": 21120
+  },
+  "flow_896": {
+   "s": 20.03,
+   "check_s": 5.67,
+   "prep_s": 0.35,
+   "new_binaries": 69,
+   "dram_mib": 104.73,
+   "l1_small_b": 23552
+  },
+  "flow_1024": {
+   "s": 20.77,
+   "check_s": 5.6,
+   "prep_s": 0.34,
+   "new_binaries": 66,
+   "dram_mib": 107.0,
+   "l1_small_b": 26176
+  },
+  "flow_1280": {
+   "s": 24.84,
+   "check_s": 5.64,
+   "prep_s": 0.36,
+   "new_binaries": 69,
+   "dram_mib": 109.38,
+   "l1_small_b": 29184
+  },
+  "flow_1536": {
+   "s": 28.9,
+   "check_s": 5.85,
+   "prep_s": 0.36,
+   "new_binaries": 69,
+   "dram_mib": 111.88,
+   "l1_small_b": 32192
+  },
+  "flow_1792": {
+   "s": 33.14,
+   "check_s": 5.89,
+   "prep_s": 0.37,
+   "new_binaries": 69,
+   "dram_mib": 114.51,
+   "l1_small_b": 35392
+  },
+  "hift_128": {
+   "s": 67.73,
+   "check_s": 16.81,
+   "prep_s": 1.05,
+   "new_binaries": 350,
+   "dram_mib": 121.38,
+   "l1_small_b": 60064
+  },
+  "hift_256": {
+   "s": 53.78,
+   "check_s": 12.93,
+   "prep_s": 1.05,
+   "new_binaries": 271,
+   "dram_mib": 131.21,
+   "l1_small_b": 82400
+  },
+  "hift_384": {
+   "s": 53.78,
+   "check_s": 14.31,
+   "prep_s": 1.03,
+   "new_binaries": 265,
+   "dram_mib": 143.91,
+   "l1_small_b": 101440
+  },
+  "hift_512": {
+   "s": 43.32,
+   "check_s": 11.71,
+   "prep_s": 1.06,
+   "new_binaries": 196,
+   "dram_mib": 159.42,
+   "l1_small_b": 119872
+  },
+  "hift_640": {
+   "s": 62.99,
+   "check_s": 17.4,
+   "prep_s": 1.07,
+   "new_binaries": 295,
+   "dram_mib": 177.82,
+   "l1_small_b": 142784
+  },
+  "hift_768": {
+   "s": 40.24,
+   "check_s": 14.37,
+   "prep_s": 1.05,
+   "new_binaries": 157,
+   "dram_mib": 198.93,
+   "l1_small_b": 176768
+  }
+ }
+}

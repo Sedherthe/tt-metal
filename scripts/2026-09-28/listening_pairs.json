@@ -1,0 +1,35 @@
+[
+ {
+  "case_id": "zero_shot_260-123440-0010",
+  "audio_s": 8.08,
+  "mel_frames": 404,
+  "hift_bucket": 512,
+  "pad_frames": 108,
+  "reach_ms": 7916,
+  "last_400ms_rms_diff_db_rel_signal": -2.7,
+  "max_abs_diff_last_400ms": 0.0335,
+  "max_abs_diff_before_last_500ms": 0.016207
+ },
+ {
+  "case_id": "zero_shot_121-127105-0003",
+  "audio_s": 8.52,
+  "mel_frames": 426,
+  "hift_bucket": 512,
+  "pad_frames": 86,
+  "reach_ms": 8349,
+  "last_400ms_rms_diff_db_rel_signal": 0.4,
+  "max_abs_diff_last_400ms": 0.0038,
+  "max_abs_diff_before_last_500ms": 0.018738
+ },
+ {
+  "case_id": "zero_shot_260-123440-0002",
+  "audio_s": 12.68,
+  "mel_frames": 634,
+  "hift_bucket": 640,
+  "pad_frames": 6,
+  "reach_ms": 357,
+  "last_400ms_rms_diff_db_rel_signal": -27.0,
+  "max_abs_diff_last_400ms": 0.0046,
+  "max_abs_diff_before_last_500ms": 0.0
+ }
+]

@@ -1,0 +1,24 @@
+bf16 against /home/user/data/cosyvoice2_token_accuracy
+  | case | positions | top-1 agreement | top-1 in the other's top-5 |
+  |---|---|---|---|
+  | zero_shot_260-123286-0014 | 79 | 97.47 % | 100.00 % |
+  | zero_shot_260-123440-0010 | 209 | 96.65 % | 100.00 % |
+  | zero_shot_260-123440-0002 | 302 | 96.69 % | 100.00 % |
+  | zero_shot_121-127105-0015 | 93 | 97.85 % | 100.00 % |
+  | zero_shot_121-127105-0003 | 192 | 93.75 % | 100.00 % |
+  | zero_shot_121-127105-0024 | 322 | 94.72 % | 100.00 % |
+  | zero_shot_parity_cosyvoice1_en | 152 | 94.74 % | 100.00 % |
+  | **all** | 1349 | **95.70 %** | 100.00 % |
+  the other run's top-1 / top-2 log-prob margin at the 58 disagreements: median 0.023, 90th percentile 0.058, max 0.100
+bf16-fp32-head against /home/user/data/cosyvoice2_token_accuracy
+  | case | positions | top-1 agreement | top-1 in the other's top-5 |
+  |---|---|---|---|
+  | zero_shot_260-123286-0014 | 79 | 100.00 % | 100.00 % |
+  | zero_shot_260-123440-0010 | 209 | 98.56 % | 100.00 % |
+  | zero_shot_260-123440-0002 | 302 | 98.01 % | 100.00 % |
+  | zero_shot_121-127105-0015 | 93 | 100.00 % | 100.00 % |
+  | zero_shot_121-127105-0003 | 192 | 97.92 % | 100.00 % |
+  | zero_shot_121-127105-0024 | 322 | 98.76 % | 100.00 % |
+  | zero_shot_parity_cosyvoice1_en | 152 | 96.71 % | 100.00 % |
+  | **all** | 1349 | **98.37 %** | 100.00 % |
+  the other run's top-1 / top-2 log-prob margin at the 22 disagreements: median 0.008, 90th percentile 0.025, max 0.033

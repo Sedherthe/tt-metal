@@ -170,7 +170,7 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
 - **The load dtype.** 5.x also loads `from_pretrained` in the config's dtype (bf16 for BlankEN) where 4.51 loaded
   fp32. The first matmul failed on mixed dtypes.
 
-### B2 — Distinct-utterance RTF is dominated by first sight of each new length (confirmed). Status: planned (D17)
+### B2 — Distinct-utterance RTF is dominated by first sight of each new length (confirmed). Status: **fixed by bucketing, `b05bc66e8d`**: RTF 0.43–0.63 on distinct utterances after the warm-up (B16)
 - **Three regimes, N150, reported configuration** (`docs/VALIDATION.md`, `0dbe9c44f4`):
 
   | regime | RTF |
@@ -185,7 +185,7 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
 - **Non-streaming lengths are exact**, so every distinct utterance is a new geometry. The earlier "warm RTF ≈ 0.5"
   was a repeated request (D14).
 
-### B3 — The disk kernel cache is only partly reused across processes (confirmed). Status: **mechanism identified; workaround confirmed; upstream issue drafted, not filed**
+### B3 — The disk kernel cache is only partly reused across processes (confirmed). Status: **workaround in production (`warmup_buckets()`, `b05bc66e8d`); upstream issue drafted, the user files it**
 - **Cause.** With `config_tensors_in_dram=True`, the conv reader kernels and the halo reader kernels take their config
   tensors' DRAM addresses as compile-time args (`conv2d_op_sharded_program_factory.cpp:871`,
   `conv2d_op_width_sharded_program_factory.cpp:562`, `untilize_with_halo_program_factory.cpp:307-316`, unchanged on
@@ -201,6 +201,8 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
 - **Standalone reproducer** (`repro_conv_dram_config_kernel_hash.py`): a single conv1d. With the config in DRAM,
   a 1 MiB shift recompiles; with the config in L1, it doesn't.
 - **Not reported upstream** (searched issues and PRs, 09-27). Draft: `drafts/2026-09-27_ttnn_issue_conv_dram_config_kernel_hash.md`.
+- **09-28, in production:** an identical second process compiled 0 of the first's 19,068 binaries, with the same DRAM
+  figures after every geometry (B15). Any code change still costs one full recompile.
 
 ### B4 — Device memory across consecutive different-length utterances (confirmed). Status: closed
 - **L1_SMALL:** 0 B/bank for all nine calls of `test_pipeline_api.py`.
@@ -229,6 +231,75 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
 - None is on the reference venv's code path. The one on `from_pretrained` (CVE-2026-4372) is ruled out by grepping
   the two pinned configs.
 - The alternative, 5.12.1 plus two shims that are provably exact (B1), would remove all 18.
+
+### B9 — Single-pass HiFT limits (confirmed). Status: **capped at 1,024 tokens / 2,048 frames, `b05bc66e8d`** (D24)
+- **Per op:** at 3,200 frames, `ttnn.concat` inside HiFT needs a 1,536,032 B circular-buffer page against 1,393,440 B
+  of per-core L1 (TT_FATAL). So a single pass tops out near 2,900 frames.
+- **With every bucket resident:** the 09-27 cold warm-up ran HiFT through 2,048 frames, then the 2,560-frame bucket
+  failed to allocate. It needed 118 MB/bank of contiguous DRAM; the largest free block was 106 MB.
+- **Past the cap**, `SegmentTooLong` names the segment's length. The LLM runs one step past the cap, which tells an
+  exact 1,024-token segment from a longer one. Host test: `test_segment_past_the_cap_raises`.
+- Chunked HiFT would remove the cap (proposal in STATUS, D26).
+
+### B10 — Non-streaming flow bucketing (confirmed). Status: **built, `b9f75371bc`**
+- Bucketed vs exact-length: max |diff| 0.15–0.25, PCC ≥ 0.9997. The naive control (no masks): 2.4–3.9 and
+  0.955–0.983.
+- Gate test: `test_device_nonstreaming_bucketed_flow_matches_exact_real_checkpoint`.
+
+### B11 — HiFT silence padding touches the tail (confirmed). Status: **measured; inaudible to WER/SIM; three listening pairs for the user**
+- **09-27, on real prompt mels cut mid-speech:** the padding reaches 0.22–0.38 s back. The last 160 ms has 0.20–0.27
+  log-mel L1, against the port's own 0.03–0.05. Over the whole utterance it is no larger than the port's own.
+- **09-28, on Stage 1 utterances** (`~/listening`, `scripts/2026-09-28/listening_pairs.py`):
+  - Where the utterance ends in near-silence, the bucketed-vs-exact difference sits at the silence's own level
+    (−55 and −70 dBFS).
+  - Where sound runs to the end, the difference is 27 dB below it.
+- **Stage 1 WER/SIM on bucketed audio:** 0.68 % and 95.88, the reference 0.68 % and 95.21.
+- `test_device_hift_bucket_padding_reach_real_checkpoint` pins the reach under 0.5 s (124 ms on its input).
+
+### B12 — Token accuracy (confirmed). Status: **met, 96.37 %, `1333db5af5`** (D23)
+- bf16 logits: 91.10 % (max_seq_len 2,304) and 90.66 % (2,048). Every disagreement is at a small reference margin.
+- fp32 logits (bf16 weights, HiFi4, fp32 accumulation): 96.37 %, for 0.3 ms per decode step. fp32 weights give the
+  same 96.37 %; HiFi3 gives 96.22 %.
+- **Noise floor**, the PyTorch reference in bf16 against its own fp32 run, same forced sequences: 95.70 % all-bf16,
+  98.37 % with an fp32 head. So > 95 % is reachable in bf16 with almost no margin, and the head is most of it.
+
+### B13 — A device job ignored SIGINT (observed). Status: note
+- The 09-27 cold warm-up (`warmup_measure.py`) kept compiling after SIGINT and ran to completion.
+- tt-metal probably installs its own SIGINT handler. Don't count on SIGINT to stop a ttnn job promptly.
+
+### B14 — Waits on process state are unreliable in this container (confirmed). Status: **fixed in the tooling** (D25)
+- PID 1 never reaps, so a finished child stays a zombie: `kill -0` and `ps -p` both report it alive. `pgrep -f`
+  matched the launcher's own command line.
+- Together these cost about 2.5 h of idle device time on 09-27.
+- **Now** each job writes a sentinel file with its exit code as its last action. The chain waits on the file, with a
+  timeout that reports and never kills (`scripts/2026-09-28/jobs.sh`).
+
+### B15 — The bucketed start-up (confirmed). Status: **measured** (docs/VALIDATION.md, "Start-up")
+- **Two processes, the first on an empty kernel cache:**
+
+  | process | binaries compiled | warm-up | conv safety checks |
+  |---|---|---|---|
+  | first | 19,068 | 4,561 s | 1,628 s (includes compiling the reference convs) |
+  | second, identical | 0 | 577 s | 182 s |
+
+- **The checks rerun in every process, and they are needed.** Both processes found the same 43 disagreements:
+  - 20 were real corruption of the prepared-weight fast path: `Conv1d(128->128, k=11)` at the 640 bucket (relative
+    error 1.0–2.6), the first source downsampling conv at every bucket ≥ 640 (7.7), and the second at every
+    bucket ≥ 896 (0.14–0.19);
+  - 23 were the safe-config reference's own error, arbitrated by a float64 host conv.
+- **Eviction:** 416 MiB/bank with every bucket warmed. At the 3,060 conv-cache inserts free DRAM never went below
+  559 MiB/bank, against the old 150 MB threshold. It is 0 in bucketed mode anyway.
+- **The L1 option doesn't fit:** L1_SMALL reached 172.6 KiB after the flow set and HiFT ≤ 768 (the run stopped at
+  its 160 KiB bound). The whole set would need ≥ 372 KiB, and 2,048-frame HiFT leaves ≤ 465 KiB beside its largest
+  circular buffer.
+- **HiFT is 77 % of the warm start-up;** its 1,792- and 2,048-frame buckets alone are 254 s.
+
+### B16 — Stage 1 under the protocol (confirmed). Status: **RTF, token accuracy, WER and SIM met; verdicts recorded**
+- **Warmed** (demo, 09-28): 0 binaries compiled, warm-up 542 s. Six distinct utterances at RTF 0.428–0.633,
+  aggregate 0.481. LLM decode is 44–60 % of each request.
+- **Cold first request** (`--warmup none`): 706 binaries compiled, 277.2 s for 8.52 s of audio, RTF 32.5.
+- **Perf test** (pytest, enforcing `Meets()`): passed. 0 binaries compiled, so the pytest fixture allocates exactly as
+  the demo does. The same tokens, warm-up 533.9 s, RTF 0.436–0.633 (aggregate 0.484), no evictions.
 
 ## O: older open items
 

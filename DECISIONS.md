@@ -56,11 +56,35 @@ its date.
 - **The bucket set** derives from the 80-token segment cap. Report how long warming every bucket takes.
 - **Check** how much of the "kernels on disk" RTF (2.0–2.9) is the conv safety checks re-running in each process.
   If it is most of it, propose persisting their results to disk, keyed by geometry and commit.
+- **Outcome (09-28):** built (`b9f75371bc`, `b05bc66e8d`). The sets: 15 flow buckets, 12 HiFT, 8 LLM prefill
+  lengths. The conv caches never evict in bucketed mode. Config tensors stay in DRAM with the deterministic warm-up,
+  because the L1 option doesn't fit (B15). The checks rerun per process (182 s of 577 s), and persisting their
+  verdicts is proposed in STATUS.
 
 ### D18 — Stage 1 RTF protocol (user, 09-27 evening)
 - **The measurement:** distinct utterances with warmed buckets.
 - **Also reported:** the start-up warm-up cost and the cold first-request time.
 - **The `gates.py` verdict** for `rtf_nonstreaming` is recorded only after bucketing (D17).
+- **Outcome (09-28):** `Meets()` recorded for rtf_nonstreaming (worst 0.633), token_accuracy (96.37 %), wer
+  (0.68 %) and speaker_similarity (95.88). The start-up cost and the cold first request are in B15 and B16.
+
+### D23 — fp32-logit LLM head (Claude, 09-28; the user can reverse it)
+- Adopted before the cold warm-up, so the bucket set compiled once instead of twice. The alternative was measuring
+  Stage 1, then changing the head, then recompiling everything and measuring again.
+- Measured: 96.37 % vs 90.66 % token accuracy, for 0.3 ms per decode step.
+- One field reverses it: `CosyVoice2Config.llm_head_logits_dtype="bfloat16"`.
+
+### D24 — HiFT cap: 2,048 frames; past it, a clear error (user, 09-28)
+- `max_segment_speech_tokens=1024`. Past the cap, `SegmentTooLong` names the segment's length, and a test covers it.
+- Chunked HiFT is the eventual fix (D26).
+
+### D25 — Waits: sentinel files, never process state (user, 09-28)
+- Each job writes its exit code to a sentinel file as its last action. The chain waits on the file, with a timeout
+  that reports rather than kills.
+
+### D26 — Chunked HiFT for non-streaming: propose after Stage 1, don't build (user, 09-28)
+- Fixed-size mel chunks with upstream's streaming cache and crossfade. That leaves one or two HiFT geometries, no
+  cap, and no tail padding. It is Stage 2 work anyway. The proposal is in STATUS.
 
 ### D21 — Evaluation (user, 09-27)
 - **ASR:** Whisper large-v3. WER is per utterance and at corpus level.

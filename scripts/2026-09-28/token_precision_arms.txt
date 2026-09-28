@@ -1,0 +1,7 @@
+token_fp32head	{"arm": "fp32head", "top1_agreement_percent": 96.37, "positions": 1349, "seconds_per_token_incl_prefill": 0.0144}
+token_fp32out_warm	{"arm": "fp32out", "top1_agreement_percent": 96.37, "positions": 1349, "seconds_per_token_incl_prefill": 0.0121}
+token_fp32head_hifi3_warm	{"arm": "fp32head_hifi3", "top1_agreement_percent": 96.22, "positions": 1349, "seconds_per_token_incl_prefill": 0.0121}
+token_default_warm	{"arm": "default", "top1_agreement_percent": 90.66, "positions": 1349, "seconds_per_token_incl_prefill": 0.0107}
+token_fp32head_warm	{"arm": "fp32head", "top1_agreement_percent": 96.37, "positions": 1349, "seconds_per_token_incl_prefill": 0.011}
+token_fp32out_warm2	{"arm": "fp32out", "top1_agreement_percent": 96.37, "positions": 1349, "seconds_per_token_incl_prefill": 0.011}
+token_fp32head_hifi3_warm2	{"arm": "fp32head_hifi3", "top1_agreement_percent": 96.22, "positions": 1349, "seconds_per_token_incl_prefill": 0.011}
