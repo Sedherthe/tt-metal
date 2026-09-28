@@ -1,0 +1,5168 @@
+[
+ {
+  "conv": "Conv1d(80->512, k=3, s=1, d=1)",
+  "L": 128,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.001807119317108684,
+   false
+  ],
+  "prep_with_cc": [
+   0.001807119317108684,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.001807119317108684,
+   false
+  ],
+  "raw": [
+   0.001807119317108684,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(512->512, k=3, s=1, d=1)",
+  "L": 128,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0007684616383788,
+   false
+  ],
+  "prep_with_cc": [
+   0.0007684616383788,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0007684616383788,
+   false
+  ],
+  "raw": [
+   0.0007684616383788,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(512->512, k=3, s=1, d=1)",
+  "L": 128,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.000974925900063312,
+   false
+  ],
+  "prep_with_cc": [
+   0.000974925900063312,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.000974925900063312,
+   false
+  ],
+  "raw": [
+   0.000974925900063312,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(512->512, k=3, s=1, d=1)",
+  "L": 128,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.000894246930539292,
+   false
+  ],
+  "prep_with_cc": [
+   0.000894246930539292,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.000894246930539292,
+   false
+  ],
+  "raw": [
+   0.000894246930539292,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(512->512, k=3, s=1, d=1)",
+  "L": 128,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0008720231677403881,
+   false
+  ],
+  "prep_with_cc": [
+   0.0008720231677403881,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0008720231677403881,
+   false
+  ],
+  "raw": [
+   0.0008720231677403881,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(80->512, k=7, s=1, d=1)",
+  "L": 128,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.002049750176088091,
+   false
+  ],
+  "prep_with_cc": [
+   0.002049750176088091,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.002049750176088091,
+   false
+  ],
+  "raw": [
+   0.002049750176088091,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(18->256, k=30, s=15, d=1)",
+  "L": 15361,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0008258174503085663,
+   false
+  ],
+  "prep_with_cc": [
+   0.0008258174503085663,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0008258174503085663,
+   false
+  ],
+  "raw": [
+   0.0008258174503085663,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=7, s=1, d=1)",
+  "L": 1024,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0009741320001168523,
+   false
+  ],
+  "prep_with_cc": [
+   0.0009741320001168523,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0009741320001168523,
+   false
+  ],
+  "raw": [
+   0.0009741320001168523,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=7, s=1, d=1)",
+  "L": 1024,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0010163513432988318,
+   false
+  ],
+  "prep_with_cc": [
+   0.0010163513432988318,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0010163513432988318,
+   false
+  ],
+  "raw": [
+   0.0010163513432988318,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=7, s=1, d=3)",
+  "L": 1024,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0029323920058133292,
+   false
+  ],
+  "prep_with_cc": [
+   0.0029323920058133292,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0029323920058133292,
+   false
+  ],
+  "raw": [
+   0.0029323920058133292,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=7, s=1, d=1)",
+  "L": 1024,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0011327204269473686,
+   false
+  ],
+  "prep_with_cc": [
+   0.0011327204269473686,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0011327204269473686,
+   false
+  ],
+  "raw": [
+   0.0011327204269473686,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=7, s=1, d=5)",
+  "L": 1024,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0008866536426289084,
+   false
+  ],
+  "prep_with_cc": [
+   0.0008866536426289084,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0008866536426289084,
+   false
+  ],
+  "raw": [
+   0.0008866536426289084,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=7, s=1, d=1)",
+  "L": 1024,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0006553798546299281,
+   false
+  ],
+  "prep_with_cc": [
+   0.0006553798546299281,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0006553798546299281,
+   false
+  ],
+  "raw": [
+   0.0006553798546299281,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=3, s=1, d=1)",
+  "L": 1024,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0010193117510001863,
+   false
+  ],
+  "prep_with_cc": [
+   0.0010193117510001863,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0010193117510001863,
+   false
+  ],
+  "raw": [
+   0.0010193117510001863,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=3, s=1, d=1)",
+  "L": 1024,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0009819091825915287,
+   false
+  ],
+  "prep_with_cc": [
+   0.0009819091825915287,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0009819091825915287,
+   false
+  ],
+  "raw": [
+   0.0009819091825915287,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=3, s=1, d=3)",
+  "L": 1024,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.001246037785935254,
+   false
+  ],
+  "prep_with_cc": [
+   0.001246037785935254,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.001246037785935254,
+   false
+  ],
+  "raw": [
+   0.001246037785935254,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=3, s=1, d=1)",
+  "L": 1024,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0010468846291959186,
+   false
+  ],
+  "prep_with_cc": [
+   0.0010468846291959186,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0010468846291959186,
+   false
+  ],
+  "raw": [
+   0.0010468846291959186,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=3, s=1, d=5)",
+  "L": 1024,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0009534093066898135,
+   false
+  ],
+  "prep_with_cc": [
+   0.0009534093066898135,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0009534093066898135,
+   false
+  ],
+  "raw": [
+   0.0009534093066898135,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=3, s=1, d=1)",
+  "L": 1024,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.000820308689612469,
+   false
+  ],
+  "prep_with_cc": [
+   0.000820308689612469,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.000820308689612469,
+   false
+  ],
+  "raw": [
+   0.000820308689612469,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=7, s=1, d=1)",
+  "L": 1024,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.002450327769506751,
+   false
+  ],
+  "prep_with_cc": [
+   0.002450327769506751,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.002450327769506751,
+   false
+  ],
+  "raw": [
+   0.002450327769506751,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=7, s=1, d=1)",
+  "L": 1024,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0017658745112425279,
+   false
+  ],
+  "prep_with_cc": [
+   0.0017658745112425279,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0017658745112425279,
+   false
+  ],
+  "raw": [
+   0.0017658745112425279,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=7, s=1, d=3)",
+  "L": 1024,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0015708616989733835,
+   false
+  ],
+  "prep_with_cc": [
+   0.0015708616989733835,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0015708616989733835,
+   false
+  ],
+  "raw": [
+   0.0015708616989733835,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=7, s=1, d=1)",
+  "L": 1024,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0018009704318701681,
+   false
+  ],
+  "prep_with_cc": [
+   0.0018009704318701681,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0018009704318701681,
+   false
+  ],
+  "raw": [
+   0.0018009704318701681,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=7, s=1, d=5)",
+  "L": 1024,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0017473243344250258,
+   false
+  ],
+  "prep_with_cc": [
+   0.0017473243344250258,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0017473243344250258,
+   false
+  ],
+  "raw": [
+   0.0017473243344250258,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=7, s=1, d=1)",
+  "L": 1024,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0013223135622145465,
+   false
+  ],
+  "prep_with_cc": [
+   0.0013223135622145465,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0013223135622145465,
+   false
+  ],
+  "raw": [
+   0.0013223135622145465,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=11, s=1, d=1)",
+  "L": 1024,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.001517514647737871,
+   false
+  ],
+  "prep_with_cc": [
+   0.001517514647737871,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.001517514647737871,
+   false
+  ],
+  "raw": [
+   0.001517514647737871,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=11, s=1, d=1)",
+  "L": 1024,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0013418057451726065,
+   false
+  ],
+  "prep_with_cc": [
+   0.0013418057451726065,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0013418057451726065,
+   false
+  ],
+  "raw": [
+   0.0013418057451726065,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=11, s=1, d=3)",
+  "L": 1024,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0014338891404783959,
+   false
+  ],
+  "prep_with_cc": [
+   0.0014338891404783959,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0014338891404783959,
+   false
+  ],
+  "raw": [
+   0.0014338891404783959,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=11, s=1, d=1)",
+  "L": 1024,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0015480416672547868,
+   false
+  ],
+  "prep_with_cc": [
+   0.0015480416672547868,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0015480416672547868,
+   false
+  ],
+  "raw": [
+   0.0015480416672547868,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=11, s=1, d=5)",
+  "L": 1024,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0014673641271936823,
+   false
+  ],
+  "prep_with_cc": [
+   0.0014673641271936823,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0014673641271936823,
+   false
+  ],
+  "raw": [
+   0.0014673641271936823,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=11, s=1, d=1)",
+  "L": 1024,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0015027971562260965,
+   false
+  ],
+  "prep_with_cc": [
+   0.0015027971562260965,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0015027971562260965,
+   false
+  ],
+  "raw": [
+   0.0015027971562260965,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(18->128, k=6, s=3, d=1)",
+  "L": 15361,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0009972997610034427,
+   false
+  ],
+  "prep_with_cc": [
+   0.0009972997610034427,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0009972997610034427,
+   false
+  ],
+  "raw": [
+   0.0009972997610034427,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=7, s=1, d=1)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.000931950576735014,
+   false
+  ],
+  "prep_with_cc": [
+   0.000931950576735014,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.000931950576735014,
+   false
+  ],
+  "raw": [
+   0.000931950576735014,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=7, s=1, d=1)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0011758211747046816,
+   false
+  ],
+  "prep_with_cc": [
+   0.0011758211747046816,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0011758211747046816,
+   false
+  ],
+  "raw": [
+   0.0011758211747046816,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=7, s=1, d=3)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.001410853734354971,
+   false
+  ],
+  "prep_with_cc": [
+   0.001410853734354971,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.001410853734354971,
+   false
+  ],
+  "raw": [
+   0.001410853734354971,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=7, s=1, d=1)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0012128423898586631,
+   false
+  ],
+  "prep_with_cc": [
+   0.0012128423898586631,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0012128423898586631,
+   false
+  ],
+  "raw": [
+   0.0012128423898586631,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=7, s=1, d=5)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0020477703650169468,
+   false
+  ],
+  "prep_with_cc": [
+   0.0020477703650169468,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0020477703650169468,
+   false
+  ],
+  "raw": [
+   0.0020477703650169468,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=7, s=1, d=1)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0015918836427108237,
+   false
+  ],
+  "prep_with_cc": [
+   0.0015918836427108237,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0015918836427108237,
+   false
+  ],
+  "raw": [
+   0.0015918836427108237,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=3, s=1, d=1)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.001172918028322756,
+   false
+  ],
+  "prep_with_cc": [
+   0.001172918028322756,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.001172918028322756,
+   false
+  ],
+  "raw": [
+   0.001172918028322756,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=3, s=1, d=1)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0010907920972636665,
+   false
+  ],
+  "prep_with_cc": [
+   0.0010907920972636665,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0010907920972636665,
+   false
+  ],
+  "raw": [
+   0.0010907920972636665,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=3, s=1, d=3)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0011580217564375382,
+   false
+  ],
+  "prep_with_cc": [
+   0.0011580217564375382,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0011580217564375382,
+   false
+  ],
+  "raw": [
+   0.0011580217564375382,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=3, s=1, d=1)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.001318760695557386,
+   false
+  ],
+  "prep_with_cc": [
+   0.001318760695557386,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.001318760695557386,
+   false
+  ],
+  "raw": [
+   0.001318760695557386,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=3, s=1, d=5)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0009587999783776472,
+   false
+  ],
+  "prep_with_cc": [
+   0.0009587999783776472,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0009587999783776472,
+   false
+  ],
+  "raw": [
+   0.0009587999783776472,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=3, s=1, d=1)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0009501529388665579,
+   false
+  ],
+  "prep_with_cc": [
+   0.0009501529388665579,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0009501529388665579,
+   false
+  ],
+  "raw": [
+   0.0009501529388665579,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=7, s=1, d=1)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.00157612388063826,
+   false
+  ],
+  "prep_with_cc": [
+   0.00157612388063826,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.00157612388063826,
+   false
+  ],
+  "raw": [
+   0.00157612388063826,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=7, s=1, d=1)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.001634941231419369,
+   false
+  ],
+  "prep_with_cc": [
+   0.001634941231419369,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.001634941231419369,
+   false
+  ],
+  "raw": [
+   0.001634941231419369,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=7, s=1, d=3)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0018720364650300025,
+   false
+  ],
+  "prep_with_cc": [
+   0.0018720364650300025,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0018720364650300025,
+   false
+  ],
+  "raw": [
+   0.0018720364650300025,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=7, s=1, d=1)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.002082103421339794,
+   false
+  ],
+  "prep_with_cc": [
+   0.002082103421339794,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.002082103421339794,
+   false
+  ],
+  "raw": [
+   0.002082103421339794,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=7, s=1, d=5)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0014003382666261496,
+   false
+  ],
+  "prep_with_cc": [
+   0.0014003382666261496,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0014003382666261496,
+   false
+  ],
+  "raw": [
+   0.0014003382666261496,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=7, s=1, d=1)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0014765296366866963,
+   false
+  ],
+  "prep_with_cc": [
+   0.0014765296366866963,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0014765296366866963,
+   false
+  ],
+  "raw": [
+   0.0014765296366866963,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=11, s=1, d=1)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   1.2217697543071102,
+   false
+  ],
+  "prep_with_cc": [
+   3.443538590733086e+29,
+   false
+  ],
+  "prep_with_cc_slice": [
+   1.9447276165243662e+30,
+   false
+  ],
+  "raw": [
+   0.003594179708960915,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=11, s=1, d=1)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   1.266485206914188,
+   false
+  ],
+  "prep_with_cc": [
+   9.470358871706421e+28,
+   false
+  ],
+  "prep_with_cc_slice": [
+   1.5419758441633804e+30,
+   false
+  ],
+  "raw": [
+   0.0037096556909766293,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=11, s=1, d=3)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   1.472229041731819,
+   false
+  ],
+  "prep_with_cc": [
+   3.481713726167705e+28,
+   false
+  ],
+  "prep_with_cc_slice": [
+   6.735503604344582e+29,
+   false
+  ],
+  "raw": [
+   0.004032123480052959,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=11, s=1, d=1)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   1.5711202322138447,
+   false
+  ],
+  "prep_with_cc": [
+   3.75376381053372e+28,
+   false
+  ],
+  "prep_with_cc_slice": [
+   1.4354825758618266e+30,
+   false
+  ],
+  "raw": [
+   0.004186413561680412,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=11, s=1, d=5)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   1.2025379365673325,
+   false
+  ],
+  "prep_with_cc": [
+   3.0299107319029766e+28,
+   false
+  ],
+  "prep_with_cc_slice": [
+   9.582997846710355e+29,
+   false
+  ],
+  "raw": [
+   0.003555777782690441,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=11, s=1, d=1)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   1.1462269908886213,
+   false
+  ],
+  "prep_with_cc": [
+   1.591841219627949e+28,
+   false
+  ],
+  "prep_with_cc_slice": [
+   5.36484355834218e+29,
+   false
+  ],
+  "raw": [
+   0.004193800196148174,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(18->64, k=1, s=1, d=1)",
+  "L": 15361,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0015244181727245283,
+   false
+  ],
+  "prep_with_cc": [
+   0.0015244181727245283,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0015244181727245283,
+   false
+  ],
+  "raw": [
+   0.0015244181727245283,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=11, s=1, d=1)",
+  "L": 15361,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.005840606122022525,
+   false
+  ],
+  "prep_with_cc": [
+   0.005840606122022525,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.005840606122022525,
+   false
+  ],
+  "raw": [
+   0.005840606122022525,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=11, s=1, d=1)",
+  "L": 15361,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.002924948511173521,
+   false
+  ],
+  "prep_with_cc": [
+   0.002924948511173521,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.002924948511173521,
+   false
+  ],
+  "raw": [
+   0.002924948511173521,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=11, s=1, d=3)",
+  "L": 15361,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0032496014364343175,
+   false
+  ],
+  "prep_with_cc": [
+   0.0032496014364343175,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0032496014364343175,
+   false
+  ],
+  "raw": [
+   0.0032496014364343175,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=11, s=1, d=1)",
+  "L": 15361,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0024228757460785797,
+   false
+  ],
+  "prep_with_cc": [
+   0.0024228757460785797,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0024228757460785797,
+   false
+  ],
+  "raw": [
+   0.0024228757460785797,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=11, s=1, d=5)",
+  "L": 15361,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.003380741253123551,
+   false
+  ],
+  "prep_with_cc": [
+   0.003380741253123551,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.003380741253123551,
+   false
+  ],
+  "raw": [
+   0.003380741253123551,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=11, s=1, d=1)",
+  "L": 15361,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0031163233704836987,
+   false
+  ],
+  "prep_with_cc": [
+   0.0031163233704836987,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0031163233704836987,
+   false
+  ],
+  "raw": [
+   0.0031163233704836987,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=3, s=1, d=1)",
+  "L": 15361,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.001081694464677986,
+   false
+  ],
+  "prep_with_cc": [
+   0.001081694464677986,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.001081694464677986,
+   false
+  ],
+  "raw": [
+   0.001081694464677986,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=3, s=1, d=1)",
+  "L": 15361,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.001018818491821604,
+   false
+  ],
+  "prep_with_cc": [
+   0.001018818491821604,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.001018818491821604,
+   false
+  ],
+  "raw": [
+   0.001018818491821604,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=3, s=1, d=3)",
+  "L": 15361,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0010936496828802239,
+   false
+  ],
+  "prep_with_cc": [
+   0.0010936496828802239,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0010936496828802239,
+   false
+  ],
+  "raw": [
+   0.0010936496828802239,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=3, s=1, d=1)",
+  "L": 15361,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0011397014665571197,
+   false
+  ],
+  "prep_with_cc": [
+   0.0011397014665571197,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0011397014665571197,
+   false
+  ],
+  "raw": [
+   0.0011397014665571197,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=3, s=1, d=5)",
+  "L": 15361,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0011096332837955264,
+   false
+  ],
+  "prep_with_cc": [
+   0.0011096332837955264,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0011096332837955264,
+   false
+  ],
+  "raw": [
+   0.0011096332837955264,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=3, s=1, d=1)",
+  "L": 15361,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0009364974056707289,
+   false
+  ],
+  "prep_with_cc": [
+   0.0009364974056707289,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0009364974056707289,
+   false
+  ],
+  "raw": [
+   0.0009364974056707289,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=7, s=1, d=1)",
+  "L": 15361,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0013894421195372196,
+   false
+  ],
+  "prep_with_cc": [
+   0.0013894421195372196,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0013894421195372196,
+   false
+  ],
+  "raw": [
+   0.0013894421195372196,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=7, s=1, d=1)",
+  "L": 15361,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0011391710095542376,
+   false
+  ],
+  "prep_with_cc": [
+   0.0011391710095542376,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0011391710095542376,
+   false
+  ],
+  "raw": [
+   0.0011391710095542376,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=7, s=1, d=3)",
+  "L": 15361,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0014171586374102905,
+   false
+  ],
+  "prep_with_cc": [
+   0.0014171586374102905,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0014171586374102905,
+   false
+  ],
+  "raw": [
+   0.0014171586374102905,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=7, s=1, d=1)",
+  "L": 15361,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.001271648274227299,
+   false
+  ],
+  "prep_with_cc": [
+   0.001271648274227299,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.001271648274227299,
+   false
+  ],
+  "raw": [
+   0.001271648274227299,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=7, s=1, d=5)",
+  "L": 15361,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0008315762890506132,
+   false
+  ],
+  "prep_with_cc": [
+   0.0008315762890506132,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0008315762890506132,
+   false
+  ],
+  "raw": [
+   0.0008315762890506132,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=7, s=1, d=1)",
+  "L": 15361,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.000842242498829065,
+   false
+  ],
+  "prep_with_cc": [
+   0.000842242498829065,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.000842242498829065,
+   false
+  ],
+  "raw": [
+   0.000842242498829065,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=11, s=1, d=1)",
+  "L": 15361,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.003471711486268946,
+   false
+  ],
+  "prep_with_cc": [
+   0.003471711486268946,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.003471711486268946,
+   false
+  ],
+  "raw": [
+   0.003471711486268946,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=11, s=1, d=1)",
+  "L": 15361,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.003311486995929742,
+   false
+  ],
+  "prep_with_cc": [
+   0.003311486995929742,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.003311486995929742,
+   false
+  ],
+  "raw": [
+   0.003311486995929742,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=11, s=1, d=3)",
+  "L": 15361,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0032137313570753064,
+   false
+  ],
+  "prep_with_cc": [
+   0.0032137313570753064,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0032137313570753064,
+   false
+  ],
+  "raw": [
+   0.0032137313570753064,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=11, s=1, d=1)",
+  "L": 15361,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.003257068923918442,
+   false
+  ],
+  "prep_with_cc": [
+   0.003257068923918442,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.003257068923918442,
+   false
+  ],
+  "raw": [
+   0.003257068923918442,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=11, s=1, d=5)",
+  "L": 15361,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0029202042788248114,
+   false
+  ],
+  "prep_with_cc": [
+   0.0029202042788248114,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0029202042788248114,
+   false
+  ],
+  "raw": [
+   0.0029202042788248114,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=11, s=1, d=1)",
+  "L": 15361,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.003132171204519146,
+   false
+  ],
+  "prep_with_cc": [
+   0.003132171204519146,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.003132171204519146,
+   false
+  ],
+  "raw": [
+   0.003132171204519146,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->18, k=7, s=1, d=1)",
+  "L": 15361,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0010025713156078526,
+   false
+  ],
+  "prep_with_cc": [
+   0.0010025713156078526,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0010025713156078526,
+   false
+  ],
+  "raw": [
+   0.0010025713156078526,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(80->512, k=3, s=1, d=1)",
+  "L": 640,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.001831968869331119,
+   false
+  ],
+  "prep_with_cc": [
+   0.001831968869331119,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.001831968869331119,
+   false
+  ],
+  "raw": [
+   0.001831968869331119,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(512->512, k=3, s=1, d=1)",
+  "L": 640,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0007708881803415609,
+   false
+  ],
+  "prep_with_cc": [
+   0.0007708881803415609,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0007708881803415609,
+   false
+  ],
+  "raw": [
+   0.0007708881803415609,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(512->512, k=3, s=1, d=1)",
+  "L": 640,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0009831925257673462,
+   false
+  ],
+  "prep_with_cc": [
+   0.0009831925257673462,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0009831925257673462,
+   false
+  ],
+  "raw": [
+   0.0009831925257673462,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(512->512, k=3, s=1, d=1)",
+  "L": 640,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0008961129575643757,
+   false
+  ],
+  "prep_with_cc": [
+   0.0008961129575643757,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0008961129575643757,
+   false
+  ],
+  "raw": [
+   0.0008961129575643757,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(512->512, k=3, s=1, d=1)",
+  "L": 640,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0008618187776677738,
+   false
+  ],
+  "prep_with_cc": [
+   0.0008618187776677738,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0008618187776677738,
+   false
+  ],
+  "raw": [
+   0.0008618187776677738,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(80->512, k=7, s=1, d=1)",
+  "L": 640,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.002051487239994852,
+   false
+  ],
+  "prep_with_cc": [
+   0.002051487239994852,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.002051487239994852,
+   false
+  ],
+  "raw": [
+   0.002051487239994852,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(18->256, k=30, s=15, d=1)",
+  "L": 76801,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.9171133847768103,
+   false
+  ],
+  "prep_with_cc": [
+   0.9171133847768103,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.9171133847768103,
+   false
+  ],
+  "raw": [
+   0.00285996267276902,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=7, s=1, d=1)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0031341115480266447,
+   false
+  ],
+  "prep_with_cc": [
+   0.0031341115480266447,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0031341115480266447,
+   false
+  ],
+  "raw": [
+   0.0031341115480266447,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=7, s=1, d=1)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.003362865732148183,
+   false
+  ],
+  "prep_with_cc": [
+   0.003362865732148183,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.003362865732148183,
+   false
+  ],
+  "raw": [
+   0.003362865732148183,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=7, s=1, d=3)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.003351516866621669,
+   false
+  ],
+  "prep_with_cc": [
+   0.003351516866621669,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.003351516866621669,
+   false
+  ],
+  "raw": [
+   0.003351516866621669,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=7, s=1, d=1)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0033049687566219688,
+   false
+  ],
+  "prep_with_cc": [
+   0.0033049687566219688,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0033049687566219688,
+   false
+  ],
+  "raw": [
+   0.0033049687566219688,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=7, s=1, d=5)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.002672719625349374,
+   false
+  ],
+  "prep_with_cc": [
+   0.002672719625349374,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.002672719625349374,
+   false
+  ],
+  "raw": [
+   0.002672719625349374,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=7, s=1, d=1)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.00265601197051018,
+   false
+  ],
+  "prep_with_cc": [
+   0.00265601197051018,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.00265601197051018,
+   false
+  ],
+  "raw": [
+   0.00265601197051018,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=3, s=1, d=1)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0010193996539953618,
+   false
+  ],
+  "prep_with_cc": [
+   0.0010193996539953618,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0010193996539953618,
+   false
+  ],
+  "raw": [
+   0.0010193996539953618,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=3, s=1, d=1)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0009828376370283854,
+   false
+  ],
+  "prep_with_cc": [
+   0.0009828376370283854,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0009828376370283854,
+   false
+  ],
+  "raw": [
+   0.0009828376370283854,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=3, s=1, d=3)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0012415518673169466,
+   false
+  ],
+  "prep_with_cc": [
+   0.0012415518673169466,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0012415518673169466,
+   false
+  ],
+  "raw": [
+   0.0012415518673169466,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=3, s=1, d=1)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0010472034222619904,
+   false
+  ],
+  "prep_with_cc": [
+   0.0010472034222619904,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0010472034222619904,
+   false
+  ],
+  "raw": [
+   0.0010472034222619904,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=3, s=1, d=5)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0009471184596986476,
+   false
+  ],
+  "prep_with_cc": [
+   0.0009471184596986476,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0009471184596986476,
+   false
+  ],
+  "raw": [
+   0.0009471184596986476,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=3, s=1, d=1)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.000827874133561931,
+   false
+  ],
+  "prep_with_cc": [
+   0.000827874133561931,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.000827874133561931,
+   false
+  ],
+  "raw": [
+   0.000827874133561931,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=7, s=1, d=1)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0042556050620129885,
+   false
+  ],
+  "prep_with_cc": [
+   0.0042556050620129885,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0042556050620129885,
+   false
+  ],
+  "raw": [
+   0.0042556050620129885,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=7, s=1, d=1)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0034391827866034363,
+   false
+  ],
+  "prep_with_cc": [
+   0.0034391827866034363,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0034391827866034363,
+   false
+  ],
+  "raw": [
+   0.0034391827866034363,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=7, s=1, d=3)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.003730694727603959,
+   false
+  ],
+  "prep_with_cc": [
+   0.003730694727603959,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.003730694727603959,
+   false
+  ],
+  "raw": [
+   0.003730694727603959,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=7, s=1, d=1)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.003912706975879013,
+   false
+  ],
+  "prep_with_cc": [
+   0.003912706975879013,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.003912706975879013,
+   false
+  ],
+  "raw": [
+   0.003912706975879013,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=7, s=1, d=5)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.003965171956020425,
+   false
+  ],
+  "prep_with_cc": [
+   0.003965171956020425,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.003965171956020425,
+   false
+  ],
+  "raw": [
+   0.003965171956020425,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=7, s=1, d=1)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0035583195167950363,
+   false
+  ],
+  "prep_with_cc": [
+   0.0035583195167950363,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0035583195167950363,
+   false
+  ],
+  "raw": [
+   0.0035583195167950363,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=11, s=1, d=1)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0036668169581856335,
+   false
+  ],
+  "prep_with_cc": [
+   0.0036668169581856335,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0036668169581856335,
+   false
+  ],
+  "raw": [
+   0.0036668169581856335,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=11, s=1, d=1)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0035330017424147556,
+   false
+  ],
+  "prep_with_cc": [
+   0.0035330017424147556,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0035330017424147556,
+   false
+  ],
+  "raw": [
+   0.0035330017424147556,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=11, s=1, d=3)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0035805218116756873,
+   false
+  ],
+  "prep_with_cc": [
+   0.0035805218116756873,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0035805218116756873,
+   false
+  ],
+  "raw": [
+   0.0035805218116756873,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=11, s=1, d=1)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.003662238771734876,
+   false
+  ],
+  "prep_with_cc": [
+   0.003662238771734876,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.003662238771734876,
+   false
+  ],
+  "raw": [
+   0.003662238771734876,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=11, s=1, d=5)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0045843459078576156,
+   false
+  ],
+  "prep_with_cc": [
+   0.0045843459078576156,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0045843459078576156,
+   false
+  ],
+  "raw": [
+   0.0045843459078576156,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=11, s=1, d=1)",
+  "L": 5120,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.003671800066073334,
+   false
+  ],
+  "prep_with_cc": [
+   0.003671800066073334,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.003671800066073334,
+   false
+  ],
+  "raw": [
+   0.003671800066073334,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(18->128, k=6, s=3, d=1)",
+  "L": 76801,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0009993042917622247,
+   false
+  ],
+  "prep_with_cc": [
+   0.0009993042917622247,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0009993042917622247,
+   false
+  ],
+  "raw": [
+   0.0009993042917622247,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=7, s=1, d=1)",
+  "L": 25600,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.003140853493524382,
+   false
+  ],
+  "prep_with_cc": [
+   0.003140853493524382,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.003140853493524382,
+   false
+  ],
+  "raw": [
+   0.003140853493524382,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=7, s=1, d=1)",
+  "L": 25600,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.003328671133561165,
+   false
+  ],
+  "prep_with_cc": [
+   0.003328671133561165,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.003328671133561165,
+   false
+  ],
+  "raw": [
+   0.003328671133561165,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=7, s=1, d=3)",
+  "L": 25600,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.003579230153524517,
+   false
+  ],
+  "prep_with_cc": [
+   0.003579230153524517,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.003579230153524517,
+   false
+  ],
+  "raw": [
+   0.003579230153524517,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=7, s=1, d=1)",
+  "L": 25600,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.003372853622874706,
+   false
+  ],
+  "prep_with_cc": [
+   0.003372853622874706,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.003372853622874706,
+   false
+  ],
+  "raw": [
+   0.003372853622874706,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=7, s=1, d=5)",
+  "L": 25600,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.003908368757688659,
+   false
+  ],
+  "prep_with_cc": [
+   0.003908368757688659,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.003908368757688659,
+   false
+  ],
+  "raw": [
+   0.003908368757688659,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=7, s=1, d=1)",
+  "L": 25600,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.003727512353660304,
+   false
+  ],
+  "prep_with_cc": [
+   0.003727512353660304,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.003727512353660304,
+   false
+  ],
+  "raw": [
+   0.003727512353660304,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=3, s=1, d=1)",
+  "L": 25600,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0035553218423967064,
+   false
+  ],
+  "prep_with_cc": [
+   0.0035553218423967064,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0035553218423967064,
+   false
+  ],
+  "raw": [
+   0.0035553218423967064,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=3, s=1, d=1)",
+  "L": 25600,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0033812782462964465,
+   false
+  ],
+  "prep_with_cc": [
+   0.0033812782462964465,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0033812782462964465,
+   false
+  ],
+  "raw": [
+   0.0033812782462964465,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=3, s=1, d=3)",
+  "L": 25600,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0033520576035322067,
+   false
+  ],
+  "prep_with_cc": [
+   0.0033520576035322067,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0033520576035322067,
+   false
+  ],
+  "raw": [
+   0.0033520576035322067,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=3, s=1, d=1)",
+  "L": 25600,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.00343387527867906,
+   false
+  ],
+  "prep_with_cc": [
+   0.00343387527867906,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.00343387527867906,
+   false
+  ],
+  "raw": [
+   0.00343387527867906,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=3, s=1, d=5)",
+  "L": 25600,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0033781135286226932,
+   false
+  ],
+  "prep_with_cc": [
+   0.0033781135286226932,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0033781135286226932,
+   false
+  ],
+  "raw": [
+   0.0033781135286226932,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=3, s=1, d=1)",
+  "L": 25600,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0031763832671896056,
+   false
+  ],
+  "prep_with_cc": [
+   0.0031763832671896056,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0031763832671896056,
+   false
+  ],
+  "raw": [
+   0.0031763832671896056,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=7, s=1, d=1)",
+  "L": 25600,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0034243686336384643,
+   false
+  ],
+  "prep_with_cc": [
+   0.0034243686336384643,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0034243686336384643,
+   false
+  ],
+  "raw": [
+   0.0034243686336384643,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=7, s=1, d=1)",
+  "L": 25600,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.003762292369822672,
+   false
+  ],
+  "prep_with_cc": [
+   0.003762292369822672,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.003762292369822672,
+   false
+  ],
+  "raw": [
+   0.003762292369822672,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=7, s=1, d=3)",
+  "L": 25600,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.004243240246836009,
+   false
+  ],
+  "prep_with_cc": [
+   0.004243240246836009,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.004243240246836009,
+   false
+  ],
+  "raw": [
+   0.004243240246836009,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=7, s=1, d=1)",
+  "L": 25600,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0042784942872905645,
+   false
+  ],
+  "prep_with_cc": [
+   0.0042784942872905645,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0042784942872905645,
+   false
+  ],
+  "raw": [
+   0.0042784942872905645,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=7, s=1, d=5)",
+  "L": 25600,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.004234692084451337,
+   false
+  ],
+  "prep_with_cc": [
+   0.004234692084451337,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.004234692084451337,
+   false
+  ],
+  "raw": [
+   0.004234692084451337,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=7, s=1, d=1)",
+  "L": 25600,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0036474707559137317,
+   false
+  ],
+  "prep_with_cc": [
+   0.0036474707559137317,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0036474707559137317,
+   false
+  ],
+  "raw": [
+   0.0036474707559137317,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=11, s=1, d=1)",
+  "L": 25600,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0034294149244465315,
+   false
+  ],
+  "prep_with_cc": [
+   0.0034294149244465315,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0034294149244465315,
+   false
+  ],
+  "raw": [
+   0.0034294149244465315,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=11, s=1, d=1)",
+  "L": 25600,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.003698268273283949,
+   false
+  ],
+  "prep_with_cc": [
+   0.003698268273283949,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.003698268273283949,
+   false
+  ],
+  "raw": [
+   0.003698268273283949,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=11, s=1, d=3)",
+  "L": 25600,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0041305536667043345,
+   false
+  ],
+  "prep_with_cc": [
+   0.0041305536667043345,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0041305536667043345,
+   false
+  ],
+  "raw": [
+   0.0041305536667043345,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=11, s=1, d=1)",
+  "L": 25600,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0044433206425116886,
+   false
+  ],
+  "prep_with_cc": [
+   0.0044433206425116886,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0044433206425116886,
+   false
+  ],
+  "raw": [
+   0.0044433206425116886,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=11, s=1, d=5)",
+  "L": 25600,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0035493558839429624,
+   false
+  ],
+  "prep_with_cc": [
+   0.0035493558839429624,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0035493558839429624,
+   false
+  ],
+  "raw": [
+   0.0035493558839429624,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=11, s=1, d=1)",
+  "L": 25600,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0035437698138858264,
+   false
+  ],
+  "prep_with_cc": [
+   0.0035437698138858264,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0035437698138858264,
+   false
+  ],
+  "raw": [
+   0.0035437698138858264,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(18->64, k=1, s=1, d=1)",
+  "L": 76801,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0015248506659186806,
+   false
+  ],
+  "prep_with_cc": [
+   0.0015248506659186806,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0015248506659186806,
+   false
+  ],
+  "raw": [
+   0.0015248506659186806,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=11, s=1, d=1)",
+  "L": 76801,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.005845001445661299,
+   false
+  ],
+  "prep_with_cc": [
+   0.005845001445661299,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.005845001445661299,
+   false
+  ],
+  "raw": [
+   0.005845001445661299,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=11, s=1, d=1)",
+  "L": 76801,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0029639997564495663,
+   false
+  ],
+  "prep_with_cc": [
+   0.0029639997564495663,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0029639997564495663,
+   false
+  ],
+  "raw": [
+   0.0029639997564495663,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=11, s=1, d=3)",
+  "L": 76801,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.002916738403729143,
+   false
+  ],
+  "prep_with_cc": [
+   0.002916738403729143,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.002916738403729143,
+   false
+  ],
+  "raw": [
+   0.002916738403729143,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=11, s=1, d=1)",
+  "L": 76801,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0020200379906300196,
+   false
+  ],
+  "prep_with_cc": [
+   0.0020200379906300196,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0020200379906300196,
+   false
+  ],
+  "raw": [
+   0.0020200379906300196,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=11, s=1, d=5)",
+  "L": 76801,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0033767288430798003,
+   false
+  ],
+  "prep_with_cc": [
+   0.0033767288430798003,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0033767288430798003,
+   false
+  ],
+  "raw": [
+   0.0033767288430798003,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=11, s=1, d=1)",
+  "L": 76801,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0031274376587123384,
+   false
+  ],
+  "prep_with_cc": [
+   0.0031274376587123384,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0031274376587123384,
+   false
+  ],
+  "raw": [
+   0.0031274376587123384,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=3, s=1, d=1)",
+  "L": 76801,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0033561076534791177,
+   false
+  ],
+  "prep_with_cc": [
+   0.0033561076534791177,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0033561076534791177,
+   false
+  ],
+  "raw": [
+   0.0033561076534791177,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=3, s=1, d=1)",
+  "L": 76801,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0031845048774435357,
+   false
+  ],
+  "prep_with_cc": [
+   0.0031845048774435357,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0031845048774435357,
+   false
+  ],
+  "raw": [
+   0.0031845048774435357,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=3, s=1, d=3)",
+  "L": 76801,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.003298038491279093,
+   false
+  ],
+  "prep_with_cc": [
+   0.003298038491279093,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.003298038491279093,
+   false
+  ],
+  "raw": [
+   0.003298038491279093,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=3, s=1, d=1)",
+  "L": 76801,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.003149980159997101,
+   false
+  ],
+  "prep_with_cc": [
+   0.003149980159997101,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.003149980159997101,
+   false
+  ],
+  "raw": [
+   0.003149980159997101,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=3, s=1, d=5)",
+  "L": 76801,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0033974643476817647,
+   false
+  ],
+  "prep_with_cc": [
+   0.0033974643476817647,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0033974643476817647,
+   false
+  ],
+  "raw": [
+   0.0033974643476817647,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=3, s=1, d=1)",
+  "L": 76801,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.003907680830038152,
+   false
+  ],
+  "prep_with_cc": [
+   0.003907680830038152,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.003907680830038152,
+   false
+  ],
+  "raw": [
+   0.003907680830038152,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=7, s=1, d=1)",
+  "L": 76801,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0034327107017172362,
+   false
+  ],
+  "prep_with_cc": [
+   0.0034327107017172362,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0034327107017172362,
+   false
+  ],
+  "raw": [
+   0.0034327107017172362,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=7, s=1, d=1)",
+  "L": 76801,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0035340134630606557,
+   false
+  ],
+  "prep_with_cc": [
+   0.0035340134630606557,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0035340134630606557,
+   false
+  ],
+  "raw": [
+   0.0035340134630606557,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=7, s=1, d=3)",
+  "L": 76801,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0034583888133169222,
+   false
+  ],
+  "prep_with_cc": [
+   0.0034583888133169222,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0034583888133169222,
+   false
+  ],
+  "raw": [
+   0.0034583888133169222,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=7, s=1, d=1)",
+  "L": 76801,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.003078288111675445,
+   false
+  ],
+  "prep_with_cc": [
+   0.003078288111675445,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.003078288111675445,
+   false
+  ],
+  "raw": [
+   0.003078288111675445,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=7, s=1, d=5)",
+  "L": 76801,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0028545226073275554,
+   false
+  ],
+  "prep_with_cc": [
+   0.0028545226073275554,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0028545226073275554,
+   false
+  ],
+  "raw": [
+   0.0028545226073275554,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=7, s=1, d=1)",
+  "L": 76801,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.002910443687783597,
+   false
+  ],
+  "prep_with_cc": [
+   0.002910443687783597,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.002910443687783597,
+   false
+  ],
+  "raw": [
+   0.002910443687783597,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=11, s=1, d=1)",
+  "L": 76801,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0034903317008244967,
+   false
+  ],
+  "prep_with_cc": [
+   0.0034903317008244967,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0034903317008244967,
+   false
+  ],
+  "raw": [
+   0.0034903317008244967,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=11, s=1, d=1)",
+  "L": 76801,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0034009880976826456,
+   false
+  ],
+  "prep_with_cc": [
+   0.0034009880976826456,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0034009880976826456,
+   false
+  ],
+  "raw": [
+   0.0034009880976826456,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=11, s=1, d=3)",
+  "L": 76801,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.003189241061729318,
+   false
+  ],
+  "prep_with_cc": [
+   0.003189241061729318,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.003189241061729318,
+   false
+  ],
+  "raw": [
+   0.003189241061729318,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=11, s=1, d=1)",
+  "L": 76801,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0032343740119907638,
+   false
+  ],
+  "prep_with_cc": [
+   0.0032343740119907638,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0032343740119907638,
+   false
+  ],
+  "raw": [
+   0.0032343740119907638,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=11, s=1, d=5)",
+  "L": 76801,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0029597212082050524,
+   false
+  ],
+  "prep_with_cc": [
+   0.0029597212082050524,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0029597212082050524,
+   false
+  ],
+  "raw": [
+   0.0029597212082050524,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=11, s=1, d=1)",
+  "L": 76801,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0032301229854534144,
+   false
+  ],
+  "prep_with_cc": [
+   0.0032301229854534144,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0032301229854534144,
+   false
+  ],
+  "raw": [
+   0.0032301229854534144,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->18, k=7, s=1, d=1)",
+  "L": 76801,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0032861326755806394,
+   false
+  ],
+  "prep_with_cc": [
+   0.0032861326755806394,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0032861326755806394,
+   false
+  ],
+  "raw": [
+   0.0032861326755806394,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(80->512, k=3, s=1, d=1)",
+  "L": 896,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.001831520666853177,
+   false
+  ],
+  "prep_with_cc": [
+   0.001831520666853177,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.001831520666853177,
+   false
+  ],
+  "raw": [
+   0.001831520666853177,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(512->512, k=3, s=1, d=1)",
+  "L": 896,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0007697750273614326,
+   false
+  ],
+  "prep_with_cc": [
+   0.0007697750273614326,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0007697750273614326,
+   false
+  ],
+  "raw": [
+   0.0007697750273614326,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(512->512, k=3, s=1, d=1)",
+  "L": 896,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.001512116303827622,
+   false
+  ],
+  "prep_with_cc": [
+   0.001512116303827622,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.001512116303827622,
+   false
+  ],
+  "raw": [
+   0.001512116303827622,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(512->512, k=3, s=1, d=1)",
+  "L": 896,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0017666600914815235,
+   false
+  ],
+  "prep_with_cc": [
+   0.0017666600914815235,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0017666600914815235,
+   false
+  ],
+  "raw": [
+   0.0017666600914815235,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(512->512, k=3, s=1, d=1)",
+  "L": 896,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0008474739151151986,
+   false
+  ],
+  "prep_with_cc": [
+   0.0008474739151151986,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0008474739151151986,
+   false
+  ],
+  "raw": [
+   0.0008474739151151986,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(80->512, k=7, s=1, d=1)",
+  "L": 896,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.002048753410109203,
+   false
+  ],
+  "prep_with_cc": [
+   0.002048753410109203,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.002048753410109203,
+   false
+  ],
+  "raw": [
+   0.002048753410109203,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(18->256, k=30, s=15, d=1)",
+  "L": 107521,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.9211091154665837,
+   false
+  ],
+  "prep_with_cc": [
+   0.9211091154665837,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.9211091154665837,
+   false
+  ],
+  "raw": [
+   0.0028698337135522516,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=7, s=1, d=1)",
+  "L": 7168,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.003118739012457249,
+   false
+  ],
+  "prep_with_cc": [
+   0.003118739012457249,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.003118739012457249,
+   false
+  ],
+  "raw": [
+   0.003118739012457249,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=7, s=1, d=1)",
+  "L": 7168,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.00334546786757143,
+   false
+  ],
+  "prep_with_cc": [
+   0.00334546786757143,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.00334546786757143,
+   false
+  ],
+  "raw": [
+   0.00334546786757143,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=7, s=1, d=3)",
+  "L": 7168,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0034266362340001646,
+   false
+  ],
+  "prep_with_cc": [
+   0.0034266362340001646,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0034266362340001646,
+   false
+  ],
+  "raw": [
+   0.0034266362340001646,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=7, s=1, d=1)",
+  "L": 7168,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0033408392005734007,
+   false
+  ],
+  "prep_with_cc": [
+   0.0033408392005734007,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0033408392005734007,
+   false
+  ],
+  "raw": [
+   0.0033408392005734007,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=7, s=1, d=5)",
+  "L": 7168,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.002652997655659937,
+   false
+  ],
+  "prep_with_cc": [
+   0.002652997655659937,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.002652997655659937,
+   false
+  ],
+  "raw": [
+   0.002652997655659937,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=7, s=1, d=1)",
+  "L": 7168,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0026603023738438697,
+   false
+  ],
+  "prep_with_cc": [
+   0.0026603023738438697,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0026603023738438697,
+   false
+  ],
+  "raw": [
+   0.0026603023738438697,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=3, s=1, d=1)",
+  "L": 7168,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0010173344828686571,
+   false
+  ],
+  "prep_with_cc": [
+   0.0010173344828686571,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0010173344828686571,
+   false
+  ],
+  "raw": [
+   0.0010173344828686571,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=3, s=1, d=1)",
+  "L": 7168,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0009844343708482522,
+   false
+  ],
+  "prep_with_cc": [
+   0.0009844343708482522,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0009844343708482522,
+   false
+  ],
+  "raw": [
+   0.0009844343708482522,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=3, s=1, d=3)",
+  "L": 7168,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0017242708144822151,
+   false
+  ],
+  "prep_with_cc": [
+   0.0017242708144822151,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0017242708144822151,
+   false
+  ],
+  "raw": [
+   0.0017242708144822151,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=3, s=1, d=1)",
+  "L": 7168,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.001059990761817047,
+   false
+  ],
+  "prep_with_cc": [
+   0.001059990761817047,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.001059990761817047,
+   false
+  ],
+  "raw": [
+   0.001059990761817047,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=3, s=1, d=5)",
+  "L": 7168,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0009453189352575393,
+   false
+  ],
+  "prep_with_cc": [
+   0.0009453189352575393,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0009453189352575393,
+   false
+  ],
+  "raw": [
+   0.0009453189352575393,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=3, s=1, d=1)",
+  "L": 7168,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0008274419931250844,
+   false
+  ],
+  "prep_with_cc": [
+   0.0008274419931250844,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0008274419931250844,
+   false
+  ],
+  "raw": [
+   0.0008274419931250844,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=7, s=1, d=1)",
+  "L": 7168,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.003789365834301604,
+   false
+  ],
+  "prep_with_cc": [
+   0.003789365834301604,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.003789365834301604,
+   false
+  ],
+  "raw": [
+   0.003789365834301604,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=7, s=1, d=1)",
+  "L": 7168,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.003437186501513607,
+   false
+  ],
+  "prep_with_cc": [
+   0.003437186501513607,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.003437186501513607,
+   false
+  ],
+  "raw": [
+   0.003437186501513607,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=7, s=1, d=3)",
+  "L": 7168,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0048619193530254476,
+   false
+  ],
+  "prep_with_cc": [
+   0.0048619193530254476,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0048619193530254476,
+   false
+  ],
+  "raw": [
+   0.0048619193530254476,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=7, s=1, d=1)",
+  "L": 7168,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.003917290375743917,
+   false
+  ],
+  "prep_with_cc": [
+   0.003917290375743917,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.003917290375743917,
+   false
+  ],
+  "raw": [
+   0.003917290375743917,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=7, s=1, d=5)",
+  "L": 7168,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0038844956707188437,
+   false
+  ],
+  "prep_with_cc": [
+   0.0038844956707188437,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0038844956707188437,
+   false
+  ],
+  "raw": [
+   0.0038844956707188437,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=7, s=1, d=1)",
+  "L": 7168,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0036161257773354985,
+   false
+  ],
+  "prep_with_cc": [
+   0.0036161257773354985,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0036161257773354985,
+   false
+  ],
+  "raw": [
+   0.0036161257773354985,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=11, s=1, d=1)",
+  "L": 7168,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0036745603539353397,
+   false
+  ],
+  "prep_with_cc": [
+   0.0036745603539353397,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0036745603539353397,
+   false
+  ],
+  "raw": [
+   0.0036745603539353397,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=11, s=1, d=1)",
+  "L": 7168,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.003574188193985233,
+   false
+  ],
+  "prep_with_cc": [
+   0.003574188193985233,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.003574188193985233,
+   false
+  ],
+  "raw": [
+   0.003574188193985233,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=11, s=1, d=3)",
+  "L": 7168,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.00357667893994536,
+   false
+  ],
+  "prep_with_cc": [
+   0.00357667893994536,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.00357667893994536,
+   false
+  ],
+  "raw": [
+   0.00357667893994536,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=11, s=1, d=1)",
+  "L": 7168,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0036410291620822075,
+   false
+  ],
+  "prep_with_cc": [
+   0.0036410291620822075,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0036410291620822075,
+   false
+  ],
+  "raw": [
+   0.0036410291620822075,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=11, s=1, d=5)",
+  "L": 7168,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0036325663332546576,
+   false
+  ],
+  "prep_with_cc": [
+   0.0036325663332546576,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0036325663332546576,
+   false
+  ],
+  "raw": [
+   0.0036325663332546576,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(256->256, k=11, s=1, d=1)",
+  "L": 7168,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0036885806239635235,
+   false
+  ],
+  "prep_with_cc": [
+   0.0036885806239635235,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0036885806239635235,
+   false
+  ],
+  "raw": [
+   0.0036885806239635235,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(18->128, k=6, s=3, d=1)",
+  "L": 107521,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.6944030672277848,
+   false
+  ],
+  "prep_with_cc": [
+   0.6944030672277848,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.6944030672277848,
+   false
+  ],
+  "raw": [
+   0.00272299312064238,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=7, s=1, d=1)",
+  "L": 35840,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0031507597624376945,
+   false
+  ],
+  "prep_with_cc": [
+   0.0031507597624376945,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0031507597624376945,
+   false
+  ],
+  "raw": [
+   0.0031507597624376945,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=7, s=1, d=1)",
+  "L": 35840,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0033042059040651094,
+   false
+  ],
+  "prep_with_cc": [
+   0.0033042059040651094,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0033042059040651094,
+   false
+  ],
+  "raw": [
+   0.0033042059040651094,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=7, s=1, d=3)",
+  "L": 35840,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.003585249611338109,
+   false
+  ],
+  "prep_with_cc": [
+   0.003585249611338109,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.003585249611338109,
+   false
+  ],
+  "raw": [
+   0.003585249611338109,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=7, s=1, d=1)",
+  "L": 35840,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0033586719751484495,
+   false
+  ],
+  "prep_with_cc": [
+   0.0033586719751484495,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0033586719751484495,
+   false
+  ],
+  "raw": [
+   0.0033586719751484495,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=7, s=1, d=5)",
+  "L": 35840,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.003977483861584567,
+   false
+  ],
+  "prep_with_cc": [
+   0.003977483861584567,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.003977483861584567,
+   false
+  ],
+  "raw": [
+   0.003977483861584567,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=7, s=1, d=1)",
+  "L": 35840,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.003766578910081963,
+   false
+  ],
+  "prep_with_cc": [
+   0.003766578910081963,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.003766578910081963,
+   false
+  ],
+  "raw": [
+   0.003766578910081963,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=3, s=1, d=1)",
+  "L": 35840,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0035527449292687137,
+   false
+  ],
+  "prep_with_cc": [
+   0.0035527449292687137,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0035527449292687137,
+   false
+  ],
+  "raw": [
+   0.0035527449292687137,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=3, s=1, d=1)",
+  "L": 35840,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.003539011802801384,
+   false
+  ],
+  "prep_with_cc": [
+   0.003539011802801384,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.003539011802801384,
+   false
+  ],
+  "raw": [
+   0.003539011802801384,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=3, s=1, d=3)",
+  "L": 35840,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.00334592656894412,
+   false
+  ],
+  "prep_with_cc": [
+   0.00334592656894412,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.00334592656894412,
+   false
+  ],
+  "raw": [
+   0.00334592656894412,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=3, s=1, d=1)",
+  "L": 35840,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.00343097349997247,
+   false
+  ],
+  "prep_with_cc": [
+   0.00343097349997247,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.00343097349997247,
+   false
+  ],
+  "raw": [
+   0.00343097349997247,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=3, s=1, d=5)",
+  "L": 35840,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0033765847746110994,
+   false
+  ],
+  "prep_with_cc": [
+   0.0033765847746110994,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0033765847746110994,
+   false
+  ],
+  "raw": [
+   0.0033765847746110994,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=3, s=1, d=1)",
+  "L": 35840,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0031722836797248625,
+   false
+  ],
+  "prep_with_cc": [
+   0.0031722836797248625,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0031722836797248625,
+   false
+  ],
+  "raw": [
+   0.0031722836797248625,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=7, s=1, d=1)",
+  "L": 35840,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0035943664256079862,
+   false
+  ],
+  "prep_with_cc": [
+   0.0035943664256079862,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0035943664256079862,
+   false
+  ],
+  "raw": [
+   0.0035943664256079862,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=7, s=1, d=1)",
+  "L": 35840,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.005061602895930743,
+   false
+  ],
+  "prep_with_cc": [
+   0.005061602895930743,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.005061602895930743,
+   false
+  ],
+  "raw": [
+   0.005061602895930743,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=7, s=1, d=3)",
+  "L": 35840,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0040259604831664785,
+   false
+  ],
+  "prep_with_cc": [
+   0.0040259604831664785,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0040259604831664785,
+   false
+  ],
+  "raw": [
+   0.0040259604831664785,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=7, s=1, d=1)",
+  "L": 35840,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.004269217035818125,
+   false
+  ],
+  "prep_with_cc": [
+   0.004269217035818125,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.004269217035818125,
+   false
+  ],
+  "raw": [
+   0.004269217035818125,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=7, s=1, d=5)",
+  "L": 35840,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.003697247407608919,
+   false
+  ],
+  "prep_with_cc": [
+   0.003697247407608919,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.003697247407608919,
+   false
+  ],
+  "raw": [
+   0.003697247407608919,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=7, s=1, d=1)",
+  "L": 35840,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0036615041139889644,
+   false
+  ],
+  "prep_with_cc": [
+   0.0036615041139889644,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0036615041139889644,
+   false
+  ],
+  "raw": [
+   0.0036615041139889644,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=11, s=1, d=1)",
+  "L": 35840,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0034157371727881304,
+   false
+  ],
+  "prep_with_cc": [
+   0.0034157371727881304,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0034157371727881304,
+   false
+  ],
+  "raw": [
+   0.0034157371727881304,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=11, s=1, d=1)",
+  "L": 35840,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.00650643411399684,
+   false
+  ],
+  "prep_with_cc": [
+   0.00650643411399684,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.00650643411399684,
+   false
+  ],
+  "raw": [
+   0.00650643411399684,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=11, s=1, d=3)",
+  "L": 35840,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.004039368372459932,
+   false
+  ],
+  "prep_with_cc": [
+   0.004039368372459932,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.004039368372459932,
+   false
+  ],
+  "raw": [
+   0.004039368372459932,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=11, s=1, d=1)",
+  "L": 35840,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.004142052879854079,
+   false
+  ],
+  "prep_with_cc": [
+   0.004142052879854079,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.004142052879854079,
+   false
+  ],
+  "raw": [
+   0.004142052879854079,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=11, s=1, d=5)",
+  "L": 35840,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0035575322474082753,
+   false
+  ],
+  "prep_with_cc": [
+   0.0035575322474082753,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0035575322474082753,
+   false
+  ],
+  "raw": [
+   0.0035575322474082753,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(128->128, k=11, s=1, d=1)",
+  "L": 35840,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0035278229535711638,
+   false
+  ],
+  "prep_with_cc": [
+   0.0035278229535711638,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0035278229535711638,
+   false
+  ],
+  "raw": [
+   0.0035278229535711638,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(18->64, k=1, s=1, d=1)",
+  "L": 107521,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0015243765326066823,
+   false
+  ],
+  "prep_with_cc": [
+   0.0015243765326066823,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0015243765326066823,
+   false
+  ],
+  "raw": [
+   0.0015243765326066823,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=11, s=1, d=1)",
+  "L": 107521,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.005854835727587825,
+   false
+  ],
+  "prep_with_cc": [
+   0.005854835727587825,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.005854835727587825,
+   false
+  ],
+  "raw": [
+   0.005854835727587825,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=11, s=1, d=1)",
+  "L": 107521,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0029817638443045626,
+   false
+  ],
+  "prep_with_cc": [
+   0.0029817638443045626,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0029817638443045626,
+   false
+  ],
+  "raw": [
+   0.0029817638443045626,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=11, s=1, d=3)",
+  "L": 107521,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0030098622957014146,
+   false
+  ],
+  "prep_with_cc": [
+   0.0030098622957014146,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0030098622957014146,
+   false
+  ],
+  "raw": [
+   0.0030098622957014146,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=11, s=1, d=1)",
+  "L": 107521,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.001899013953184906,
+   false
+  ],
+  "prep_with_cc": [
+   0.001899013953184906,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.001899013953184906,
+   false
+  ],
+  "raw": [
+   0.001899013953184906,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=11, s=1, d=5)",
+  "L": 107521,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.003411782728681071,
+   false
+  ],
+  "prep_with_cc": [
+   0.003411782728681071,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.003411782728681071,
+   false
+  ],
+  "raw": [
+   0.003411782728681071,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=11, s=1, d=1)",
+  "L": 107521,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.003121281865577925,
+   false
+  ],
+  "prep_with_cc": [
+   0.003121281865577925,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.003121281865577925,
+   false
+  ],
+  "raw": [
+   0.003121281865577925,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=3, s=1, d=1)",
+  "L": 107521,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.003340217291147414,
+   false
+  ],
+  "prep_with_cc": [
+   0.003340217291147414,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.003340217291147414,
+   false
+  ],
+  "raw": [
+   0.003340217291147414,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=3, s=1, d=1)",
+  "L": 107521,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0033352239777457394,
+   false
+  ],
+  "prep_with_cc": [
+   0.0033352239777457394,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0033352239777457394,
+   false
+  ],
+  "raw": [
+   0.0033352239777457394,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=3, s=1, d=3)",
+  "L": 107521,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0033011410606996355,
+   false
+  ],
+  "prep_with_cc": [
+   0.0033011410606996355,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0033011410606996355,
+   false
+  ],
+  "raw": [
+   0.0033011410606996355,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=3, s=1, d=1)",
+  "L": 107521,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.003171600264751754,
+   false
+  ],
+  "prep_with_cc": [
+   0.003171600264751754,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.003171600264751754,
+   false
+  ],
+  "raw": [
+   0.003171600264751754,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=3, s=1, d=5)",
+  "L": 107521,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.003409870047476597,
+   false
+  ],
+  "prep_with_cc": [
+   0.003409870047476597,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.003409870047476597,
+   false
+  ],
+  "raw": [
+   0.003409870047476597,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=3, s=1, d=1)",
+  "L": 107521,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.003904345314251848,
+   false
+  ],
+  "prep_with_cc": [
+   0.003904345314251848,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.003904345314251848,
+   false
+  ],
+  "raw": [
+   0.003904345314251848,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=7, s=1, d=1)",
+  "L": 107521,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.003463542585844875,
+   false
+  ],
+  "prep_with_cc": [
+   0.003463542585844875,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.003463542585844875,
+   false
+  ],
+  "raw": [
+   0.003463542585844875,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=7, s=1, d=1)",
+  "L": 107521,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0036039046249806347,
+   false
+  ],
+  "prep_with_cc": [
+   0.0036039046249806347,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0036039046249806347,
+   false
+  ],
+  "raw": [
+   0.0036039046249806347,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=7, s=1, d=3)",
+  "L": 107521,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0034412188910217262,
+   false
+  ],
+  "prep_with_cc": [
+   0.0034412188910217262,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0034412188910217262,
+   false
+  ],
+  "raw": [
+   0.0034412188910217262,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=7, s=1, d=1)",
+  "L": 107521,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0030736839484178866,
+   false
+  ],
+  "prep_with_cc": [
+   0.0030736839484178866,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0030736839484178866,
+   false
+  ],
+  "raw": [
+   0.0030736839484178866,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=7, s=1, d=5)",
+  "L": 107521,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.002835587425351622,
+   false
+  ],
+  "prep_with_cc": [
+   0.002835587425351622,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.002835587425351622,
+   false
+  ],
+  "raw": [
+   0.002835587425351622,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=7, s=1, d=1)",
+  "L": 107521,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0029221218225737038,
+   false
+  ],
+  "prep_with_cc": [
+   0.0029221218225737038,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0029221218225737038,
+   false
+  ],
+  "raw": [
+   0.0029221218225737038,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=11, s=1, d=1)",
+  "L": 107521,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0034779812891763038,
+   false
+  ],
+  "prep_with_cc": [
+   0.0034779812891763038,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0034779812891763038,
+   false
+  ],
+  "raw": [
+   0.0034779812891763038,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=11, s=1, d=1)",
+  "L": 107521,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.003299768032029722,
+   false
+  ],
+  "prep_with_cc": [
+   0.003299768032029722,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.003299768032029722,
+   false
+  ],
+  "raw": [
+   0.003299768032029722,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=11, s=1, d=3)",
+  "L": 107521,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0031877920658732305,
+   false
+  ],
+  "prep_with_cc": [
+   0.0031877920658732305,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0031877920658732305,
+   false
+  ],
+  "raw": [
+   0.0031877920658732305,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=11, s=1, d=1)",
+  "L": 107521,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0032293594995117954,
+   false
+  ],
+  "prep_with_cc": [
+   0.0032293594995117954,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0032293594995117954,
+   false
+  ],
+  "raw": [
+   0.0032293594995117954,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=11, s=1, d=5)",
+  "L": 107521,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.0029679638674475436,
+   false
+  ],
+  "prep_with_cc": [
+   0.0029679638674475436,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.0029679638674475436,
+   false
+  ],
+  "raw": [
+   0.0029679638674475436,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->64, k=11, s=1, d=1)",
+  "L": 107521,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.003401088485025352,
+   false
+  ],
+  "prep_with_cc": [
+   0.003401088485025352,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.003401088485025352,
+   false
+  ],
+  "raw": [
+   0.003401088485025352,
+   false
+  ]
+ },
+ {
+  "conv": "Conv1d(64->18, k=7, s=1, d=1)",
+  "L": 107521,
+  "input": "BufferType.DRAM/TensorMemoryLayout.INTERLEAVED/Layout.TILE/DataType.FLOAT32",
+  "prep_as_pipeline": [
+   0.003310898174279154,
+   false
+  ],
+  "prep_with_cc": [
+   0.003310898174279154,
+   false
+  ],
+  "prep_with_cc_slice": [
+   0.003310898174279154,
+   false
+  ],
+  "raw": [
+   0.003310898174279154,
+   false
+  ]
+ }
+]

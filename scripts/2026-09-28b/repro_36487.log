@@ -1,0 +1,2 @@
+WITH prepare functions: has inf False, min/max 0/6.355e+36, PCC vs torch 0.000352
+WITHOUT prepare functions: has inf False, min/max 0/69.5, PCC vs torch 0.999912

@@ -1,0 +1,8 @@
+#!/bin/bash
+# The package's device suite on the chunked-HiFT tree (default kernel cache); the perf test runs in phase R.
+source /tmp/claude-1000/-home-user-tt-metal/5e0d25e5-2b87-412d-8d72-f567c348a996/scratchpad/jobs.sh
+RUN_DIR=/home/user/data/cosyvoice2_runs/0928b
+cd /home/user/tt-metal
+start_job suite bash -c "source python_env/bin/activate && HF_HOME=/home/user/models COSYVOICE2_INPUTS=/home/user/data/cosyvoice2_inputs COSYVOICE2_TOKEN_REF=/home/user/data/cosyvoice2_token_accuracy COSYVOICE2_HIFT_STREAM_REF=/home/user/data/cosyvoice2_hift_stream_ref python -m pytest models/experimental/cosyvoice2/tests --timeout=0 -p no:cacheprovider -q -rs --durations=12 --deselect 'models/experimental/cosyvoice2/tests/perf/test_pipeline_perf.py::test_device_nonstreaming_rtf_distinct_utterances[device_params0]'"
+wait_job suite 14400
+grep -E "passed|failed|^FAILED|^ERROR|^SKIPPED" $RUN_DIR/suite.log | tail -12

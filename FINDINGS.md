@@ -256,7 +256,7 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
 - **Stage 1 WER/SIM on bucketed audio:** 0.68 % and 95.88, the reference 0.68 % and 95.21.
 - `test_device_hift_bucket_padding_reach_real_checkpoint` pins the reach under 0.5 s (124 ms on its input).
 
-### B12 — Token accuracy (confirmed). Status: **met, 96.37 %, `1333db5af5`** (D23)
+### B12 — Token accuracy (confirmed). Status: **met, 96.37 %, `1333db5af5`** (D23); **holds on the larger sample: 95.94 % over 5,003 positions (B19)**
 - bf16 logits: 91.10 % (max_seq_len 2,304) and 90.66 % (2,048). Every disagreement is at a small reference margin.
 - fp32 logits (bf16 weights, HiFi4, fp32 accumulation): 96.37 %, for 0.3 ms per decode step. fp32 weights give the
   same 96.37 %; HiFi3 gives 96.22 %.
@@ -283,9 +283,10 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
   | second, identical | 0 | 577 s | 182 s |
 
 - **The checks rerun in every process, and they are needed.** Both processes found the same 43 disagreements:
-  - 20 were real corruption of the prepared-weight fast path: `Conv1d(128->128, k=11)` at the 640 bucket (relative
-    error 1.0–2.6), the first source downsampling conv at every bucket ≥ 640 (7.7), and the second at every
-    bucket ≥ 896 (0.14–0.19);
+  - 20 were real corruption of the prepared-weight fast path: `Conv1d(128->128, k=11)` at the **128** bucket
+    (relative error 1.0–2.6; length 5,120 = 40 x 128 frames, **corrected 09-28**: first recorded as the 640
+    bucket), the first source downsampling conv at every bucket ≥ 640 (7.7), and the second at every bucket ≥ 896
+    (0.14–0.19). What they are: B17;
   - 23 were the safe-config reference's own error, arbitrated by a float64 host conv.
 - **Eviction:** 416 MiB/bank with every bucket warmed. At the 3,060 conv-cache inserts free DRAM never went below
   559 MiB/bank, against the old 150 MB threshold. It is 0 in bucketed mode anyway.
@@ -300,6 +301,50 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
 - **Cold first request** (`--warmup none`): 706 binaries compiled, 277.2 s for 8.52 s of audio, RTF 32.5.
 - **Perf test** (pytest, enforcing `Meets()`): passed. 0 binaries compiled, so the pytest fixture allocates exactly as
   the demo does. The same tokens, warm-up 533.9 s, RTF 0.436–0.633 (aggregate 0.484), no evictions.
+
+### B17 — The 20 corrupted conv geometries are tenstorrent/tt-metal#36487's bug (confirmed). Status: **comment drafted, not posted** (`drafts/2026-09-28_comment_36487_prepare_conv_weights_dram_slicing.md`; D29)
+- **In the pipeline** (`scripts/2026-09-28b/prepare_mismatch_probe.py`: real weights and inputs, the 128, 640 and
+  896 buckets): 6 of 102 conv geometries are wrong with prepared weights; raw weights are right everywhere
+  (≤ 0.0065). All six take DRAM inputs, which conv1d auto-slices.
+- **It is not our call.** Passing the conv's own compute config to `prepare_conv_weights` makes the k=11 case far
+  worse (1e28–1e29), and a matching slice config changes nothing. So there is nothing of ours to fix.
+- **Standalone** (`repro_prepare_conv1d.py`, random weights), with the same slice config given to prepare and conv:
+  - explicit DRAM width slicing (2 or 8) is wrong at every geometry tried, including ones auto slicing gets right;
+  - an L1 input with no slicing is right;
+  - `act_block_h_override=1024` (#35852's workaround) doesn't help.
+- **#36487's own reproducer fails on this build:** prepared PCC 0.00035, raw 0.999912.
+- **#55545** (conv1d, a band of lengths on Wormhole) is very likely the same bug, where auto slicing picks a bad
+  split.
+- Chunked HiFT (B18) runs only the 256- and 512-frame geometries. There the only disagreements are the safe-config
+  reference's own error.
+
+### B18 — Chunked HiFT (confirmed). Status: **built and gated, `da90d8cc84`** (D26)
+- 512-frame calls with upstream's streaming cache (8-frame overlap, source carry-over, Hamming crossfade), the last
+  call anchored to the end. HiFT goes from 12 geometries to 2, with no length limit; the cap is back to 1,600.
+- **Seam gate** vs upstream's own streaming HiFT (reference venv, the same schedule and noise), on 600-, 1,016- and
+  1,500-frame test-clean mels:
+  - mechanism (F0 injected): seams PCC ≥ 0.99855, max |diff| ≤ 0.034; whole signal PCC ≥ 0.99927;
+  - the no-crossfade control fails at 2 of 4 seams (the other two already agree, one near-silent);
+  - own F0: log-mel L1 0.090–0.109, the same as single pass (0.09–0.12). Chunking adds nothing to the port's own
+    spectral error.
+- chunking.py's stitch equals upstream's `fade_in_out` stitch exactly.
+- Upstream itself, chunked vs single pass: waveform PCC 0.49–0.82 (the sine phase restarts each call) but log-mel
+  L1 0.011–0.039.
+
+### B19 — Token accuracy on the larger sample (confirmed). Status: **holds, thin margin, `c7df6d00d5`** (D28)
+- 27 sequences, 4 speakers (the corpus plus a 20-sequence extension): **95.94 % over 5,003 positions**. The first
+  seven gave 96.37 %, case for case as before; the extension's 20 gave 95.79 %. Per sequence: 92.4–100 %.
+- Noise floor on the same positions: 96.45 % in bf16, 98.58 % with an fp32 head.
+
+### B20 — Stage 1 re-verified on chunked HiFT (confirmed). Status: **all four targets met, `7bd094cc3e`**
+- **Start-up:**
+  - cold (empty kernel cache): 1,831 s (30.5 min), 9,959 kernels; before chunking, 4,561 s and 19,068;
+  - warm: 194.6 s (3.2 min), 0 compiled, checks 21.5 s; before, 577 s. The flow is now 157 s of it.
+- **Geometries:** 8 LLM prefill + decode, 17 flow, 2 HiFT. DRAM warmed: 146.6 MiB/bank (before 416).
+- **The checks caught one corrupted geometry,** in the flow's new 2,560-token bucket: the CFM's
+  `Conv1d(320->256, k=3)` at length 5,120 (prepared 2.13, raw 0.0026). It is B17's bug.
+- **RTF:** 0.433–0.628, aggregate 0.479. The perf test passed (worst 0.621), 0 compiled.
+- **WER/SIM:** 0.68 % / 95.87 (reference 0.68 % / 95.21). Token accuracy 95.94 % (B19).
 
 ## O: older open items
 

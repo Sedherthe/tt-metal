@@ -74,6 +74,9 @@ its date.
 - Measured: 96.37 % vs 90.66 % token accuracy, for 0.3 ms per decode step.
 - One field reverses it: `CosyVoice2Config.llm_head_logits_dtype="bfloat16"`.
 
+- **Outcome (user, 09-28, second round):** keep the fp32-logit head as the default. VALIDATION.md explains the
+  noise-floor reasoning (`9ccd53edd0`).
+
 ### D24 — HiFT cap: 2,048 frames; past it, a clear error (user, 09-28)
 - `max_segment_speech_tokens=1024`. Past the cap, `SegmentTooLong` names the segment's length, and a test covers it.
 - Chunked HiFT is the eventual fix (D26).
@@ -85,6 +88,20 @@ its date.
 ### D26 — Chunked HiFT for non-streaming: propose after Stage 1, don't build (user, 09-28)
 - Fixed-size mel chunks with upstream's streaming cache and crossfade. That leaves one or two HiFT geometries, no
   cap, and no tail padding. It is Stage 2 work anyway. The proposal is in STATUS.
+- **Outcome (user, 09-28, second round):** approved as the next build. It is built and gated (`da90d8cc84`, B18).
+  The cap it removed (D24) is back to upstream's 1,600.
+
+### D27 — P1 (persist the conv check verdicts): deferred until after chunked HiFT (user, 09-28)
+
+### D28 — Token accuracy on more sequences, with the sample size next to the number (user, 09-28)
+- Done: B19 (`c7df6d00d5`).
+
+### D29 — The 20 corrupted geometries against #36487 (user, 09-28)
+- If it is the same bug, draft a comment for #36487 (don't post it); if different, draft a separate issue. It is
+  the same bug (B17); the comment is in `drafts/`.
+
+### D30 — PERF.md records start-up plainly (user, 09-28)
+- Done in `9ccd53edd0`; updated for chunked HiFT in the Stage 1 re-verification commit.
 
 ### D21 — Evaluation (user, 09-27)
 - **ASR:** Whisper large-v3. WER is per utterance and at corpus level.
