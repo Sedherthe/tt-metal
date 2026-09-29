@@ -1,0 +1,5 @@
+109 packages queried
+| setuptools 81.0.0 | GHSA-h35f-9h28-mq5c | CVE-2026-59890 | MODERATE | fixed 83.0.0 | setuptools: MANIFEST.in exclusion bypass in sdist via Unicode normalization collision (NFC/NFD) on macOS APFS/ |
+| setuptools 81.0.0 | PYSEC-2026-3447 | CVE-2026-59890 | CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:L | fixed 83.0.0 |  |
+| torch 2.11.0 | GHSA-rrmf-rvhw-rf47 | CVE-2025-3000 | LOW | fixed 2.13.0 | PyTorch is vulnerable to memory corruption through its torch.jit.script function |
+3 advisories

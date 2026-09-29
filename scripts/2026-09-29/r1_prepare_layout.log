@@ -1,0 +1,74 @@
+{"case": "resblock k=11 d=1, 128 frames", "L": 5120, "batch": 1, "dtype": "fp32", "declared TILE": 3.783636495327379, "declared ROW_MAJOR": 0.003945705492257132, "raw weight": 0.003945705492257132}
+{"case": "resblock k=11 d=3, 128 frames", "L": 5120, "batch": 1, "dtype": "fp32", "declared TILE": 1.378722066591024, "declared ROW_MAJOR": 0.003943305567673814, "raw weight": 0.003943305567673814}
+{"case": "resblock k=11 d=5, 128 frames", "L": 5120, "batch": 1, "dtype": "fp32", "declared TILE": 1.3787052033838472, "declared ROW_MAJOR": 0.004129934226020118, "raw weight": 0.004129934226020118}
+{"case": "resblock k=11 d=1, 256 frames", "L": 10240, "batch": 1, "dtype": "fp32", "declared TILE": 0.0039504957435857165, "declared ROW_MAJOR": 1.369127233029852, "raw weight": 0.0039504957435857165}
+{"case": "resblock k=11 d=1, 108 frames", "L": 4320, "batch": 1, "dtype": "fp32", "declared TILE": 1.3641586396849443, "declared ROW_MAJOR": 0.003944118029716727, "raw weight": 0.003944118029716727}
+{"case": "resblock k=11 d=3, 108 frames", "L": 4320, "batch": 1, "dtype": "fp32", "declared TILE": 1.3693904549081497, "declared ROW_MAJOR": 0.003942233952027546, "raw weight": 0.003942233952027546}
+{"case": "resblock k=11 d=5, 108 frames", "L": 4320, "batch": 1, "dtype": "fp32", "declared TILE": 1.3684401761016263, "declared ROW_MAJOR": 0.004164193869308356, "raw weight": 0.004164193869308356}
+{"case": "resblock k=11 d=1, 208 frames", "L": 8320, "batch": 1, "dtype": "fp32", "declared TILE": 1.371772250606957, "declared ROW_MAJOR": 0.003950430398385181, "raw weight": 0.003950430398385181}
+{"case": "resblock k=11 d=3, 208 frames", "L": 8320, "batch": 1, "dtype": "fp32", "declared TILE": 1.3695346601783722, "declared ROW_MAJOR": 0.005517186741752811, "raw weight": 0.005517186741752811}
+{"case": "resblock k=11 d=5, 208 frames", "L": 8320, "batch": 1, "dtype": "fp32", "declared TILE": 1.3705360851542483, "declared ROW_MAJOR": 0.004065871798015689, "raw weight": 0.004065871798015689}
+{"case": "source_downs[0] k=30 s=15, 640 frames", "L": 76801, "batch": 1, "dtype": "fp32", "declared TILE": 1.230988922221922, "declared ROW_MAJOR": 0.003961962718843694, "raw weight": 0.003961962718843694}
+{"case": "source_downs[0] k=30 s=15, 768 frames", "L": 92161, "batch": 1, "dtype": "fp32", "declared TILE": 1.2308681169309759, "declared ROW_MAJOR": 0.003963411322814007, "raw weight": 0.003963411322814007}
+{"case": "source_downs[0] k=30 s=15, 896 frames", "L": 107521, "batch": 1, "dtype": "fp32", "declared TILE": 1.2307160920958753, "declared ROW_MAJOR": 0.0039640533256701995, "raw weight": 0.0039640533256701995}
+{"case": "source_downs[0] k=30 s=15, 1024 frames", "L": 122881, "batch": 1, "dtype": "fp32", "declared TILE": 1.232284493152974, "declared ROW_MAJOR": 0.003963088784808326, "raw weight": 0.003963088784808326}
+{"case": "source_downs[0] k=30 s=15, 1280 frames", "L": 153601, "batch": 1, "dtype": "fp32", "declared TILE": 1.2306737307620046, "declared ROW_MAJOR": 0.003960070633226959, "raw weight": 0.003960070633226959}
+{"case": "source_downs[0] k=30 s=15, 1536 frames", "L": 184321, "batch": 1, "dtype": "fp32", "declared TILE": 1.2321583764854205, "declared ROW_MAJOR": 0.003958763110155764, "raw weight": 0.003958763110155764}
+{"case": "source_downs[0] k=30 s=15, 1792 frames", "L": 215041, "batch": 1, "dtype": "fp32", "declared TILE": 1.2302943568467566, "declared ROW_MAJOR": 0.003958006396040572, "raw weight": 0.003958006396040572}
+{"case": "source_downs[0] k=30 s=15, 2048 frames", "L": 245761, "batch": 1, "dtype": "fp32", "declared TILE": 1.2319280825167307, "declared ROW_MAJOR": 0.00395842723480924, "raw weight": 0.00395842723480924}
+{"case": "source_downs[0] k=30 s=15, 512 frames", "L": 61441, "batch": 1, "dtype": "fp32", "declared TILE": 0.0018513379091678892, "declared ROW_MAJOR": 1.1326686080278705, "raw weight": 0.0018513379091678892}
+{"case": "source_downs[0] k=30 s=15, 256 frames", "L": 30721, "batch": 1, "dtype": "fp32", "declared TILE": 0.0018527563971853771, "declared ROW_MAJOR": 1.1336419116903722, "raw weight": 0.0018527563971853771}
+{"case": "source_downs[0] k=30 s=15, 208 frames", "L": 24961, "batch": 1, "dtype": "fp32", "declared TILE": 0.0018513901413029846, "declared ROW_MAJOR": 1.1662335541014137, "raw weight": 0.0018513901413029846}
+{"case": "source_downs[0] k=30 s=15, 128 frames", "L": 15361, "batch": 1, "dtype": "fp32", "declared TILE": 0.0018534660404766873, "declared ROW_MAJOR": 1.1666937907682486, "raw weight": 0.0018534660404766873}
+{"case": "source_downs[0] k=30 s=15, 108 frames", "L": 12961, "batch": 1, "dtype": "fp32", "declared TILE": 0.0018552390926919236, "declared ROW_MAJOR": 1.1661305716180048, "raw weight": 0.0018552390926919236}
+{"case": "source_downs[1] k=6 s=3, 896 frames", "L": 107521, "batch": 1, "dtype": "fp32", "declared TILE": 1.1452746567812935, "declared ROW_MAJOR": 0.003912411924079131, "raw weight": 0.003912411924079131}
+{"case": "source_downs[1] k=6 s=3, 1024 frames", "L": 122881, "batch": 1, "dtype": "fp32", "declared TILE": 1.1460379029289072, "declared ROW_MAJOR": 0.003913019533457773, "raw weight": 0.003913019533457773}
+{"case": "source_downs[1] k=6 s=3, 1280 frames", "L": 153601, "batch": 1, "dtype": "fp32", "declared TILE": 1.1475327484202362, "declared ROW_MAJOR": 0.00391339564551754, "raw weight": 0.00391339564551754}
+{"case": "source_downs[1] k=6 s=3, 1536 frames", "L": 184321, "batch": 1, "dtype": "fp32", "declared TILE": 1.1482962961415102, "declared ROW_MAJOR": 0.003913068519061386, "raw weight": 0.003913068519061386}
+{"case": "source_downs[1] k=6 s=3, 1792 frames", "L": 215041, "batch": 1, "dtype": "fp32", "declared TILE": 1.1472195211329064, "declared ROW_MAJOR": 0.003911483919181857, "raw weight": 0.003911483919181857}
+{"case": "source_downs[1] k=6 s=3, 2048 frames", "L": 245761, "batch": 1, "dtype": "fp32", "declared TILE": 1.1480293962587942, "declared ROW_MAJOR": 0.003911149533782412, "raw weight": 0.003911149533782412}
+{"case": "source_downs[1] k=6 s=3, 512 frames", "L": 61441, "batch": 1, "dtype": "fp32", "declared TILE": 0.0018185009055464094, "declared ROW_MAJOR": 1.0689133382110878, "raw weight": 0.0018185009055464094}
+{"case": "source_downs[1] k=6 s=3, 256 frames", "L": 30721, "batch": 1, "dtype": "fp32", "declared TILE": 0.0018175818696348806, "declared ROW_MAJOR": 1.0692944163640798, "raw weight": 0.0018175818696348806}
+{"case": "source_downs[1] k=6 s=3, 208 frames", "L": 24961, "batch": 1, "dtype": "fp32", "declared TILE": 0.0018162849893366103, "declared ROW_MAJOR": 1.0687604267407615, "raw weight": 0.0018162849893366103}
+{"case": "source_downs[1] k=6 s=3, 128 frames", "L": 15361, "batch": 1, "dtype": "fp32", "declared TILE": 0.0018168556537981552, "declared ROW_MAJOR": 1.0699093403603839, "raw weight": 0.0018168556537981552}
+{"case": "source_downs[1] k=6 s=3, 108 frames", "L": 12961, "batch": 1, "dtype": "fp32", "declared TILE": 0.001816025827881689, "declared ROW_MAJOR": 1.0705359071332692, "raw weight": 0.001816025827881689}
+{"case": "flow CFM conv 320->256 k=3, 2560-token bucket", "L": 5120, "batch": 2, "dtype": "bf16", "declared TILE": 1.2617807895863198, "declared ROW_MAJOR": 1.3575483735759428, "raw weight": 0.0035724086995763465}
+{"case": "flow CFM conv 256->256 k=3, 2560-token bucket", "L": 5120, "batch": 2, "dtype": "bf16", "declared TILE": 0.003148020542097112, "declared ROW_MAJOR": 0.003148020542097112, "raw weight": 0.003148020542097112}
+| case | length | declared TILE | declared ROW_MAJOR | raw weight |
+|---|---|---|---|---|
+| resblock k=11 d=1, 128 frames | 5,120 | 3.78 | 0.00395 | 0.00395 |
+| resblock k=11 d=3, 128 frames | 5,120 | 1.38 | 0.00394 | 0.00394 |
+| resblock k=11 d=5, 128 frames | 5,120 | 1.38 | 0.00413 | 0.00413 |
+| resblock k=11 d=1, 256 frames | 10,240 | 0.00395 | 1.37 | 0.00395 |
+| resblock k=11 d=1, 108 frames | 4,320 | 1.36 | 0.00394 | 0.00394 |
+| resblock k=11 d=3, 108 frames | 4,320 | 1.37 | 0.00394 | 0.00394 |
+| resblock k=11 d=5, 108 frames | 4,320 | 1.37 | 0.00416 | 0.00416 |
+| resblock k=11 d=1, 208 frames | 8,320 | 1.37 | 0.00395 | 0.00395 |
+| resblock k=11 d=3, 208 frames | 8,320 | 1.37 | 0.00552 | 0.00552 |
+| resblock k=11 d=5, 208 frames | 8,320 | 1.37 | 0.00407 | 0.00407 |
+| source_downs[0] k=30 s=15, 640 frames | 76,801 | 1.23 | 0.00396 | 0.00396 |
+| source_downs[0] k=30 s=15, 768 frames | 92,161 | 1.23 | 0.00396 | 0.00396 |
+| source_downs[0] k=30 s=15, 896 frames | 107,521 | 1.23 | 0.00396 | 0.00396 |
+| source_downs[0] k=30 s=15, 1024 frames | 122,881 | 1.23 | 0.00396 | 0.00396 |
+| source_downs[0] k=30 s=15, 1280 frames | 153,601 | 1.23 | 0.00396 | 0.00396 |
+| source_downs[0] k=30 s=15, 1536 frames | 184,321 | 1.23 | 0.00396 | 0.00396 |
+| source_downs[0] k=30 s=15, 1792 frames | 215,041 | 1.23 | 0.00396 | 0.00396 |
+| source_downs[0] k=30 s=15, 2048 frames | 245,761 | 1.23 | 0.00396 | 0.00396 |
+| source_downs[0] k=30 s=15, 512 frames | 61,441 | 0.00185 | 1.13 | 0.00185 |
+| source_downs[0] k=30 s=15, 256 frames | 30,721 | 0.00185 | 1.13 | 0.00185 |
+| source_downs[0] k=30 s=15, 208 frames | 24,961 | 0.00185 | 1.17 | 0.00185 |
+| source_downs[0] k=30 s=15, 128 frames | 15,361 | 0.00185 | 1.17 | 0.00185 |
+| source_downs[0] k=30 s=15, 108 frames | 12,961 | 0.00186 | 1.17 | 0.00186 |
+| source_downs[1] k=6 s=3, 896 frames | 107,521 | 1.15 | 0.00391 | 0.00391 |
+| source_downs[1] k=6 s=3, 1024 frames | 122,881 | 1.15 | 0.00391 | 0.00391 |
+| source_downs[1] k=6 s=3, 1280 frames | 153,601 | 1.15 | 0.00391 | 0.00391 |
+| source_downs[1] k=6 s=3, 1536 frames | 184,321 | 1.15 | 0.00391 | 0.00391 |
+| source_downs[1] k=6 s=3, 1792 frames | 215,041 | 1.15 | 0.00391 | 0.00391 |
+| source_downs[1] k=6 s=3, 2048 frames | 245,761 | 1.15 | 0.00391 | 0.00391 |
+| source_downs[1] k=6 s=3, 512 frames | 61,441 | 0.00182 | 1.07 | 0.00182 |
+| source_downs[1] k=6 s=3, 256 frames | 30,721 | 0.00182 | 1.07 | 0.00182 |
+| source_downs[1] k=6 s=3, 208 frames | 24,961 | 0.00182 | 1.07 | 0.00182 |
+| source_downs[1] k=6 s=3, 128 frames | 15,361 | 0.00182 | 1.07 | 0.00182 |
+| source_downs[1] k=6 s=3, 108 frames | 12,961 | 0.00182 | 1.07 | 0.00182 |
+| flow CFM conv 320->256 k=3, 2560-token bucket | 5,120 | 1.26 | 1.36 | 0.00357 |
+| flow CFM conv 256->256 k=3, 2560-token bucket | 5,120 | 0.00315 | 0.00315 | 0.00315 |

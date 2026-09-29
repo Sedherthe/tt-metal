@@ -1,0 +1,14 @@
+{"utt": "121-123852-0000", "speaker": 121, "gender": "F", "start": 9, "frames": 600, "calls": 2, "utterance_frames": 884, "seam_f0_min_hz": [152.7]}
+{"utt": "260-123288-0015", "speaker": 260, "gender": "M", "start": 10, "frames": 800, "calls": 2, "utterance_frames": 1059, "seam_f0_min_hz": [122.5]}
+{"utt": "1221-135766-0011", "speaker": 1221, "gender": "F", "start": 15, "frames": 1016, "calls": 2, "utterance_frames": 1067, "seam_f0_min_hz": [222.3]}
+{"utt": "672-122797-0008", "speaker": 672, "gender": "M", "start": 56, "frames": 1100, "calls": 3, "utterance_frames": 1540, "seam_f0_min_hz": [108.4, 93.7]}
+{"utt": "1995-1836-0004", "speaker": 1995, "gender": "F", "start": 17, "frames": 1300, "calls": 3, "utterance_frames": 1695, "seam_f0_min_hz": [151.4, 164.2]}
+{"utt": "908-157963-0007", "speaker": 908, "gender": "M", "start": 30, "frames": 1520, "calls": 3, "utterance_frames": 1638, "seam_f0_min_hz": [105.8, 114.3]}
+CASES = {  # utterance id -> (first mel frame, mel frames)
+    "121-123852-0000": (9, 600),  # F, 2 calls
+    "260-123288-0015": (10, 800),  # M, 2 calls
+    "1221-135766-0011": (15, 1016),  # F, 2 calls
+    "672-122797-0008": (56, 1100),  # M, 3 calls
+    "1995-1836-0004": (17, 1300),  # F, 3 calls
+    "908-157963-0007": (30, 1520),  # M, 3 calls
+}

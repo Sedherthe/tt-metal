@@ -302,7 +302,7 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
 - **Perf test** (pytest, enforcing `Meets()`): passed. 0 binaries compiled, so the pytest fixture allocates exactly as
   the demo does. The same tokens, warm-up 533.9 s, RTF 0.436–0.633 (aggregate 0.484), no evictions.
 
-### B17 — The 20 corrupted conv geometries are tenstorrent/tt-metal#36487's bug (confirmed). Status: **comment drafted, not posted** (`drafts/2026-09-28_comment_36487_prepare_conv_weights_dram_slicing.md`; D29)
+### B17 — The 20 corrupted conv geometries are tenstorrent/tt-metal#36487's bug (confirmed). Status: **comment redrafted 09-29, not posted** (`drafts/2026-09-29_comment_36487_prepare_conv_weights_dram_slicing.md`, which replaces the 09-28 draft; D29). The ROW_MAJOR-prepared candidate is B23.
 - **In the pipeline** (`scripts/2026-09-28b/prepare_mismatch_probe.py`: real weights and inputs, the 128, 640 and
   896 buckets): 6 of 102 conv geometries are wrong with prepared weights; raw weights are right everywhere
   (≤ 0.0065). All six take DRAM inputs, which conv1d auto-slices.
@@ -376,13 +376,47 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
 ### B22 — Two numbers in the rebuild spec conflict with the record (confirmed, 09-29). Status: open (R1, R6)
 - **#36487's own reproducer:** the spec says prepared PCC 0.225 under TILE. The pushed log
   (`scripts/2026-09-28b/repro_36487.log`) says 0.000352 for the reproducer as written.
-  - R1 re-measures it.
-  - Today's number is used everywhere, including the comment draft (D37).
+  - **Re-measured 09-29** (`scripts/2026-09-29/r1_repro_36487.py`):
+    - TILE declared, as written: 0.000768, with inf in the output;
+    - ROW_MAJOR declared: 0.999912;
+    - raw: 0.999912.
+  - The spec's 0.225 does not reproduce. 0.000768 is the figure in VALIDATION and in the comment draft (D37).
 - **"Cold first request on chunked HiFT: RTF 32.5":** exactly the pre-chunking figure already in PERF.md (277.2 s
   for 8.52 s), so it may be a copy.
   - Unverified; R6 measures it fresh.
   - R6 also re-measures PERF.md's cold and warm start-up (30.5 and 3.2 min), which weren't re-verified on 09-29
     (D37).
+
+### B23 — #36487: the declared input layout decides it; a ROW_MAJOR-prepared candidate (confirmed, 09-29). Status: **built, `79349deacd`** (R1)
+- **Standalone** (`scripts/2026-09-29/r1_prepare_layout.py`, 36 geometries with the pipeline's configs):
+  - wherever the weight prepared declaring TILE is wrong (1.2–3.8), the one prepared declaring ROW_MAJOR is right;
+  - wherever TILE is right, ROW_MAJOR is wrong (1.07–1.37);
+  - the right one gives exactly the raw weight's error;
+  - the exception is the flow CFM's `Conv1d(320->256, k=3)` at 5,120, wrong both ways (1.26 / 1.36; raw 0.0036).
+  - The streaming HiFT lengths (108 and 208 frames) put every k=11 resblock conv where TILE is wrong: 6 convs, as
+    the spec said.
+- **Why, from the code:**
+  - `conv1d` width-slices DRAM inputs by default (`conv1d.cpp:82-88`);
+  - a sliced op, or a ROW_MAJOR input, gets a smaller channel alignment (`conv2d_utils.cpp:92-99`);
+  - but `prepare_conv_weights` never takes the DRAM path for a 1-D conv (`prepare_conv2d_weights.cpp:1313`).
+- **Built:**
+  - `TtConv1d._verify_and_resolve` adds the ROW_MAJOR-prepared weight as the second of four candidates, ahead of
+    the raw weight, so ties keep a prepared weight;
+  - the unit test runs at two real broken geometries, where the candidate wins, tied with raw at 0.0039;
+  - where the op rejects a ROW_MAJOR-prepared weight outright, the candidate is skipped and the other three
+    compete. The case seen: the F0 predictor's width-sharded `Conv1d(80->512, k=3)` at 8–20 frames in the unit
+    tests, which fails `TT_FATAL: act_matrix_width == weight_matrix_height` at validation, before any device work.
+    Those tests pass, resolved to the raw weight as before.
+- **In the pipeline** (Stage 1 demo, `scripts/2026-09-29/phase_r1verify.sh`):
+  - 898 binaries recompiled, as the spec predicted;
+  - five warm-up disagreements, none changing hands: the flow conv above (TILE 2.126, ROW_MAJOR 2.267, raw
+    0.00265, exactly the spec's figures), and four HiFT geometries where the safe reference itself was off;
+  - tokens and audio bit-identical to the baseline on HEAD;
+  - RTF 0.432–0.630.
+- **Rejected on 09-28** (from the rebuild spec; the run was lost, not re-measured): converting the conv *inputs*
+  to ROW_MAJOR.
+  - It broke 30 other convs and made HiFT 22–28 % slower.
+  - HiFT PCC vs torch improved from 0.9909 to 0.9966. That may be a future accuracy lever.
 
 ## O: older open items
 
