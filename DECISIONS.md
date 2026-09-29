@@ -92,6 +92,9 @@ its date.
   The cap it removed (D24) is back to upstream's 1,600.
 
 ### D27 — P1 (persist the conv check verdicts): deferred until after chunked HiFT (user, 09-28)
+- **Outcome (user, 09-28, after chunked HiFT): won't do.**
+  - The checks are 21.5 s of the 195 s warm start (PERF.md).
+  - The note recording this was lost with the 09-28 pod. It is recorded here on 09-29 from the rebuild spec.
 
 ### D28 — Token accuracy on more sequences, with the sample size next to the number (user, 09-28)
 - Done: B19 (`c7df6d00d5`).
@@ -102,6 +105,26 @@ its date.
 
 ### D30 — PERF.md records start-up plainly (user, 09-28)
 - Done in `9ccd53edd0`; updated for chunked HiFT in the Stage 1 re-verification commit.
+
+### D31 — Streaming final chunk: upstream parity, the flow runs non-streaming (user, 09-28; recorded 09-29)
+- The final chunk runs the existing bucketed non-streaming flow over all tokens, which is already warmed. Only the
+  new frames are emitted.
+- **Why:** it is what upstream does.
+  - `CosyVoice2Model.tts` passes no `stream` to its last `token2wav` (`cosyvoice/cli/model.py:367-373` at
+    `074ca6dc9e80`).
+  - So `stream` defaults to False (`:292`), and the flow gets `streaming=False` (`:301`).
+  - Checked in the source on 09-29.
+- The earlier streaming final-chunk path does not match upstream.
+- D22's trace release before the final chunk still applies.
+- The note recording this was lost with the 09-28 pod. It is recorded here from the rebuild spec.
+
+### D32 — Stage 3 flow caching: dropped (user, 09-28; recorded 09-29)
+- **Why** (09-28 measurements, lost with the design note, not re-measured):
+  - the prompt is 15–19 % of the flow;
+  - the gain would be about 0.1 s of time to first audio;
+  - it costs 2.3 MB of device memory per mel frame;
+  - it breaks final-chunk parity (D31).
+- **Revisit if:** R5's first-chunk breakdown puts the prompt's share of the flow much higher.
 
 ### D21 — Evaluation (user, 09-27)
 - **ASR:** Whisper large-v3. WER is per utterance and at corpus level.
@@ -115,6 +138,8 @@ its date.
 - **Release the LLM decode trace** before the final chunk runs.
 - **Warm every final-chunk bucket.** Don't rely on "needs no warming".
 - **Our caveat:** HiFT's final-chunk length is not bucketed today. D17's HiFT bucketing is meant to close that.
+- **09-28:** the final chunk's flow runs non-streaming, as upstream's does (D31). Its flow buckets are the
+  non-streaming set, already warmed. The rebuild spec pads the final HiFT chunk to 128 or 256 frames.
 
 ## Process
 
@@ -180,8 +205,59 @@ Alongside steps 1–2, a timeboxed rebase trial on a side branch. Cleanup contin
 ### D20 — Reference venv: pin transformers to upstream's version (user, 09-27 evening)
 - Pin transformers to the version upstream CosyVoice2's `requirements.txt` specifies. Keep a compatibility patch
   only if the pin can't work, and document why.
-- **Outcome (09-27, `fcb2fd6110`):**
+- **First outcome (09-27, `fcb2fd6110`), superseded:**
   - Pinned 4.51.3, with tokenizers 0.21.4 and huggingface-hub 0.36.2.
   - Both transformers shims were removed; `reference_env.py` refuses any other version.
   - The reference output is unchanged bit for bit.
   - Cost: 18 transformers CVEs to disposition (B8).
+- **Revised (user, 09-27 night, `027d30ec33`); the state since:**
+  - Back to transformers 5.12.1 with the two shims. `reference_env.py` refuses any other version.
+  - The shims are exact: 4.51.3 with no shims gave bit-identical reference output on all seven cases.
+  - 4.51.3's 18 CVEs (B8) outweighed pinning upstream's own version. `docs/security.md` has the reasoning.
+  - Corrected here on 09-29; this entry had kept the first outcome.
+
+### D33 — Rebuild order and scope (user, 09-29)
+1. The notes commit.
+2. The README. It goes early because the PR is public and the README says only the iSTFT exists. It is CPU work,
+   done while the device runs.
+3. The Stage 1 baseline on HEAD.
+4. R1, with R2 overlapping on CPU.
+5. The streaming design note.
+6. R3.
+7. R4, with a hang check first.
+8. R5.
+9. R6.
+10. Stage 3.
+
+This session stops after R5, with the streaming numbers. R1 must land before R4. It also matters for R3, whose
+108-frame HiFT length hit #36487.
+
+### D34 — Git on the rebuild day (user, 09-29; updates D11)
+- Local commits are authorized for this session, one per verified chunk.
+- Every commit is pushed at once to `backup/2026-09-29-pr` or `backup/2026-09-29-notes`, and its hash reported to
+  the user.
+- Never push `bringup/cosyvoice2-istft` or `notes/cosyvoice2`. The user pushes those.
+- No `Co-Authored-By`.
+- The pre-commit hook is installed for the PR repo. The worktrees share it, so notes commits use
+  `PRE_COMMIT_ALLOW_NO_CONFIG=1`.
+
+### D35 — Reproducible inputs (user, 09-29)
+- **Record the checkpoint revision and pin it** in the prepare/reference scripts, so a re-download can't change
+  results. `FunAudioLLM/CosyVoice2-0.5B` is at `eec1ae6c79877dbd9379285cf8789c9e0879293d`.
+- **Lock the reference venv:** a constraints file next to `requirements-reference.txt`, so indirect dependencies
+  can't drift again. On 09-29 three of them had drifted (`scripts/2026-09-29/README.md`). It is committed with R1
+  or on its own.
+
+### D36 — KMD 2.9.0 (user, 09-29; updates D10)
+- R4 starts with a hang check. KMD 2.9.0 is the driver both dead pods ran (O2).
+- If the card drops at any point:
+  - stop;
+  - make sure the backup branches hold everything;
+  - report the exact error and what was running.
+- Don't retry resets in a loop.
+
+### D37 — The two rebuild-spec conflicts (user, 09-29; B22)
+- **#36487's reproducer:** R1 re-measures it. Today's number is used everywhere, including the comment draft. The
+  discrepancy is noted in FINDINGS.
+- **"RTF 32.5 on chunked HiFT":** unverified. R6 measures it fresh, together with cold start-up (an empty
+  kernel-cache directory) and warm start-up.

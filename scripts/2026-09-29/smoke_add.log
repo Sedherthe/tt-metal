@@ -1,0 +1,4 @@
+opened device in 5.1 s; arch Arch.WORMHOLE_B0, grid 8-8
+shape (64, 64), max|diff| 0.00781, finite True, all-ones bit pattern present False, bit-identical False
+closed; total 6.3 s
+SMOKE OK

@@ -346,6 +346,44 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
 - **RTF:** 0.433–0.628, aggregate 0.479. The perf test passed (worst 0.621), 0 compiled.
 - **WER/SIM:** 0.68 % / 95.87 (reference 0.68 % / 95.21). Token accuracy 95.94 % (B19).
 
+### B21 — HEAD re-verified on a second pod (confirmed, 09-29). Status: **measured**
+- **Pod:** `app-5ddf2d9d-deployment-5545b7c7f8-c4vpz`, n150 L at `0000:01:00.0`, KMD 2.9.0 (O2), firmware
+  19.11.0.0, 16 GT/s x16. It has no `python_env`, so everything ran in `/opt/venv` with `inflect` 7.5.0 added
+  (RUNBOOK §2). Scripts and snapshots: `scripts/2026-09-29/`.
+- **The reference side, rebuilt from scratch:** the venv from the committed requirements, upstream at
+  `074ca6dc9e80`, the checkpoint at `eec1ae6c` (D35), and LibriSpeech test-clean (md5 checked). It reproduces the
+  09-27 reference wherever that was recorded:
+  - prompt tokens: 175 and 168;
+  - the six cases' audio lengths, exactly;
+  - per-case WER and SIM, to two decimals (corpus 0.68 %, SIM 95.21);
+  - teacher-forced positions: 1,349 + 3,654;
+  - the HiFT stream reference: chunking's stitch matches upstream's exactly, and chunked vs single pass is PCC
+    0.489–0.822;
+  - the shim self-test: 8.1e-6, against 1.8 for the control.
+- **The device suite** (cold kernel cache, 16,747 binaries compiled): 204 passed and 3 skipped in 1:13:01.
+  - Token accuracy: 95.94 % over 5,003 positions (203 disagreements, median margin 0.024, max 0.226). Exactly B19.
+  - The seam gate: every printed digit equals VALIDATION's chunked-HiFT table.
+  - TT's tokens: 213/95/347/75/317/202. Equal to B20's Stage 1 run.
+  - The HiFT padding reach: 124 ms, as before.
+- **The perf test**, in its own process, passed: worst RTF 0.634, aggregate 0.479. On 09-28 it gave 0.621 and
+  0.490.
+  - It compiled 5,214 binaries, and its warm-up took 1,309 s.
+  - The suite had filled the cache, but this process allocates differently, so the kernels that carry DRAM
+    addresses compiled again (B3). This start-up is neither cold nor warm.
+- **The conv checks in the suite** fired 37 times and rejected the prepared weight 25 times. These were random-weight
+  unit tests at short lengths, plus the deliberate corrupted-weight test.
+
+### B22 — Two numbers in the rebuild spec conflict with the record (confirmed, 09-29). Status: open (R1, R6)
+- **#36487's own reproducer:** the spec says prepared PCC 0.225 under TILE. The pushed log
+  (`scripts/2026-09-28b/repro_36487.log`) says 0.000352 for the reproducer as written.
+  - R1 re-measures it.
+  - Today's number is used everywhere, including the comment draft (D37).
+- **"Cold first request on chunked HiFT: RTF 32.5":** exactly the pre-chunking figure already in PERF.md (277.2 s
+  for 8.52 s), so it may be a copy.
+  - Unverified; R6 measures it fresh.
+  - R6 also re-measures PERF.md's cold and warm start-up (30.5 and 3.2 min), which weren't re-verified on 09-29
+    (D37).
+
 ## O: older open items
 
 - **O1 — HiFT dtype crash.** Status: **fixed `544d588018`** (09-27). `TtHiFTDecoder.decode` converts `mel` and
@@ -354,6 +392,9 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
   generator (F0 predictor and source) with an fp32 decoder failed with `TT_FATAL` in `TtStft`'s concat.
 - **O2 — PCIe drops on two pods.** Status: open (infra). Both ran KMD 2.9.0. The pod with KMD 2.3.0 was stable
   throughout 09-27. Root cause unknown.
+  - **09-29:** the new pod also runs KMD 2.9.0, with `power_policy=Y` and `idle_power_down_grace_ms=5000`.
+  - It stayed clean through the reference rebuild, the suite and the perf test (B21).
+  - The procedure if a card drops is D36.
 - **O3 — `TtHiFTStreamingState` lost on 09-24.** Status: planned (streaming step). Rebuild it per the design in
   `history/BRINGUP_STATUS_25_sept.md` (mel cache 8, source cache 3840, host crossfade).
 - **O4 — The torch-CPU LLM reference isn't reproducible across processes** (119 vs 105 tokens with the same seed).

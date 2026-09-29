@@ -11,10 +11,13 @@ Read these first:
 - `RUNBOOK.md`: new-pod checks, environment, run commands, safety rules.
 
 Also here:
+- `REBUILD_2026-09-29.md`: the spec for rebuilding the work lost with the 09-28 pod. Its numbers are claims until
+  re-measured (B22, D33).
 - `drafts/`: unposted texts (issue comments, the PR description).
 - `design/`: design proposals. `2026-09-27_pipeline_nonstreaming.md` (rev 2) is approved and built through step 5.
 - `reviews/`: checks of documents we were handed (`2026-09-27_cosyvoice1_lessons_verification.md`).
-- `scripts/2026-09-27/`: one-off checks and their logs behind today's FINDINGS entries (not part of the PR).
+- `scripts/2026-09-27/`, `2026-09-28/`, `2026-09-28b/`, `2026-09-29/`: the one-off checks and job chains behind each
+  day's FINDINGS entries, with their logs (not part of the PR).
 - `scripts/perf_2026_09_21/` … `perf_2026_09_25/`, `scripts/vocoder_debug_2026_09_20/`: the dated one-off scripts that
   used to live in the PR tree under `models/demos/audio/cosyvoice2/scripts/`. They moved here unchanged on 09-27
   (R15), so their imports and absolute paths still name that old location. Docstrings in the PR cite them as
