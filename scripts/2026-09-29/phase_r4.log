@@ -1,0 +1,17 @@
+2026-09-29 14:05:28 started r4_tracker (log /home/user/data/cosyvoice2_runs/0929/r4_tracker.log)
+2026-09-29 14:06:28 r4_tracker exited 0
+  tracker subprocess: ['====================== 6 passed, 15 deselected in 37.62s =======================']
+============================== 1 passed in 45.51s ==============================
+2026-09-29 14:06:28 started r4_interleaved (log /home/user/data/cosyvoice2_runs/0929/r4_interleaved.log)
+2026-09-29 14:23:28 r4_interleaved exited 0
+  zero_shot_260-123286-0014: 180 tokens, 4 chunks, 3 ready during generation; first audio 12.247 s, RTF 10.837
+    chunk offset 0 hop 25: start 11.216 s, flow 0.904 s (CFM 0.744), HiFT 0.127 s, ready 12.247 s
+    chunk offset 25 hop 50: start 32.375 s, flow 0.904 s (CFM 0.722), HiFT 0.119 s, ready 33.399 s
+    chunk offset 75 hop 100: start 74.071 s, flow 1.185 s (CFM 0.871), HiFT 0.184 s, ready 75.439 s
+    chunk offset 175 hop 5 (final): start 76.709 s, flow 1.184 s (CFM 0.868), HiFT 0.134 s, ready 78.028 s
+================== 1 passed, 4 warnings in 1007.35s (0:16:47) ==================
+2026-09-29 14:23:28 started suite_r4 (log /home/user/data/cosyvoice2_runs/0929/suite_r4.log)
+2026-09-29 14:41:14 suite_r4 exited 0
+  capture failed -> eager fallback PCC 0.9993872375555415
+  the no-crossfade control failed the seam gate at 9 seams, passed it at: []
+==== 210 passed, 3 skipped, 1 deselected, 10 warnings in 1049.32s (0:17:29) ====

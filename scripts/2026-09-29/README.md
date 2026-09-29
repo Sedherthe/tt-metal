@@ -26,3 +26,5 @@ logs under `/home/user/data/cosyvoice2_runs/0929`. Job control is `../2026-09-28
 | `r3_streaming_ref.log` | no (reference venv) | B25. `streaming_reference.py` on TT's Stage 1 tokens: each case's chunk plan and HiFT call lengths. |
 | `r3_stream_gate.log` | yes | B25. The stage A gate, per chunk: flow, control, HiFT chunk and seam PCC, and the final chunks' tail levels. |
 | `r3_scores.log` | no (reference venv) | B25. WER/SIM: upstream streaming (0.68 % / 95.90) and our offline streaming (1.36 % / 95.83) of the same tokens. |
+| `phase_r4.sh` (+ `.log`) | yes | B26, D36. R4's hang check first (the opt-in tracker on the CFM traces; then the interleaved test under `TT_METAL_TRACE_ALLOC_TRACKING=1`, alone), then the full suite (210 passed, 3 skipped). |
+| `phase_r5.sh` | yes | R5. The streaming demo twice (warm), the cold first request under the tracker, WER/SIM. It waits for `r4_committed.exit`, written by hand after R4's push, so no pre-commit stash races a demo's imports. |

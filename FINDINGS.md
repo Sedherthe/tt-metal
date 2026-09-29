@@ -460,6 +460,33 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
 - **The encoder:** the streaming look-ahead goes in place (`context_rows`), so a chunk meets only bucket
   geometries. The encoder and flow tests pass (56 passed).
 
+### B26 — R4: streaming stage B, interleaved with the LLM (confirmed, 09-29). Status: **built, `fa4eca1213`**
+- **How it runs:**
+  - `generate(on_token=...)` feeds a `StreamSession`, and a due chunk's flow and HiFT run between decode steps
+    under the live decode trace;
+  - `warmup_streaming()` first compiles and verifies every streaming geometry: 17 flow buckets, and HiFT at 128
+    padded in front, 108, 208 and 128/256 padded at the end;
+  - the trace is released before the final chunk, and nothing is alive after;
+  - HiFT's state stays on the host;
+  - the hop restarts per segment.
+- **The noise has its own generator.** Host-side RAS sampling draws from the global RNG, so noise drawn there
+  between decode steps would have changed the sampled tokens.
+- **The hang check first, on KMD 2.9.0 (D36):**
+  - the opt-in tracker on the CFM traces: 6 passed;
+  - the interleaved test under `TT_METAL_TRACE_ALLOC_TRACKING=1`: passed, no violation, no hang (16:47).
+  - The spec's "no hang" was observed on KMD 2.3.0; this is the first stage-B run on 2.9.0.
+  - The tracker slows each decode-trace replay about 40x (about 0.4 s a token), so tracked timings are not
+    measurements.
+- **The test** (greedy, 260-123286-0014):
+  - 180 tokens, 4 chunks, 3 of them ready during generation;
+  - greedy streamed tokens equal the batch tokens, as the spec recorded;
+  - no trace alive after;
+  - the streamed audio is bit-identical to stage A's offline streaming of the same tokens and noise, as the spec
+    recorded.
+  - Greedy decoding runs this sentence to 180 tokens; RAS gives 75.
+- **#36487 in the interleaved run:** the 108- and 208-frame k=11 convs again, with TILE-prepared weights from 6e32
+  and 2.5e33 up to inf. The ROW_MAJOR candidate is chosen, as the spec said R1 would be needed for.
+
 ## O: older open items
 
 - **O1 — HiFT dtype crash.** Status: **fixed `544d588018`** (09-27). `TtHiFTDecoder.decode` converts `mel` and
