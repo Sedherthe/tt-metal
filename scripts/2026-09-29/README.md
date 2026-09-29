@@ -27,4 +27,9 @@ logs under `/home/user/data/cosyvoice2_runs/0929`. Job control is `../2026-09-28
 | `r3_stream_gate.log` | yes | B25. The stage A gate, per chunk: flow, control, HiFT chunk and seam PCC, and the final chunks' tail levels. |
 | `r3_scores.log` | no (reference venv) | B25. WER/SIM: upstream streaming (0.68 % / 95.90) and our offline streaming (1.36 % / 95.83) of the same tokens. |
 | `phase_r4.sh` (+ `.log`) | yes | B26, D36. R4's hang check first (the opt-in tracker on the CFM traces; then the interleaved test under `TT_METAL_TRACE_ALLOC_TRACKING=1`, alone), then the full suite (210 passed, 3 skipped). |
-| `phase_r5.sh` | yes | R5. The streaming demo twice (warm), the cold first request under the tracker, WER/SIM. It waits for `r4_committed.exit`, written by hand after R4's push, so no pre-commit stash races a demo's imports. |
+| `phase_r5.sh` (+ `.log`) | yes | B27. R5: the streaming demo twice (warm; 0 kernels compiled each), the cold first request under the tracker (failed: 416 compiled, then the tracker's refusal), WER/SIM. It waited for `r4_committed.exit`, written by hand after R4's push, so no pre-commit stash could race a demo's imports. |
+| `r5_warm1_timings.md`, `r5_warm2_timings.md` | yes | B27. The two warm runs' tables: per utterance, the first chunk's breakdown, first audio and RTF. |
+| `r5_cold_excerpt.log` | yes | B27. The cold run's traceback: 1,259 buffers alive at the first decode replay after the first chunk, counted by what allocated them (772 `ttnn.to_device`, 487 program-cache). The full log stays on the pod. |
+| `r5_score.log` | no (reference venv) | B27. WER/SIM of run 1 against upstream's streaming of the same tokens: 1.36 % / 95.85 against 0.68 % / 95.90. |
+| `r5_tt_smi.json` | yes | `tt-smi -s` after the cold run (15:05): n150 L at `0000:01:00.0`, DRAM OK, heartbeat 158,131, firmware 19.11.0.0. |
+| `phase_r5b.sh` (+ `.log`) | yes | D40. The guarded interleaved test, alone, with the schedule test: 2 passed, 0 kernels compiled; the refusal is logged before any device work. |

@@ -276,3 +276,14 @@ This session stops after R5, with the streaming numbers. R1 must land before R4.
   seam.
 - max |diff| is no longer gated: an absolute bound follows loudness.
 - Whole-signal PCC moves from 0.998 to 0.995, set from the first voiced-seam measurement (B24).
+
+### D40 — Streaming refuses to run without its warm-up (Claude, 09-29; the user can reverse it)
+- `synthesize_stream` raises unless `warmup_streaming()` has run in the process. `demo.py --stream` needs
+  `--warmup buckets`.
+- Why: a cold streaming request allocated 1,259 buffers under the live decode trace (B27). Refusing costs nothing
+  on the warmed path, and the alternative, documenting the restriction, leaves a path that can corrupt silently.
+- The 09-29 report left the choice to the user. The guard was built when work resumed, before an answer, as the
+  recommended option. Reverting it is one small commit.
+- Non-streaming cold requests are unaffected (`generate()` releases the trace before the flow and HiFT run), so
+  R6's cold first request (B22, D37) is still measurable. A cold streaming start is the two warm-ups on an empty
+  kernel cache.

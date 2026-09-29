@@ -487,6 +487,44 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
 - **#36487 in the interleaved run:** the 108- and 208-frame k=11 convs again, with TILE-prepared weights from 6e32
   and 2.5e33 up to inf. The ROW_MAJOR candidate is chosen, as the spec said R1 would be needed for.
 
+### B27 — R5: streaming measured; without its warm-up, streaming allocates under the live trace (confirmed, 09-29). Status: **built, `8ca78aa5a1`, `6a2ab97dde`**
+- **Warm, two runs** (`demo.py --stream`; `scripts/2026-09-29/phase_r5.sh`):
+  - fresh processes, both warm-ups first, the six distinct utterances, RAS seed 1986;
+  - time to first audio 1.365–1.455 s and 1.336–1.479 s (target < 0.5 s);
+  - streaming RTF 0.806–1.057 and 0.787–1.122 per utterance, aggregate 0.853 and 0.843 (target < 0.4). The 3.8 s
+    utterance is the worst both times;
+  - warm-ups: buckets 186.1 s, streaming 149.2 and 149.8 s; 0 kernels compiled; the tokens equal the Stage 1 demo's.
+- **The first chunk:**
+  - 0.371–0.466 s until it starts;
+  - flow 0.812–0.920 s, of which the CFM takes 0.674–0.731 s (67–73 ms a step);
+  - HiFT 0.121–0.127 s.
+
+  With a free flow, first audio would be at 0.51–0.59 s.
+- **The spec's R5 figures reproduce:** first audio 1.34–1.49 s; RTF 0.80–1.12, aggregate 0.85; first chunk LLM
+  0.38–0.47 s, flow 0.79–0.90 s (CFM 0.66–0.70 s), HiFT 0.12 s; floor 0.50–0.59 s.
+  - Today's flow and CFM run 0.01–0.03 s higher.
+  - Not re-measured: "the prompt is 15–19 % of the flow" and "~65 ms per Euler step regardless of length".
+- **WER/SIM** (run 1, against upstream's streaming of the same tokens): 1.36 % / 95.85 against 0.68 % / 95.90. The
+  extra error is Whisper appending "you" to 260-123440-0010, as in stage A (B25).
+- **Cold, under the tracker** (`--warmup none`, 121-127105-0003, `TT_METAL_TRACE_ALLOC_TRACKING=1`):
+  - 416 kernels compiled. Then the first decode replay after the first chunk raised `Found 1259 device buffer(s)
+    still alive before trace replay. These will be corrupted on replay.`
+  - 772 of them are `ttnn.to_device` copies: weights and constants on first use.
+  - 487 were allocated while new programs were created on program-cache misses, in the "program_cache: <op>"
+    context of `ttnn/api/ttnn/device_operation.hpp:384` (convs 110, halos 102, moves 42, matmuls 34, others). The
+    program cache keeps them.
+  - The spec's "cold first request, no warm-up: 172 s to first audio, RTF 65" came from an untracked run. If that
+    run took this path, it could have overwritten its own buffers. Not re-measured; the path is now refused.
+  - The process exited cleanly. tt-smi afterwards: n150 L at 0000:01:00.0, DRAM OK, heartbeat 158,131, firmware
+    19.11.0.0.
+- **The guard (D40):**
+  - `synthesize_stream` raises unless `warmup_streaming()` has run;
+  - `demo.py` refuses `--stream` without `--warmup buckets` (exit 2 at argument parsing);
+  - the interleaved test checks the refusal first: 2 passed, 0 kernels compiled, first audio 1.373 s, RTF 0.890
+    (`phase_r5b.sh`).
+- **Recorded as `Misses()`** in `tests/perf/gates.py`: `ttfp_ms` at 1470 ± 15 %, `rtf_streaming` at 1.09 ± 20 %.
+  No device test enforces them yet.
+
 ## O: older open items
 
 - **O1 — HiFT dtype crash.** Status: **fixed `544d588018`** (09-27). `TtHiFTDecoder.decode` converts `mel` and
@@ -498,8 +536,9 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
   - **09-29:** the new pod also runs KMD 2.9.0, with `power_policy=Y` and `idle_power_down_grace_ms=5000`.
   - It stayed clean through the reference rebuild, the suite and the perf test (B21).
   - The procedure if a card drops is D36.
-- **O3 — `TtHiFTStreamingState` lost on 09-24.** Status: planned (streaming step). Rebuild it per the design in
-  `history/BRINGUP_STATUS_25_sept.md` (mel cache 8, source cache 3840, host crossfade).
+  - It also stayed clean through R1–R5, including R5's cold run that failed in the tracker (B27).
+- **O3 — `TtHiFTStreamingState` lost on 09-24.** Status: **rebuilt as `HiFTStream`** (R3, `082fad43d6`; B25).
+  It follows the design in `history/BRINGUP_STATUS_25_sept.md`: mel cache 8, source cache 3840, host crossfade.
 - **O4 — The torch-CPU LLM reference isn't reproducible across processes** (119 vs 105 tokens with the same seed).
   Status: open (minor).
 - **O5 — The cumsum precision test only covers 250 mel frames.** Status: open (nice to have). Add 464 or more.

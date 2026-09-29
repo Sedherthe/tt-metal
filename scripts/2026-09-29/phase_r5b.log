@@ -1,0 +1,11 @@
+2026-09-29 17:55:44 started r5_guard (log /home/user/data/cosyvoice2_runs/0929/r5_guard.log)
+2026-09-29 18:01:59 r5_guard exited 0
+binaries compiled by r5_guard: 0
+2026-09-29 17:59:04.453 | INFO     | conftest:expect_error_:960 - [EXPECTED_ERROR BEGIN] RuntimeError message="needs warmup_streaming\(\) first"
+2026-09-29 17:59:04.454 | INFO     | conftest:expect_error_:965 - [EXPECTED_ERROR END] RuntimeError message="needs warmup_streaming\(\) first"
+  zero_shot_260-123286-0014: 180 tokens, 4 chunks, 3 ready during generation; first audio 1.373 s, RTF 0.890
+    chunk offset 0 hop 25: start 0.383 s, flow 0.868 s (CFM 0.687), HiFT 0.123 s, ready 1.373 s
+    chunk offset 25 hop 50: start 1.858 s, flow 0.857 s (CFM 0.675), HiFT 0.115 s, ready 2.830 s
+    chunk offset 75 hop 100: start 3.793 s, flow 1.169 s (CFM 0.855), HiFT 0.175 s, ready 5.137 s
+    chunk offset 175 hop 5 (final): start 5.166 s, flow 1.123 s (CFM 0.853), HiFT 0.120 s, ready 6.409 s
+================== 2 passed, 4 warnings in 356.90s (0:05:56) ===================

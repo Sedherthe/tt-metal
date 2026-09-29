@@ -1,0 +1,47 @@
+2026-09-29 14:42:41 r4_committed exited 0
+2026-09-29 14:42:43 started r5_warm1 (log /home/user/data/cosyvoice2_runs/0929/r5_warm1.log)
+2026-09-29 14:49:28 r5_warm1 exited 0
+binaries compiled by r5_warm1: 0
+| zero_shot_260-123286-0014 | 3.00 | 75 | 2 | 25 | 0.395 | 0.880 | 0.696 | 0.124 | **1.398** | 2.918 | 0.973 |  DRAM 169.2 MiB/bank, L1_SMALL 0 B/bank
+| zero_shot_260-123440-0002 | 12.68 | 317 | 5 | 25 | 0.393 | 0.894 | 0.710 | 0.126 | **1.413** | 10.390 | 0.819 |  DRAM 169.2 MiB/bank, L1_SMALL 0 B/bank
+| zero_shot_260-123440-0010 | 8.08 | 202 | 4 | 25 | 0.386 | 0.894 | 0.707 | 0.124 | **1.403** | 6.847 | 0.847 |  DRAM 169.2 MiB/bank, L1_SMALL 0 B/bank
+| zero_shot_121-127105-0003 | 8.52 | 213 | 4 | 32 | 0.466 | 0.865 | 0.687 | 0.124 | **1.455** | 6.869 | 0.806 |
+| zero_shot_121-127105-0015 | 3.80 | 95 | 3 | 32 | 0.432 | 0.812 | 0.674 | 0.121 | **1.365** | 4.017 | 1.057 |
+| zero_shot_121-127105-0024 | 13.88 | 347 | 5 | 32 | 0.455 | 0.861 | 0.686 | 0.123 | **1.439** | 11.585 | 0.835 |
+| zero_shot_260-123286-0014 | 3.00 | 75 | 2 | 25 | 0.395 | 0.880 | 0.696 | 0.124 | **1.398** | 2.918 | 0.973 |
+| zero_shot_260-123440-0002 | 12.68 | 317 | 5 | 25 | 0.393 | 0.894 | 0.710 | 0.126 | **1.413** | 10.390 | 0.819 |
+| zero_shot_260-123440-0010 | 8.08 | 202 | 4 | 25 | 0.386 | 0.894 | 0.707 | 0.124 | **1.403** | 6.847 | 0.847 |
+Distinct utterances: 6, audio 49.96 s, wall 42.63 s, aggregate RTF 0.853, worst 1.057. Config: reported, HiFT F0/source float32, bucketing True, warm-up buckets (186.1 s), seed 1986. Streaming: first audio 1.365-1.455 s; streaming warm-up 149.2 s.
+2026-09-29 14:49:30 started r5_warm2 (log /home/user/data/cosyvoice2_runs/0929/r5_warm2.log)
+2026-09-29 14:56:16 r5_warm2 exited 0
+binaries compiled by r5_warm2: 0
+| zero_shot_260-123286-0014 | 3.00 | 75 | 2 | 25 | 0.393 | 0.880 | 0.692 | 0.126 | **1.399** | 2.835 | 0.945 |  DRAM 169.2 MiB/bank, L1_SMALL 0 B/bank
+| zero_shot_260-123440-0002 | 12.68 | 317 | 5 | 25 | 0.371 | 0.841 | 0.692 | 0.124 | **1.336** | 9.984 | 0.787 |  DRAM 169.2 MiB/bank, L1_SMALL 0 B/bank
+| zero_shot_260-123440-0010 | 8.08 | 202 | 4 | 25 | 0.393 | 0.920 | 0.731 | 0.127 | **1.441** | 6.869 | 0.850 |  DRAM 169.2 MiB/bank, L1_SMALL 0 B/bank
+| zero_shot_121-127105-0003 | 8.52 | 213 | 4 | 32 | 0.445 | 0.848 | 0.696 | 0.125 | **1.418** | 6.916 | 0.812 |
+| zero_shot_121-127105-0015 | 3.80 | 95 | 3 | 32 | 0.454 | 0.898 | 0.702 | 0.127 | **1.479** | 4.262 | 1.122 |
+| zero_shot_121-127105-0024 | 13.88 | 347 | 5 | 32 | 0.459 | 0.891 | 0.701 | 0.125 | **1.475** | 11.240 | 0.810 |
+| zero_shot_260-123286-0014 | 3.00 | 75 | 2 | 25 | 0.393 | 0.880 | 0.692 | 0.126 | **1.399** | 2.835 | 0.945 |
+| zero_shot_260-123440-0002 | 12.68 | 317 | 5 | 25 | 0.371 | 0.841 | 0.692 | 0.124 | **1.336** | 9.984 | 0.787 |
+| zero_shot_260-123440-0010 | 8.08 | 202 | 4 | 25 | 0.393 | 0.920 | 0.731 | 0.127 | **1.441** | 6.869 | 0.850 |
+Distinct utterances: 6, audio 49.96 s, wall 42.11 s, aggregate RTF 0.843, worst 1.122. Config: reported, HiFT F0/source float32, bucketing True, warm-up buckets (186.1 s), seed 1986. Streaming: first audio 1.336-1.479 s; streaming warm-up 149.8 s.
+2026-09-29 14:56:18 started r5_cold (log /home/user/data/cosyvoice2_runs/0929/r5_cold.log)
+2026-09-29 14:59:48 r5_cold exited 1
+r5_cold failed
+    raise RuntimeError("".join(parts))
+RuntimeError: Found 1259 device buffer(s) still alive before trace replay. These will be corrupted on replay.
+binaries compiled by r5_cold: 416
+2026-09-29 14:59:50 started r5_score (log /home/user/data/cosyvoice2_runs/0929/r5_score.log)
+2026-09-29 15:02:05 r5_score exited 0
+/home/user/data/cosyvoice2_runs/0929/r5_stream_warm1: {"n": 6, "corpus_wer_percent": 1.36, "corpus_word_errors": 2, "corpus_ref_words": 147, "sim_mean": 95.85, "sim_campplus_diagnostic_mean": 83.93}
+wrote /home/user/data/cosyvoice2_runs/0929/r5_stream_warm1/scores.json
+
+| case | words | WER % pytorch-reference-streaming | WER % ttnn | SIM pytorch-reference-streaming | SIM ttnn | audio s pytorch-reference-streaming / ttnn |
+|---|---|---|---|---|---|---|
+| zero_shot_121-127105-0003 | 18 | 0.00 | 0.00 | 95.07 | 94.40 | 8.52 / 8.52 |
+| zero_shot_121-127105-0015 | 10 | 0.00 | 0.00 | 93.74 | 93.80 | 3.80 / 3.80 |
+| zero_shot_121-127105-0024 | 48 | 0.00 | 0.00 | 93.42 | 93.86 | 13.88 / 13.88 |
+| zero_shot_260-123286-0014 | 7 | 0.00 | 0.00 | 96.10 | 96.21 | 3.00 / 3.00 |
+| zero_shot_260-123440-0002 | 44 | 2.27 | 2.27 | 98.61 | 98.50 | 12.68 / 12.68 |
+| zero_shot_260-123440-0010 | 20 | 0.00 | 5.00 | 98.45 | 98.33 | 8.08 / 8.08 |
+| **corpus (6 utterances)** | 147 | **0.68** (1 errors) | **1.36** (2 errors) | **95.90** | **95.85** | |

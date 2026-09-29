@@ -20,6 +20,8 @@ Written for the 09-29 pod (`app-5ddf2d9d-deployment-5545b7c7f8-c4vpz`). Where an
     `/sys/class/tenstorrent/*/device`. On 09-29 that was `/dev/tenstorrent/2` = `0000:01:00.0`.
 - **`tt-smi -s`, twice, a few minutes apart.** Check the firmware version, DRAM status, and that the heartbeat
   advances between the two. There must be no `0xffffffff`.
+  - On the 09-29 pod, tt-smi is `~/.local/bin/tt-smi` (the tt-installer venv), not in `/opt/venv`. `-s` prints the
+    snapshot to stdout, the job's log; with `-f <file>` as well, no file was written.
 - **Smoke test:** `scripts/2026-09-29/smoke_add.py`, a 64×64 `ttnn.add` with a `to_torch` read-back.
   - On a hang or a `0xffffffff`, stop and report.
   - Don't loop on resets. One `tt-smi -r` is acceptable if the link is still up.

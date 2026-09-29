@@ -1,0 +1,69 @@
+# r5_cold.log, excerpt: the traceback, the flagged buffers counted by what allocated them, and the end.
+# Full log: /home/user/data/cosyvoice2_runs/0929/r5_cold.log (1,651 lines; lines 384-1643 list the 1,259 buffers).
+Traceback (most recent call last):
+  File "/home/user/tt-metal/models/experimental/cosyvoice2/demo/demo.py", line 246, in <module>
+    sys.exit(main())
+  File "/home/user/tt-metal/models/experimental/cosyvoice2/demo/demo.py", line 163, in main
+    syn = synth(ctx, case["text"], rng=RandomSources(llm_seed=args.seed))
+  File "/home/user/tt-metal/models/experimental/cosyvoice2/tt/pipeline.py", line 653, in synthesize_stream
+    tokens = self._clock.wrap("llm", self.text_to_tokens)(
+  File "/home/user/tt-metal/models/experimental/cosyvoice2/tt/pipeline.py", line 376, in timed
+    return fn(*args, **kwargs)
+  File "/home/user/tt-metal/models/experimental/cosyvoice2/tt/pipeline.py", line 493, in text_to_tokens
+    tokens = self.llm.generate(
+  File "/home/user/tt-metal/models/experimental/cosyvoice2/tt/llm/qwen2lm.py", line 711, in generate
+    logits = self._decode_step_traced(token, pos)
+  File "/home/user/tt-metal/models/experimental/cosyvoice2/tt/llm/qwen2lm.py", line 570, in _decode_step_traced
+    ttnn.execute_trace(self.mesh_device, self._trace_id, cq_id=0, blocking=False)
+  File "/home/user/tt-metal/ttnn/ttnn/__init__.py", line 161, in execute_trace
+    UnsafeAllocationTracker(device).verify_before_replay(trace_id)
+  File "/home/user/tt-metal/ttnn/ttnn/unsafe_allocation_tracker.py", line 115, in verify_before_replay
+    raise RuntimeError("".join(parts))
+RuntimeError: Found 1259 device buffer(s) still alive before trace replay. These will be corrupted on replay.
+# --- the 1,259 buffers, by the tracker's allocation context:
+    772 ttnn.to_device
+    110 program_cache: Conv
+    102 program_cache: HaloDeviceOperation
+     42 program_cache: MoveDeviceOperation
+     34 program_cache: MatmulDeviceOperation
+     20 program_cache: PaddedSliceDeviceOperation
+     18 program_cache: TransposeDeviceOperation
+     17 program_cache: UnaryDeviceOperation
+     17 program_cache: BinaryNgDeviceOperation
+     15 program_cache: UntilizeWithUnpaddingDeviceOperation
+     15 program_cache: TilizeWithValPaddingDeviceOperation
+     15 program_cache: InterleavedToShardedDeviceOperation
+     14 program_cache: ReshapeViewDeviceOperation
+     14 program_cache: ConcatDeviceOperation
+     12 program_cache: SliceDeviceOperation
+     10 program_cache: SliceWriteDeviceOperation
+     10 program_cache: ShardedToInterleavedDeviceOperation
+      5 program_cache: LayerNormDeviceOperation
+      3 program_cache: TypecastDeviceOperation
+      2 program_cache: SoftmaxDeviceOperation
+      2 program_cache: PermuteDeviceOperation
+      1 program_cache: UntilizeDeviceOperation
+      1 program_cache: UntilizeCodegenDeviceOperation
+      1 program_cache: TilizeDeviceOperation
+      1 program_cache: SDPAOperation
+      1 program_cache: RepeatDeviceOperation
+      1 program_cache: ReduceDeviceOperation
+      1 program_cache: NlpCreateHeadsDeviceOperation
+      1 program_cache: FillPadDeviceOperation
+      1 program_cache: EmbeddingsDeviceOperation
+      1 program_cache: AccumulationDeviceOperation
+# --- the first five buffers of the list (cut at 240 characters), then the log's end:
+Buffer 6561 [op: program_cache: BinaryNgDeviceOperation binary_op_type=BinaryOpType::MUL lhs_activations={} rhs_activations={} post_activations={} memory_config=MemoryConfig(memory_layout=TensorMemoryLayout::INTERLEAVED,buffer_type=BufferTy
+Buffer 6565 [op: program_cache: FillPadDeviceOperation fill_value=0 output_mem_config=MemoryConfig(memory_layout=TensorMemoryLayout::INTERLEAVED,buffer_type=BufferType::DRAM,shard_spec=std::nullopt,nd_shard_spec=std::nullopt,created_with_nd
+Buffer 6572 [op: program_cache: ReduceDeviceOperation math_op=ReduceOpMath::SUM dim=ReduceOpDim::W scaler=1 output_mem_config=MemoryConfig(memory_layout=TensorMemoryLayout::INTERLEAVED,buffer_type=BufferType::DRAM,shard_spec=std::nullopt,nd
+Buffer 6579 [op: program_cache: UnaryDeviceOperation op_chain={BasicUnaryWithParam<float, int, unsigned int>(base=BasicUnaryWithParam<float>(op_type=UnaryOpType::RSQRT,param={0}))} output_dtype=DataType::BFLOAT16 memory_config=MemoryConfig(
+Buffer 6585 [op: program_cache: BinaryNgDeviceOperation binary_op_type=BinaryOpType::MUL lhs_activations={} rhs_activations={} post_activations={} memory_config=MemoryConfig(memory_layout=TensorMemoryLayout::INTERLEAVED,buffer_type=BufferTy
+
+Use corruptible_allocation_scope() for acknowledged-corruptible tensors, or ensure temporary tensors are freed before replay.
+2026-09-29 14:59:42.361 | info     |    BuildKernels | JIT cache stats: 1181/1495 hits (79.0%) [1181 cached, 592 build-once dedup, 0 merged artifacts, 0 merged genfiles] (build_cache_telemetry.cpp:207)
+2026-09-29 14:59:42.361 | info     |    BuildKernels | JIT telemetry: 3 registered TelemetryTokens (build_cache_telemetry.cpp:230)
+2026-09-29 14:59:42.410 | info     |          Device | Closing user mode device drivers (tt_cluster.cpp:550)
+2026-09-29 14:59:42.410 | info     |             UMD | Closing devices in cluster (cluster.cpp:1218)
+2026-09-29 14:59:42.415 | info     |             UMD | Closing devices in cluster completed. (cluster.cpp:1227)
+2026-09-29 14:59:42.415 | info     |             UMD | Cluster destructor started. (cluster.cpp:933)
+2026-09-29 14:59:42.415 | info     |             UMD | Cluster destructor completed. (cluster.cpp:936)
