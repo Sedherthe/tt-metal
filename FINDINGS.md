@@ -418,6 +418,48 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
   - It broke 30 other convs and made HiFT 22–28 % slower.
   - HiFT PCC vs torch improved from 0.9909 to 0.9966. That may be a future accuracy lever.
 
+### B24 — R2: the seam gate on nine voiced seams (confirmed, 09-29). Status: **built, `c2c387db2f`**
+- **The set:** six test-clean mels from six speakers, each cut so that every crossfade is voiced: upstream's own F0
+  above 10 Hz over the crossfade ±4 frames (`scripts/2026-09-29/r2_select_seam_mels.py`). Nine seams.
+- **The metric:** the error relative to the signal over each 160 ms crossfade.
+  - Mechanism: 0.041–0.078, where the spec recorded 0.049–0.078. The bound is 0.10.
+  - No-crossfade control: 0.108–0.473, failing at all nine, where the spec recorded 0.116–0.640, failing at all
+    nine (D39).
+- **Gate changes** (D39):
+  - max |diff| is printed, not gated: it follows loudness (0.11 at the loudest seam, in both arms);
+  - whole-signal PCC is now ≥ 0.995: 1221-135766-0011, a high-F0 voice, measures 0.99641 over the whole signal and
+    0.044 at its seam.
+- **The spec's caveat does not reproduce with our measure.** The spec said that at 5 of 9 seams upstream's own two
+  calls already agree within 0.03–0.10. Measured as the old call's held-back tail against the new call's head over
+  the crossfade, they differ by 0.13–0.63 at all nine. So here the control's failures show real discontinuities,
+  not only the crossfade's ~8 % gain (which holds by construction). The 09-28 measure is unknown.
+- **On the old three mels,** the relative error at the near-silent seam is 0.154, from a tiny signal. That is why
+  every seam is voiced now.
+
+### B25 — R3: streaming stage A, offline from fixed tokens (confirmed, 09-29). Status: **built, `082fad43d6`**
+- **Against upstream's own streaming of TT's Stage 1 tokens** (`scripts/streaming_reference.py`; 6 utterances, 23
+  chunks, 17 seams):
+  - the chunk plans are identical;
+  - flow per chunk: 0.0085–0.0182 relative error (spec: 0.0085–0.018). Upstream's non-streaming control is
+    0.022–0.130, further away at every middle chunk;
+  - HiFT with upstream's F0 and noise: PCC 0.99921–0.99985 per chunk and 0.99900–0.99989 per seam (spec: ≥ 0.999);
+  - own F0: log-mel L1 0.069–0.088.
+- **#36487 at the streaming lengths:** 108, 128 and 208 frames. All 18 k=11 resblock convs (6 per length) have a
+  wrong TILE-prepared weight, 1.0 up to 7.9e7 or inf. The ROW_MAJOR candidate is used at 0.0035–0.0045 (B23).
+- **The final chunk's end padding** (B11's tail):
+  - over the whole of 121-127105-0015's 0.68 s final chunk, PCC is 0.965; before its last 0.4 s, 0.99921;
+  - in the last 0.4 s of each utterance the difference sits at −55 to −82 dBFS, at the silence's own level where
+    the utterance ends in near-silence.
+  - Gated on level (D38).
+- **WER/SIM:**
+  - our streamed audio: 1.36 % / 95.83;
+  - upstream streaming on the same tokens: 0.68 % / 95.90;
+  - the spec recorded 0.68 % / 95.81 vs 0.68 % / 95.89.
+  - The one extra word is Whisper appending "you" after the last word of 260-123440-0010, in the end-padded tail.
+    Not investigated further.
+- **The encoder:** the streaming look-ahead goes in place (`context_rows`), so a chunk meets only bucket
+  geometries. The encoder and flow tests pass (56 passed).
+
 ## O: older open items
 
 - **O1 — HiFT dtype crash.** Status: **fixed `544d588018`** (09-27). `TtHiFTDecoder.decode` converts `mel` and

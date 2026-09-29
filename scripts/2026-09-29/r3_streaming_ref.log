@@ -1,0 +1,6 @@
+  zero_shot_121-127105-0003: 213 tokens, prompt 168 (pad 7); chunks at offsets [0, 32, 82, 182] with hops [32, 50, 100, 31]; HiFT frames [64, 108, 208, 70]
+  zero_shot_121-127105-0015: 95 tokens, prompt 168 (pad 7); chunks at offsets [0, 32, 82] with hops [32, 50, 13]; HiFT frames [64, 108, 34]
+  zero_shot_121-127105-0024: 347 tokens, prompt 168 (pad 7); chunks at offsets [0, 32, 82, 182, 282] with hops [32, 50, 100, 100, 65]; HiFT frames [64, 108, 208, 208, 138]
+  zero_shot_260-123286-0014: 75 tokens, prompt 175 (pad 0); chunks at offsets [0, 25] with hops [25, 50]; HiFT frames [50, 108]
+  zero_shot_260-123440-0002: 317 tokens, prompt 175 (pad 0); chunks at offsets [0, 25, 75, 175, 275] with hops [25, 50, 100, 100, 42]; HiFT frames [50, 108, 208, 208, 92]
+  zero_shot_260-123440-0010: 202 tokens, prompt 175 (pad 0); chunks at offsets [0, 25, 75, 175] with hops [25, 50, 100, 27]; HiFT frames [50, 108, 208, 62]

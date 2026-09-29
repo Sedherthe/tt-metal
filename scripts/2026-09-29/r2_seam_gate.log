@@ -1,0 +1,33 @@
+| case | seam (sample) | arm | rel. error over the crossfade | PCC | max\|diff\| | upstream's calls agree to |
+| 121-123852-0000 | 241920 | mechanism | 0.075 | 0.99763 | 0.1125 | 0.128 |
+| 121-123852-0000 | 241920 | no crossfade (control) | 0.147 | 0.99576 | 0.1125 | 0.128 |
+| 121-123852-0000 | whole signal | mechanism | 0.99804 | 0.1125 |
+  121-123852-0000 own F0: log-mel L1 whole 0.0969, around each seam [0.1198]; for scale, upstream chunked vs its own single pass 0.0128
+| 1221-135766-0011 | 241920 | mechanism | 0.044 | 0.99930 | 0.0093 | 0.414 |
+| 1221-135766-0011 | 241920 | no crossfade (control) | 0.200 | 0.98731 | 0.0524 | 0.414 |
+| 1221-135766-0011 | whole signal | mechanism | 0.99641 | 0.1330 |
+  1221-135766-0011 own F0: log-mel L1 whole 0.0760, around each seam [0.085]; for scale, upstream chunked vs its own single pass 0.0314
+| 1995-1836-0004 | 241920 | mechanism | 0.051 | 0.99979 | 0.0204 | 0.421 |
+| 1995-1836-0004 | 241920 | no crossfade (control) | 0.303 | 0.96987 | 0.1527 | 0.421 |
+| 1995-1836-0004 | 483840 | mechanism | 0.050 | 0.99958 | 0.0148 | 0.275 |
+| 1995-1836-0004 | 483840 | no crossfade (control) | 0.116 | 0.99848 | 0.0343 | 0.275 |
+| 1995-1836-0004 | whole signal | mechanism | 0.99959 | 0.0303 |
+  1995-1836-0004 own F0: log-mel L1 whole 0.0892, around each seam [0.0725, 0.0835]; for scale, upstream chunked vs its own single pass 0.0381
+| 260-123288-0015 | 241920 | mechanism | 0.078 | 0.99919 | 0.0437 | 0.597 |
+| 260-123288-0015 | 241920 | no crossfade (control) | 0.145 | 0.99628 | 0.0777 | 0.597 |
+| 260-123288-0015 | whole signal | mechanism | 0.99942 | 0.0524 |
+  260-123288-0015 own F0: log-mel L1 whole 0.0907, around each seam [0.1102]; for scale, upstream chunked vs its own single pass 0.0194
+| 672-122797-0008 | 241920 | mechanism | 0.053 | 0.99884 | 0.0141 | 0.318 |
+| 672-122797-0008 | 241920 | no crossfade (control) | 0.180 | 0.99039 | 0.0451 | 0.318 |
+| 672-122797-0008 | 483840 | mechanism | 0.041 | 0.99954 | 0.0066 | 0.284 |
+| 672-122797-0008 | 483840 | no crossfade (control) | 0.108 | 0.99866 | 0.0209 | 0.284 |
+| 672-122797-0008 | whole signal | mechanism | 0.99865 | 0.0564 |
+  672-122797-0008 own F0: log-mel L1 whole 0.0846, around each seam [0.0872, 0.0899]; for scale, upstream chunked vs its own single pass 0.0350
+| 908-157963-0007 | 241920 | mechanism | 0.069 | 0.99820 | 0.0156 | 0.625 |
+| 908-157963-0007 | 241920 | no crossfade (control) | 0.473 | 0.88632 | 0.1001 | 0.625 |
+| 908-157963-0007 | 483840 | mechanism | 0.066 | 0.99952 | 0.0280 | 0.489 |
+| 908-157963-0007 | 483840 | no crossfade (control) | 0.387 | 0.94734 | 0.3584 | 0.489 |
+| 908-157963-0007 | whole signal | mechanism | 0.99922 | 0.0817 |
+  908-157963-0007 own F0: log-mel L1 whole 0.0901, around each seam [0.0879, 0.0824]; for scale, upstream chunked vs its own single pass 0.0469
+  the no-crossfade control failed the seam gate at 9 seams, passed it at: []
+======================== 3 passed, 2 warnings in 28.46s ========================

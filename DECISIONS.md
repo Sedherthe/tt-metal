@@ -261,3 +261,18 @@ This session stops after R5, with the streaming numbers. R1 must land before R4.
   discrepancy is noted in FINDINGS.
 - **"RTF 32.5 on chunked HiFT":** unverified. R6 measures it fresh, together with cold start-up (an empty
   kernel-cache directory) and warm start-up.
+
+### D38 — Streaming's final HiFT call is padded at its end, and its tail gated on level (Claude, 09-29; the user can reverse it)
+- The spec pads the final call to 128 or 256 frames at the end. Its last ~0.4 s then differ from upstream's, as
+  bucketing's tail does (B11).
+- The alternatives were rejected:
+  - running every final length exactly makes an unbounded geometry set;
+  - anchoring the final call to the end with earlier frames as context would change the crossfade region instead.
+- The gate checks the final chunk's body on PCC, and its last 0.4 s on level: 20 dB below the signal, or under
+  −50 dBFS (B25).
+
+### D39 — The seam gate's thresholds on the voiced set (Claude, 09-29; the user can reverse it)
+- The relative error over the crossfade is bounded at 0.10, the spec's bound, and the control must fail at every
+  seam.
+- max |diff| is no longer gated: an absolute bound follows loudness.
+- Whole-signal PCC moves from 0.998 to 0.995, set from the first voiced-seam measurement (B24).

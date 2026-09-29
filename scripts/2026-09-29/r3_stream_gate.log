@@ -1,0 +1,31 @@
+| case | chunk | offset | hop | flow rel. err | control rel. err | HiFT chunk PCC | seam PCC |
+| zero_shot_121-127105-0003 | 0 | 0 | 32 | 0.0123 | 0.0860 | 0.99967 | nan |
+| zero_shot_121-127105-0003 | 1 | 32 | 50 | 0.0144 | 0.0668 | 0.99942 | 0.99986 |
+| zero_shot_121-127105-0003 | 2 | 82 | 100 | 0.0126 | 0.0378 | 0.99949 | 0.99976 |
+| zero_shot_121-127105-0003 | 3 (final) | 182 | 31 | 0.0137 | 0.0000 | 0.99963 | 0.99983 |; last 0.4 s: signal -71.3 dBFS, difference -70.4 dBFS
+  zero_shot_121-127105-0003: own F0, log-mel L1 against upstream's streamed audio 0.0755
+| zero_shot_121-127105-0015 | 0 | 0 | 32 | 0.0140 | 0.0529 | 0.99968 | nan |
+| zero_shot_121-127105-0015 | 1 | 32 | 50 | 0.0122 | 0.1154 | 0.99960 | 0.99954 |
+| zero_shot_121-127105-0015 | 2 (final) | 82 | 13 | 0.0085 | 0.0000 | 0.99921 | 0.99982 |; last 0.4 s: signal -70.9 dBFS, difference -81.5 dBFS
+  zero_shot_121-127105-0015: own F0, log-mel L1 against upstream's streamed audio 0.0692
+| zero_shot_121-127105-0024 | 0 | 0 | 32 | 0.0113 | 0.0923 | 0.99976 | nan |
+| zero_shot_121-127105-0024 | 1 | 32 | 50 | 0.0142 | 0.1299 | 0.99967 | 0.99976 |
+| zero_shot_121-127105-0024 | 2 | 82 | 100 | 0.0129 | 0.0682 | 0.99948 | 0.99984 |
+| zero_shot_121-127105-0024 | 3 | 182 | 100 | 0.0182 | 0.0413 | 0.99936 | 0.99900 |
+| zero_shot_121-127105-0024 | 4 (final) | 282 | 65 | 0.0117 | 0.0000 | 0.99931 | 0.99948 |; last 0.4 s: signal -67.8 dBFS, difference -76.2 dBFS
+  zero_shot_121-127105-0024: own F0, log-mel L1 against upstream's streamed audio 0.0831
+| zero_shot_260-123286-0014 | 0 | 0 | 25 | 0.0094 | 0.0216 | 0.99985 | nan |
+| zero_shot_260-123286-0014 | 1 (final) | 25 | 50 | 0.0095 | 0.0000 | 0.99979 | 0.99985 |; last 0.4 s: signal -47.7 dBFS, difference -65.5 dBFS
+  zero_shot_260-123286-0014: own F0, log-mel L1 against upstream's streamed audio 0.0804
+| zero_shot_260-123440-0002 | 0 | 0 | 25 | 0.0096 | 0.0429 | 0.99969 | nan |
+| zero_shot_260-123440-0002 | 1 | 25 | 50 | 0.0085 | 0.0294 | 0.99977 | 0.99975 |
+| zero_shot_260-123440-0002 | 2 | 75 | 100 | 0.0095 | 0.0313 | 0.99961 | 0.99962 |
+| zero_shot_260-123440-0002 | 3 | 175 | 100 | 0.0110 | 0.0811 | 0.99965 | 0.99970 |
+| zero_shot_260-123440-0002 | 4 (final) | 275 | 42 | 0.0150 | 0.0000 | 0.99979 | 0.99985 |; last 0.4 s: signal -36.7 dBFS, difference -60.1 dBFS
+  zero_shot_260-123440-0002: own F0, log-mel L1 against upstream's streamed audio 0.0880
+| zero_shot_260-123440-0010 | 0 | 0 | 25 | 0.0088 | 0.0321 | 0.99975 | nan |
+| zero_shot_260-123440-0010 | 1 | 25 | 50 | 0.0091 | 0.0443 | 0.99960 | 0.99989 |
+| zero_shot_260-123440-0010 | 2 | 75 | 100 | 0.0102 | 0.0366 | 0.99967 | 0.99982 |
+| zero_shot_260-123440-0010 | 3 (final) | 175 | 27 | 0.0098 | 0.0000 | 0.99970 | 0.99962 |; last 0.4 s: signal -52.9 dBFS, difference -55.4 dBFS
+  zero_shot_260-123440-0010: own F0, log-mel L1 against upstream's streamed audio 0.0859
+=================== 2 passed, 6 warnings in 84.16s (0:01:24) ===================

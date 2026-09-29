@@ -1,0 +1,23 @@
+== upstream streaming on TT's Stage 1 tokens vs the non-streamed reference
+wrote /home/user/data/cosyvoice2_streaming_ref/scores.json
+| case | words | WER % pytorch-reference | WER % pytorch-reference-streaming | SIM pytorch-reference | SIM pytorch-reference-streaming | audio s pytorch-reference / pytorch-reference-streaming |
+|---|---|---|---|---|---|---|
+| zero_shot_260-123286-0014 | 7 | 14.29 | 0.00 | 95.82 | 96.10 | 3.12 / 3.00 |
+| zero_shot_260-123440-0010 | 20 | 0.00 | 0.00 | 96.85 | 98.45 | 8.32 / 8.08 |
+| zero_shot_260-123440-0002 | 44 | 0.00 | 2.27 | 97.74 | 98.61 | 12.04 / 12.68 |
+| zero_shot_121-127105-0015 | 10 | 0.00 | 0.00 | 92.61 | 93.74 | 3.68 / 3.80 |
+| zero_shot_121-127105-0003 | 18 | 0.00 | 0.00 | 94.32 | 95.07 | 7.64 / 8.52 |
+| zero_shot_121-127105-0024 | 48 | 0.00 | 0.00 | 93.94 | 93.42 | 12.84 / 13.88 |
+| **corpus (6 utterances)** | 147 | **0.68** (1 errors) | **0.68** (1 errors) | **95.21** | **95.90** | |
+
+== TT offline streaming (stage A) vs upstream streaming, same tokens
+wrote /home/user/data/cosyvoice2_runs/0929/stream_offline/scores.json
+| case | words | WER % pytorch-reference-streaming | WER % ttnn-streaming-offline | SIM pytorch-reference-streaming | SIM ttnn-streaming-offline | audio s pytorch-reference-streaming / ttnn-streaming-offline |
+|---|---|---|---|---|---|---|
+| zero_shot_121-127105-0003 | 18 | 0.00 | 0.00 | 95.07 | 94.43 | 8.52 / 8.52 |
+| zero_shot_121-127105-0015 | 10 | 0.00 | 0.00 | 93.74 | 93.56 | 3.80 / 3.80 |
+| zero_shot_121-127105-0024 | 48 | 0.00 | 0.00 | 93.42 | 93.88 | 13.88 / 13.88 |
+| zero_shot_260-123286-0014 | 7 | 0.00 | 0.00 | 96.10 | 96.33 | 3.00 / 3.00 |
+| zero_shot_260-123440-0002 | 44 | 2.27 | 2.27 | 98.61 | 98.49 | 12.68 / 12.68 |
+| zero_shot_260-123440-0010 | 20 | 0.00 | 5.00 | 98.45 | 98.31 | 8.08 / 8.08 |
+| **corpus (6 utterances)** | 147 | **0.68** (1 errors) | **1.36** (2 errors) | **95.90** | **95.83** | |

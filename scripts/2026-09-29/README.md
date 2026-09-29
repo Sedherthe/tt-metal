@@ -20,4 +20,9 @@ logs under `/home/user/data/cosyvoice2_runs/0929`. Job control is `../2026-09-28
 | `phase_r1verify.sh` | yes | R1. The Stage 1 demo with the ROW_MAJOR candidate, bit-compared with `phase_baseline.sh`'s run; then the suite, with R2's reference running on CPU. |
 | `r2_select_seam_mels.py` (+ `.log`) | no (reference venv) | R2. Six mels from six speakers, cut so every crossfade is voiced by upstream's own F0 (> 10 Hz, ±4 frames): nine seams. |
 | `r2_hift_stream_ref.log` | no (reference venv) | R2. `hift_streaming_reference.py` on those six: the stitch is exact. Upstream's own two calls disagree by 0.13–0.63 over every crossfade. |
-| `phase_r23.sh` | yes | R2's seam gate on the new reference, then R3's streaming gate (stage A), then WER/SIM on the offline-streamed audio. |
+| `phase_r23.sh` | yes | R2's seam gate on the new reference, then R3's streaming gate (stage A), then WER/SIM on the offline-streamed audio. Both gates' first measurement set their thresholds (D38, D39). |
+| `phase_r23b.sh` | yes | The two gates re-run with those thresholds (both pass), then the encoder and flow tests (56 passed). |
+| `r2_seam_gate.log` | yes | B24. The nine-seam table: mechanism 0.041–0.078 over the crossfade, control 0.108–0.473. |
+| `r3_streaming_ref.log` | no (reference venv) | B25. `streaming_reference.py` on TT's Stage 1 tokens: each case's chunk plan and HiFT call lengths. |
+| `r3_stream_gate.log` | yes | B25. The stage A gate, per chunk: flow, control, HiFT chunk and seam PCC, and the final chunks' tail levels. |
+| `r3_scores.log` | no (reference venv) | B25. WER/SIM: upstream streaming (0.68 % / 95.90) and our offline streaming (1.36 % / 95.83) of the same tokens. |

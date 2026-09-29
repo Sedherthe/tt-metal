@@ -67,7 +67,8 @@ Written for the 09-29 pod (`app-5ddf2d9d-deployment-5545b7c7f8-c4vpz`). Where an
   | `cosyvoice2_runs/reference` | the PyTorch reference, 7 cases, scored |
   | `cosyvoice2_runs/reference_tfx` | the token-accuracy extension's reference, 20 cases |
   | `cosyvoice2_token_accuracy` | 27 top-5 files |
-  | `cosyvoice2_hift_stream_ref` | 3 mels for the seam gate |
+  | `cosyvoice2_hift_stream_ref` | the seam gate's six voiced-seam mels (R2); the 09-28 three: `..._0928set` |
+  | `cosyvoice2_streaming_ref` | upstream's streaming of TT's Stage 1 tokens, the stage A gate's reference (R3) |
 
   Run logs go under `cosyvoice2_runs/<MMDD>`.
 - **The build:** `build/` → `build_Release`, from `build_metal.sh` (the setup script). Rebuild only if C++ changed
