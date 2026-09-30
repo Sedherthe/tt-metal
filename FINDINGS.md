@@ -783,6 +783,27 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
 - **CPU time:** the reference ran as three parallel jobs, 56 min; scoring took 40 min, after the TT runs were scored
   alongside.
 
+### B38 — Stage A's end gate: the last 0.1 s added at 12 dB; all three checks fail on the old padding and pass on the fix (confirmed, 09-30). Status: **built, `ea95ce1d66`**
+- **Decided** (user, 09-30): add the last-0.1 s check at 12 dB, keep the 0.4 s at 15 dB and the 20 ms as it is. Show
+  all three failing on the old padding and passing on the fix (D41).
+- **How the old padding is run:** `scripts/2026-09-30/old_padding_plugin.py` is a pytest plugin.
+  - It compiles `HiFTStream.step` verbatim from `6a2ab97dde`, the commit before the fix, in the current module's
+    namespace, and installs it on the class.
+  - The fix changed only that method, and the generator masks only when the step passes `valid_frames`, which the
+    old step never does.
+  - The test file runs unchanged (`phase_last100ms.sh`).
+- **Results** (`gate_last100ms_results.log`, the test's own verdicts):
+
+  | check | the old padding fails on | the fix |
+  |---|---|---|
+  | last 20 ms within 3 dB | 6 of 6 (15–79 dB off) | 0.2–0.5 dB |
+  | last 0.4 s, 15 dB below | 4 of 6 (−0.9 to 10.6 dB; 0014 at 17.8 and 0002 at 23.4 pass) | 21.2–27.2 dB |
+  | last 0.1 s, 12 dB below | 6 of 6 (−3.1 to 0.4 dB) | 23.5–28.7 dB |
+
+  No other check fails on the old padding: no chunk PCC, seam or own-F0 log-mel failure.
+- The first old-padding run's failure list was cut short by pytest's assertion truncation. It showed 2 of 6
+  utterances for each check, and it was re-run with `-vv`.
+
 ## O: older open items
 
 - **O1 — HiFT dtype crash.** Status: **fixed `544d588018`** (09-27). `TtHiFTDecoder.decode` converts `mel` and

@@ -40,3 +40,5 @@ The spec-against-today table is `../../reviews/2026-09-30_rebuild_spec_vs_today.
 | `steps_summary.py` (+ `steps_summary.md`) | no | B37: the token checks (60 of 60), WER/SIM per step count, latency per step count and utterance. |
 | `steps_distance.py` (+ `steps_distance.md`) | no (`/opt/venv`) | B37: how far the audio moves, log-mel L1 against its own 10 steps, with the noise-draw and TT-vs-upstream distances for scale. |
 | `steps_listening.sh` | no | B37: seed 1's wavs at every step count, TT and reference, both modes, into `~/listening/steps/` (96). |
+| `old_padding_plugin.py` | yes (a pytest plugin) | B38: runs the streaming tests with `HiFTStream.step` compiled verbatim from `6a2ab97dde` (silence end padding, no masks, no end gain). |
+| `phase_last100ms.sh` (+ `.log`, `gate_last100ms_results.log`) | yes | B38: stage A with the last-0.1 s check, on the fix (2 passed) and on the old padding (fails; `-vv` for the full list). |

@@ -1,0 +1,25 @@
+2026-09-30 15:00:57 started gate_last_fix (log /home/user/data/cosyvoice2_runs/0930/gate_last_fix.log)
+2026-09-30 15:02:42 gate_last_fix exited 0
+| zero_shot_121-127105-0003 | 3 (final) | 182 | 31 | 0.0137 | 0.0000 | 0.99963 | 0.99983 |; last 20 ms: -64.6 dBFS, upstream -64.9; last 0.4 s: signal -71.3, difference -98.5 dBFS; last 0.1 s: signal -67.9, difference -95.0 dBFS
+| zero_shot_121-127105-0015 | 2 (final) | 82 | 13 | 0.0085 | 0.0000 | 0.99921 | 0.99982 |; last 20 ms: -88.4 dBFS, upstream -88.8; last 0.4 s: signal -70.9, difference -92.1 dBFS; last 0.1 s: signal -81.2, difference -106.8 dBFS
+| zero_shot_121-127105-0024 | 4 (final) | 282 | 65 | 0.0117 | 0.0000 | 0.99931 | 0.99948 |; last 20 ms: -67.7 dBFS, upstream -68.0; last 0.4 s: signal -67.8, difference -93.6 dBFS; last 0.1 s: signal -72.6, difference -96.1 dBFS
+| zero_shot_260-123286-0014 | 1 (final) | 25 | 50 | 0.0095 | 0.0000 | 0.99979 | 0.99985 |; last 20 ms: -63.2 dBFS, upstream -63.4; last 0.4 s: signal -47.7, difference -74.8 dBFS; last 0.1 s: signal -60.9, difference -89.6 dBFS
+| zero_shot_260-123440-0002 | 4 (final) | 275 | 42 | 0.0150 | 0.0000 | 0.99979 | 0.99985 |; last 20 ms: -81.1 dBFS, upstream -81.6; last 0.4 s: signal -36.7, difference -61.0 dBFS; last 0.1 s: signal -67.4, difference -95.9 dBFS
+| zero_shot_260-123440-0010 | 3 (final) | 175 | 27 | 0.0098 | 0.0000 | 0.99970 | 0.99962 |; last 20 ms: -51.7 dBFS, upstream -51.9; last 0.4 s: signal -52.9, difference -80.1 dBFS; last 0.1 s: signal -50.1, difference -76.9 dBFS
+=================== 2 passed, 6 warnings in 84.53s (0:01:24) ===================
+2026-09-30 15:02:42 started gate_last_old (log /home/user/data/cosyvoice2_runs/0930/gate_last_old.log)
+2026-09-30 15:04:27 gate_last_old exited 1
+old_padding_plugin: HiFTStream.step is 6a2ab97dde's (silence end padding, no masks, no end gain)
+| zero_shot_121-127105-0003 | 3 (final) | 182 | 31 | 0.0137 | 0.0000 | 0.99963 | 0.99983 |; last 20 ms: -117.6 dBFS, upstream -64.9; last 0.4 s: signal -71.3, difference -70.4 dBFS; last 0.1 s: signal -67.9, difference -64.8 dBFS
+| zero_shot_121-127105-0015 | 2 (final) | 82 | 13 | 0.0085 | 0.0000 | 0.99921 | 0.99982 |; last 20 ms: -103.8 dBFS, upstream -88.8; last 0.4 s: signal -70.9, difference -81.5 dBFS; last 0.1 s: signal -81.2, difference -78.8 dBFS
+| zero_shot_121-127105-0024 | 4 (final) | 282 | 65 | 0.0117 | 0.0000 | 0.99931 | 0.99948 |; last 20 ms: -112.3 dBFS, upstream -68.0; last 0.4 s: signal -67.8, difference -76.2 dBFS; last 0.1 s: signal -72.6, difference -70.3 dBFS
+| zero_shot_260-123286-0014 | 1 (final) | 25 | 50 | 0.0095 | 0.0000 | 0.99979 | 0.99985 |; last 20 ms: -138.7 dBFS, upstream -63.4; last 0.4 s: signal -47.7, difference -65.5 dBFS; last 0.1 s: signal -60.9, difference -61.3 dBFS
+| zero_shot_260-123440-0002 | 4 (final) | 275 | 42 | 0.0150 | 0.0000 | 0.99979 | 0.99985 |; last 20 ms: -113.9 dBFS, upstream -81.6; last 0.4 s: signal -36.7, difference -60.1 dBFS; last 0.1 s: signal -67.4, difference -65.1 dBFS
+| zero_shot_260-123440-0010 | 3 (final) | 175 | 27 | 0.0098 | 0.0000 | 0.99970 | 0.99962 |; last 20 ms: -131.1 dBFS, upstream -51.9; last 0.4 s: signal -52.9, difference -55.4 dBFS; last 0.1 s: signal -50.1, difference -49.4 dBFS
+                print(f"| {case_id} | {k}{' (final)' if chunk.final else ''} | {chunk.offset} | {chunk.hop} | "
+=================== 1 failed, 6 warnings in 83.40s (0:01:23) ===================
+AssertionError: ["zero_shot_121-127105-0003 final chunk: last 20 ms at -117.6 dBFS, upstream's -64.9", 'zero_shot_121-127105-0003 final chunk: last 0.4 s difference -70.4 dBFS, signal -71.3', 'zero_sh
+assert not ["zero_shot_121-127105-0003 final chunk: last 20 ms at -117.6 dBFS, upstream's -64.9", 'zero_shot_121-127105-0003 final chunk: last 0.4 s difference -70.4 dBFS, signal -71.3', 'zero_shot_12
+f"{case_id} final chunk: last {END_S * 1000:.0f} ms at {got_db:.1f} dBFS, upstream's {want_db:.1f}"
+f"{case_id} final chunk: last {LAST_S} s difference {last_diff_db:.1f} dBFS, signal "
+f"{case_id} final chunk: last {TAIL_S} s difference {diff_db:.1f} dBFS, signal {sig_db:.1f}"

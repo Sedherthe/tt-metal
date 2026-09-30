@@ -303,6 +303,10 @@ This session stops after R5, with the streaming numbers. R1 must land before R4.
     fails the end gate on every utterance through the 20 ms level check; this criterion alone fails it on 4 of 6;
   - the final chunk's PCC stays gated before those 0.4 s. On a chunk ending near −71 dBFS, PCC measures the port's
     own floor: 0.9975 even at the exact length.
+- **Also the last 0.1 s, 12 dB below the signal (user, 09-30; B38):**
+  - the fix measures 22.0–29.0 dB there and the old padding −3.1 to 0.4, so 12 dB is 10 dB from both (B34);
+  - the 20 ms check (3 dB) and the 0.4 s check (15 dB) stay as they were;
+  - all three were shown failing on the old padding and passing on the fix (`ea95ce1d66`).
 - **D38's −50 dBFS floor** was set by Claude on 09-29 from the first measurement. It passed 260-123440-0010's ending
   with the difference 2.5 dB below the signal, which is how the silenced endings reached the audio.
 
