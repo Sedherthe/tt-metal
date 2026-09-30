@@ -1,0 +1,177 @@
+{
+ "summary": {
+  "host_ms_between_signposts": 71.26,
+  "ops": 1158,
+  "ops_with_device_data": 1158,
+  "ops_missing_device_data": 0,
+  "ops_cached": 1158,
+  "device_span_ms": 67.76,
+  "device_fw_ms": 58.98,
+  "device_kernel_ms": 47.77,
+  "device_gaps_ms": 8.78,
+  "ns_per_cycle": 1.0
+ },
+ "by_op": [
+  {
+   "op": "ReshapeViewDeviceOperation",
+   "count": 56,
+   "kernel_ms": 14.977,
+   "fw_ms": 16.289,
+   "cores": [
+    64
+   ]
+  },
+  {
+   "op": "MatmulDeviceOperation",
+   "count": 255,
+   "kernel_ms": 10.979,
+   "fw_ms": 15.16,
+   "cores": [
+    8,
+    24,
+    32,
+    64
+   ]
+  },
+  {
+   "op": "SDPAOperation",
+   "count": 56,
+   "kernel_ms": 4.592,
+   "fw_ms": 4.673,
+   "cores": [
+    64
+   ]
+  },
+  {
+   "op": "BinaryNgDeviceOperation",
+   "count": 275,
+   "kernel_ms": 4.058,
+   "fw_ms": 6.253,
+   "cores": [
+    64
+   ]
+  },
+  {
+   "op": "TransposeDeviceOperation",
+   "count": 57,
+   "kernel_ms": 3.545,
+   "fw_ms": 4.313,
+   "cores": [
+    32,
+    64
+   ]
+  },
+  {
+   "op": "UnaryDeviceOperation",
+   "count": 100,
+   "kernel_ms": 3.352,
+   "fw_ms": 4.064,
+   "cores": [
+    64
+   ]
+  },
+  {
+   "op": "LayerNormDeviceOperation",
+   "count": 141,
+   "kernel_ms": 2.513,
+   "fw_ms": 3.43,
+   "cores": [
+    32
+   ]
+  },
+  {
+   "op": "NlpCreateHeadsDeviceOperation",
+   "count": 56,
+   "kernel_ms": 2.408,
+   "fw_ms": 3.263,
+   "cores": [
+    32
+   ]
+  },
+  {
+   "op": "Conv2dDeviceOperation",
+   "count": 31,
+   "kernel_ms": 0.839,
+   "fw_ms": 0.88,
+   "cores": [
+    64
+   ]
+  },
+  {
+   "op": "ShardedToInterleavedDeviceOperation",
+   "count": 31,
+   "kernel_ms": 0.123,
+   "fw_ms": 0.148,
+   "cores": [
+    64
+   ]
+  },
+  {
+   "op": "ConcatDeviceOperation",
+   "count": 4,
+   "kernel_ms": 0.115,
+   "fw_ms": 0.128,
+   "cores": [
+    32,
+    64
+   ]
+  },
+  {
+   "op": "InterleavedToShardedDeviceOperation",
+   "count": 31,
+   "kernel_ms": 0.108,
+   "fw_ms": 0.159,
+   "cores": [
+    40,
+    64
+   ]
+  },
+  {
+   "op": "HaloDeviceOperation",
+   "count": 31,
+   "kernel_ms": 0.083,
+   "fw_ms": 0.116,
+   "cores": [
+    40,
+    64
+   ]
+  },
+  {
+   "op": "MoveDeviceOperation",
+   "count": 31,
+   "kernel_ms": 0.042,
+   "fw_ms": 0.071,
+   "cores": [
+    40,
+    64
+   ]
+  },
+  {
+   "op": "RepeatDeviceOperation",
+   "count": 1,
+   "kernel_ms": 0.024,
+   "fw_ms": 0.025,
+   "cores": [
+    64
+   ]
+  },
+  {
+   "op": "TilizeWithValPaddingDeviceOperation",
+   "count": 1,
+   "kernel_ms": 0.007,
+   "fw_ms": 0.008,
+   "cores": [
+    32
+   ]
+  },
+  {
+   "op": "UntilizeWithUnpaddingDeviceOperation",
+   "count": 1,
+   "kernel_ms": 0.003,
+   "fw_ms": 0.004,
+   "cores": [
+    2
+   ]
+  }
+ ]
+}

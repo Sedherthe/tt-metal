@@ -713,6 +713,42 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
 - PERF's old line blamed "the ~1.4 s first chunk over the least audio" for both short utterances. The chunk count
   is what separates them.
 
+### B36 — Stage 3, step 2: one CFM Euler step is host-bound at the first chunk's size, and 39 % of its device time merges attention heads (confirmed, 09-30). Status: **recorded, `7be3b2aa48`**
+- **How** (`scripts/2026-09-30/cfm_step_profile.py`, `phase_cfm_profile.sh`):
+  - The flow is built as `CosyVoice2TTNN` builds it. The CFM's inputs are captured from the flow's own calls on real
+    chunks.
+  - Per geometry: five eager solves; then 50 steps split into parts, with syncs between them; then the traced step
+    replayed (streaming geometries only).
+  - Then, in its own process under `python -m tracy -r -p -v`, one eager step at 512 frames between signposts.
+- **Wall time, per step** (`cfm_time.json`):
+
+  | geometry | mel frames | eager step | host enqueue | device after | traced |
+  |---|---|---|---|---|---|
+  | first chunk, bucket 256 | 512 | 64.7 ms | 62.6 | 0.07 | 49.2 |
+  | 100-token hop, bucket 384 | 768 | 85.4 | 66.6 | 16.0 | 80.5 |
+  | later chunk, bucket 512 | 1,024 | 102.2 | 72.9 | 25.7 | 94.9 |
+  | non-streaming final, bucket 320 | 640 | 77.6 | 62.7 | 12.6 | not traceable |
+
+  Host-bound at 512 frames, device-bound from 768 up. The rest of a step is 1.9–3.3 ms.
+- **Device profile** (`cfm_profile_raw.py` → `cfm_profile_raw.json`): 1,158 ops and 47.8 ms of kernel time (firmware
+  59.0, span 67.8, under the profiler).
+  - `ReshapeViewDeviceOperation`: 56 calls, 15.0 ms. Merging heads: `[2, 8, 512, 64]` → transpose → `[2, 512, 8, 64]`
+    → reshape → `[2, 512, 512]` (`tt/flow/decoder.py:764-765`). In tile layout the 8 heads pad to a 32-row tile, so the
+    reshape moves data. The transposes add 3.5 ms: 18.5 ms in all, 39 %.
+  - Matmul: 11.0 ms (QKV 3.8, FF 2.8 + 2.2, out 1.5). SDPA: 4.6. Binary: 4.1. Unary: 3.4 (GELU 2.9). Layer norm:
+    2.5. Create heads: 2.4. Convs with halo and resharding: 1.2.
+  - Per op: about 54 µs of host enqueue against about 41 µs of device kernel time.
+- **Tracy's own ops report failed.** The compile solve filled the profiler's DRAM buffers before the first
+  `ReadDeviceProfiler` (640 "buffers were full" warnings), and the post-processing asserts on ops without device data.
+  The step runs after that flush, and all 1,158 of its ops have device data in the raw logs.
+- **The profiler's op message is not a cache-status reading.** Its "program cache hit" field in a repeat message is
+  the first call's value, stored once (`ttnn/cpp/tools/profiler/op_profiler_json.cpp:175`). So all 1,158 read
+  "false", and that says nothing about this step's caching.
+- **Levers named, not tried:**
+  - `ttnn.experimental.nlp_concat_heads` for the merge (the QKV side already uses the fused split);
+  - GELU fused into the FF matmul;
+  - the CFM trace, off in the pipeline because a streaming chunk runs under the LLM's live decode trace.
+
 ## O: older open items
 
 - **O1 — HiFT dtype crash.** Status: **fixed `544d588018`** (09-27). `TtHiFTDecoder.decode` converts `mel` and

@@ -1,0 +1,7 @@
+stream_256: zero_shot_121-127105-0015 35 tokens (+ prompt 168) -> bucket 256, T 512, valid 400, streaming True
+2026-09-30 11:27:39.828 | INFO     | tracy:signpost:49 - euler_step_start
+2026-09-30 11:27:39.899 | INFO     | tracy:signpost:49 - euler_step_end
+    host_ops_by_device = _enrich_ops_from_perf_csv(host_ops_by_device, device_perf_by_device, traceReplays)
+  File "/home/user/tt-metal/tools/tracy/process_ops_logs.py", line 683, in _enrich_ops_from_perf_csv
+    assert candidates, (
+AssertionError: Device data missing: Op 5301248 not present in cpp_device_perf_report.csv for device 0 (trace_id=None)
