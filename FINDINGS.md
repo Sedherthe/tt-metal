@@ -804,6 +804,24 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
 - The first old-padding run's failure list was cut short by pytest's assertion truncation. It showed 2 of 6
   utterances for each check, and it was re-run with `-vv`.
 
+### B39 — The Euler step count is a config option, default 10; it reproduces the sweep exactly (confirmed, 09-30). Status: **built, `1dcdc10059`**
+- **Decided** (user, 09-30): keep 10 as the default for now; make the step count an explicit, documented config
+  option; put the sweep table in PERF.md as a measured trade-off. The user listens and decides.
+- **Built:**
+  - `CosyVoice2Config.flow_n_timesteps` (default 10, documented at the field) is passed to
+    `TtCausalMaskedDiffWithXvec(n_timesteps=...)`, which uses it in `inference` and `inference_streaming`. It refuses
+    anything but a positive int.
+  - `N_TIMESTEPS` stays as upstream's value and the default.
+  - `--flow-steps N` in `demo.py` and `scripts/noise_draws.py`.
+  - PERF.md: "Euler steps: a measured trade-off".
+- **Verified:**
+  - `noise_draws.py --flow-steps 5 --noise-seeds 1` reproduces B37's 5-step draw wav for wav: Stage 1 6 of 6,
+    streaming 6 of 6 (`scripts/2026-09-30/phase_flow_steps_option.sh`). The sweep set the module constant in-process
+    instead, so the option reaches both flow paths.
+  - Host test `test_flow_step_count_is_a_config_option` (135 host tests).
+- **Committed with `--no-verify`, after `pre-commit run --files` passed on the same staged files.** A device job was
+  starting, and the hook's stash would have reverted the unstaged `decoder.py` (lever (a)) for its duration.
+
 ## O: older open items
 
 - **O1 — HiFT dtype crash.** Status: **fixed `544d588018`** (09-27). `TtHiFTDecoder.decode` converts `mel` and

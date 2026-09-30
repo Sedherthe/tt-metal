@@ -1,0 +1,4 @@
+2026-09-30 15:07:48 started flow_steps_option (log /home/user/data/cosyvoice2_runs/0930/flow_steps_option.log)
+2026-09-30 15:14:19 flow_steps_option exited 0
+stage1: 6 of 6 wavs identical to the sweep's 5-step draw
+stream: 6 of 6 wavs identical to the sweep's 5-step draw
