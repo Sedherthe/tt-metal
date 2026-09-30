@@ -119,8 +119,38 @@ first audio 1,469 ms, worst RTF 1.110).
   - 64.7 ms eager, of which the host spends 62.6 ms enqueueing the estimator's 1,158 ops; 49.2 ms traced;
   - on the device, 47.8 ms of kernel time, 18.5 ms of it merging attention heads (a transpose and a reshape in each
     of the 56 transformer blocks).
-- **Fewer Euler steps** (`docs/VALIDATION.md`, "The Euler step sweep"): each step costs the first chunk about 70 ms.
-  - At 8 steps: first audio 1.21–1.40 s, worst streaming RTF 0.98–1.03.
-  - At 5 steps: first audio 0.98–1.14 s, worst streaming RTF 0.82–0.84, Stage 1 worst 0.51–0.54.
-  - WER and SIM do not move, but the audio does.
-  - The reported configuration keeps upstream's 10 steps.
+- **Fewer Euler steps:** "Euler steps: a measured trade-off" below.
+
+## Euler steps: a measured trade-off
+
+The flow's CFM integrates `CosyVoice2Config.flow_n_timesteps` Euler steps per call, streaming and not.
+- **The default is upstream's 10.** Upstream hardcodes it in its flow's `inference`, and every other figure in this
+  package uses it.
+- **To change it:** `demo.py --flow-steps N` and `scripts/noise_draws.py --flow-steps N`.
+
+Measured on 2026-09-30 (`docs/VALIDATION.md`, "The Euler step sweep"):
+- the six corpus utterances under five vocoder noise draws, with the tokens fixed;
+- TT in one process after both warm-ups, with nothing else on the host;
+- upstream at the same step counts, for the quality columns.
+
+| Euler steps | first audio | streaming RTF, worst per draw | streaming RTF, aggregate | the first chunk's CFM | Stage 1 RTF, worst per draw | Stage 1 RTF, aggregate |
+|---|---|---|---|---|---|---|
+| 10 (default) | 1.363–1.544 s | 1.092–1.142 | 0.851–0.864 | 0.68–0.75 s | 0.645–0.663 | 0.486–0.488 |
+| 8 | 1.208–1.401 s | 0.980–1.028 | 0.776–0.796 | 0.54–0.61 s | 0.572–0.620 | 0.459–0.469 |
+| 6 | 1.067–1.243 s | 0.878–0.915 | 0.703–0.715 | 0.41–0.45 s | 0.533–0.567 | 0.438–0.445 |
+| 5 | 0.981–1.140 s | 0.819–0.837 | 0.667–0.682 | 0.34–0.36 s | 0.510–0.543 | 0.420–0.432 |
+
+| Euler steps | WER, TT and upstream, Stage 1 and streaming | SIM, TT Stage 1 / streaming | the audio's change from 10 steps, log-mel L1, TT Stage 1 / streaming (upstream's) |
+|---|---|---|---|
+| 10 (default) | 0.68 % | 95.88 / 95.83 | — |
+| 8 | 0.68 % | 95.95 / 95.91 | 0.110 / 0.123 (0.101 / 0.114) |
+| 6 | 0.68 % | 95.77 / 95.87 | 0.162 / 0.176 (0.140 / 0.169) |
+| 5 | 0.68 % | 95.91 / 95.98 | 0.187 / 0.189 (0.167 / 0.181) |
+
+- **What fewer steps buy:** each step costs every chunk's flow about 70 ms at the first chunk's size. At 5 steps first
+  audio is still 0.98–1.14 s against the 0.5 s target.
+- **What they cost:** nothing the corpus's WER or speaker similarity can see. The audio does change, though.
+  - At 5 steps it moves 1.6–1.9 times as far as this port sits from upstream at 10 (0.10).
+  - Upstream moves as much as the port does.
+  - Two noise draws differ by 0.01–0.03.
+  - Neither WER nor similarity measures naturalness, so listening decides.

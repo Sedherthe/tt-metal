@@ -86,7 +86,9 @@ INPUT_SIZE = 512  # encoder's own d_model
 OUTPUT_SIZE = 80  # mel channels
 SPK_EMBED_DIM = 192  # real xvec width
 VOCAB_SIZE = 6561  # speech_token_size, confirmed from cosyvoice2.yaml's flow.vocab_size
-N_TIMESTEPS = 10  # hardcoded in the real inference() call, not a yaml/config parameter
+# The CFM's Euler steps: upstream hardcodes 10 in its inference() call (not a yaml parameter). It is the default of
+# `TtCausalMaskedDiffWithXvec(n_timesteps=...)`, which the pipeline sets from `CosyVoice2Config.flow_n_timesteps`.
+N_TIMESTEPS = 10
 
 
 # ---------------------------------------------------------------------------
@@ -201,8 +203,15 @@ def _bias(device, bias: torch.Tensor, dtype):
 
 
 class TtCausalMaskedDiffWithXvec:
-    def __init__(self, device, module: CausalMaskedDiffWithXvecRef, dtype=ttnn.bfloat16):
+    def __init__(
+        self, device, module: CausalMaskedDiffWithXvecRef, dtype=ttnn.bfloat16, n_timesteps: int = N_TIMESTEPS
+    ):
+        """`n_timesteps`: the CFM's Euler steps for every call, both `inference` and `inference_streaming`.
+        Upstream's 10 by default; fewer are faster and change the mel (PERF.md, "Euler steps")."""
+        if not (isinstance(n_timesteps, int) and n_timesteps >= 1):
+            raise ValueError(f"n_timesteps must be a positive int, got {n_timesteps!r}")
         self.device = device
+        self.n_timesteps = n_timesteps
         self.dtype = dtype
         self.output_size = module.output_size
         self.input_embedding = TtSmallEmbedding(device, module.input_embedding.weight, dtype=dtype)
@@ -282,7 +291,7 @@ class TtCausalMaskedDiffWithXvec:
         mask = torch.zeros(1, t_len2, 1, dtype=mu.dtype)
         mask[:, :valid2] = 1.0
 
-        feat = self.decoder.forward(mu, mask, N_TIMESTEPS, spks, conds)
+        feat = self.decoder.forward(mu, mask, self.n_timesteps, spks, conds)
         feat = feat[:, mel_len1:valid2, :]
         assert feat.shape[1] == mel_len2
         return feat
@@ -334,7 +343,7 @@ class TtCausalMaskedDiffWithXvec:
         conds[:, :mel_len1] = prompt_feat
         mask = torch.zeros(1, t_len2, 1, dtype=mu.dtype)
         mask[:, :valid2] = 1.0
-        feat = self.decoder.forward(mu, mask, N_TIMESTEPS, spks, conds, streaming=True)
+        feat = self.decoder.forward(mu, mask, self.n_timesteps, spks, conds, streaming=True)
         return feat[:, mel_len1:valid2, :]
 
     def release_traces(self) -> None:

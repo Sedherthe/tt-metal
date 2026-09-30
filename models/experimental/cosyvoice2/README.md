@@ -47,7 +47,7 @@ How the figures were taken:
 | text normalization, splitting, tokenization | host | [`tt/text.py`](tt/text.py): upstream's English path, with parity tests |
 | prompt features: speech tokens, speaker embedding, prompt mel | host, once per prompt | the upstream frontend (ONNX speech tokenizer, CAM++). It runs in the reference venv, and `scripts/prepare_inputs.py` writes one `.npz` per case |
 | LLM: Qwen2-0.5B backbone, speech-token head | device | prefill, then a traced decode loop; sampling (RAS) on the host |
-| flow: Conformer encoder + conditional flow matching (10 Euler steps) | device | bucketed lengths with padding masks |
+| flow: Conformer encoder + conditional flow matching (10 Euler steps, `CosyVoice2Config.flow_n_timesteps`) | device | bucketed lengths with padding masks |
 | HiFT vocoder: F0 predictor, NSF source, upsampling stack, iSTFT | device, fp32 | a mel of 512 frames or more runs in 512-frame chunks with upstream's streaming cache; a shorter one, and streaming's final call, run at a bucket, masked past the real length so they compute upstream's call exactly ([`tt/hifigan/valid_length.py`](tt/hifigan/valid_length.py)) |
 
 - Between stages, only the sampled token ids, the mel and the waveform return to the host.
@@ -112,7 +112,9 @@ $REF $S/prepare_inputs.py --extension --out-dir $COSYVOICE2_INPUTS
 ```
 
 **3. The demo (device).** It warms every bucket, then synthesizes the six targets. It writes wavs, `results.json` and
-a timing table. `--stream` streams them instead, after warming the streaming set too.
+a timing table. `--stream` streams them instead, after warming the streaming set too. `--flow-steps N` runs the
+flow's CFM at N Euler steps instead of upstream's 10: faster, and the audio changes (`PERF.md`, "Euler steps: a
+measured trade-off").
 
 ```bash
 pip install -r models/experimental/cosyvoice2/requirements.txt   # once, into python_env
@@ -144,7 +146,7 @@ $REF $S/eval_draws.py --out draws.json --group "TT Stage 1" <draws dir>/tt_stage
 ## Tests
 
 ```bash
-# host tier: no device, 134 tests
+# host tier: no device, 135 tests
 pytest models/experimental/cosyvoice2/tests -k "not test_device"
 
 # the whole suite: the host tier and 98 device tests (the two perf tests deselected). Some need reference-side

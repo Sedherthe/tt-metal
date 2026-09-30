@@ -6,12 +6,13 @@ the layout scripts/eval_wer_sim.py scores. scripts/eval_draws.py reports the mea
 or similarity claim rests on one draw (notes: B28, where one draw's trailing "you" moved the corpus WER).
 
     python models/experimental/cosyvoice2/scripts/noise_draws.py --inputs <dir> --out <dir> \\
-        [--noise-seeds 1,2,3,4,5] [--seed 1986] [--cases a,b]
+        [--noise-seeds 1,2,3,4,5] [--seed 1986] [--cases a,b] [--flow-steps N]
 
 Every draw samples the demo's tokens (`--seed` seeds the LLM through torch's global RNG); the vocoder's noise comes
 from a generator of its own (`RandomSources.noise_seed`). The warm-ups are the demo's (the buckets, then the
 streaming set), so no request compiles. It writes `<out>/tt_stage1_seed<N>/` and `<out>/tt_stream_seed<N>/`, and
-checks that every draw of a case sampled the same tokens.
+checks that every draw of a case sampled the same tokens. `--flow-steps` runs the CFM at N Euler steps instead of
+upstream's 10 (`CosyVoice2Config.flow_n_timesteps`; PERF.md, "Euler steps: a measured trade-off").
 """
 from __future__ import annotations
 
@@ -35,6 +36,7 @@ def main() -> int:
     ap.add_argument("--noise-seeds", default="1,2,3,4,5")
     ap.add_argument("--seed", type=int, default=1986)
     ap.add_argument("--cases", default="", help="comma-separated case ids (default: every librispeech case)")
+    ap.add_argument("--flow-steps", type=int, default=None, help="the CFM's Euler steps (default: the config's 10)")
     args = ap.parse_args()
     seeds = [int(s) for s in args.noise_seeds.split(",")]
     wanted = set(filter(None, args.cases.split(",")))
@@ -49,7 +51,12 @@ def main() -> int:
     device = ttnn.open_device(device_id=0, l1_small_size=65536, trace_region_size=50_000_000)  # the demo's
     tokens_by_case: dict[str, list] = {}
     try:
-        pipe = CosyVoice2TTNN(device, CosyVoice2Config.reported())
+        cfg = CosyVoice2Config.reported()
+        if args.flow_steps is not None:
+            from dataclasses import replace
+
+            cfg = replace(cfg, flow_n_timesteps=args.flow_steps)
+        pipe = CosyVoice2TTNN(device, cfg)
         pipe.warmup_buckets()
         pipe.warmup_streaming()
         for seed in seeds:

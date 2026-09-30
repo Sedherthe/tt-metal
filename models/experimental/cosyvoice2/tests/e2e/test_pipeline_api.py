@@ -101,6 +101,21 @@ def test_environment_switches_are_refused(monkeypatch, expect_error):
         _refuse_env_switches()
 
 
+def test_flow_step_count_is_a_config_option(expect_error):
+    """The CFM's Euler steps come from `CosyVoice2Config.flow_n_timesteps`, upstream's 10 by default (every reported
+    figure). The flow refuses anything but a positive int before touching the device."""
+    from dataclasses import replace
+
+    from models.experimental.cosyvoice2.tt.flow.flow import N_TIMESTEPS, TtCausalMaskedDiffWithXvec
+
+    assert CosyVoice2Config.reported().flow_n_timesteps == CosyVoice2Config.eager().flow_n_timesteps == N_TIMESTEPS
+    assert N_TIMESTEPS == 10
+    assert replace(CosyVoice2Config.reported(), flow_n_timesteps=5).describe()["flow_n_timesteps"] == 5
+    for bad in (0, -1, 2.5):
+        with expect_error(ValueError, "n_timesteps must be a positive int"):
+            TtCausalMaskedDiffWithXvec(None, None, n_timesteps=bad)
+
+
 def _librispeech_cases():
     from models.experimental.cosyvoice2.tt.prompt import PromptContext
 

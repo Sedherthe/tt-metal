@@ -96,7 +96,6 @@ FIXED = {
     # ModelArgs' default, tt_transformers DecodersPrecision.accuracy: for Qwen2, attention weights and KV cache
     # bf16 at HiFi4; MLP weights bfp8 at HiFi2 with fp16 accumulation
     "llm_decoder_precision": "tt_transformers DecodersPrecision.accuracy",
-    "euler_steps": 10,  # tt/flow/flow.py N_TIMESTEPS, as upstream's flow.inference hardcodes it
     "flow_fused_sdpa": True,
     "flow_fused_qkv": True,
     "flow_matmul_compute_config": "ttnn default",
@@ -143,6 +142,11 @@ class CosyVoice2Config:
     # geometry: bucketing runs the flow and HiFT at a finite set of lengths, all warmed at start-up (`warmup_buckets`)
     bucketing: bool = True
     conv_config_tensors_in_dram: bool = True
+    # The flow's CFM: Euler steps per call, streaming and not. 10 is upstream's (its flow.inference hardcodes it) and
+    # the reported configuration's. Each step costs a chunk's flow about 70 ms at the first chunk's size. Over 10, 8,
+    # 6 and 5 steps, the corpus's WER and speaker similarity did not move, but the audio does change, on upstream as
+    # much as here: PERF.md, "Euler steps: a measured trade-off".
+    flow_n_timesteps: int = 10
 
     @classmethod
     def reported(cls) -> "CosyVoice2Config":
@@ -443,7 +447,9 @@ class CosyVoice2TTNN:
             _, flow_sd = load("flow.pt")
             flow_ref = CausalMaskedDiffWithXvecRef.from_checkpoint(flow_sd)
             flow_ref.eval()
-            self.flow = TtCausalMaskedDiffWithXvec(device, flow_ref, dtype=getattr(ttnn, cfg.flow_dtype))
+            self.flow = TtCausalMaskedDiffWithXvec(
+                device, flow_ref, dtype=getattr(ttnn, cfg.flow_dtype), n_timesteps=cfg.flow_n_timesteps
+            )
             self.flow.decoder.use_trace = cfg.cfm_trace
             self.flow.encoder.use_trace = False
             del flow_sd, flow_ref

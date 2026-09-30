@@ -22,7 +22,7 @@ and every figure names its run. The bounty's numeric targets (tenstorrent/tt-met
 - **Model configuration:** `CosyVoice2Config.reported()` ([`../tt/pipeline.py`](../tt/pipeline.py)). The LLM is
   bf16 with tt_transformers' default decoder precision (attention and KV cache bf16, MLP weights bfp8), and since
   2026-09-28 an fp32-logit output head (bf16 weights, fp32 accumulation). The decode trace is on, and sampling is RAS
-  on the host, seed 1986. The flow is bf16, 10 Euler steps, eager (the CFM trace
+  on the host, seed 1986. The flow is bf16, 10 Euler steps (`flow_n_timesteps`), eager (the CFM trace
   is off, see the module docstring). HiFT's decoder is fp32 and its F0 predictor and NSF source are fp32; since
   2026-09-28 a mel of 512 frames or more runs through HiFT in 512-frame chunks ("Chunked HiFT" below).
 - **Timing:** stage times are device-synchronized. `wall s` spans the whole `synthesize` call, text normalization
@@ -1127,6 +1127,9 @@ the step count, the head merge and the trace. The step sweep measures the first.
 - **The reference:** upstream's Stage 1 on its own tokens, and upstream's streaming of TT's tokens, as in D43.
   - 10 steps is D43's draws.
   - Every run at 8, 6 and 5 steps sampled D43's tokens for its side and mode: 60 of 60, TT and reference.
+- **Since then, the step count is a configuration field:** `CosyVoice2Config.flow_n_timesteps`, default 10. It is
+  `--flow-steps` in `demo.py` and `scripts/noise_draws.py`. `noise_draws.py --flow-steps 5` reproduces the sweep's
+  5-step draw (noise seed 1) wav for wav, 6 of 6 in Stage 1 and 6 of 6 streaming.
 
 **Quality:** corpus WER and SIM, mean (range) over the five draws:
 

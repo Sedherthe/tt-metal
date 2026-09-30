@@ -4,7 +4,8 @@
 """Synthesize the fixed corpus on a Tenstorrent device: wavs, results.json and a timing table.
 
     python models/experimental/cosyvoice2/demo/demo.py --inputs <dir> --out <dir> [--cases a,b] [--seed 1986] \\
-        [--config reported|eager] [--hift-source-dtype float32|bfloat16] [--warmup buckets|sentence|none] [--stream]
+        [--config reported|eager] [--hift-source-dtype float32|bfloat16] [--warmup buckets|sentence|none] [--stream] \\
+        [--flow-steps N]
 
 `--inputs` (or `COSYVOICE2_INPUTS`) is the directory `scripts/prepare_inputs.py` wrote: one `.npz` per corpus
 case, made once in the reference venv, because the frontend (ONNX speech tokenizer, CAM++, mel filterbank) is not
@@ -28,6 +29,10 @@ while the LLM generates, on upstream's chunk schedule. It needs `--warmup bucket
 set too (`warmup_streaming`): a chunk's flow and HiFT run while the LLM's decode trace is alive, where nothing may
 compile or allocate (docs/VALIDATION.md, "Streaming, measured"). The table then reports each utterance's time to
 first audio, the first chunk's breakdown and the RTF; `results.json` keeps every chunk's times.
+
+`--flow-steps N`: the flow's CFM at N Euler steps (`CosyVoice2Config.flow_n_timesteps`) instead of upstream's 10.
+It is faster, and it changes the audio (PERF.md, "Euler steps: a measured trade-off"). Every reported figure uses
+10.
 """
 
 from __future__ import annotations
@@ -106,6 +111,7 @@ def main() -> int:
         action="store_true",
         help="streaming synthesis (synthesize_stream); needs --warmup buckets, which then warms the streaming set too",
     )
+    ap.add_argument("--flow-steps", type=int, default=None, help="the CFM's Euler steps (default: the config's 10)")
     args = ap.parse_args()
     if args.stream and args.warmup != "buckets":
         ap.error("--stream needs --warmup buckets: synthesize_stream() refuses to run before warmup_streaming()")
@@ -129,6 +135,10 @@ def main() -> int:
         from dataclasses import replace
 
         cfg = replace(cfg, hift_source_dtype=args.hift_source_dtype)
+    if args.flow_steps is not None:
+        from dataclasses import replace
+
+        cfg = replace(cfg, flow_n_timesteps=args.flow_steps)
     os.makedirs(args.out, exist_ok=True)
 
     trace_region = TRACE_REGION_SIZE if (cfg.llm_decode_trace or cfg.cfm_trace) else 0
