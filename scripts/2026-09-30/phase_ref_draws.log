@@ -1,0 +1,21 @@
+2026-09-30 04:34:19 started ref_stage1_seed1 (log /home/user/data/cosyvoice2_runs/0930/ref_stage1_seed1.log)
+2026-09-30 04:39:34 ref_stage1_seed1 exited 0
+2026-09-30 04:39:34 started ref_stream_seed1 (log /home/user/data/cosyvoice2_runs/0930/ref_stream_seed1.log)
+2026-09-30 04:43:04 ref_stream_seed1 exited 0
+2026-09-30 04:43:04 started ref_stage1_seed2 (log /home/user/data/cosyvoice2_runs/0930/ref_stage1_seed2.log)
+2026-09-30 04:48:34 ref_stage1_seed2 exited 0
+2026-09-30 04:48:34 started ref_stream_seed2 (log /home/user/data/cosyvoice2_runs/0930/ref_stream_seed2.log)
+2026-09-30 04:52:19 ref_stream_seed2 exited 0
+2026-09-30 04:52:19 started ref_stage1_seed3 (log /home/user/data/cosyvoice2_runs/0930/ref_stage1_seed3.log)
+2026-09-30 04:57:35 ref_stage1_seed3 exited 0
+2026-09-30 04:57:35 started ref_stream_seed3 (log /home/user/data/cosyvoice2_runs/0930/ref_stream_seed3.log)
+2026-09-30 05:01:20 ref_stream_seed3 exited 0
+2026-09-30 05:01:20 started ref_stage1_seed4 (log /home/user/data/cosyvoice2_runs/0930/ref_stage1_seed4.log)
+2026-09-30 05:06:35 ref_stage1_seed4 exited 0
+2026-09-30 05:06:35 started ref_stream_seed4 (log /home/user/data/cosyvoice2_runs/0930/ref_stream_seed4.log)
+2026-09-30 05:10:35 ref_stream_seed4 exited 0
+2026-09-30 05:10:35 started ref_stage1_seed5 (log /home/user/data/cosyvoice2_runs/0930/ref_stage1_seed5.log)
+2026-09-30 05:15:50 ref_stage1_seed5 exited 0
+2026-09-30 05:15:50 started ref_stream_seed5 (log /home/user/data/cosyvoice2_runs/0930/ref_stream_seed5.log)
+2026-09-30 05:19:50 ref_stream_seed5 exited 0
+reference draws done

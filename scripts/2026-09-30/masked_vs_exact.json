@@ -1,0 +1,316 @@
+[
+  {
+    "case": "zero_shot_121-127105-0003",
+    "path": "streaming final chunk vs upstream (mechanism)",
+    "arm": "PCC, whole chunk",
+    "final_chunk_pcc": {
+      "masked": 0.9996336309133798,
+      "exact": 0.9997121944519504
+    }
+  },
+  {
+    "case": "zero_shot_121-127105-0003",
+    "path": "streaming final call (70 frames, bucket 128)",
+    "arm": "same F0",
+    "whole": {
+      "max_diff": 0.01111459732055664,
+      "pcc": 0.9999691012441515
+    },
+    "last_20ms": {
+      "max_diff": 7.12077016942203e-05,
+      "pcc": 0.9997519040081606
+    }
+  },
+  {
+    "case": "zero_shot_121-127105-0003",
+    "path": "streaming final call (70 frames, bucket 128)",
+    "arm": "own F0",
+    "whole": {
+      "max_diff": 0.01171875,
+      "pcc": 0.9999682092553873
+    },
+    "last_20ms": {
+      "max_diff": 7.12077016942203e-05,
+      "pcc": 0.9995704300478518
+    }
+  },
+  {
+    "case": "zero_shot_121-127105-0003",
+    "path": "Stage 1 single call (426 frames, bucket 512)",
+    "arm": "same F0",
+    "whole": {
+      "max_diff": 0.035724163986742496,
+      "pcc": 0.9999162686188743
+    },
+    "last_20ms": {
+      "max_diff": 6.103517080191523e-05,
+      "pcc": 0.999782583499896
+    }
+  },
+  {
+    "case": "zero_shot_121-127105-0003",
+    "path": "Stage 1 single call (426 frames, bucket 512)",
+    "arm": "own F0",
+    "whole": {
+      "max_diff": 0.01954174041748047,
+      "pcc": 0.9999210864992227
+    },
+    "last_20ms": {
+      "max_diff": 6.103517080191523e-05,
+      "pcc": 0.999782583499896
+    }
+  },
+  {
+    "case": "zero_shot_121-127105-0015",
+    "path": "streaming final chunk vs upstream (mechanism)",
+    "arm": "PCC, whole chunk",
+    "final_chunk_pcc": {
+      "masked": 0.9969622998399978,
+      "exact": 0.9974899839806018
+    }
+  },
+  {
+    "case": "zero_shot_121-127105-0015",
+    "path": "streaming final call (34 frames, bucket 128)",
+    "arm": "same F0",
+    "whole": {
+      "max_diff": 0.000152587890625,
+      "pcc": 0.9999999991155962
+    },
+    "last_20ms": {
+      "max_diff": 6.357833626680076e-06,
+      "pcc": 0.9993021804455146
+    }
+  },
+  {
+    "case": "zero_shot_121-127105-0015",
+    "path": "streaming final call (34 frames, bucket 128)",
+    "arm": "own F0",
+    "whole": {
+      "max_diff": 0.00016276049427688122,
+      "pcc": 0.9999999991441566
+    },
+    "last_20ms": {
+      "max_diff": 8.265174983534962e-06,
+      "pcc": 0.99902844743061
+    }
+  },
+  {
+    "case": "zero_shot_121-127105-0015",
+    "path": "Stage 1 single call (190 frames, bucket 256)",
+    "arm": "same F0",
+    "whole": {
+      "max_diff": 0.017005756497383118,
+      "pcc": 0.9999247931503559
+    },
+    "last_20ms": {
+      "max_diff": 1.0172530892305076e-05,
+      "pcc": 0.9988496075428698
+    }
+  },
+  {
+    "case": "zero_shot_121-127105-0015",
+    "path": "Stage 1 single call (190 frames, bucket 256)",
+    "arm": "own F0",
+    "whole": {
+      "max_diff": 0.010416671633720398,
+      "pcc": 0.9999312004437528
+    },
+    "last_20ms": {
+      "max_diff": 1.0172530892305076e-05,
+      "pcc": 0.9988496075428698
+    }
+  },
+  {
+    "case": "zero_shot_121-127105-0024",
+    "path": "streaming final chunk vs upstream (mechanism)",
+    "arm": "PCC, whole chunk",
+    "final_chunk_pcc": {
+      "masked": 0.9993086951398255,
+      "exact": 0.9995334815282442
+    }
+  },
+  {
+    "case": "zero_shot_121-127105-0024",
+    "path": "streaming final call (138 frames, bucket 256)",
+    "arm": "same F0",
+    "whole": {
+      "max_diff": 0.013872146606445312,
+      "pcc": 0.9999763101977659
+    },
+    "last_20ms": {
+      "max_diff": 6.103515625e-05,
+      "pcc": 0.9994467339071723
+    }
+  },
+  {
+    "case": "zero_shot_121-127105-0024",
+    "path": "streaming final call (138 frames, bucket 256)",
+    "arm": "own F0",
+    "whole": {
+      "max_diff": 0.013020813465118408,
+      "pcc": 0.999978066948203
+    },
+    "last_20ms": {
+      "max_diff": 8.138021257764194e-05,
+      "pcc": 0.9994405189153305
+    }
+  },
+  {
+    "case": "zero_shot_260-123286-0014",
+    "path": "streaming final chunk vs upstream (mechanism)",
+    "arm": "PCC, whole chunk",
+    "final_chunk_pcc": {
+      "masked": 0.9997927618466961,
+      "exact": 0.9997927630779182
+    }
+  },
+  {
+    "case": "zero_shot_260-123286-0014",
+    "path": "streaming final call (108 frames, bucket 128)",
+    "arm": "same F0",
+    "whole": {
+      "max_diff": 0.0013020833721384406,
+      "pcc": 0.9999999491829816
+    },
+    "last_20ms": {
+      "max_diff": 4.0690123569220304e-05,
+      "pcc": 0.999909756336446
+    }
+  },
+  {
+    "case": "zero_shot_260-123286-0014",
+    "path": "streaming final call (108 frames, bucket 128)",
+    "arm": "own F0",
+    "whole": {
+      "max_diff": 0.0013020834885537624,
+      "pcc": 0.9999999354383368
+    },
+    "last_20ms": {
+      "max_diff": 6.103515625e-05,
+      "pcc": 0.9998076899127969
+    }
+  },
+  {
+    "case": "zero_shot_260-123286-0014",
+    "path": "Stage 1 single call (150 frames, bucket 256)",
+    "arm": "same F0",
+    "whole": {
+      "max_diff": 0.010416664183139801,
+      "pcc": 0.9999428953360278
+    },
+    "last_20ms": {
+      "max_diff": 8.138013072311878e-05,
+      "pcc": 0.9996523810802757
+    }
+  },
+  {
+    "case": "zero_shot_260-123286-0014",
+    "path": "Stage 1 single call (150 frames, bucket 256)",
+    "arm": "own F0",
+    "whole": {
+      "max_diff": 0.010416664183139801,
+      "pcc": 0.9999403023887544
+    },
+    "last_20ms": {
+      "max_diff": 8.138013072311878e-05,
+      "pcc": 0.9997146291282241
+    }
+  },
+  {
+    "case": "zero_shot_260-123440-0002",
+    "path": "streaming final chunk vs upstream (mechanism)",
+    "arm": "PCC, whole chunk",
+    "final_chunk_pcc": {
+      "masked": 0.9997810773913863,
+      "exact": 0.999823478803978
+    }
+  },
+  {
+    "case": "zero_shot_260-123440-0002",
+    "path": "streaming final call (92 frames, bucket 128)",
+    "arm": "same F0",
+    "whole": {
+      "max_diff": 0.03389438986778259,
+      "pcc": 0.9999266499879692
+    },
+    "last_20ms": {
+      "max_diff": 1.525878951724735e-05,
+      "pcc": 0.9987697726446714
+    }
+  },
+  {
+    "case": "zero_shot_260-123440-0002",
+    "path": "streaming final call (92 frames, bucket 128)",
+    "arm": "own F0",
+    "whole": {
+      "max_diff": 0.024878501892089844,
+      "pcc": 0.999930413984503
+    },
+    "last_20ms": {
+      "max_diff": 1.52587890625e-05,
+      "pcc": 0.9997970478634115
+    }
+  },
+  {
+    "case": "zero_shot_260-123440-0010",
+    "path": "streaming final chunk vs upstream (mechanism)",
+    "arm": "PCC, whole chunk",
+    "final_chunk_pcc": {
+      "masked": 0.9997023502089318,
+      "exact": 0.9997963053559897
+    }
+  },
+  {
+    "case": "zero_shot_260-123440-0010",
+    "path": "streaming final call (62 frames, bucket 128)",
+    "arm": "same F0",
+    "whole": {
+      "max_diff": 0.011381149291992188,
+      "pcc": 0.9999651890415775
+    },
+    "last_20ms": {
+      "max_diff": 0.00040690088644623756,
+      "pcc": 0.9993588563252296
+    }
+  },
+  {
+    "case": "zero_shot_260-123440-0010",
+    "path": "streaming final call (62 frames, bucket 128)",
+    "arm": "own F0",
+    "whole": {
+      "max_diff": 0.012185096740722656,
+      "pcc": 0.9999622469110581
+    },
+    "last_20ms": {
+      "max_diff": 0.0003378789406269789,
+      "pcc": 0.999320794701276
+    }
+  },
+  {
+    "case": "zero_shot_260-123440-0010",
+    "path": "Stage 1 single call (404 frames, bucket 512)",
+    "arm": "same F0",
+    "whole": {
+      "max_diff": 0.012298583984375,
+      "pcc": 0.999852771143089
+    },
+    "last_20ms": {
+      "max_diff": 0.00048828125,
+      "pcc": 0.9988623518054841
+    }
+  },
+  {
+    "case": "zero_shot_260-123440-0010",
+    "path": "Stage 1 single call (404 frames, bucket 512)",
+    "arm": "own F0",
+    "whole": {
+      "max_diff": 0.02083333395421505,
+      "pcc": 0.999833621570963
+    },
+    "last_20ms": {
+      "max_diff": 0.0004882813082076609,
+      "pcc": 0.9986725805850234
+    }
+  }
+]

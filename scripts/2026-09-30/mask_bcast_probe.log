@@ -1,0 +1,4 @@
+[1,1016,512] x [1,1016,1]: shape (1, 1016, 512), exact True, tail zero True
+[1,8129,64] x [1,8129,1]: shape (1, 8129, 64), exact True, tail zero True
+[1,30721,64] x [1,30721,1]: shape (1, 30721, 64), exact True, tail zero True
+[1,9,30721] x [1,1,30721]: shape (1, 9, 30721), exact True

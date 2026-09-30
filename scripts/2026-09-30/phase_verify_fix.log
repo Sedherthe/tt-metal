@@ -1,0 +1,71 @@
+2026-09-30 05:04:18 phase_gate_after exited 0
+2026-09-30 05:04:20 started masked_vs_exact (log /home/user/data/cosyvoice2_runs/0930/masked_vs_exact.log)
+2026-09-30 05:41:36 masked_vs_exact exited 0
+binaries compiled by masked_vs_exact: 5429
+| case | path | arm | whole: max\|diff\| | whole: PCC | last 20 ms: max\|diff\| | last 20 ms: PCC |
+|---|---|---|---|---|---|---|
+| 121-127105-0003 | streaming final call (70 frames, bucket 128) | same F0 | 1.11e-02 | 0.999969 | 7.12e-05 | 0.999752 |
+| 121-127105-0003 | streaming final call (70 frames, bucket 128) | own F0 | 1.17e-02 | 0.999968 | 7.12e-05 | 0.999570 |
+| 121-127105-0003 | Stage 1 single call (426 frames, bucket 512) | same F0 | 3.57e-02 | 0.999916 | 6.10e-05 | 0.999783 |
+| 121-127105-0003 | Stage 1 single call (426 frames, bucket 512) | own F0 | 1.95e-02 | 0.999921 | 6.10e-05 | 0.999783 |
+| 121-127105-0015 | streaming final call (34 frames, bucket 128) | same F0 | 1.53e-04 | 1.000000 | 6.36e-06 | 0.999302 |
+| 121-127105-0015 | streaming final call (34 frames, bucket 128) | own F0 | 1.63e-04 | 1.000000 | 8.27e-06 | 0.999028 |
+| 121-127105-0015 | Stage 1 single call (190 frames, bucket 256) | same F0 | 1.70e-02 | 0.999925 | 1.02e-05 | 0.998850 |
+| 121-127105-0015 | Stage 1 single call (190 frames, bucket 256) | own F0 | 1.04e-02 | 0.999931 | 1.02e-05 | 0.998850 |
+| 121-127105-0024 | streaming final call (138 frames, bucket 256) | same F0 | 1.39e-02 | 0.999976 | 6.10e-05 | 0.999447 |
+| 121-127105-0024 | streaming final call (138 frames, bucket 256) | own F0 | 1.30e-02 | 0.999978 | 8.14e-05 | 0.999441 |
+| 260-123286-0014 | streaming final call (108 frames, bucket 128) | same F0 | 1.30e-03 | 1.000000 | 4.07e-05 | 0.999910 |
+| 260-123286-0014 | streaming final call (108 frames, bucket 128) | own F0 | 1.30e-03 | 1.000000 | 6.10e-05 | 0.999808 |
+| 260-123286-0014 | Stage 1 single call (150 frames, bucket 256) | same F0 | 1.04e-02 | 0.999943 | 8.14e-05 | 0.999652 |
+| 260-123286-0014 | Stage 1 single call (150 frames, bucket 256) | own F0 | 1.04e-02 | 0.999940 | 8.14e-05 | 0.999715 |
+| 260-123440-0002 | streaming final call (92 frames, bucket 128) | same F0 | 3.39e-02 | 0.999927 | 1.53e-05 | 0.998770 |
+| 260-123440-0002 | streaming final call (92 frames, bucket 128) | own F0 | 2.49e-02 | 0.999930 | 1.53e-05 | 0.999797 |
+| 260-123440-0010 | streaming final call (62 frames, bucket 128) | same F0 | 1.14e-02 | 0.999965 | 4.07e-04 | 0.999359 |
+| 260-123440-0010 | streaming final call (62 frames, bucket 128) | own F0 | 1.22e-02 | 0.999962 | 3.38e-04 | 0.999321 |
+| 260-123440-0010 | Stage 1 single call (404 frames, bucket 512) | same F0 | 1.23e-02 | 0.999853 | 4.88e-04 | 0.998862 |
+| 260-123440-0010 | Stage 1 single call (404 frames, bucket 512) | own F0 | 2.08e-02 | 0.999834 | 4.88e-04 | 0.998673 |
+
+| case | final chunk vs upstream, whole chunk PCC: masked | exact |
+|---|---|---|
+| 121-127105-0003 | 0.99963 | 0.99971 |
+| 121-127105-0015 | 0.99696 | 0.99749 |
+| 121-127105-0024 | 0.99931 | 0.99953 |
+| 260-123286-0014 | 0.99979 | 0.99979 |
+| 260-123440-0002 | 0.99978 | 0.99982 |
+| 260-123440-0010 | 0.99970 | 0.99980 |
+2026-09-30 05:41:24.284 | info     |    BuildKernels | JIT cache stats: 8910/12549 hits (71.0%) [8910 cached, 10477 build-once dedup, 0 merged artifacts, 0 merged genfiles] (build_cache_telemetry.cpp:207)
+2026-09-30 05:41:24.284 | info     |    BuildKernels | JIT telemetry: 3 registered TelemetryTokens (build_cache_telemetry.cpp:230)
+2026-09-30 05:41:24.382 | info     |          Device | Closing user mode device drivers (tt_cluster.cpp:550)
+2026-09-30 05:41:24.382 | info     |             UMD | Closing devices in cluster (cluster.cpp:1218)
+2026-09-30 05:41:24.389 | info     |             UMD | Closing devices in cluster completed. (cluster.cpp:1227)
+2026-09-30 05:41:24.389 | info     |             UMD | Cluster destructor started. (cluster.cpp:933)
+2026-09-30 05:41:24.389 | info     |             UMD | Cluster destructor completed. (cluster.cpp:936)
+2026-09-30 05:41:38 started you_device (log /home/user/data/cosyvoice2_runs/0930/you_device.log)
+2026-09-30 05:51:23 you_device exited 0
+  zero_shot_260-123440-0010 seed1987: last 20 ms -51.6 dBFS, upstream's -51.9
+  zero_shot_260-123440-0010 seed1: last 20 ms -51.3 dBFS, upstream's -51.9
+  zero_shot_260-123440-0010 seed2: last 20 ms -51.6 dBFS, upstream's -51.9
+  zero_shot_260-123440-0010 seed3: last 20 ms -51.6 dBFS, upstream's -51.9
+  zero_shot_260-123440-0010 seed4: last 20 ms -51.6 dBFS, upstream's -51.9
+  zero_shot_260-123440-0010 seed5: last 20 ms -51.7 dBFS, upstream's -51.9
+  zero_shot_260-123440-0010 seed6: last 20 ms -51.5 dBFS, upstream's -51.9
+  zero_shot_260-123440-0010 seed7: last 20 ms -51.5 dBFS, upstream's -51.9
+  zero_shot_260-123440-0010 seed8: last 20 ms -51.5 dBFS, upstream's -51.9
+  zero_shot_260-123440-0010 seed9: last 20 ms -51.6 dBFS, upstream's -51.9
+  zero_shot_260-123440-0010 upstream_noise: last 20 ms -51.6 dBFS, upstream's -51.9
+================== 1 passed, 4 warnings in 567.96s (0:09:27) ===================
+2026-09-30 05:51:23 started you_asr_check (log /home/user/data/cosyvoice2_runs/0930/you_asr_check.log)
+2026-09-30 05:53:23 you_asr_check exited 0
+[asr] loading whisper large-v3 (cpu)
+  zero_shot_260-123440-0010_seed1987           errors 0  ...'tle fishes in, with gently smiling jaws.'
+  zero_shot_260-123440-0010_seed1              errors 0  ...'tle fishes in, with gently smiling jaws.'
+  zero_shot_260-123440-0010_seed2              errors 0  ...'tle fishes in, with gently smiling jaws.'
+  zero_shot_260-123440-0010_seed3              errors 0  ...'tle fishes in, with gently smiling jaws.'
+  zero_shot_260-123440-0010_seed4              errors 0  ...'tle fishes in, with gently smiling jaws.'
+  zero_shot_260-123440-0010_seed5              errors 0  ...'tle fishes in, with gently smiling jaws.'
+  zero_shot_260-123440-0010_seed6              errors 0  ...'tle fishes in, with gently smiling jaws.'
+  zero_shot_260-123440-0010_seed7              errors 0  ...'tle fishes in, with gently smiling jaws.'
+  zero_shot_260-123440-0010_seed8              errors 0  ...'tle fishes in, with gently smiling jaws.'
+  zero_shot_260-123440-0010_seed9              errors 0  ...'tle fishes in, with gently smiling jaws.'
+  zero_shot_260-123440-0010_upstream_noise     errors 0  ...'tle fishes in, with gently smiling jaws.'
+PASSED test_no_draw_of_the_you_clip_ends_in_you

@@ -1,0 +1,84 @@
+  62 of 128 frames: f0 max|diff| 0.00e+00 Hz, f0 up to 1218 Hz
+PASSED
+  34 of 128 frames: f0 max|diff| 7.04e-03 Hz, f0 up to 286 Hz
+PASSED
+  70 of 128 frames: f0 max|diff| 1.33e-03 Hz, f0 up to 565 Hz
+PASSED
+  138 of 256 frames: f0 max|diff| 5.49e-04 Hz, f0 up to 461 Hz
+PASSED
+  150 of 256 frames: f0 max|diff| 0.00e+00 Hz, f0 up to 497 Hz
+PASSED
+  190 of 256 frames: f0 max|diff| 0.00e+00 Hz, f0 up to 1874 Hz
+PASSED
+  404 of 512 frames: f0 max|diff| 0.00e+00 Hz, f0 up to 3999 Hz
+PASSED
+  426 of 512 frames: f0 max|diff| 0.00e+00 Hz, f0 up to 7470 Hz
+PASSED
+  62 of 128 frames: whole max|diff| 2.93e-07 PCC 1.00000000; last 20 ms max|diff| 1.94e-07 PCC 1.00000000
+PASSED
+  34 of 128 frames: whole max|diff| 3.35e-07 PCC 1.00000000; last 20 ms max|diff| 8.20e-08 PCC 1.00000000
+PASSED
+  70 of 128 frames: whole max|diff| 8.23e-07 PCC 1.00000000; last 20 ms max|diff| 5.77e-08 PCC 1.00000000
+PASSED
+  138 of 256 frames: whole max|diff| 5.17e-07 PCC 1.00000000; last 20 ms max|diff| 1.22e-07 PCC 1.00000000
+PASSED
+  150 of 256 frames: whole max|diff| 4.47e-07 PCC 1.00000000; last 20 ms max|diff| 1.56e-07 PCC 1.00000000
+PASSED
+  190 of 256 frames: whole max|diff| 4.95e-07 PCC 1.00000000; last 20 ms max|diff| 1.19e-07 PCC 1.00000000
+PASSED
+  404 of 512 frames: whole max|diff| 1.18e-06 PCC 1.00000000; last 20 ms max|diff| 7.95e-08 PCC 1.00000000
+PASSED
+  426 of 512 frames: whole max|diff| 6.74e-07 PCC 1.00000000; last 20 ms max|diff| 7.82e-08 PCC 1.00000000
+PASSED
+| zero_shot_121-127105-0003 | 426 / 512 | -115.2 / -65.0 | 0.99906 | 0.00047 | 1.39e-01 |
+| zero_shot_121-127105-0015 | 190 / 256 | -104.1 / -88.9 | 0.99927 | -0.03830 | 9.15e-02 |
+| zero_shot_260-123286-0014 | 150 / 256 | -138.2 / -63.1 | 0.99967 | 0.02890 | 3.03e-02 |
+| zero_shot_260-123440-0010 | 404 / 512 | -130.1 / -51.9 | 0.99938 | -0.04691 | 4.63e-02 |
+FAILED2026-09-30 04:28:19.020 | INFO     | conftest:pytest_runtest_teardown:1227 - In custom teardown, open device ids: {0}
+| zero_shot_121-127105-0003 | 0 | 0 | 32 | 0.0123 | 0.0860 | 0.99967 | nan |
+| zero_shot_121-127105-0003 | 1 | 32 | 50 | 0.0144 | 0.0668 | 0.99942 | 0.99986 |
+| zero_shot_121-127105-0003 | 2 | 82 | 100 | 0.0126 | 0.0378 | 0.99949 | 0.99976 |
+| zero_shot_121-127105-0003 | 3 (final) | 182 | 31 | 0.0137 | 0.0000 | 0.99963 | 0.99983 |; last 20 ms: -117.6 dBFS, upstream -64.9
+| zero_shot_121-127105-0015 | 0 | 0 | 32 | 0.0140 | 0.0529 | 0.99968 | nan |
+| zero_shot_121-127105-0015 | 1 | 32 | 50 | 0.0122 | 0.1154 | 0.99960 | 0.99954 |
+| zero_shot_121-127105-0015 | 2 (final) | 82 | 13 | 0.0085 | 0.0000 | 0.96492 | 0.99982 |; last 20 ms: -103.8 dBFS, upstream -88.8
+| zero_shot_121-127105-0024 | 0 | 0 | 32 | 0.0113 | 0.0923 | 0.99976 | nan |
+| zero_shot_121-127105-0024 | 1 | 32 | 50 | 0.0142 | 0.1299 | 0.99967 | 0.99976 |
+| zero_shot_121-127105-0024 | 2 | 82 | 100 | 0.0129 | 0.0682 | 0.99948 | 0.99984 |
+| zero_shot_121-127105-0024 | 3 | 182 | 100 | 0.0182 | 0.0413 | 0.99936 | 0.99900 |
+| zero_shot_121-127105-0024 | 4 (final) | 282 | 65 | 0.0117 | 0.0000 | 0.99931 | 0.99948 |; last 20 ms: -112.3 dBFS, upstream -68.0
+| zero_shot_260-123286-0014 | 0 | 0 | 25 | 0.0094 | 0.0216 | 0.99985 | nan |
+| zero_shot_260-123286-0014 | 1 (final) | 25 | 50 | 0.0095 | 0.0000 | 0.99979 | 0.99985 |; last 20 ms: -138.7 dBFS, upstream -63.4
+| zero_shot_260-123440-0002 | 0 | 0 | 25 | 0.0096 | 0.0429 | 0.99969 | nan |
+| zero_shot_260-123440-0002 | 1 | 25 | 50 | 0.0085 | 0.0294 | 0.99977 | 0.99975 |
+| zero_shot_260-123440-0002 | 2 | 75 | 100 | 0.0095 | 0.0313 | 0.99961 | 0.99962 |
+| zero_shot_260-123440-0002 | 3 | 175 | 100 | 0.0110 | 0.0811 | 0.99965 | 0.99970 |
+| zero_shot_260-123440-0002 | 4 (final) | 275 | 42 | 0.0150 | 0.0000 | 0.99978 | 0.99985 |; last 20 ms: -113.9 dBFS, upstream -81.6
+| zero_shot_260-123440-0010 | 0 | 0 | 25 | 0.0088 | 0.0321 | 0.99975 | nan |
+| zero_shot_260-123440-0010 | 1 | 25 | 50 | 0.0091 | 0.0443 | 0.99960 | 0.99989 |
+| zero_shot_260-123440-0010 | 2 | 75 | 100 | 0.0102 | 0.0366 | 0.99967 | 0.99982 |
+| zero_shot_260-123440-0010 | 3 (final) | 175 | 27 | 0.0098 | 0.0000 | 0.99953 | 0.99962 |; last 20 ms: -131.1 dBFS, upstream -51.9
+FAILED2026-09-30 04:29:36.729 | INFO     | conftest:pytest_runtest_teardown:1227 - In custom teardown, open device ids: {0}
+E       AssertionError: ["zero_shot_121-127105-0003: last 20 ms at -115.2 dBFS, the reference's at -65.0", "zero_shot_121-127105-0015: last 20 ms at -104.1 dBFS, the reference's at -88.9", "zero_shot_260-123286-0014: last 20 ms at -138.2 dBFS, the reference's at -63.1", "zero_shot_260-123440-0010: l
+E       assert not ["zero_shot_121-127105-0003: last 20 ms at -115.2 dBFS, the reference's at -65.0", "zero_shot_121-127105-0015: last 20 ms at -104.1 dBFS, the reference's at -88.9", "zero_shot_260-123286-0014: last 20 ms at -138.2 dBFS, the reference's at -63.1", "zero_shot_260-123440-0010: last 2
+E       AssertionError: ["zero_shot_121-127105-0003 final chunk: last 20 ms at -117.6 dBFS, upstream's -64.9", "zero_shot_121-127105-0015 final chunk: last 20 ms at -103.8 dBFS, upstream's -88.8", 'zero_shot_121-127105-0015 chunk 2: HiFT PCC 0.96492', "zero_shot_121-127105-0024 final chunk: last 20 
+E       assert not ["zero_shot_121-127105-0003 final chunk: last 20 ms at -117.6 dBFS, upstream's -64.9", "zero_shot_121-127105-0015 final chunk: last 20 ms at -103.8 dBFS, upstream's -88.8", 'zero_shot_121-127105-0015 chunk 2: HiFT PCC 0.96492', "zero_shot_121-127105-0024 final chunk: last 20 ms at
+PASSED models/experimental/cosyvoice2/tests/pcc/test_hift_masked.py::test_masked_f0_predictor_matches_the_real_length_on_host[62-128]
+PASSED models/experimental/cosyvoice2/tests/pcc/test_hift_masked.py::test_masked_f0_predictor_matches_the_real_length_on_host[34-128]
+PASSED models/experimental/cosyvoice2/tests/pcc/test_hift_masked.py::test_masked_f0_predictor_matches_the_real_length_on_host[70-128]
+PASSED models/experimental/cosyvoice2/tests/pcc/test_hift_masked.py::test_masked_f0_predictor_matches_the_real_length_on_host[138-256]
+PASSED models/experimental/cosyvoice2/tests/pcc/test_hift_masked.py::test_masked_f0_predictor_matches_the_real_length_on_host[150-256]
+PASSED models/experimental/cosyvoice2/tests/pcc/test_hift_masked.py::test_masked_f0_predictor_matches_the_real_length_on_host[190-256]
+PASSED models/experimental/cosyvoice2/tests/pcc/test_hift_masked.py::test_masked_f0_predictor_matches_the_real_length_on_host[404-512]
+PASSED models/experimental/cosyvoice2/tests/pcc/test_hift_masked.py::test_masked_f0_predictor_matches_the_real_length_on_host[426-512]
+PASSED models/experimental/cosyvoice2/tests/pcc/test_hift_masked.py::test_masked_source_and_decode_match_the_real_length_on_host[62-128]
+PASSED models/experimental/cosyvoice2/tests/pcc/test_hift_masked.py::test_masked_source_and_decode_match_the_real_length_on_host[34-128]
+PASSED models/experimental/cosyvoice2/tests/pcc/test_hift_masked.py::test_masked_source_and_decode_match_the_real_length_on_host[70-128]
+PASSED models/experimental/cosyvoice2/tests/pcc/test_hift_masked.py::test_masked_source_and_decode_match_the_real_length_on_host[138-256]
+PASSED models/experimental/cosyvoice2/tests/pcc/test_hift_masked.py::test_masked_source_and_decode_match_the_real_length_on_host[150-256]
+PASSED models/experimental/cosyvoice2/tests/pcc/test_hift_masked.py::test_masked_source_and_decode_match_the_real_length_on_host[190-256]
+PASSED models/experimental/cosyvoice2/tests/pcc/test_hift_masked.py::test_masked_source_and_decode_match_the_real_length_on_host[404-512]
+PASSED models/experimental/cosyvoice2/tests/pcc/test_hift_masked.py::test_masked_source_and_decode_match_the_real_length_on_host[426-512]
+FAILED models/experimental/cosyvoice2/tests/pcc/test_hift_masked.py::test_device_stage1_padded_hift_ends_like_the_reference[device_params0]
+FAILED models/experimental/cosyvoice2/tests/e2e/test_streaming.py::test_device_offline_streaming_matches_upstream_streaming[device_params0]
+============= 2 failed, 16 passed, 6 warnings in 219.17s (0:03:39) =============

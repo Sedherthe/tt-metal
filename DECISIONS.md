@@ -287,3 +287,39 @@ This session stops after R5, with the streaming numbers. R1 must land before R4.
 - Non-streaming cold requests are unaffected (`generate()` releases the trace before the flow and HiFT run), so
   R6's cold first request (B22, D37) is still measurable. A cold streaming start is the two warm-ups on an empty
   kernel cache.
+
+### D41 — The end gate replaces D38's tail criterion (user, 09-30; D38's floor is why B28 slipped through)
+- **Streaming**, against upstream's streaming (stage A's mechanism): the final chunk's last 20 ms within 3 dB of
+  upstream's RMS level, with no absolute floor.
+- **Stage 1**, against torch's HiFT at the real length with the same F0 and noise
+  (`tests/pcc/test_hift_masked.py`): the same criterion.
+- **Shown both ways:** it fails on the old padding (`scripts/2026-09-30/phase_gate_before.sh`) and passes on the fix
+  (`phase_gate_after.sh`, `phase_gate_final.sh`).
+- **Also in stage A (Claude, 09-30; the user can reverse it):**
+  - D38's other criterion without its floor: the last 0.4 s's difference at least 20 dB below the signal (measured
+    21–27 dB);
+  - the final chunk's PCC stays gated before those 0.4 s. On a chunk ending near −71 dBFS, PCC measures the port's
+    own floor: 0.9975 even at the exact length.
+- **D38's −50 dBFS floor** was set by Claude on 09-29 from the first measurement. It passed 260-123440-0010's ending
+  with the difference 2.5 dB below the signal, which is how the silenced endings reached the audio.
+
+### D42 — Masked end padding in HiFT, built (user, 09-30)
+- **A padded HiFT call computes upstream's call at the real length.** It keeps the bucket's geometry, so nothing is
+  compiled per length. The rules are in `tt/hifigan/valid_length.py`, and every padding site was checked against
+  upstream's code (B29).
+- **Reference:** the exact-length run. The masked output matches it within 4.9e-4 over the last 20 ms, for every
+  streamed final call and Stage 1's padded utterances.
+- **Out of scope:** the streaming first call is padded in front, at the utterance's start, and stays as built.
+
+### D43 — WER/SIM over five noise draws; the "you" clip as a regression test (user, 09-30)
+- **WER and SIM are reported as the mean and range over five vocoder noise draws per utterance** (seeds 1–5), for
+  Stage 1 and streaming, TT and reference. The tokens are fixed by the LLM seed, so only the noise varies. No claim
+  rests on one draw.
+  - TT: `scripts/noise_draws.py`;
+  - the reference: `run_reference.py --noise-seed` (re-seeds torch before each vocoder call and restores it) and
+    `streaming_reference.py --noise-seed`;
+  - scoring: `scripts/eval_draws.py`, with the scorer's own functions, unchanged.
+- **The scorer is left alone** (user, 09-30).
+- **The "you" clip is a regression test:** 260-123440-0010 streamed over 11 draws.
+  - `test_streaming.py::test_device_you_clip_noise_draws` renders them and checks each ending's level;
+  - `tests/reference/test_you_clip.py`, in the reference venv, fails on any trailing "you".

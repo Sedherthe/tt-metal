@@ -1,0 +1,630 @@
+{
+  "TT Stage 1": {
+    "draws": [
+      "/home/user/data/cosyvoice2_draws/tt_stage1_seed1",
+      "/home/user/data/cosyvoice2_draws/tt_stage1_seed2",
+      "/home/user/data/cosyvoice2_draws/tt_stage1_seed3",
+      "/home/user/data/cosyvoice2_draws/tt_stage1_seed4",
+      "/home/user/data/cosyvoice2_draws/tt_stage1_seed5"
+    ],
+    "corpus": {
+      "wer_percent": {
+        "mean": 0.68,
+        "min": 0.68,
+        "max": 0.68,
+        "n": 5
+      },
+      "sim": {
+        "mean": 95.88,
+        "min": 95.84,
+        "max": 95.92,
+        "n": 5
+      }
+    },
+    "cases": {
+      "zero_shot_121-127105-0003": {
+        "words": 18,
+        "wer_percent": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "n": 5
+        },
+        "sim": {
+          "mean": 94.75,
+          "min": 94.68,
+          "max": 94.87,
+          "n": 5
+        },
+        "hypotheses": [
+          "There was a unanimous groan at this, and much reproach, after which, in his preoccupied way, he explained,",
+          "There was a unanimous groan at this, and much reproach, after which, in his preoccupied way, he explained,",
+          "There was a unanimous groan at this, and much reproach, after which, in his preoccupied way, he explained,",
+          "There was a unanimous groan at this, and much reproach, after which, in his preoccupied way, he explained,",
+          "There was a unanimous groan at this, and much reproach, after which, in his preoccupied way, he explained,"
+        ]
+      },
+      "zero_shot_121-127105-0015": {
+        "words": 10,
+        "wer_percent": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "n": 5
+        },
+        "sim": {
+          "mean": 94.68,
+          "min": 94.57,
+          "max": 94.77,
+          "n": 5
+        },
+        "hypotheses": [
+          "He quitted the fire and dropped back into his chair.",
+          "He quitted the fire and dropped back into his chair.",
+          "He quitted the fire and dropped back into his chair.",
+          "He quitted the fire and dropped back into his chair.",
+          "He quitted the fire and dropped back into his chair."
+        ]
+      },
+      "zero_shot_121-127105-0024": {
+        "words": 48,
+        "wer_percent": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "n": 5
+        },
+        "sim": {
+          "mean": 93.51,
+          "min": 93.47,
+          "max": 93.54,
+          "n": 5
+        },
+        "hypotheses": [
+          "poor douglas before his death when it was in sight committed to me the manuscript that reached him on the third of these days and that on the same spot with immense effect he began to read to our hushed little circle on the night of the fourth",
+          "poor douglas before his death when it was in sight committed to me the manuscript that reached him on the third of these days and that on the same spot with immense effect he began to read to our hushed little circle on the night of the fourth",
+          "poor douglas before his death when it was in sight committed to me the manuscript that reached him on the third of these days and that on the same spot with immense effect he began to read to our hushed little circle on the night of the fourth",
+          "poor douglas before his death when it was in sight committed to me the manuscript that reached him on the third of these days and that on the same spot with immense effect he began to read to our hushed little circle on the night of the fourth",
+          "poor douglas before his death when it was in sight committed to me the manuscript that reached him on the third of these days and that on the same spot with immense effect he began to read to our hushed little circle on the night of the fourth"
+        ]
+      },
+      "zero_shot_260-123286-0014": {
+        "words": 7,
+        "wer_percent": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "n": 5
+        },
+        "sim": {
+          "mean": 95.91,
+          "min": 95.88,
+          "max": 95.92,
+          "n": 5
+        },
+        "hypotheses": [
+          "Truly, this sea is of infinite width.",
+          "Truly, this sea is of infinite width.",
+          "Truly, this sea is of infinite width.",
+          "Truly, this sea is of infinite width.",
+          "Truly, this sea is of infinite width."
+        ]
+      },
+      "zero_shot_260-123440-0002": {
+        "words": 44,
+        "wer_percent": {
+          "mean": 2.27,
+          "min": 2.27,
+          "max": 2.27,
+          "n": 5
+        },
+        "sim": {
+          "mean": 98.29,
+          "min": 98.27,
+          "max": 98.33,
+          "n": 5
+        },
+        "hypotheses": [
+          "It was the white Rathor returning, splendidly dressed, with a pair of white kid gloves in one hand and a large fan in the other. He came trotting along in a great hurry, muttering to himself as he came, Oh, the Duchess! The Duchess!",
+          "It was the white Rathor returning, splendidly dressed, with a pair of white kid gloves in one hand and a large fan in the other. He came trotting along in a great hurry, muttering to himself as he came, Oh, the Duchess! The Duchess!",
+          "It was the white Rathor returning, splendidly dressed, with a pair of white kid gloves in one hand and a large fan in the other. He came trotting along in a great hurry, muttering to himself as he came, Oh, the Duchess! The Duchess!",
+          "It was the white Rathor returning, splendidly dressed, with a pair of white kid gloves in one hand and a large fan in the other. He came trotting along in a great hurry, muttering to himself as he came, Oh, the Duchess! The Duchess!",
+          "It was the white Rathor returning, splendidly dressed, with a pair of white kid gloves in one hand and a large fan in the other. He came trotting along in a great hurry, muttering to himself as he came, Oh, the Duchess! The Duchess!"
+        ]
+      },
+      "zero_shot_260-123440-0010": {
+        "words": 20,
+        "wer_percent": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "n": 5
+        },
+        "sim": {
+          "mean": 98.19,
+          "min": 98.16,
+          "max": 98.21,
+          "n": 5
+        },
+        "hypotheses": [
+          "How cheerfully he seems to grin, how neatly spread his claws, and welcome little fishes in, with gently smiling jaws.",
+          "How cheerfully he seems to grin, how neatly spread his claws, and welcome little fishes in, with gently smiling jaws.",
+          "How cheerfully he seems to grin, how neatly spread his claws, and welcome little fishes in, with gently smiling jaws.",
+          "How cheerfully he seems to grin, how neatly spread his claws, and welcome little fishes in, with gently smiling jaws.",
+          "How cheerfully he seems to grin, how neatly spread his claws, and welcome little fishes in, with gently smiling jaws."
+        ]
+      }
+    }
+  },
+  "reference Stage 1": {
+    "draws": [
+      "/home/user/data/cosyvoice2_draws/ref_stage1_seed1",
+      "/home/user/data/cosyvoice2_draws/ref_stage1_seed2",
+      "/home/user/data/cosyvoice2_draws/ref_stage1_seed3",
+      "/home/user/data/cosyvoice2_draws/ref_stage1_seed4",
+      "/home/user/data/cosyvoice2_draws/ref_stage1_seed5"
+    ],
+    "corpus": {
+      "wer_percent": {
+        "mean": 0.68,
+        "min": 0.68,
+        "max": 0.68,
+        "n": 5
+      },
+      "sim": {
+        "mean": 95.22,
+        "min": 95.21,
+        "max": 95.24,
+        "n": 5
+      }
+    },
+    "cases": {
+      "zero_shot_121-127105-0003": {
+        "words": 18,
+        "wer_percent": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "n": 5
+        },
+        "sim": {
+          "mean": 94.36,
+          "min": 94.33,
+          "max": 94.41,
+          "n": 5
+        },
+        "hypotheses": [
+          "There was a unanimous groan at this and much reproach, after which in his preoccupied way he explained,",
+          "There was a unanimous groan at this and much reproach, after which in his preoccupied way he explained,",
+          "There was a unanimous groan at this and much reproach, after which in his preoccupied way he explained,",
+          "There was a unanimous groan at this and much reproach, after which in his preoccupied way he explained,",
+          "There was a unanimous groan at this and much reproach, after which in his preoccupied way he explained,"
+        ]
+      },
+      "zero_shot_121-127105-0015": {
+        "words": 10,
+        "wer_percent": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "n": 5
+        },
+        "sim": {
+          "mean": 92.59,
+          "min": 92.56,
+          "max": 92.61,
+          "n": 5
+        },
+        "hypotheses": [
+          "He quitted the fire and dropped back into his chair.",
+          "He quitted the fire and dropped back into his chair.",
+          "He quitted the fire and dropped back into his chair.",
+          "He quitted the fire and dropped back into his chair.",
+          "He quitted the fire and dropped back into his chair."
+        ]
+      },
+      "zero_shot_121-127105-0024": {
+        "words": 48,
+        "wer_percent": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "n": 5
+        },
+        "sim": {
+          "mean": 93.93,
+          "min": 93.9,
+          "max": 93.96,
+          "n": 5
+        },
+        "hypotheses": [
+          "Poor Douglas! Before his death, when it was in sight, committed to me the manuscript that reached him on the third of these days, and that on the same spot, with immense effect, he began to read to our hushed little circle on the night of the fourth.",
+          "Poor Douglas! Before his death, when it was in sight, committed to me the manuscript that reached him on the third of these days, and that on the same spot, with immense effect, he began to read to our hushed little circle on the night of the fourth.",
+          "Poor Douglas! Before his death, when it was in sight, committed to me the manuscript that reached him on the third of these days, and that on the same spot, with immense effect, he began to read to our hushed little circle on the night of the fourth.",
+          "Poor Douglas! Before his death, when it was in sight, committed to me the manuscript that reached him on the third of these days, and that on the same spot, with immense effect, he began to read to our hushed little circle on the night of the fourth.",
+          "Poor Douglas! Before his death, when it was in sight, committed to me the manuscript that reached him on the third of these days, and that on the same spot, with immense effect, he began to read to our hushed little circle on the night of the fourth."
+        ]
+      },
+      "zero_shot_260-123286-0014": {
+        "words": 7,
+        "wer_percent": {
+          "mean": 14.29,
+          "min": 14.29,
+          "max": 14.29,
+          "n": 5
+        },
+        "sim": {
+          "mean": 95.85,
+          "min": 95.77,
+          "max": 95.89,
+          "n": 5
+        },
+        "hypotheses": [
+          "Truly, the sea is of infinite width.",
+          "Truly, the sea is of infinite width.",
+          "Truly, the sea is of infinite width.",
+          "Truly, the sea is of infinite width.",
+          "Truly, the sea is of infinite width."
+        ]
+      },
+      "zero_shot_260-123440-0002": {
+        "words": 44,
+        "wer_percent": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "n": 5
+        },
+        "sim": {
+          "mean": 97.74,
+          "min": 97.72,
+          "max": 97.74,
+          "n": 5
+        },
+        "hypotheses": [
+          "It was the white rabbit returning splendidly dressed with a pair of white kid gloves in one hand and a large fan in the other. He came trotting along in a great hurry, muttering to himself as he came, Oh, the duchess, the duchess!",
+          "It was the white rabbit returning splendidly dressed with a pair of white kid gloves in one hand and a large fan in the other. He came trotting along in a great hurry, muttering to himself as he came, Oh, the duchess, the duchess!",
+          "It was the white rabbit returning splendidly dressed with a pair of white kid gloves in one hand and a large fan in the other. He came trotting along in a great hurry, muttering to himself as he came, Oh, the duchess, the duchess!",
+          "It was the white rabbit returning splendidly dressed with a pair of white kid gloves in one hand and a large fan in the other. He came trotting along in a great hurry, muttering to himself as he came, Oh, the duchess, the duchess!",
+          "It was the white rabbit returning splendidly dressed with a pair of white kid gloves in one hand and a large fan in the other. He came trotting along in a great hurry, muttering to himself as he came, Oh, the duchess, the duchess!"
+        ]
+      },
+      "zero_shot_260-123440-0010": {
+        "words": 20,
+        "wer_percent": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "n": 5
+        },
+        "sim": {
+          "mean": 96.87,
+          "min": 96.85,
+          "max": 96.94,
+          "n": 5
+        },
+        "hypotheses": [
+          "How cheerfully he seems to grin, how neatly spread his claws, and welcome little fishes in with gently smiling jaws.",
+          "How cheerfully he seems to grin, how neatly spread his claws, And welcome little fishes in with gently smiling jaws.",
+          "How cheerfully he seems to grin, how neatly spread his claws, And welcome little fishes in with gently smiling jaws.",
+          "How cheerfully he seems to grin, how neatly spread his claws, And welcome little fishes in with gently smiling jaws.",
+          "How cheerfully he seems to grin, how neatly spread his claws, And welcome little fishes in with gently smiling jaws."
+        ]
+      }
+    }
+  },
+  "TT streaming": {
+    "draws": [
+      "/home/user/data/cosyvoice2_draws/tt_stream_seed1",
+      "/home/user/data/cosyvoice2_draws/tt_stream_seed2",
+      "/home/user/data/cosyvoice2_draws/tt_stream_seed3",
+      "/home/user/data/cosyvoice2_draws/tt_stream_seed4",
+      "/home/user/data/cosyvoice2_draws/tt_stream_seed5"
+    ],
+    "corpus": {
+      "wer_percent": {
+        "mean": 0.68,
+        "min": 0.68,
+        "max": 0.68,
+        "n": 5
+      },
+      "sim": {
+        "mean": 95.83,
+        "min": 95.81,
+        "max": 95.87,
+        "n": 5
+      }
+    },
+    "cases": {
+      "zero_shot_121-127105-0003": {
+        "words": 18,
+        "wer_percent": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "n": 5
+        },
+        "sim": {
+          "mean": 94.53,
+          "min": 94.48,
+          "max": 94.61,
+          "n": 5
+        },
+        "hypotheses": [
+          "There was a unanimous groan at this, and much reproach, after which, in his preoccupied way, he explained,",
+          "There was a unanimous groan at this, and much reproach, after which, in his preoccupied way, he explained,",
+          "There was a unanimous groan at this, and much reproach, after which, in his preoccupied way, he explained,",
+          "There was a unanimous groan at this, and much reproach, after which, in his preoccupied way, he explained,",
+          "There was a unanimous groan at this, and much reproach, after which, in his preoccupied way, he explained,"
+        ]
+      },
+      "zero_shot_121-127105-0015": {
+        "words": 10,
+        "wer_percent": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "n": 5
+        },
+        "sim": {
+          "mean": 93.4,
+          "min": 93.28,
+          "max": 93.59,
+          "n": 5
+        },
+        "hypotheses": [
+          "He quitted the fire and dropped back into his chair.",
+          "He quitted the fire and dropped back into his chair.",
+          "He quitted the fire and dropped back into his chair.",
+          "He quitted the fire and dropped back into his chair.",
+          "He quitted the fire and dropped back into his chair."
+        ]
+      },
+      "zero_shot_121-127105-0024": {
+        "words": 48,
+        "wer_percent": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "n": 5
+        },
+        "sim": {
+          "mean": 93.84,
+          "min": 93.82,
+          "max": 93.87,
+          "n": 5
+        },
+        "hypotheses": [
+          "poor douglas before his death when it was in sight committed to me the manuscript that reached him on the third of these days and that on the same spot with immense effect he began to read to our hushed little circle on the night of the fourth",
+          "poor douglas before his death when it was in sight committed to me the manuscript that reached him on the third of these days and that on the same spot with immense effect he began to read to our hushed little circle on the night of the fourth",
+          "poor douglas before his death when it was in sight committed to me the manuscript that reached him on the third of these days and that on the same spot with immense effect he began to read to our hushed little circle on the night of the fourth",
+          "poor douglas before his death when it was in sight committed to me the manuscript that reached him on the third of these days and that on the same spot with immense effect he began to read to our hushed little circle on the night of the fourth",
+          "poor douglas before his death when it was in sight committed to me the manuscript that reached him on the third of these days and that on the same spot with immense effect he began to read to our hushed little circle on the night of the fourth"
+        ]
+      },
+      "zero_shot_260-123286-0014": {
+        "words": 7,
+        "wer_percent": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "n": 5
+        },
+        "sim": {
+          "mean": 96.42,
+          "min": 96.38,
+          "max": 96.52,
+          "n": 5
+        },
+        "hypotheses": [
+          "Truly, this sea is of infinite width.",
+          "Truly, this sea is of infinite width.",
+          "Truly, this sea is of infinite width.",
+          "Truly, this sea is of infinite width.",
+          "Truly, this sea is of infinite width."
+        ]
+      },
+      "zero_shot_260-123440-0002": {
+        "words": 44,
+        "wer_percent": {
+          "mean": 2.27,
+          "min": 2.27,
+          "max": 2.27,
+          "n": 5
+        },
+        "sim": {
+          "mean": 98.47,
+          "min": 98.42,
+          "max": 98.5,
+          "n": 5
+        },
+        "hypotheses": [
+          "It was the white Rathor returning, splendidly dressed, with a pair of white kid gloves in one hand and a large fan in the other. He came trotting along in a great hurry, muttering to himself as he came, Oh, the Duchess! The Duchess!",
+          "It was the white Rathor returning, splendidly dressed, with a pair of white kid gloves in one hand and a large fan in the other. He came trotting along in a great hurry, muttering to himself as he came, Oh, the Duchess! The Duchess!",
+          "It was the white Rathor returning, splendidly dressed, with a pair of white kid gloves in one hand and a large fan in the other. He came trotting along in a great hurry, muttering to himself as he came, Oh, the Duchess! The Duchess!",
+          "It was the white Rathor returning, splendidly dressed, with a pair of white kid gloves in one hand and a large fan in the other. He came trotting along in a great hurry, muttering to himself as he came, Oh, the Duchess! The Duchess!",
+          "It was the white Ratha returning, splendidly dressed, with a pair of white kid gloves in one hand and a large fan in the other. He came trotting along in a great hurry, muttering to himself as he came, Oh, the Duchess! The Duchess!"
+        ]
+      },
+      "zero_shot_260-123440-0010": {
+        "words": 20,
+        "wer_percent": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "n": 5
+        },
+        "sim": {
+          "mean": 98.32,
+          "min": 98.29,
+          "max": 98.37,
+          "n": 5
+        },
+        "hypotheses": [
+          "How cheerfully he seems to grin, how neatly spread his claws, and welcome little fishes in, with gently smiling jaws.",
+          "How cheerfully he seems to grin, how neatly spread his claws, and welcome little fishes in, with gently smiling jaws.",
+          "How cheerfully he seems to grin, how neatly spread his claws, and welcome little fishes in, with gently smiling jaws.",
+          "How cheerfully he seems to grin, how neatly spread his claws, and welcome little fishes in, with gently smiling jaws.",
+          "How cheerfully he seems to grin, how neatly spread his claws, and welcome little fishes in, with gently smiling jaws."
+        ]
+      }
+    }
+  },
+  "reference streaming": {
+    "draws": [
+      "/home/user/data/cosyvoice2_draws/ref_stream_seed1",
+      "/home/user/data/cosyvoice2_draws/ref_stream_seed2",
+      "/home/user/data/cosyvoice2_draws/ref_stream_seed3",
+      "/home/user/data/cosyvoice2_draws/ref_stream_seed4",
+      "/home/user/data/cosyvoice2_draws/ref_stream_seed5"
+    ],
+    "corpus": {
+      "wer_percent": {
+        "mean": 0.68,
+        "min": 0.68,
+        "max": 0.68,
+        "n": 5
+      },
+      "sim": {
+        "mean": 95.89,
+        "min": 95.87,
+        "max": 95.91,
+        "n": 5
+      }
+    },
+    "cases": {
+      "zero_shot_121-127105-0003": {
+        "words": 18,
+        "wer_percent": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "n": 5
+        },
+        "sim": {
+          "mean": 95.11,
+          "min": 95.08,
+          "max": 95.14,
+          "n": 5
+        },
+        "hypotheses": [
+          "There was a unanimous groan at this, and much reproach, after which, in his preoccupied way, he explained,",
+          "There was a unanimous groan at this, and much reproach, after which, in his preoccupied way, he explained,",
+          "There was a unanimous groan at this, and much reproach, after which, in his preoccupied way, he explained,",
+          "There was a unanimous groan at this, and much reproach, after which, in his preoccupied way, he explained,",
+          "There was a unanimous groan at this, and much reproach, after which, in his preoccupied way, he explained,"
+        ]
+      },
+      "zero_shot_121-127105-0015": {
+        "words": 10,
+        "wer_percent": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "n": 5
+        },
+        "sim": {
+          "mean": 93.72,
+          "min": 93.67,
+          "max": 93.76,
+          "n": 5
+        },
+        "hypotheses": [
+          "He quitted the fire and dropped back into his chair.",
+          "He quitted the fire and dropped back into his chair.",
+          "He quitted the fire and dropped back into his chair.",
+          "He quitted the fire and dropped back into his chair.",
+          "He quitted the fire and dropped back into his chair."
+        ]
+      },
+      "zero_shot_121-127105-0024": {
+        "words": 48,
+        "wer_percent": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "n": 5
+        },
+        "sim": {
+          "mean": 93.39,
+          "min": 93.38,
+          "max": 93.4,
+          "n": 5
+        },
+        "hypotheses": [
+          "poor douglas before his death when it was in sight committed to me the manuscript that reached him on the third of these days and that on the same spot with immense effect he began to read to our hushed little circle on the night of the fourth",
+          "poor douglas before his death when it was in sight committed to me the manuscript that reached him on the third of these days and that on the same spot with immense effect he began to read to our hushed little circle on the night of the fourth",
+          "poor douglas before his death when it was in sight committed to me the manuscript that reached him on the third of these days and that on the same spot with immense effect he began to read to our hushed little circle on the night of the fourth",
+          "poor douglas before his death when it was in sight committed to me the manuscript that reached him on the third of these days and that on the same spot with immense effect he began to read to our hushed little circle on the night of the fourth",
+          "poor douglas before his death when it was in sight committed to me the manuscript that reached him on the third of these days and that on the same spot with immense effect he began to read to our hushed little circle on the night of the fourth"
+        ]
+      },
+      "zero_shot_260-123286-0014": {
+        "words": 7,
+        "wer_percent": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "n": 5
+        },
+        "sim": {
+          "mean": 96.1,
+          "min": 96.07,
+          "max": 96.13,
+          "n": 5
+        },
+        "hypotheses": [
+          "Truly, this sea is of infinite width.",
+          "Truly, this sea is of infinite width.",
+          "Truly, this sea is of infinite width.",
+          "Truly, this sea is of infinite width.",
+          "Truly, this sea is of infinite width."
+        ]
+      },
+      "zero_shot_260-123440-0002": {
+        "words": 44,
+        "wer_percent": {
+          "mean": 2.27,
+          "min": 2.27,
+          "max": 2.27,
+          "n": 5
+        },
+        "sim": {
+          "mean": 98.6,
+          "min": 98.59,
+          "max": 98.61,
+          "n": 5
+        },
+        "hypotheses": [
+          "It was the white Rathor returning, splendidly dressed, with a pair of white kid gloves in one hand and a large fan in the other. He came trotting along in a great hurry, muttering to himself as he came, Oh, the Duchess! The Duchess!",
+          "It was the white Rathor returning, splendidly dressed, with a pair of white kid gloves in one hand and a large fan in the other. He came trotting along in a great hurry, muttering to himself as he came, Oh, the Duchess! The Duchess!",
+          "It was the white Rathor returning, splendidly dressed, with a pair of white kid gloves in one hand and a large fan in the other. He came trotting along in a great hurry, muttering to himself as he came, Oh, the Duchess! The Duchess!",
+          "It was the white Rathor returning, splendidly dressed, with a pair of white kid gloves in one hand and a large fan in the other. He came trotting along in a great hurry, muttering to himself as he came, Oh, the Duchess! The Duchess!",
+          "It was the white Rathor returning, splendidly dressed, with a pair of white kid gloves in one hand and a large fan in the other. He came trotting along in a great hurry, muttering to himself as he came, Oh, the Duchess! The Duchess!"
+        ]
+      },
+      "zero_shot_260-123440-0010": {
+        "words": 20,
+        "wer_percent": {
+          "mean": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "n": 5
+        },
+        "sim": {
+          "mean": 98.44,
+          "min": 98.39,
+          "max": 98.47,
+          "n": 5
+        },
+        "hypotheses": [
+          "How cheerfully he seems to grin, how neatly spread his claws, and welcome little fishes in, with gently smiling jaws.",
+          "How cheerfully he seems to grin, how neatly spread his claws, and welcome little fishes in, with gently smiling jaws.",
+          "How cheerfully he seems to grin, how neatly spread his claws, and welcome little fishes in, with gently smiling jaws.",
+          "How cheerfully he seems to grin, how neatly spread his claws, and welcome little fishes in, with gently smiling jaws.",
+          "How cheerfully he seems to grin, how neatly spread his claws, and welcome little fishes in, with gently smiling jaws."
+        ]
+      }
+    }
+  }
+}

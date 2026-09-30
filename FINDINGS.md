@@ -525,7 +525,7 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
 - **Recorded as `Misses()`** in `tests/perf/gates.py`: `ttfp_ms` at 1470 ± 15 %, `rtf_streaming` at 1.09 ± 20 %.
   No device test enforces them yet.
 
-### B28 — Streaming WER 1.36 %: the final HiFT call's end padding silences the last ~25 ms, and Whisper adds "you" (confirmed, 09-30). Status: open; fix proposed, not built
+### B28 — Streaming WER 1.36 %: the final HiFT call's end padding silences the last ~25 ms, and Whisper adds "you" (confirmed, 09-30). Status: **fixed, `ed1c3ad1c5`** (B29)
 - **The flip:** stage A (R3) and R5's live audio both end 260-123440-0010 in "... gently smiling jaws you" (WER 5.00 % there; corpus 0.68 → 1.36 %). Upstream's streaming of the same tokens and our Stage 1 don't. `scripts/2026-09-30/`.
 - **Not lengths:** all six utterances match upstream's streamed audio sample for sample in length, whole and per
   chunk. The "new frames only" slicing and the trim are exact.
@@ -550,6 +550,53 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
   - But the silence under the crossfade degrades the final seam: PCC 0.9923–0.9997, five of six below the gate's 0.998. A 13-token final chunk's body falls to 0.978, and corpus SIM to 95.80.
   - That it removes "you" as well confirms the tail as the trigger.
 - **Proposed** (not built; the user's call): masked end padding in HiFT, i.e. activations beyond the valid length zeroed after every layer: upstream's zero padding at the bucket geometry. It would fix the Stage 1 tails as well. It needs a gate: in the mechanism test, the final chunk's last 20 ms within 3 dB of upstream's (padded misses by 15–79 dB, exact is within 1.3), with no absolute floor.
+
+### B29 — HiFT's padded calls masked: they compute upstream's call at the real length (confirmed, 09-30). Status: **built, `ed1c3ad1c5`**
+- **Every padding site checked against upstream's code** (`tt/hifigan/valid_length.py`, D42):
+  - zero-padded convs: masks after each conv and each stage's sum;
+  - F0 zeroed past the end, which keeps SineGen2's interpolated phase flat as upstream's clamping does;
+  - `torch.stft`'s reflect centering: the source's 8 samples after the end are reflected;
+  - the iSTFT's window normalization: the last 3 samples are rescaled;
+  - ReflectionPad1d((1, 0)) pads the start only, so it is untouched.
+- **The host proof, with the same F0:** masked equals the real length to ≤ 1.2e-6 (8 pairs). Each rule matters:
+  2.4e-5 to 4.7e-2 without it.
+- **The F0 predictor alone** rounds differently at another length (≤ 7e-3 Hz). SineGen2 integrates it over the call,
+  so end to end the rounding grows to ~1e-3; hence the two-part test.
+- **On the device, against the exact-length call:** last 20 ms max |diff| ≤ 4.9e-4, PCC 0.9987–0.9999; whole PCC
+  0.99983–1.0 (six streaming final calls, four Stage 1 calls, same and own F0). The whole-utterance max |diff| up to
+  3.6e-2 is the device phase's geometry rounding.
+- **D41's gate** fails on the old padding (15–79 dB under) and passes on the fix (0.2–0.8 dB): Stage 1 against
+  torch, streaming against upstream.
+- **Stage A's final chunks:** the last 0.4 s's difference is 21–27 dB below the signal; PCC before it
+  0.99921–0.99979.
+  - 121-127105-0015's whole final chunk is 0.9970 (exact length 0.9975): the port's floor at −71 dBFS. Not gated.
+- **The "you" clip, 11 draws:** 0 end in "you", 0 word errors, endings within 0.2–0.6 dB of upstream's.
+- **Costs:**
+  - ~80 elementwise masks and a host round trip of the source per padded call;
+  - 3,222 kernels recompiled once (the new allocations);
+  - the final call's HiFT 0.140 against 0.120 s, measured under CPU load. The clean figure comes with the streaming
+    re-measure.
+
+### B30 — WER and similarity over five noise draws: steady, TT and reference (confirmed, 09-30). Status: **built, `5317572d0c`**
+- **Protocol (D43):** seeds 1–5 for the vocoder's noise, the tokens fixed by the LLM seed.
+  - The tokens are identical across every draw and equal to the undrawn runs': TT's the Stage 1 demo's, the
+    reference's its 09-29 run.
+  - The reference is re-seeded before each vocoder call and restored after, so its later segments sample the same
+    tokens.
+- **Corpus WER 0.68 % in every draw of all four groups** (TT and reference, Stage 1 and streaming). No utterance's WER
+  moves between draws.
+  - TT's one error (260-123440-0002, 1 word in 44) is the one upstream's streaming makes on the same tokens.
+  - The reference's Stage 1 error is on its own tokens of 260-123286-0014.
+- **Similarity, mean (range):**
+
+  | | Stage 1 | streaming |
+  |---|---|---|
+  | TT | 95.88 (95.84–95.92) | 95.83 (95.81–95.87) |
+  | reference / upstream | 95.22 (95.21–95.24) | 95.89 (95.87–95.91) |
+
+  Per utterance it varies by at most 0.3.
+- **Before the fix, the streamed clip was a coin flip:** 5 of 11 draws ended in "you" (B28). On the masked HiFT, 0
+  of 11 do, and the five-draw corpus figures above hold.
 
 ## O: older open items
 

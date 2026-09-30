@@ -1,4 +1,4 @@
-# 2026-09-30: the "you" clip (B28; not part of the PR)
+# 2026-09-30: the "you" clip (B28), its fix (B29) and the noise draws (B30); not part of the PR
 
 Stage A's streaming WER was 0.68 % on 09-28 and 1.36 % on 09-29: Whisper appends "you" to 260-123440-0010. The user
 asked where the rebuild differs before R6, with no PR code changed until that is known. Nothing here changes the PR:
@@ -16,3 +16,12 @@ The spec-against-today table is `../../reviews/2026-09-30_rebuild_spec_vs_today.
 | `you_mech_metrics.py` (+ `you_mech_metrics.md`) | no | The mechanism outputs of all three variants against upstream: seam, chunk body, tail, last 20 ms. |
 | `you_score_sweep.py`, `you_sweep_scores.jsonl`, `front_sweep_scores.jsonl` | no (reference venv) | Whisper on the sweeps and the mechanism outputs. Padded: "you" 5 of 11, first token within ±0.16 nats of a tie; exact: 0 of 11, 0.78–1.04 nats clear. Mechanism: padded says "you" (0.55 nats lowercase), exact doesn't (0.575 capitalized, upstream 0.541). |
 | `score_padded.log`, `score_exact.log`, `score_front.log` | no (reference venv) | `eval_wer_sim.py` on the three corpus runs against upstream's streaming. |
+| `mask_bcast_probe.py` (+ `.log`) | yes | The fix's primitive: a `[1, L, C]` fp32 tensor times a `[1, L, 1]` 0/1 mask (and `[1, 9, T]` times `[1, 1, T]`) broadcasts on the device, bit-exact against torch. |
+| `phase_gate_before.sh` (+ `.log`, `gate_before_results.log`) | yes | D41's gates on the old padding: both fail. Stage 1: the last 20 ms 15–78 dB under the reference; streaming: 15–79 dB under upstream, 0015's final chunk PCC 0.965. The host proof passed (16). |
+| `phase_gate_after.sh` (+ `.log`) | yes | The same on the masked HiFT: the Stage 1 gate passes (0.4–0.8 dB), stage A's ends pass (0.2–0.5 dB), stage B passes; the whole-chunk PCC of 0015's quiet final chunk (0.99696) was the one failure, which led to D41's PCC window. The HiFT/F0/STFT/iSTFT/SineGen2/seam tests: 76 passed, 0 compiled. |
+| `masked_vs_exact.py` (+ `masked_vs_exact.json`, table in `phase_verify_fix.log`) | yes | The fix against its reference: the call at its exact length (5,429 kernels for ten lengths). Last 20 ms max \|diff\| ≤ 4.9e-4, PCC 0.9987–0.9999; whole PCC 0.99983–1.0; the final chunk against upstream, masked / exact, 0.99696 / 0.99749 on 0015. |
+| `phase_verify_fix.sh` (+ `.log`) | yes, then reference venv | masked_vs_exact, then the "you" clip's regression test: the device renders 11 draws (endings within 0.2–0.6 dB of upstream's), Whisper finds no "you" and no error in any. |
+| `phase_gate_final.sh` (+ `.log`) | yes | Stage A with D41's final criteria (the last 0.4 s's difference 21–27 dB below the signal; PCC before it 0.99921–0.99979) and the "you" device half at 3 dB: 2 passed. |
+| `phase_ref_draws.sh` (+ `.log`) | no (reference venv) | D43's reference draws, seeds 1–5: `run_reference.py --noise-seed` and `streaming_reference.py --noise-seed`; the Stage 1 tokens identical to the 09-29 reference run in every draw. |
+| `phase_tt_draws.sh` (+ `.log`, `draws.json`) | yes, then reference venv | D43's TT draws (`scripts/noise_draws.py`, 0 kernels compiled, the demo's tokens in every draw) and `eval_draws.py` over all four groups: corpus WER 0.68 % in every draw of every group. |
+

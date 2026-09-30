@@ -1,0 +1,20 @@
+2026-09-30 05:59:01 started gate_final (log /home/user/data/cosyvoice2_runs/0930/gate_final.log)
+2026-09-30 06:02:02 gate_final exited 0
+| zero_shot_121-127105-0003 | 3 (final) | 182 | 31 | 0.0137 | 0.0000 | 0.99963 | 0.99983 |; last 20 ms: -64.6 dBFS, upstream -64.9; last 0.4 s: signal -71.3, difference -98.5 dBFS
+| zero_shot_121-127105-0015 | 2 (final) | 82 | 13 | 0.0085 | 0.0000 | 0.99921 | 0.99982 |; last 20 ms: -88.4 dBFS, upstream -88.8; last 0.4 s: signal -70.9, difference -92.1 dBFS
+| zero_shot_121-127105-0024 | 4 (final) | 282 | 65 | 0.0117 | 0.0000 | 0.99931 | 0.99948 |; last 20 ms: -67.7 dBFS, upstream -68.0; last 0.4 s: signal -67.8, difference -93.6 dBFS
+| zero_shot_260-123286-0014 | 1 (final) | 25 | 50 | 0.0095 | 0.0000 | 0.99979 | 0.99985 |; last 20 ms: -63.2 dBFS, upstream -63.4; last 0.4 s: signal -47.7, difference -74.8 dBFS
+| zero_shot_260-123440-0002 | 4 (final) | 275 | 42 | 0.0150 | 0.0000 | 0.99979 | 0.99985 |; last 20 ms: -81.1 dBFS, upstream -81.6; last 0.4 s: signal -36.7, difference -61.0 dBFS
+| zero_shot_260-123440-0010 | 3 (final) | 175 | 27 | 0.0098 | 0.0000 | 0.99970 | 0.99962 |; last 20 ms: -51.7 dBFS, upstream -51.9; last 0.4 s: signal -52.9, difference -80.1 dBFS
+  zero_shot_260-123440-0010 seed1987: last 20 ms -51.6 dBFS, upstream's -51.9
+  zero_shot_260-123440-0010 seed1: last 20 ms -51.3 dBFS, upstream's -51.9
+  zero_shot_260-123440-0010 seed2: last 20 ms -51.6 dBFS, upstream's -51.9
+  zero_shot_260-123440-0010 seed3: last 20 ms -51.6 dBFS, upstream's -51.9
+  zero_shot_260-123440-0010 seed4: last 20 ms -51.6 dBFS, upstream's -51.9
+  zero_shot_260-123440-0010 seed5: last 20 ms -51.7 dBFS, upstream's -51.9
+  zero_shot_260-123440-0010 seed6: last 20 ms -51.5 dBFS, upstream's -51.9
+  zero_shot_260-123440-0010 seed7: last 20 ms -51.5 dBFS, upstream's -51.9
+  zero_shot_260-123440-0010 seed8: last 20 ms -51.5 dBFS, upstream's -51.9
+  zero_shot_260-123440-0010 seed9: last 20 ms -51.6 dBFS, upstream's -51.9
+  zero_shot_260-123440-0010 upstream_noise: last 20 ms -51.6 dBFS, upstream's -51.9
+================== 2 passed, 7 warnings in 162.07s (0:02:42) ===================
