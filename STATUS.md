@@ -10,8 +10,9 @@ items, X = fixed. Older narrative lives in `history/`.
   WER regression is found and fixed: HiFT's padded calls are masked (B29). Every gate was re-run on the fixed code
   (B31).
 - **PR #56651** (`bringup/cosyvoice2-istft`), `models/experimental/cosyvoice2/`.
-  - The local HEAD is `d2a2439e05`, and all of it is on the fork's `backup/2026-09-29-pr`.
-  - GitHub's `bringup/cosyvoice2-istft` is still at `7bd094cc3e`. The user pushes it (D34).
+  - The local HEAD is `f899ad51a2`, and all of it is on the fork's `backup/2026-09-29-pr`.
+  - GitHub's `bringup/cosyvoice2-istft` is at `d2a2439e05`, fast-forwarded from the backup on 09-30 under the
+    user's one-time authorization. The user pushes it (D34).
 - **The PR commits of 09-29 and 09-30**, in order:
 
   | commit | what | record |
@@ -29,10 +30,11 @@ items, X = fixed. Older narrative lives in `history/`.
   | `5317572d0c` | WER/SIM over five noise draws, TT and reference, Stage 1 and streaming | B30, D43 |
   | `ba56920c77` | the Stage 1 and streaming gates re-run on the masked HiFT | B31 |
   | `d2a2439e05` | R6: the streaming figures enforced by a device test; start-up and the cold first request | B32 |
+  | `f899ad51a2` | stage A's last-0.4 s criterion at 15 dB, from 36 final chunks | B34 |
 
 - **Notes commits:** `9db66f07d0`, `2f0b029596`, `b7106ce85d`, `d0f5cb94fe`, `50857575e6`, `7c90cc8e67`,
-  `8401e5b6b0`, and the one carrying this file. All are on `backup/2026-09-29-notes`; the user pushes
-  `notes/cosyvoice2`.
+  `8401e5b6b0`, `3b111b1688`, `cb60112fbe`, and the one carrying this file. All are on `backup/2026-09-29-notes`.
+  GitHub's `notes/cosyvoice2` is at `3b111b1688` (the same one-time push); the user pushes it.
 
 ## The figures (masked HiFT, 09-30)
 
@@ -72,9 +74,11 @@ items, X = fixed. Older narrative lives in `history/`.
 
 1. **Pushing:** `bringup/cosyvoice2-istft` and `notes/cosyvoice2`, from the backup branches (D34).
 2. **D40, the streaming guard:** kept (user, 09-30; D44).
-3. **D41's additions** (Claude): the stage A end also gates the last 0.4 s's difference, 20 dB below the signal
-   with no floor, and keeps the final chunk's PCC before those 0.4 s. On a quiet ending, PCC measures the port's own
-   floor.
+3. **D41's additions** (Claude): the stage A end also gates the last 0.4 s's difference, now 15 dB below the signal
+   with no floor (B34: 19.5–27.5 dB over 36 final chunks; 20 dB was one draw from failing), and keeps the final
+   chunk's PCC before those 0.4 s.
+   - Offered, not taken: a last-0.1 s criterion at 12 dB would separate the fix from the old padding by 10 dB each
+     way (B34).
 4. **The #36487 comment** (`drafts/2026-09-29_comment_36487_prepare_conv_weights_dram_slicing.md`) is drafted, not
    posted.
 

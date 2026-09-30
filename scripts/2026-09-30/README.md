@@ -28,4 +28,6 @@ The spec-against-today table is `../../reviews/2026-09-30_rebuild_spec_vs_today.
 | `phase_r6.sh` (+ `.log`) | yes | B32. The streaming perf test (1,469 ms, RTF 1.110, in band), start-up cold and warm, the cold first request on an empty and on a filled kernel cache. |
 | `startup_measure.py` (+ `startup_cold.json`, `startup_warm.json`) | yes | B32. Construction and both warm-ups timed in a fresh process, kernels counted, the conv checks' and weight preparation's share: 1,885 + 779 s cold, 188 + 150 s warm. |
 | `first_request_empty_cache_timings.md`, `first_request_filled_cache_timings.md` | yes | B32. The non-streaming cold first request: RTF 66.1 on an empty kernel cache, 2.04 on one already holding its binaries. |
-
+| `tail_margin.py` (+ `tail_margin.json`, `tail_margin_exact.json`, `tail_margin_rows.log`) | yes | B34. Stage A's mechanism over six references (the suite's and D43's five draws), 36 final chunks, three variants of the final call: masked (as built), silence (the old padding, rebuilt by a subclass) and exact (`--variants exact`: unpadded, compiled per length). Per chunk: the last 20 ms, the last 0.4 s's signal, difference and margin, the body's margin, and the last 0.4 s in 20 ms frames. |
+| `tail_margin_analysis.py` (+ `tail_margin_analysis.md`) | no | B34's figures: masked 19.5–27.5 dB, exact 19.9–29.5, silence −1.9 to 24.8; 0015's burst frame sets its margin; the padding's reach, 120–200 ms; the 0.2 s and 0.1 s windows. |
+| `phase_tail15.sh` (+ `.log`) | yes | Stage A at the new 15 dB: 2 passed (`f899ad51a2`). |

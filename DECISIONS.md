@@ -296,8 +296,11 @@ This session stops after R5, with the streaming numbers. R1 must land before R4.
 - **Shown both ways:** it fails on the old padding (`scripts/2026-09-30/phase_gate_before.sh`) and passes on the fix
   (`phase_gate_after.sh`, `phase_gate_final.sh`).
 - **Also in stage A (Claude, 09-30; the user can reverse it):**
-  - D38's other criterion without its floor: the last 0.4 s's difference at least 20 dB below the signal (measured
-    21–27 dB);
+  - D38's other criterion without its floor: the last 0.4 s's difference below the signal, at least **15 dB** (09-30,
+    B34). It was 20 dB, from the six final chunks of one draw (21–27 dB). The user asked for real headroom. Over 36
+    final chunks (six noise draws) it measures 19.5–27.5 dB; the lowest is 121-127105-0015, and the port's own error
+    sets it there (the unpadded call scores the same). 15 dB is 4.5 dB below that lowest. The old padding still
+    fails the end gate on every utterance through the 20 ms level check; this criterion alone fails it on 4 of 6;
   - the final chunk's PCC stays gated before those 0.4 s. On a chunk ending near −71 dBFS, PCC measures the port's
     own floor: 0.9975 even at the exact length.
 - **D38's −50 dBFS floor** was set by Claude on 09-29 from the first measurement. It passed 260-123440-0010's ending

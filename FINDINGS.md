@@ -655,6 +655,46 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
   power-down; the steady counter through 09-29's idle gaps argues against that.
 - **No job was affected.** Every 09-30 device job ran clean after it. Related to O2 only as another infra event.
 
+### B34 — Stage A's last-0.4 s criterion was one draw from failing at 20 dB; the port's error on one burst sets it; now 15 dB (confirmed, 09-30). Status: **built, `f899ad51a2`**
+- **Asked** (user, 09-30): the criterion measured 21–27 dB against 20, about 1 dB of margin. What limits the worst
+  case? Set the threshold with real headroom from the measured distribution, or justify 20. It should not be one
+  noisy run away from failing.
+- **Measured.** `scripts/2026-09-30/tail_margin.py` runs stage A's mechanism (upstream's mel, F0 and noise per HiFT
+  call) over six references: the suite's, and D43's five streaming noise draws. That is 36 final chunks per variant
+  of the final call. The figures are in `tail_margin_analysis.py` → `tail_margin_analysis.md`.
+
+  | variant | margin over the last 0.4 s |
+  |---|---|
+  | masked (as built) | 19.5–27.5 dB, median 26.4 |
+  | exact length, unpadded and compiled per length | 19.9–29.5 dB |
+  | silence padding (the code before `ed1c3ad1c5`) | −1.9 to 24.8 dB |
+
+  At 20 dB, one draw already failed: `ref_stream_seed2`'s 121-127105-0015 measured 19.5.
+- **What limits it: 121-127105-0015**, all five lowest (19.5–23.6, mean 21.6 ± 1.5).
+  - Its 13-token final chunk ends near-silent: the last 0.4 s is −71 dBFS. The exception is one 20 ms burst at
+    −58 dBFS, 0.38–0.36 s before the end, which holds 85–87 % of the window's signal energy and 81–94 % of its
+    difference energy.
+  - The window's margin is the burst's own within 1 dB, in every draw (19–24 dB). Quieter frames, some only 13–19 dB
+    above their difference, carry too little energy to move it. The last 40 ms are at 22–24 dB.
+  - The exact-length call scores 19.9–24.0 on the same chunks, with the burst's difference the same within about
+    1 dB. So it is the port's own error on that burst, not the padding or the masking.
+- **Masked against exact, per utterance:** −2.2 to +0.3 dB.
+  - 121-127105-0003 and 260-123440-0010 sit 1–2 dB lower masked. Their body margins move too (26.3 against 30.1,
+    26.1 against 31.2): the bucket's geometry rounds SineGen2's phase differently ("Bucketing"), and the end is not
+    the cause.
+- **Set to 15 dB** in `tests/e2e/test_streaming.py`: 4.5 dB below the lowest of 36, about 4.5 standard deviations
+  below 0015's mean.
+- **What it still catches of the old padding.**
+  - On its own, 4 of the 6 utterances fail it (−1.9 to 10.9 dB).
+  - 260-123286-0014 (17.8) and 260-123440-0002 (23.4–24.8) pass it. The padding's effect reaches back 120–200 ms,
+    and louder speech before that dominates their last 0.4 s.
+  - Both fail the 20 ms level check, by 75 and 32 dB, so the end gate as a whole fails the old padding on every
+    utterance.
+- **Not taken: the last 0.1 s.** Over the last 0.1 s the masked call scores 22.0–29.0 dB and the old padding −3.1 to
+  0.4 dB, in all 36. A 12 dB threshold there would separate the two with 10 dB each way, where the 0.4 s window
+  cannot separate them at all. Offered to the user (D41).
+- **Verified:** stage A passes at 15 dB (`scripts/2026-09-30/phase_tail15.sh`).
+
 ## O: older open items
 
 - **O1 — HiFT dtype crash.** Status: **fixed `544d588018`** (09-27). `TtHiFTDecoder.decode` converts `mel` and
