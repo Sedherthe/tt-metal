@@ -1,0 +1,55 @@
+2026-09-30 15:14:47 started merge_check (log /home/user/data/cosyvoice2_runs/0930/merge_check.log)
+2026-09-30 15:15:32 merge_check exited 0
+{"stream_256": {"t_len": 512, "streaming": true, "one_step_dphi": {"max_abs_diff": 0.0, "pcc": 1.0, "identical": true}, "ten_step_solve": {"max_abs_diff": 0.0, "pcc": 0.9999999999999999, "identical": true}}}
+{"stream_384": {"t_len": 768, "streaming": true, "one_step_dphi": {"max_abs_diff": 0.0, "pcc": 1.0, "identical": true}, "ten_step_solve": {"max_abs_diff": 0.0, "pcc": 1.0, "identical": true}}}
+{"stream_512": {"t_len": 1024, "streaming": true, "one_step_dphi": {"max_abs_diff": 0.0, "pcc": 1.0, "identical": true}, "ten_step_solve": {"max_abs_diff": 0.0, "pcc": 1.0, "identical": true}}}
+{"final_320": {"t_len": 640, "streaming": false, "one_step_dphi": {"max_abs_diff": 0.0, "pcc": 1.0, "identical": true}, "ten_step_solve": {"max_abs_diff": 0.0, "pcc": 1.0, "identical": true}}}
+2026-09-30 15:15:32 started merge_time (log /home/user/data/cosyvoice2_runs/0930/merge_time.log)
+2026-09-30 15:16:32 merge_time exited 0
+2026-09-30 15:16:32 started merge_tracy (log /home/user/data/cosyvoice2_runs/0930/merge_tracy.log)
+2026-09-30 15:18:18 merge_tracy exited 1
+{
+ "host_ms_between_signposts": 67.72,
+ "ops": 1102,
+ "ops_with_device_data": 1102,
+ "ops_missing_device_data": 0,
+ "ops_cached": 1102,
+ "device_span_ms": 64.5,
+ "device_fw_ms": 33.17,
+ "device_kernel_ms": 29.95,
+ "device_gaps_ms": 31.34,
+ "ns_per_cycle": 1.0
+}
+
+| op | count | device kernel ms | device firmware ms | cores |
+2026-09-30 15:18:18 started merge_draws (log /home/user/data/cosyvoice2_runs/0930/merge_draws.log)
+2026-09-30 15:47:34 merge_draws exited 0
+stage1: 30 of 30 wavs identical to D43's draws (the committed merge)
+stream: 30 of 30 wavs identical to D43's draws (the committed merge)
+2026-09-30 15:47:34 started score_merge (log /home/user/data/cosyvoice2_runs/0930/score_merge.log)
+2026-09-30 15:47:34 started merge_suite (log /home/user/data/cosyvoice2_runs/0930/merge_suite.log)
+2026-09-30 16:34:21 merge_suite exited 0
+  capture failed -> eager fallback PCC 0.9993872375555415
+models/experimental/cosyvoice2/tests/pcc/test_flow_decoder.py::test_device_cfm_traces_pass_allocation_tracker SKIPPED
+  the no-crossfade control failed the seam gate at 9 seams, passed it at: []
+models/experimental/cosyvoice2/tests/reference/test_reference_env.py::test_fp32_shim_loads_the_backbone_in_fp32 SKIPPED
+models/experimental/cosyvoice2/tests/reference/test_reference_env.py::test_shimmed_decode_matches_a_no_cache_forward SKIPPED
+models/experimental/cosyvoice2/tests/reference/test_you_clip.py::test_no_draw_of_the_you_clip_ends_in_you SKIPPED
+SKIPPED [1] models/experimental/cosyvoice2/tests/pcc/test_flow_decoder.py:396: opt-in: set COSYVOICE2_RUN_TRACE_ALLOC_TRACKER=1 and run this test in its own pytest invocation
+SKIPPED [2] models/experimental/cosyvoice2/tests/reference/test_reference_env.py:60: reference venv only (No module named 'torchaudio')
+SKIPPED [1] models/experimental/cosyvoice2/tests/reference/test_you_clip.py:38: set COSYVOICE2_YOU_OUT (the device half's output)
+==== 229 passed, 4 skipped, 2 deselected, 11 warnings in 2793.07s (0:46:33) ====
+2026-09-30 16:34:21 score_merge exited 0
+WER % and SIM, mean (range) over the draws:
+
+| case | words | WER TT Stage 1, merged by nlp_concat_heads | WER TT Stage 1, D43 (committed merge) | SIM TT Stage 1, merged by nlp_concat_heads | SIM TT Stage 1, D43 (committed merge) |
+|---|---|---|---|---|---|
+| zero_shot_121-127105-0003 | 18 | 0.00 (0.00-0.00) | 0.00 (0.00-0.00) | 94.75 (94.68-94.87) | 94.75 (94.68-94.87) |
+| zero_shot_121-127105-0015 | 10 | 0.00 (0.00-0.00) | 0.00 (0.00-0.00) | 94.68 (94.57-94.77) | 94.68 (94.57-94.77) |
+| zero_shot_121-127105-0024 | 48 | 0.00 (0.00-0.00) | 0.00 (0.00-0.00) | 93.51 (93.47-93.54) | 93.51 (93.47-93.54) |
+| zero_shot_260-123286-0014 | 7 | 0.00 (0.00-0.00) | 0.00 (0.00-0.00) | 95.91 (95.88-95.92) | 95.91 (95.88-95.92) |
+| zero_shot_260-123440-0002 | 44 | 2.27 (2.27-2.27) | 2.27 (2.27-2.27) | 98.29 (98.27-98.33) | 98.29 (98.27-98.33) |
+| zero_shot_260-123440-0010 | 20 | 0.00 (0.00-0.00) | 0.00 (0.00-0.00) | 98.19 (98.16-98.21) | 98.19 (98.16-98.21) |
+| **corpus** | | **0.68 (0.68-0.68)** | **0.68 (0.68-0.68)** | **95.88 (95.84-95.92)** | **95.88 (95.84-95.92)** |
+
+wrote /home/user/data/cosyvoice2_runs/0930/merge_scores.json

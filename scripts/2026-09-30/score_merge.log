@@ -1,0 +1,90 @@
+[TT Stage 1, merged by nlp_concat_heads] /home/user/data/cosyvoice2_merge/tt_stage1_seed1
+[asr] loading whisper large-v3 (cpu)
+[sim] loading microsoft/wavlm-base-plus-sv (cpu)
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/266 [00:00<?, ?it/s]Loading weights: 100%|██████████| 266/266 [00:00<00:00, 24078.14it/s]
+/home/user/cosyvoice2_ref_env/lib/python3.10/site-packages/torch/nn/functional.py:6409: UserWarning: Support for mismatched key_padding_mask and attn_mask is deprecated. Use same type for both instead.
+  key_padding_mask = _canonical_mask(
+  zero_shot_121-127105-0003          WER   0.00%  SIM  94.73   There was a unanimous groan at this, and much reproach, afte
+  zero_shot_121-127105-0015          WER   0.00%  SIM  94.69   He quitted the fire and dropped back into his chair.
+  zero_shot_121-127105-0024          WER   0.00%  SIM  93.51   poor douglas before his death when it was in sight committed
+  zero_shot_260-123286-0014          WER   0.00%  SIM  95.88   Truly, this sea is of infinite width.
+  zero_shot_260-123440-0002          WER   2.27%  SIM  98.28   It was the white Rathor returning, splendidly dressed, with 
+  zero_shot_260-123440-0010          WER   0.00%  SIM  98.19   How cheerfully he seems to grin, how neatly spread his claws
+[TT Stage 1, merged by nlp_concat_heads] /home/user/data/cosyvoice2_merge/tt_stage1_seed2
+  zero_shot_121-127105-0003          WER   0.00%  SIM  94.68   There was a unanimous groan at this, and much reproach, afte
+  zero_shot_121-127105-0015          WER   0.00%  SIM  94.57   He quitted the fire and dropped back into his chair.
+  zero_shot_121-127105-0024          WER   0.00%  SIM  93.47   poor douglas before his death when it was in sight committed
+  zero_shot_260-123286-0014          WER   0.00%  SIM  95.91   Truly, this sea is of infinite width.
+  zero_shot_260-123440-0002          WER   2.27%  SIM  98.27   It was the white Rathor returning, splendidly dressed, with 
+  zero_shot_260-123440-0010          WER   0.00%  SIM  98.17   How cheerfully he seems to grin, how neatly spread his claws
+[TT Stage 1, merged by nlp_concat_heads] /home/user/data/cosyvoice2_merge/tt_stage1_seed3
+  zero_shot_121-127105-0003          WER   0.00%  SIM  94.71   There was a unanimous groan at this, and much reproach, afte
+  zero_shot_121-127105-0015          WER   0.00%  SIM  94.71   He quitted the fire and dropped back into his chair.
+  zero_shot_121-127105-0024          WER   0.00%  SIM  93.54   poor douglas before his death when it was in sight committed
+  zero_shot_260-123286-0014          WER   0.00%  SIM  95.92   Truly, this sea is of infinite width.
+  zero_shot_260-123440-0002          WER   2.27%  SIM  98.33   It was the white Rathor returning, splendidly dressed, with 
+  zero_shot_260-123440-0010          WER   0.00%  SIM  98.21   How cheerfully he seems to grin, how neatly spread his claws
+[TT Stage 1, merged by nlp_concat_heads] /home/user/data/cosyvoice2_merge/tt_stage1_seed4
+  zero_shot_121-127105-0003          WER   0.00%  SIM  94.74   There was a unanimous groan at this, and much reproach, afte
+  zero_shot_121-127105-0015          WER   0.00%  SIM  94.64   He quitted the fire and dropped back into his chair.
+  zero_shot_121-127105-0024          WER   0.00%  SIM  93.54   poor douglas before his death when it was in sight committed
+  zero_shot_260-123286-0014          WER   0.00%  SIM  95.91   Truly, this sea is of infinite width.
+  zero_shot_260-123440-0002          WER   2.27%  SIM  98.27   It was the white Rathor returning, splendidly dressed, with 
+  zero_shot_260-123440-0010          WER   0.00%  SIM  98.16   How cheerfully he seems to grin, how neatly spread his claws
+[TT Stage 1, merged by nlp_concat_heads] /home/user/data/cosyvoice2_merge/tt_stage1_seed5
+  zero_shot_121-127105-0003          WER   0.00%  SIM  94.87   There was a unanimous groan at this, and much reproach, afte
+  zero_shot_121-127105-0015          WER   0.00%  SIM  94.77   He quitted the fire and dropped back into his chair.
+  zero_shot_121-127105-0024          WER   0.00%  SIM  93.48   poor douglas before his death when it was in sight committed
+  zero_shot_260-123286-0014          WER   0.00%  SIM  95.91   Truly, this sea is of infinite width.
+  zero_shot_260-123440-0002          WER   2.27%  SIM  98.29   It was the white Rathor returning, splendidly dressed, with 
+  zero_shot_260-123440-0010          WER   0.00%  SIM  98.20   How cheerfully he seems to grin, how neatly spread his claws
+[TT Stage 1, D43 (committed merge)] /home/user/data/cosyvoice2_draws/tt_stage1_seed1
+  zero_shot_121-127105-0003          WER   0.00%  SIM  94.73   There was a unanimous groan at this, and much reproach, afte
+  zero_shot_121-127105-0015          WER   0.00%  SIM  94.69   He quitted the fire and dropped back into his chair.
+  zero_shot_121-127105-0024          WER   0.00%  SIM  93.51   poor douglas before his death when it was in sight committed
+  zero_shot_260-123286-0014          WER   0.00%  SIM  95.88   Truly, this sea is of infinite width.
+  zero_shot_260-123440-0002          WER   2.27%  SIM  98.28   It was the white Rathor returning, splendidly dressed, with 
+  zero_shot_260-123440-0010          WER   0.00%  SIM  98.19   How cheerfully he seems to grin, how neatly spread his claws
+[TT Stage 1, D43 (committed merge)] /home/user/data/cosyvoice2_draws/tt_stage1_seed2
+  zero_shot_121-127105-0003          WER   0.00%  SIM  94.68   There was a unanimous groan at this, and much reproach, afte
+  zero_shot_121-127105-0015          WER   0.00%  SIM  94.57   He quitted the fire and dropped back into his chair.
+  zero_shot_121-127105-0024          WER   0.00%  SIM  93.47   poor douglas before his death when it was in sight committed
+  zero_shot_260-123286-0014          WER   0.00%  SIM  95.91   Truly, this sea is of infinite width.
+  zero_shot_260-123440-0002          WER   2.27%  SIM  98.27   It was the white Rathor returning, splendidly dressed, with 
+  zero_shot_260-123440-0010          WER   0.00%  SIM  98.17   How cheerfully he seems to grin, how neatly spread his claws
+[TT Stage 1, D43 (committed merge)] /home/user/data/cosyvoice2_draws/tt_stage1_seed3
+  zero_shot_121-127105-0003          WER   0.00%  SIM  94.71   There was a unanimous groan at this, and much reproach, afte
+  zero_shot_121-127105-0015          WER   0.00%  SIM  94.71   He quitted the fire and dropped back into his chair.
+  zero_shot_121-127105-0024          WER   0.00%  SIM  93.54   poor douglas before his death when it was in sight committed
+  zero_shot_260-123286-0014          WER   0.00%  SIM  95.92   Truly, this sea is of infinite width.
+  zero_shot_260-123440-0002          WER   2.27%  SIM  98.33   It was the white Rathor returning, splendidly dressed, with 
+  zero_shot_260-123440-0010          WER   0.00%  SIM  98.21   How cheerfully he seems to grin, how neatly spread his claws
+[TT Stage 1, D43 (committed merge)] /home/user/data/cosyvoice2_draws/tt_stage1_seed4
+  zero_shot_121-127105-0003          WER   0.00%  SIM  94.74   There was a unanimous groan at this, and much reproach, afte
+  zero_shot_121-127105-0015          WER   0.00%  SIM  94.64   He quitted the fire and dropped back into his chair.
+  zero_shot_121-127105-0024          WER   0.00%  SIM  93.54   poor douglas before his death when it was in sight committed
+  zero_shot_260-123286-0014          WER   0.00%  SIM  95.91   Truly, this sea is of infinite width.
+  zero_shot_260-123440-0002          WER   2.27%  SIM  98.27   It was the white Rathor returning, splendidly dressed, with 
+  zero_shot_260-123440-0010          WER   0.00%  SIM  98.16   How cheerfully he seems to grin, how neatly spread his claws
+[TT Stage 1, D43 (committed merge)] /home/user/data/cosyvoice2_draws/tt_stage1_seed5
+  zero_shot_121-127105-0003          WER   0.00%  SIM  94.87   There was a unanimous groan at this, and much reproach, afte
+  zero_shot_121-127105-0015          WER   0.00%  SIM  94.77   He quitted the fire and dropped back into his chair.
+  zero_shot_121-127105-0024          WER   0.00%  SIM  93.48   poor douglas before his death when it was in sight committed
+  zero_shot_260-123286-0014          WER   0.00%  SIM  95.91   Truly, this sea is of infinite width.
+  zero_shot_260-123440-0002          WER   2.27%  SIM  98.29   It was the white Rathor returning, splendidly dressed, with 
+  zero_shot_260-123440-0010          WER   0.00%  SIM  98.20   How cheerfully he seems to grin, how neatly spread his claws
+
+WER % and SIM, mean (range) over the draws:
+
+| case | words | WER TT Stage 1, merged by nlp_concat_heads | WER TT Stage 1, D43 (committed merge) | SIM TT Stage 1, merged by nlp_concat_heads | SIM TT Stage 1, D43 (committed merge) |
+|---|---|---|---|---|---|
+| zero_shot_121-127105-0003 | 18 | 0.00 (0.00-0.00) | 0.00 (0.00-0.00) | 94.75 (94.68-94.87) | 94.75 (94.68-94.87) |
+| zero_shot_121-127105-0015 | 10 | 0.00 (0.00-0.00) | 0.00 (0.00-0.00) | 94.68 (94.57-94.77) | 94.68 (94.57-94.77) |
+| zero_shot_121-127105-0024 | 48 | 0.00 (0.00-0.00) | 0.00 (0.00-0.00) | 93.51 (93.47-93.54) | 93.51 (93.47-93.54) |
+| zero_shot_260-123286-0014 | 7 | 0.00 (0.00-0.00) | 0.00 (0.00-0.00) | 95.91 (95.88-95.92) | 95.91 (95.88-95.92) |
+| zero_shot_260-123440-0002 | 44 | 2.27 (2.27-2.27) | 2.27 (2.27-2.27) | 98.29 (98.27-98.33) | 98.29 (98.27-98.33) |
+| zero_shot_260-123440-0010 | 20 | 0.00 (0.00-0.00) | 0.00 (0.00-0.00) | 98.19 (98.16-98.21) | 98.19 (98.16-98.21) |
+| **corpus** | | **0.68 (0.68-0.68)** | **0.68 (0.68-0.68)** | **95.88 (95.84-95.92)** | **95.88 (95.84-95.92)** |
+
+wrote /home/user/data/cosyvoice2_runs/0930/merge_scores.json

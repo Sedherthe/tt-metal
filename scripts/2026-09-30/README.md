@@ -43,3 +43,6 @@ The spec-against-today table is `../../reviews/2026-09-30_rebuild_spec_vs_today.
 | `old_padding_plugin.py` | yes (a pytest plugin) | B38: runs the streaming tests with `HiFTStream.step` compiled verbatim from `6a2ab97dde` (silence end padding, no masks, no end gain). |
 | `phase_last100ms.sh` (+ `.log`, `gate_last100ms_results.log`) | yes | B38: stage A with the last-0.1 s check, on the fix (2 passed) and on the old padding (fails; `-vv` for the full list). |
 | `phase_flow_steps_option.sh` (+ `.log`) | yes | B39: `noise_draws.py --flow-steps 5`, seed 1, against the sweep's 5-step draw: 6 of 6 and 6 of 6 wavs identical. |
+| `head_merge_check.py` (+ `merge_check.json`) | yes | B40: the working tree's `TtBasicTransformerBlock.__call__` (the `nlp_concat_heads` merge) against `33aa3601eb`'s, compiled from git, on the same inputs at four geometries: bit-identical. |
+| `phase_head_merge.sh` (+ `.log`, `merge_time.json`, `merge_profile_raw.json`, `score_merge.log`) | yes, then reference venv | B40: the equality check, the step timing and the device profile after the merge, five draws against D43's (60 of 60 wavs identical), their scores, and the suite (229 passed). |
+| `merge_rtf.py` (+ `merge_rtf.md`) | no | B40: Stage 1 and streaming RTF over the five draws, D43's against the merged. |

@@ -822,6 +822,36 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
 - **Committed with `--no-verify`, after `pre-commit run --files` passed on the same staged files.** A device job was
   starting, and the hook's stash would have reverted the unstaged `decoder.py` (lever (a)) for its duration.
 
+### B40 — Lever (a): the CFM's heads merged by `nlp_concat_heads`: bit-identical output, device time per step 47.8 → 30.0 ms, traced step −36 %, eager only where it was device-bound (confirmed, 09-30). Status: **built, `213afe7909`**
+- **Decided** (user, 09-30), lever (a):
+  - merge the heads with `ttnn.experimental.nlp_concat_heads` at `decoder.py:764-765`;
+  - gate: PCC/max |diff| unchanged against the current estimator, and Stage 1 WER/SIM unchanged over five draws;
+  - report the device time, the traced step, and the Stage 1 RTF.
+- **The change:** `ttnn.transpose(out, 1, 2)` + `ttnn.reshape(out, (b, t, 512))` became
+  `ttnn.experimental.nlp_concat_heads(out)` + `ttnn.reshape(out, (b, t, 512))`. The op's output is
+  `[B, 1, T, 512]`, so the reshape only drops the unit dim, a view.
+- **The gate:**
+  - `head_merge_check.py` runs the new block against the committed one (`33aa3601eb`'s `__call__`, compiled from git)
+    on the same inputs. At 512/768/1,024/640 frames, one step's dphi and the 10-step solve are bit-identical: max
+    |diff| 0 (`merge_check.json`).
+  - `noise_draws.py`, five draws: 30 of 30 Stage 1 wavs and 30 of 30 streaming wavs identical to D43's. The scorer: Stage 1 WER
+    0.68 % in every draw, SIM 95.88 (95.84–95.92), the same as D43's.
+  - The device suite: 229 passed, 4 skipped, in 46.5 min; the merge's kernels compiled on the way.
+- **What it buys:**
+  - Device profile at 512 frames (`merge_profile_raw.json`): 1,158 → 1,102 ops, kernel time 47.8 → 29.95 ms; the
+    merge 18.5 → 0.75 ms (`NLPConcatHeads`).
+  - The profile's device span, 64.5 ms, now idles 31.3 ms: the host enqueues ~61 ms.
+  - Wall per step, eager / traced (`merge_time.json` against `cfm_time.json`):
+    - 512 frames: 64.7 → 62.4 / 49.2 → 31.3 ms;
+    - 768: 85.4 → 64.9 / 80.5 → 52.8;
+    - 1,024: 102.2 → 67.1 / 94.9 → 62.1;
+    - 640, non-streaming, eager only: 77.6 → 63.3.
+  - RTF over the five draws (`merge_rtf.md`):
+    - Stage 1: worst 0.648–0.667 → 0.620–0.664, aggregate 0.477–0.484 → 0.458–0.470;
+    - streaming: worst 1.082–1.128 → 1.061–1.086, aggregate 0.846–0.857 → 0.798–0.817.
+- **As the user predicted:** at the first chunk's size the eager step is host-bound, so the device-side win shows in
+  the traced step and at the larger buckets.
+
 ## O: older open items
 
 - **O1 — HiFT dtype crash.** Status: **fixed `544d588018`** (09-27). `TtHiFTDecoder.decode` converts `mel` and

@@ -1,0 +1,61 @@
+{
+ "before": "33aa3601eb",
+ "geometries": {
+  "stream_256": {
+   "t_len": 512,
+   "streaming": true,
+   "one_step_dphi": {
+    "max_abs_diff": 0.0,
+    "pcc": 1.0,
+    "identical": true
+   },
+   "ten_step_solve": {
+    "max_abs_diff": 0.0,
+    "pcc": 0.9999999999999999,
+    "identical": true
+   }
+  },
+  "stream_384": {
+   "t_len": 768,
+   "streaming": true,
+   "one_step_dphi": {
+    "max_abs_diff": 0.0,
+    "pcc": 1.0,
+    "identical": true
+   },
+   "ten_step_solve": {
+    "max_abs_diff": 0.0,
+    "pcc": 1.0,
+    "identical": true
+   }
+  },
+  "stream_512": {
+   "t_len": 1024,
+   "streaming": true,
+   "one_step_dphi": {
+    "max_abs_diff": 0.0,
+    "pcc": 1.0,
+    "identical": true
+   },
+   "ten_step_solve": {
+    "max_abs_diff": 0.0,
+    "pcc": 1.0,
+    "identical": true
+   }
+  },
+  "final_320": {
+   "t_len": 640,
+   "streaming": false,
+   "one_step_dphi": {
+    "max_abs_diff": 0.0,
+    "pcc": 1.0,
+    "identical": true
+   },
+   "ten_step_solve": {
+    "max_abs_diff": 0.0,
+    "pcc": 1.0,
+    "identical": true
+   }
+  }
+ }
+}
