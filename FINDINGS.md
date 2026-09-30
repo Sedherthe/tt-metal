@@ -749,6 +749,40 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
   - GELU fused into the FF matmul;
   - the CFM trace, off in the pipeline because a streaming chunk runs under the LLM's live decode trace.
 
+### B37 — Stage 3, step 3: Euler steps 10/8/6/5 leave WER and SIM flat, but the audio moves as much as upstream's does; at 5 steps first audio is still ~1.0–1.1 s (confirmed, 09-30). Status: **recorded, `33aa3601eb`**
+- **How** (`scripts/2026-09-30/phase_steps.sh`): D43's protocol, with the step count the only change.
+  - TT: `steps_draws.py` sets `tt/flow/flow.py:N_TIMESTEPS` in its own process.
+  - The reference: `ref_steps.py` replaces upstream's `CausalConditionalCFM.forward` so it runs `--steps` instead of
+    the 10 its flow asks for. It logged "asked for 10 steps, running k" in every job.
+  - The PR is unchanged.
+- **Controls:**
+  - TT's 10-step run reproduced D43's draws exactly: 60 of 60 wavs.
+  - Every run at 8, 6 and 5 steps sampled D43's tokens for its side and mode: 60 of 60 (`steps_summary.py`).
+- **Quality** (`steps_summary.md`; `steps.json` is `eval_draws.py`'s):
+  - corpus WER 0.68 % in every draw of all 16 groups, and no utterance's WER moves;
+  - SIM within 0.2 of its 10-step value, moving both ways. For example TT Stage 1 goes 95.88 → 95.95 / 95.77 / 95.91,
+    and the reference Stage 1 95.22 → 95.27 / 95.09 / 95.42.
+- **The audio moves** (`steps_distance.py` → `steps_distance.md`; whole-utterance log-mel L1, the stage A gate's
+  `_logmel`):
+  - from its own 10-step audio, 0.10–0.12 at 8 steps, 0.14–0.18 at 6 and 0.17–0.19 at 5, on both sides;
+  - for scale, two noise draws differ by 0.011–0.029, and TT's streaming differs from upstream's by 0.100–0.110
+    (including a noise difference);
+  - upstream is as sensitive as the port, so this is the model's property. WER and SIM don't see it; the ears have
+    to judge (`~/listening/steps/<mode>/<utterance>/{tt,ref}_k{10,8,6,5}.wav`, seed 1; `steps_listening.sh`).
+- **Latency** (TT, `steps_draws.py`, alone on the host):
+
+  | steps | first audio | worst streaming RTF | first chunk's CFM | Stage 1 worst RTF |
+  |---|---|---|---|---|
+  | 10 | 1.363–1.544 s | 1.092–1.142 | 0.68–0.75 s | 0.645–0.663 |
+  | 8 | 1.208–1.401 s | 0.980–1.028 | 0.54–0.61 s | 0.572–0.620 |
+  | 6 | 1.067–1.243 s | 0.878–0.915 | 0.41–0.45 s | 0.533–0.567 |
+  | 5 | 0.981–1.140 s | 0.819–0.837 | 0.34–0.36 s | 0.510–0.543 |
+
+  About 70 ms per step for the first chunk. At 5 steps, neither Stage 3 target: what remains is the LLM (0.37–0.47
+  s), the rest of the flow (0.15–0.20 s), the CFM (0.35 s) and HiFT (0.12 s).
+- **CPU time:** the reference ran as three parallel jobs, 56 min; scoring took 40 min, after the TT runs were scored
+  alongside.
+
 ## O: older open items
 
 - **O1 — HiFT dtype crash.** Status: **fixed `544d588018`** (09-27). `TtHiFTDecoder.decode` converts `mel` and

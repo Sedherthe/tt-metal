@@ -1,4 +1,4 @@
-<!-- DRAFT, not posted. A comment on tenstorrent/tt-metal#54104. Figures: PR #56651 at d2a2439e05 (docs/VALIDATION.md,
+<!-- DRAFT, not posted. A comment on tenstorrent/tt-metal#54104. Figures: PR #56651 at 33aa3601eb (docs/VALIDATION.md,
 PERF.md), N150, 2026-09-30. -->
 
 Streaming update on CosyVoice2 (draft PR #56651, now in `models/experimental/cosyvoice2/`).
@@ -28,15 +28,17 @@ The corpus is small. What would you consider a representative set?
 
 A device test holds both figures inside recorded bands, so they can't drift unnoticed. Stage 1 is unchanged: worst non-streaming RTF 0.654, token accuracy 95.94 %.
 
-**Where the time goes.** The first chunk spends:
-- 0.37–0.47 s on text and LLM until its tokens are in;
-- 0.82–0.91 s on the flow, of which the CFM's 10 Euler steps (with classifier-free guidance) take 0.68–0.74 s;
-- 0.12–0.13 s on the vocoder.
+**Where the time goes.**
+- **The first chunk:** 0.37–0.47 s of text and LLM, then its flow at 0.82–0.91 s, then 0.12–0.13 s of vocoder. The CFM's 10 Euler steps (with classifier-free guidance) take 0.68–0.74 s of that flow.
+- **Every chunk reruns the flow** over the prompt and the whole prefix, as upstream does, so no chunk's flow costs less than about 0.8 s. The flows alone take 0.47–0.74 of every utterance's duration.
+- **One Euler step at the first chunk's size** takes 65 ms and is host-bound: 62.6 ms of it is the host enqueueing about 1,150 ops, and the same step traced takes 49 ms on the device.
+- **Of that device time, 39 % is merging attention heads** (a transpose and a reshape in each of the 56 transformer blocks).
 
-Even a free flow would leave first audio at about 0.5–0.6 s. Every chunk reruns the flow over the whole prefix, as upstream does, so each costs at least ~0.8 s. Only one utterance streams at RTF above 1: a 3.8 s sentence whose last 13 tokens need a third chunk, and with it a full non-streaming flow, for 0.5 s of audio.
+**Fewer Euler steps** (10, 8, 6 and 5, the same five noise draws, TT and upstream):
+- **WER and speaker similarity don't move.** WER is 0.68 % at every step count on both sides, and similarity stays within 0.2 of its 10-step value.
+- **The audio does change.** At 5 steps it moves from its 10-step version about 1.6–1.9 times as far as our port sits from upstream at 10 steps, and upstream changes as much as we do. So it is the model's own sensitivity; WER and similarity don't measure it.
+- **Latency:** each step costs the first chunk about 70 ms. At 5 steps, first audio is 0.98–1.14 s and the worst streaming RTF 0.82–0.84.
 
-**Fixed along the way.** The vocoder's padded calls silenced the last ~25 ms of every streamed utterance. On one of them, Whisper heard a trailing "you" in 5 of 11 noise draws. The padded calls are now masked so they compute upstream's call at the real length, and that utterance now transcribes cleanly in all 11 draws.
+So the step count alone reaches neither target.
 
-**Next:** profile one CFM Euler step on device, then sweep 5, 6, 8 and 10 Euler steps, scoring WER and similarity over five noise draws.
-
-**A question on Stage 3.** Fewer Euler steps is the one lever that reaches the 500 ms target, and it changes the output. If the sweep shows WER and similarity holding within noise at fewer steps, would a reduced step count be acceptable for Stage 3? If not, would a measured report with the targets missed be acceptable?
+**A question on Stage 3.** Fewer steps, a cheaper head merge and a traced CFM together still look short of 500 ms. We haven't measured the combination, and the LLM alone takes 0.37–0.47 s before the first chunk can start. Would a measured report be acceptable for Stage 3, with the targets missed, the levers quantified and the step count left at upstream's 10? Or do you want the step count lowered, given that the audio changes while WER and similarity do not?
