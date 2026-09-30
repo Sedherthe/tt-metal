@@ -1101,7 +1101,7 @@ fewer Euler steps or a cheaper step.
     `[2, 512, 512]` (`tt/flow/decoder.py`).
   - In tile layout the 8 heads pad to a 32-row tile, so the reshape moves data: 0.27 ms per call.
   - `ttnn.experimental.nlp_concat_heads` does the same merge in one op, as the QKV side already does with the fused
-    split. Not measured here.
+    split. That is now built, bit-identical: "The CFM's attention heads merged in one op" below.
 - **The host takes about 54 µs to enqueue each op, against about 41 µs of device time per op.** At the first chunk's
   size, then, cutting device time alone does not shorten an eager step. The ops have to become fewer, or the step
   traced.
@@ -1178,6 +1178,53 @@ five draws, between wavs of the same tokens and the same draw:
   neither Stage 3 target (0.5 s, 0.4).
 - **What is left of the first chunk at 5 steps:** the LLM's 0.37–0.47 s, the rest of the flow (0.15–0.20 s), the
   CFM's 0.35 s and HiFT's 0.12 s.
+
+## The CFM's attention heads merged in one op (Stage 3, 2026-09-30)
+
+**The change** (`tt/flow/decoder.py`, `TtBasicTransformerBlock`):
+- **Before:** after SDPA, `[2, 8, T, 64]` was transposed to `[2, T, 8, 64]` and reshaped to `[2, T, 512]`. In tile
+  layout the 8 heads pad to a 32-row tile, so the reshape moved data: 18.5 of a step's 47.8 ms of device time at
+  512 frames ("One CFM Euler step, profiled").
+- **Now:** `ttnn.experimental.nlp_concat_heads` does the merge in one op, `[2, 8, T, 64]` → `[2, 1, T, 512]`.
+  Dropping the unit dim leaves the last two dims as they are, so that reshape is a view.
+
+**The gate** (the user's: the estimator unchanged, and Stage 1 WER/SIM unchanged over five draws):
+- **The estimator:** the new merge against the committed one on the same real inputs, in one process (notes:
+  `scripts/2026-09-30/head_merge_check.py`). At 512, 768, 1,024 and 640 frames, both one Euler step's dphi and the
+  whole 10-step solve are bit-identical: max |diff| 0.
+- **Five noise draws** (`scripts/noise_draws.py`, D43's protocol):
+  - Every wav is identical to D43's draws, which used the committed merge: 30 of 30 in Stage 1 and 30 of 30
+    streaming.
+  - So Stage 1's WER and SIM are D43's, 0.68 % and 95.88 (95.84–95.92), and so is streaming's. The scorer confirms
+    it: Stage 1 WER 0.68 % in every draw and SIM 95.88 (95.84–95.92) (`eval_draws.py`).
+- **The device suite:** 229 passed, 4 skipped (the opt-in tracker test, and three that run in the reference venv),
+  in 46.5 min on the N150. The merge's new kernels compiled on the way.
+
+**What it buys** (notes: `cfm_step_profile.py`, `cfm_profile_raw.py`):
+
+| mel frames | eager step, before → after | traced step, before → after |
+|---|---|---|
+| 512 (the first chunk's bucket) | 64.7 → 62.4 ms | 49.2 → 31.3 ms |
+| 768 | 85.4 → 64.9 ms | 80.5 → 52.8 ms |
+| 1,024 | 102.2 → 67.1 ms | 94.9 → 62.1 ms |
+| 640 (a non-streaming final chunk; not traceable) | 77.6 → 63.3 ms | — |
+
+- **On the device, one step at 512 frames:** 47.8 → 29.95 ms of kernel time, and 1,158 → 1,102 ops. The merge now
+  takes 0.75 ms (`NLPConcatHeads`, 56 calls) against 18.5. The reshape is no longer a device op.
+- **The eager step at 512 frames barely moves (−2.3 ms).**
+  - The host still takes ~61 ms to enqueue the step's ops, and the device now idles 31 of its 64.5 ms span.
+  - At 768 frames and above the eager step was device-bound, and there it falls 24–34 %.
+  - The traced step falls 34–36 % at every size.
+- **RTF, over the same five draws against D43's** (the same protocol, one process each; notes: `merge_rtf.py`):
+
+  | | worst per draw | aggregate per draw |
+  |---|---|---|
+  | Stage 1, before → after | 0.648–0.667 → 0.620–0.664 | 0.477–0.484 → 0.458–0.470 |
+  | streaming, before → after | 1.082–1.128 → 1.061–1.086 | 0.846–0.857 → 0.798–0.817 |
+
+  - The larger buckets gain most. A 3.0–3.8 s utterance's flow runs near 512 frames, where the eager step is
+    host-bound.
+  - The headline figures (README, PERF) predate this change. Its gain is this table, from the same protocol.
 
 ## Speech quality: WER and speaker similarity (2026-09-27)
 

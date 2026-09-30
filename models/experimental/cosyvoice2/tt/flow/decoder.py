@@ -761,7 +761,11 @@ class TtBasicTransformerBlock:
             scores = ttnn.add(scores, attn_bias)
             attn = ttnn.softmax(scores, dim=-1)
             out = ttnn.matmul(attn, v, compute_kernel_config=self.cc)  # [B, heads, T, head_dim]
-        out = ttnn.transpose(out, 1, 2)
+        # Merge the heads in one op: [B, heads, T, head_dim] -> [B, 1, T, heads x head_dim]; dropping the unit dim
+        # keeps the last two, so that reshape is a view. A transpose to [B, T, heads, head_dim] and a reshape did
+        # the same in two, and in tile layout the reshape moved data (the 8 heads pad to a 32-row tile): 18.5 of a
+        # step's 47.8 ms of device time at 512 frames (docs/VALIDATION.md, "One CFM Euler step, profiled").
+        out = ttnn.experimental.nlp_concat_heads(out)
         out = ttnn.reshape(out, (b, t, self.num_heads * self.head_dim))
         out = ttnn.linear(out, self.wo, bias=self.bo, compute_kernel_config=self.cc)
         x = ttnn.add(x, out)

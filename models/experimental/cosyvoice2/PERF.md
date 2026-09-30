@@ -119,6 +119,9 @@ first audio 1,469 ms, worst RTF 1.110).
   - 64.7 ms eager, of which the host spends 62.6 ms enqueueing the estimator's 1,158 ops; 49.2 ms traced;
   - on the device, 47.8 ms of kernel time, 18.5 ms of it merging attention heads (a transpose and a reshape in each
     of the 56 transformer blocks).
+  - **Since the heads are merged in one op** (`nlp_concat_heads`; `docs/VALIDATION.md`, "The CFM's attention heads
+    merged in one op"): 1,102 ops and 30.0 ms of kernel time. The step is 62.4 ms eager, still host-bound, and
+    31.3 ms traced. At 768 and 1,024 frames the eager step falls 24–34 %.
 - **Fewer Euler steps:** "Euler steps: a measured trade-off" below.
 
 ## Euler steps: a measured trade-off
@@ -132,6 +135,9 @@ Measured on 2026-09-30 (`docs/VALIDATION.md`, "The Euler step sweep"):
 - the six corpus utterances under five vocoder noise draws, with the tokens fixed;
 - TT in one process after both warm-ups, with nothing else on the host;
 - upstream at the same step counts, for the quality columns.
+
+This was before the attention heads were merged in one op. That change left the 512-frame eager step nearly unchanged
+(−2.3 ms) and cut the larger buckets' by 24–34 %.
 
 | Euler steps | first audio | streaming RTF, worst per draw | streaming RTF, aggregate | the first chunk's CFM | Stage 1 RTF, worst per draw | Stage 1 RTF, aggregate |
 |---|---|---|---|---|---|---|
