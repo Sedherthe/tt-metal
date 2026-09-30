@@ -695,6 +695,24 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
   cannot separate them at all. Offered to the user (D41).
 - **Verified:** stage A passes at 15 dB (`scripts/2026-09-30/phase_tail15.sh`).
 
+### B35 — Stage 3, step 1: only 121-127105-0015 streams above RTF 1.0, because its tokens spill into a third chunk; the flows alone are 0.47–0.74 of every utterance (confirmed, 09-30). Status: **recorded, `3ab7d78bf0`**
+- **Source:** the per-chunk records of B31's two streaming runs (`scripts/2026-09-30/rtf_breakdown.py` →
+  `rtf_breakdown.md`). Each chunk's bucket is recomputed with the pipeline's own `bucket_for`.
+- **Wall = text and LLM + each chunk's flow + each chunk's HiFT.** Nothing else takes more than 0.01 s.
+- **0015 (3.80 s):** 1.121 and 1.103.
+  - LLM 1.07 s, flows 2.81 s (0.91 + 0.89 + 1.01; CFM 2.23), HiFT 0.39 s, in run 1.
+  - Its 168-token prompt is padded to 175, so the first hop is 32. After 32 + 50, its 95 tokens leave 13 for a final
+    chunk: a non-streaming flow over 263 tokens (bucket 320, 1.01 s) for 0.52 s of audio.
+- **260-123286-0014 (3.00 s):** 75 tokens and a 175-token prompt make exactly 25 + 50, two flows: 0.957 and 0.905.
+- **The flow's cost per bucket:**
+  - CFM per Euler step: 68–74 ms at 512 mel frames, 78 at 640, 86 at 768, 100 at 1,024, 135 at 1,280. Strongly
+    sublinear, so a large fixed part per step.
+  - The flow outside the CFM: 0.14–0.19 s at 512 frames, 1.00–1.36 s at 1,280.
+- **Every utterance's flows alone come to 0.47–0.74 of its duration,** so only a cheaper flow per chunk can reach
+  0.4. That means fewer Euler steps, or a cheaper step (steps 2 and 3).
+- PERF's old line blamed "the ~1.4 s first chunk over the least audio" for both short utterances. The chunk count
+  is what separates them.
+
 ## O: older open items
 
 - **O1 — HiFT dtype crash.** Status: **fixed `544d588018`** (09-27). `TtHiFTDecoder.decode` converts `mel` and
