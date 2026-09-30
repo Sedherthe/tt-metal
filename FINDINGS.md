@@ -852,6 +852,60 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
 - **As the user predicted:** at the first chunk's size the eager step is host-bound, so the device-side win shows in
   the traced step and at the larger buckets.
 
+### B41 — Lever (b), proposed and not built: every traceable streaming bucket's CFM step captured at start-up, next to a start-up LLM decode trace. The tracker passes, and the prototype's first audio falls 1.34–1.44 → 0.96–1.05 s (confirmed, 09-30). Status: **proposal**, `design/2026-09-30_traced_cfm_streaming.md`
+- **Decided** (user, 09-30), lever (b):
+  - propose, don't build;
+  - capture every streaming bucket's CFM trace at start-up, before the LLM decode trace;
+  - prove with the allocation tracker that all the CFM traces and the decode trace can be alive together;
+  - check the trace-region budget; estimate TTFP/RTF.
+- **The tracker's rule** (`tt_metal/impl/allocator/trace_allocation_tracker.cpp`): after `end_trace_capture`, every
+  non-trace allocation is recorded against the trace, and any still alive at its `execute_trace` fails the replay.
+  It does not look at addresses. So everything persistent must exist before the first capture, including each
+  capture's output, and every program must be compiled first.
+- **The prototype** (`scripts/2026-09-30/traced_cfm_prototype.py`, notes only):
+  - pre-allocates 16 CFM slots and the decode trace's inputs and logits;
+  - compiles each body twice and every copy;
+  - captures the CFM traces, then the decode trace, and keeps them;
+  - streams the six through them.
+- **On the way** (each result is in the design note):
+  1. **The 5,120-frame bucket cannot be traced.** Its `down_resnet.block1.conv` check chose the host raw weight
+     (#36487), which `conv1d` re-uploads on every call: "Writes are not supported during trace capture" in the first
+     proof run (`traced_cfm_proof.json`). Such buckets now stay eager.
+  2. **The second proof run flagged 3 buffers.** With `TT_METAL_TRACE_ALLOC_TRACEBACKS=1` they are
+     `inference_streaming`'s locals `ids_dev`, `tok_emb_dev` and `h_dev`, alive through the CFM call
+     (`traced_cfm_diag.json`). They are freed before the call now.
+  3. **The first timing run's audio had waveform PCC ≈ 0 against eager.** It was not corruption:
+     - one bucket's solve matches eager at 0.999934 in all three forms (`_capture`, `output_tensor=`, `add_`;
+       `traced_cfm_diag2.json`);
+     - in situ, every CFM call's input is bit-identical to eager, and its output is within PCC 0.99989–0.99993
+       (`traced_cfm_record.json`).
+
+     A 1e-4 mel difference, from the bf16 blend and update on the device, drifts HiFT's sine phase. The audio is
+     compared by log-mel L1 now.
+- **The proof** (`phase_traced_cfm3.sh` A, `tcfm_proof.json`):
+  - the tracker on, 17 traces alive;
+  - six utterances, 17 traced solves (170 replays) and 1,249 decode replays, with no failure;
+  - tokens equal to eager, audio within log-mel L1 0.067–0.100.
+- **The negative control** (B, `tcfm_control.json`): the logits allocated inside the decode capture, as today. The
+  tracker fails on exactly that buffer.
+- **Budget:**
+  - trace region 123.6 MB (CFM traces 6.5–7.8 MB each, the decode trace 3.7 MB) against the pipeline's 50 MB today;
+  - 155 MB of DRAM for the slots;
+  - ~8 s of start-up (captures 0.09–0.13 s each, the bodies' compile 5.9 s).
+- **Timing** (C, `tcfm_timing.json`, the tracker off, eager then traced in one process):
+
+  | | eager | traced |
+  |---|---|---|
+  | first audio | 1.337–1.443 s | 0.955–1.046 s |
+  | streaming RTF, aggregate | 0.805 | 0.725 |
+  | streaming RTF, worst | 1.070 | 0.898 |
+
+  A free CFM would still leave 0.64–0.73 s. At 5 steps traced, first audio would be ~0.80–0.89 s (an estimate).
+- **Before building:**
+  - WER/SIM over five draws for the traced configuration;
+  - a decision on the final chunk: eager, which is still 0.69–0.95 s of CFM, or 17 more traces;
+  - the pipeline's trace region raised to at least 124 MB.
+
 ## O: older open items
 
 - **O1 — HiFT dtype crash.** Status: **fixed `544d588018`** (09-27). `TtHiFTDecoder.decode` converts `mel` and

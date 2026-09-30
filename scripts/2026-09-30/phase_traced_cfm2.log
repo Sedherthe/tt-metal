@@ -1,0 +1,26 @@
+2026-09-30 17:03:57 started traced_cfm_proof2 (log /home/user/data/cosyvoice2_runs/0930/traced_cfm_proof2.log)
+2026-09-30 17:16:27 traced_cfm_proof2 exited 0
+untraceable (a raw-weight conv verdict): {'5120': ['estimator.down_resnet.block1.conv Conv1d(320->256, k=3)']}
+trace region: 123.6 MB of 400 MB for 17 traces
+  [traced] zero_shot_121-127105-0003: FAILED RuntimeError: Found 3 device buffer(s) still alive before trace replay. These will be corrupted on replay.
+  [traced] zero_shot_121-127105-0015: FAILED RuntimeError: Found 3 device buffer(s) still alive before trace replay. These will be corrupted on replay.
+  [traced] zero_shot_121-127105-0024: FAILED RuntimeError: Found 3 device buffer(s) still alive before trace replay. These will be corrupted on replay.
+  [traced] zero_shot_260-123286-0014: FAILED RuntimeError: Found 3 device buffer(s) still alive before trace replay. These will be corrupted on replay.
+  [traced] zero_shot_260-123440-0002: FAILED RuntimeError: Found 3 device buffer(s) still alive before trace replay. These will be corrupted on replay.
+  [traced] zero_shot_260-123440-0010: FAILED RuntimeError: Found 3 device buffer(s) still alive before trace replay. These will be corrupted on replay.
+{"case": "zero_shot_121-127105-0003", "traced_ok": false, "error": "RuntimeError: Found 3 device buffer(s) still alive before trace replay. These will be corrupted on replay.\nBuffer 1936834 [op: ttnn.to_device]\nBuffer 1936836 [op: ttnn.allocate_tensor_on_device]\nBuffer 1937673 [op: ttnn.allocate_
+{"case": "zero_shot_121-127105-0015", "traced_ok": false, "error": "RuntimeError: Found 3 device buffer(s) still alive before trace replay. These will be corrupted on replay.\nBuffer 1938750 [op: ttnn.to_device]\nBuffer 1938752 [op: ttnn.allocate_tensor_on_device]\nBuffer 1939589 [op: ttnn.allocate_
+{"case": "zero_shot_121-127105-0024", "traced_ok": false, "error": "RuntimeError: Found 3 device buffer(s) still alive before trace replay. These will be corrupted on replay.\nBuffer 1940666 [op: ttnn.to_device]\nBuffer 1940668 [op: ttnn.allocate_tensor_on_device]\nBuffer 1941505 [op: ttnn.allocate_
+{"case": "zero_shot_260-123286-0014", "traced_ok": false, "error": "RuntimeError: Found 3 device buffer(s) still alive before trace replay. These will be corrupted on replay.\nBuffer 1942582 [op: ttnn.to_device]\nBuffer 1942584 [op: ttnn.allocate_tensor_on_device]\nBuffer 1943421 [op: ttnn.allocate_
+{"case": "zero_shot_260-123440-0002", "traced_ok": false, "error": "RuntimeError: Found 3 device buffer(s) still alive before trace replay. These will be corrupted on replay.\nBuffer 1944498 [op: ttnn.to_device]\nBuffer 1944500 [op: ttnn.allocate_tensor_on_device]\nBuffer 1945337 [op: ttnn.allocate_
+{"case": "zero_shot_260-123440-0010", "traced_ok": false, "error": "RuntimeError: Found 3 device buffer(s) still alive before trace replay. These will be corrupted on replay.\nBuffer 1946414 [op: ttnn.to_device]\nBuffer 1946416 [op: ttnn.allocate_tensor_on_device]\nBuffer 1947253 [op: ttnn.allocate_
+2026-09-30 17:16:27 started traced_cfm_control2 (log /home/user/data/cosyvoice2_runs/0930/traced_cfm_control2.log)
+2026-09-30 17:27:43 traced_cfm_control2 exited 0
+untraceable (a raw-weight conv verdict): {'5120': ['estimator.down_resnet.block1.conv Conv1d(320->256, k=3)']}
+trace region: 123.6 MB of 400 MB for 17 traces
+  [traced] zero_shot_121-127105-0003: FAILED RuntimeError: Found 4 device buffer(s) still alive before trace replay. These will be corrupted on replay.
+  [traced] zero_shot_121-127105-0015: FAILED RuntimeError: Found 4 device buffer(s) still alive before trace replay. These will be corrupted on replay.
+  [traced] zero_shot_121-127105-0024: FAILED RuntimeError: Found 4 device buffer(s) still alive before trace replay. These will be corrupted on replay.
+  [traced] zero_shot_260-123286-0014: FAILED RuntimeError: Found 4 device buffer(s) still alive before trace replay. These will be corrupted on replay.
+  [traced] zero_shot_260-123440-0002: FAILED RuntimeError: Found 4 device buffer(s) still alive before trace replay. These will be corrupted on replay.
+  [traced] zero_shot_260-123440-0010: FAILED RuntimeError: Found 4 device buffer(s) still alive before trace replay. These will be corrupted on replay.

@@ -1,0 +1,144 @@
+{
+ "order": "cfm-first",
+ "llm_output": "preallocated",
+ "tracking": false,
+ "trace_region_size": 400000000,
+ "warmups_s": 311.6,
+ "dram_free_before_slots": 10350897792,
+ "untraceable_buckets": {
+  "5120": [
+   "estimator.down_resnet.block1.conv Conv1d(320->256, k=3)"
+  ]
+ },
+ "dram_free_after_slots": 10195894656,
+ "compile_bodies_s": 5.8,
+ "traces": [
+  {
+   "trace": "cfm T=128",
+   "bytes": 6488064,
+   "capture_s": 0.08
+  },
+  {
+   "trace": "cfm T=256",
+   "bytes": 7176192,
+   "capture_s": 0.08
+  },
+  {
+   "trace": "cfm T=384",
+   "bytes": 6979584,
+   "capture_s": 0.08
+  },
+  {
+   "trace": "cfm T=512",
+   "bytes": 7372800,
+   "capture_s": 0.09
+  },
+  {
+   "trace": "cfm T=640",
+   "bytes": 7372800,
+   "capture_s": 0.09
+  },
+  {
+   "trace": "cfm T=768",
+   "bytes": 7569408,
+   "capture_s": 0.09
+  },
+  {
+   "trace": "cfm T=896",
+   "bytes": 7569408,
+   "capture_s": 0.09
+  },
+  {
+   "trace": "cfm T=1024",
+   "bytes": 7766016,
+   "capture_s": 0.09
+  },
+  {
+   "trace": "cfm T=1280",
+   "bytes": 7766016,
+   "capture_s": 0.09
+  },
+  {
+   "trace": "cfm T=1536",
+   "bytes": 7766016,
+   "capture_s": 0.1
+  },
+  {
+   "trace": "cfm T=1792",
+   "bytes": 7766016,
+   "capture_s": 0.1
+  },
+  {
+   "trace": "cfm T=2048",
+   "bytes": 7766016,
+   "capture_s": 0.1
+  },
+  {
+   "trace": "cfm T=2560",
+   "bytes": 7471104,
+   "capture_s": 0.1
+  },
+  {
+   "trace": "cfm T=3072",
+   "bytes": 7569408,
+   "capture_s": 0.1
+  },
+  {
+   "trace": "cfm T=3584",
+   "bytes": 7667712,
+   "capture_s": 0.1
+  },
+  {
+   "trace": "cfm T=4096",
+   "bytes": 7766016,
+   "capture_s": 0.1
+  },
+  {
+   "trace": "llm decode",
+   "bytes": 3735552
+  }
+ ],
+ "trace_region_used": 123568128,
+ "cfm_checks": [
+  {
+   "t_len": 512,
+   "valid": 400,
+   "pcc": 0.9999349877786473,
+   "max_abs_diff": 0.33890628814697266
+  },
+  {
+   "t_len": 512,
+   "valid": 500,
+   "pcc": 0.9998908220270926,
+   "max_abs_diff": 0.33890628814697266
+  },
+  {
+   "t_len": 768,
+   "valid": 700,
+   "pcc": 0.9998971357237934,
+   "max_abs_diff": 0.33890628814697266
+  },
+  {
+   "t_len": 512,
+   "valid": 400,
+   "pcc": 0.9999343544013722,
+   "max_abs_diff": 0.33890628814697266
+  },
+  {
+   "t_len": 512,
+   "valid": 500,
+   "pcc": 0.9998906601547348,
+   "max_abs_diff": 0.39449405670166016
+  }
+ ],
+ "utterances": [
+  {
+   "case": "zero_shot_121-127105-0003",
+   "traced_ok": true
+  },
+  {
+   "case": "zero_shot_121-127105-0015",
+   "traced_ok": true
+  }
+ ]
+}

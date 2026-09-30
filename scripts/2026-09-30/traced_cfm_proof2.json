@@ -1,0 +1,134 @@
+{
+ "order": "cfm-first",
+ "llm_output": "preallocated",
+ "tracking": true,
+ "trace_region_size": 400000000,
+ "warmups_s": 316.5,
+ "dram_free_before_slots": 10350897792,
+ "untraceable_buckets": {
+  "5120": [
+   "estimator.down_resnet.block1.conv Conv1d(320->256, k=3)"
+  ]
+ },
+ "dram_free_after_slots": 10195894656,
+ "compile_bodies_s": 5.9,
+ "traces": [
+  {
+   "trace": "cfm T=128",
+   "bytes": 6488064,
+   "capture_s": 0.09
+  },
+  {
+   "trace": "cfm T=256",
+   "bytes": 7176192,
+   "capture_s": 0.09
+  },
+  {
+   "trace": "cfm T=384",
+   "bytes": 6979584,
+   "capture_s": 0.1
+  },
+  {
+   "trace": "cfm T=512",
+   "bytes": 7372800,
+   "capture_s": 0.1
+  },
+  {
+   "trace": "cfm T=640",
+   "bytes": 7372800,
+   "capture_s": 0.1
+  },
+  {
+   "trace": "cfm T=768",
+   "bytes": 7569408,
+   "capture_s": 0.11
+  },
+  {
+   "trace": "cfm T=896",
+   "bytes": 7569408,
+   "capture_s": 0.11
+  },
+  {
+   "trace": "cfm T=1024",
+   "bytes": 7766016,
+   "capture_s": 0.11
+  },
+  {
+   "trace": "cfm T=1280",
+   "bytes": 7766016,
+   "capture_s": 0.12
+  },
+  {
+   "trace": "cfm T=1536",
+   "bytes": 7766016,
+   "capture_s": 0.12
+  },
+  {
+   "trace": "cfm T=1792",
+   "bytes": 7766016,
+   "capture_s": 0.12
+  },
+  {
+   "trace": "cfm T=2048",
+   "bytes": 7766016,
+   "capture_s": 0.13
+  },
+  {
+   "trace": "cfm T=2560",
+   "bytes": 7471104,
+   "capture_s": 0.13
+  },
+  {
+   "trace": "cfm T=3072",
+   "bytes": 7569408,
+   "capture_s": 0.13
+  },
+  {
+   "trace": "cfm T=3584",
+   "bytes": 7667712,
+   "capture_s": 0.13
+  },
+  {
+   "trace": "cfm T=4096",
+   "bytes": 7766016,
+   "capture_s": 0.13
+  },
+  {
+   "trace": "llm decode",
+   "bytes": 3735552
+  }
+ ],
+ "trace_region_used": 123568128,
+ "utterances": [
+  {
+   "case": "zero_shot_121-127105-0003",
+   "traced_ok": false,
+   "error": "RuntimeError: Found 3 device buffer(s) still alive before trace replay. These will be corrupted on replay.\nBuffer 1936834 [op: ttnn.to_device]\nBuffer 1936836 [op: ttnn.allocate_tensor_on_device]\nBuffer 1937673 [op: ttnn.allocate_tensor_on_device]\n\nUse corruptible_allocation_scope() for acknowledged-corruptible tensors, or ensure temporary tensors are freed before replay."
+  },
+  {
+   "case": "zero_shot_121-127105-0015",
+   "traced_ok": false,
+   "error": "RuntimeError: Found 3 device buffer(s) still alive before trace replay. These will be corrupted on replay.\nBuffer 1938750 [op: ttnn.to_device]\nBuffer 1938752 [op: ttnn.allocate_tensor_on_device]\nBuffer 1939589 [op: ttnn.allocate_tensor_on_device]\n\nUse corruptible_allocation_scope() for acknowledged-corruptible tensors, or ensure temporary tensors are freed before replay."
+  },
+  {
+   "case": "zero_shot_121-127105-0024",
+   "traced_ok": false,
+   "error": "RuntimeError: Found 3 device buffer(s) still alive before trace replay. These will be corrupted on replay.\nBuffer 1940666 [op: ttnn.to_device]\nBuffer 1940668 [op: ttnn.allocate_tensor_on_device]\nBuffer 1941505 [op: ttnn.allocate_tensor_on_device]\n\nUse corruptible_allocation_scope() for acknowledged-corruptible tensors, or ensure temporary tensors are freed before replay."
+  },
+  {
+   "case": "zero_shot_260-123286-0014",
+   "traced_ok": false,
+   "error": "RuntimeError: Found 3 device buffer(s) still alive before trace replay. These will be corrupted on replay.\nBuffer 1942582 [op: ttnn.to_device]\nBuffer 1942584 [op: ttnn.allocate_tensor_on_device]\nBuffer 1943421 [op: ttnn.allocate_tensor_on_device]\n\nUse corruptible_allocation_scope() for acknowledged-corruptible tensors, or ensure temporary tensors are freed before replay."
+  },
+  {
+   "case": "zero_shot_260-123440-0002",
+   "traced_ok": false,
+   "error": "RuntimeError: Found 3 device buffer(s) still alive before trace replay. These will be corrupted on replay.\nBuffer 1944498 [op: ttnn.to_device]\nBuffer 1944500 [op: ttnn.allocate_tensor_on_device]\nBuffer 1945337 [op: ttnn.allocate_tensor_on_device]\n\nUse corruptible_allocation_scope() for acknowledged-corruptible tensors, or ensure temporary tensors are freed before replay."
+  },
+  {
+   "case": "zero_shot_260-123440-0010",
+   "traced_ok": false,
+   "error": "RuntimeError: Found 3 device buffer(s) still alive before trace replay. These will be corrupted on replay.\nBuffer 1946414 [op: ttnn.to_device]\nBuffer 1946416 [op: ttnn.allocate_tensor_on_device]\nBuffer 1947253 [op: ttnn.allocate_tensor_on_device]\n\nUse corruptible_allocation_scope() for acknowledged-corruptible tensors, or ensure temporary tensors are freed before replay."
+  }
+ ]
+}

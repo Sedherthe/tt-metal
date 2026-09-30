@@ -334,3 +334,16 @@ This session stops after R5, with the streaming numbers. R1 must land before R4.
 ### D44 — D40 kept: streaming refuses to run without its warm-up (user, 09-30)
 - `synthesize_stream` keeps raising unless `warmup_streaming()` has run, and `demo.py --stream` keeps requiring
   `--warmup buckets`. The user's earlier answer to D40 had not arrived.
+
+### D45 — The Euler step count, and the flow's next levers in order (user, 09-30)
+- **The step count stays 10 by default,** as an explicit, documented config option (`CosyVoice2Config.flow_n_timesteps`,
+  `--flow-steps`). PERF.md carries the sweep as a measured trade-off (B37, B39). The user listens and decides.
+- **The flow's levers, in order.** The eager streaming step is host-bound, so device-side wins show only once the step
+  is traced.
+  1. **The heads merged by `nlp_concat_heads`.** Gate: the estimator unchanged, and Stage 1 WER/SIM unchanged over
+     five draws. Built, bit-identical (B40, `213afe7909`).
+  2. **The traced CFM step during streaming,** proposed and not built. All streaming buckets captured at start-up
+     before the decode trace, proven with the allocation tracker, with the trace-region budget and a TTFP/RTF
+     estimate (B41, `design/2026-09-30_traced_cfm_streaming.md`).
+  3. **Re-profile before any memory-config work.** Not started: the round stops after (2)'s proposal.
+- **The stage A end gate adds the last 0.1 s at 12 dB** (D41, B38).

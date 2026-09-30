@@ -1,0 +1,30 @@
+{
+ "A_capture_solve": {
+  "pcc": 0.999934,
+  "max_abs_diff": 0.3389
+ },
+ "A_reuse": {
+  "pcc": 0.999934,
+  "max_abs_diff": 0.3389
+ },
+ "B_output_tensor": {
+  "first": {
+   "pcc": 0.999934,
+   "max_abs_diff": 0.3389
+  },
+  "second": {
+   "pcc": 0.999934,
+   "max_abs_diff": 0.3389
+  }
+ },
+ "C_inplace_add": {
+  "first": {
+   "pcc": 0.999934,
+   "max_abs_diff": 0.3389
+  },
+  "second": {
+   "pcc": 0.999934,
+   "max_abs_diff": 0.3389
+  }
+ }
+}

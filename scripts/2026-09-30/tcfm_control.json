@@ -1,0 +1,110 @@
+{
+ "order": "cfm-first",
+ "llm_output": "inside",
+ "tracking": true,
+ "trace_region_size": 400000000,
+ "warmups_s": 319.6,
+ "dram_free_before_slots": 10350897792,
+ "untraceable_buckets": {
+  "5120": [
+   "estimator.down_resnet.block1.conv Conv1d(320->256, k=3)"
+  ]
+ },
+ "dram_free_after_slots": 10196803968,
+ "compile_bodies_s": 6.0,
+ "traces": [
+  {
+   "trace": "cfm T=128",
+   "bytes": 6488064,
+   "capture_s": 0.08
+  },
+  {
+   "trace": "cfm T=256",
+   "bytes": 7176192,
+   "capture_s": 0.09
+  },
+  {
+   "trace": "cfm T=384",
+   "bytes": 6979584,
+   "capture_s": 0.09
+  },
+  {
+   "trace": "cfm T=512",
+   "bytes": 7372800,
+   "capture_s": 0.1
+  },
+  {
+   "trace": "cfm T=640",
+   "bytes": 7372800,
+   "capture_s": 0.1
+  },
+  {
+   "trace": "cfm T=768",
+   "bytes": 7569408,
+   "capture_s": 0.11
+  },
+  {
+   "trace": "cfm T=896",
+   "bytes": 7569408,
+   "capture_s": 0.11
+  },
+  {
+   "trace": "cfm T=1024",
+   "bytes": 7766016,
+   "capture_s": 0.11
+  },
+  {
+   "trace": "cfm T=1280",
+   "bytes": 7766016,
+   "capture_s": 0.11
+  },
+  {
+   "trace": "cfm T=1536",
+   "bytes": 7766016,
+   "capture_s": 0.12
+  },
+  {
+   "trace": "cfm T=1792",
+   "bytes": 7766016,
+   "capture_s": 0.12
+  },
+  {
+   "trace": "cfm T=2048",
+   "bytes": 7766016,
+   "capture_s": 0.12
+  },
+  {
+   "trace": "cfm T=2560",
+   "bytes": 7471104,
+   "capture_s": 0.12
+  },
+  {
+   "trace": "cfm T=3072",
+   "bytes": 7569408,
+   "capture_s": 0.12
+  },
+  {
+   "trace": "cfm T=3584",
+   "bytes": 7667712,
+   "capture_s": 0.12
+  },
+  {
+   "trace": "cfm T=4096",
+   "bytes": 7766016,
+   "capture_s": 0.12
+  },
+  {
+   "trace": "llm decode",
+   "bytes": 3735552
+  }
+ ],
+ "trace_region_used": 123568128,
+ "cfm_checks": [],
+ "utterances": [
+  {
+   "case": "zero_shot_121-127105-0003",
+   "traced_ok": false,
+   "error": "RuntimeError: Found 1 device buffer(s) still alive before trace replay. These will be corrupted on replay.\nBuffer 1197526 [op: ttnn.allocate_tensor_on_device]\n\nUse corruptible_allocation_scope() for acknowledged-corruptible tensors, or ensure temporary tensors are freed before replay."
+  }
+ ]
+}

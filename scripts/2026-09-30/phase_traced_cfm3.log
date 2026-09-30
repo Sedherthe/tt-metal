@@ -1,0 +1,38 @@
+2026-09-30 18:04:47 started tcfm_proof (log /home/user/data/cosyvoice2_runs/0930/tcfm_proof.log)
+2026-09-30 18:20:48 tcfm_proof exited 0
+untraceable (a raw-weight conv verdict): {'5120': ['estimator.down_resnet.block1.conv Conv1d(320->256, k=3)']}
+trace region: 123.6 MB of 400 MB for 17 traces
+  [traced] zero_shot_121-127105-0003: first audio 9.734 s, RTF 6.301, CFM 2.35 + 2.30 + 2.52 + 0.76
+  [traced] zero_shot_121-127105-0015: first audio 9.791 s, RTF 6.932, CFM 2.32 + 2.30 + 0.75
+  [traced] zero_shot_121-127105-0024: first audio 9.875 s, RTF 6.267, CFM 2.36 + 2.32 + 2.54 + 2.63 + 0.96
+  [traced] zero_shot_260-123286-0014: first audio 8.459 s, RTF 6.855, CFM 2.33 + 0.76
+  [traced] zero_shot_260-123440-0002: first audio 8.332 s, RTF 6.279, CFM 2.30 + 2.33 + 2.52 + 2.63 + 0.74
+  [traced] zero_shot_260-123440-0010: first audio 8.337 s, RTF 6.421, CFM 2.31 + 2.32 + 2.54 + 0.78
+{"case": "zero_shot_121-127105-0003", "traced_ok": true, "tokens_equal": true, "samples_equal": true, "logmel_l1": 0.0873, "waveform_pcc": 0.2004, "first_audio_s": [8.0869, 9.7338], "rtf": [5.7545, 6.3012], "cfm_s": [[0.694, 0.699, 0.738, 0.749], [2.347, 2.3, 2.524, 0.764]]}
+{"case": "zero_shot_121-127105-0015", "traced_ok": true, "tokens_equal": true, "samples_equal": true, "logmel_l1": 0.0784, "waveform_pcc": -0.1424, "first_audio_s": [8.0566, 9.7912], "rtf": [6.0517, 6.932], "cfm_s": [[0.705, 0.715, 0.739], [2.324, 2.3, 0.754]]}
+{"case": "zero_shot_121-127105-0024", "traced_ok": true, "tokens_equal": true, "samples_equal": true, "logmel_l1": 0.0957, "waveform_pcc": 0.0104, "first_audio_s": [8.0107, 9.8749], "rtf": [5.716, 6.2672], "cfm_s": [[0.703, 0.713, 0.713, 0.729, 0.951], [2.357, 2.316, 2.543, 2.635, 0.955]]}
+{"case": "zero_shot_260-123286-0014", "traced_ok": true, "tokens_equal": true, "samples_equal": true, "logmel_l1": 0.0668, "waveform_pcc": 0.4351, "first_audio_s": [6.5433, 8.459], "rtf": [5.8489, 6.8552], "cfm_s": [[0.735, 0.755], [2.328, 0.763]]}
+{"case": "zero_shot_260-123440-0002", "traced_ok": true, "tokens_equal": true, "samples_equal": true, "logmel_l1": 0.1002, "waveform_pcc": -0.0096, "first_audio_s": [6.5558, 8.3319], "rtf": [5.7333, 6.2785], "cfm_s": [[0.715, 0.702, 0.723, 0.726, 0.766], [2.304, 2.332, 2.519, 2.626, 0.739]]}
+{"case": "zero_shot_260-123440-0010", "traced_ok": true, "tokens_equal": true, "samples_equal": true, "logmel_l1": 0.0917, "waveform_pcc": 0.0544, "first_audio_s": [6.618, 8.3365], "rtf": [5.8527, 6.421], "cfm_s": [[0.711, 0.756, 0.731, 0.736], [2.305, 2.32, 2.539, 0.781]]}
+2026-09-30 18:20:48 started tcfm_control (log /home/user/data/cosyvoice2_runs/0930/tcfm_control.log)
+2026-09-30 18:26:48 tcfm_control exited 0
+trace region: 123.6 MB of 400 MB for 17 traces
+  [traced] zero_shot_121-127105-0003: FAILED RuntimeError: Found 1 device buffer(s) still alive before trace replay. These will be corrupted on replay.
+2026-09-30 18:26:48 started tcfm_timing (log /home/user/data/cosyvoice2_runs/0930/tcfm_timing.log)
+2026-09-30 18:33:48 tcfm_timing exited 0
+  [eager] zero_shot_260-123286-0014: first audio 1.369 s, RTF 0.946, CFM 0.68 + 0.68
+  [eager] zero_shot_260-123440-0002: first audio 1.337 s, RTF 0.731, CFM 0.67 + 0.68 + 0.69 + 0.69 + 0.69
+  [eager] zero_shot_260-123440-0010: first audio 1.346 s, RTF 0.797, CFM 0.67 + 0.67 + 0.69 + 0.68
+trace region: 123.6 MB of 400 MB for 17 traces
+  [traced] zero_shot_121-127105-0003: first audio 1.032 s, RTF 0.673, CFM 0.32 + 0.32 + 0.54 + 0.69
+  [traced] zero_shot_121-127105-0015: first audio 1.046 s, RTF 0.898, CFM 0.32 + 0.32 + 0.69
+  [traced] zero_shot_121-127105-0024: first audio 1.043 s, RTF 0.739, CFM 0.32 + 0.32 + 0.54 + 0.63 + 0.95
+  [traced] zero_shot_260-123286-0014: first audio 0.963 s, RTF 0.817, CFM 0.32 + 0.69
+  [traced] zero_shot_260-123440-0002: first audio 0.955 s, RTF 0.687, CFM 0.32 + 0.32 + 0.54 + 0.63 + 0.73
+  [traced] zero_shot_260-123440-0010: first audio 0.981 s, RTF 0.700, CFM 0.32 + 0.32 + 0.54 + 0.70
+{"case": "zero_shot_121-127105-0003", "traced_ok": true, "tokens_equal": true, "samples_equal": true, "logmel_l1": 0.0873, "waveform_pcc": 0.2004, "first_audio_s": [1.4428, 1.0325], "rtf": [0.7745, 0.6727], "cfm_s": [[0.676, 0.692, 0.723, 0.682], [0.322, 0.321, 0.541, 0.694]]}
+{"case": "zero_shot_121-127105-0015", "traced_ok": true, "tokens_equal": true, "samples_equal": true, "logmel_l1": 0.0784, "waveform_pcc": -0.1424, "first_audio_s": [1.4143, 1.0459], "rtf": [1.0701, 0.8981], "cfm_s": [[0.674, 0.674, 0.693], [0.323, 0.322, 0.693]]}
+{"case": "zero_shot_121-127105-0024", "traced_ok": true, "tokens_equal": true, "samples_equal": true, "logmel_l1": 0.0957, "waveform_pcc": 0.0104, "first_audio_s": [1.4373, 1.0426], "rtf": [0.7943, 0.7395], "cfm_s": [[0.677, 0.678, 0.69, 0.704, 0.954], [0.323, 0.324, 0.544, 0.633, 0.953]]}
+{"case": "zero_shot_260-123286-0014", "traced_ok": true, "tokens_equal": true, "samples_equal": true, "logmel_l1": 0.0668, "waveform_pcc": 0.4351, "first_audio_s": [1.3685, 0.9626], "rtf": [0.946, 0.8174], "cfm_s": [[0.68, 0.678], [0.322, 0.691]]}
+{"case": "zero_shot_260-123440-0002", "traced_ok": true, "tokens_equal": true, "samples_equal": true, "logmel_l1": 0.1002, "waveform_pcc": -0.0096, "first_audio_s": [1.337, 0.9549], "rtf": [0.7311, 0.6871], "cfm_s": [[0.667, 0.678, 0.691, 0.693, 0.687], [0.322, 0.321, 0.542, 0.633, 0.733]]}
+{"case": "zero_shot_260-123440-0010", "traced_ok": true, "tokens_equal": true, "samples_equal": true, "logmel_l1": 0.0917, "waveform_pcc": 0.0544, "first_audio_s": [1.3455, 0.9807], "rtf": [0.7965, 0.7005], "cfm_s": [[0.674, 0.669, 0.689, 0.681], [0.322, 0.323, 0.54, 0.703]]}

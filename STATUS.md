@@ -6,16 +6,17 @@ items, X = fixed. Older narrative lives in `history/`.
 
 ## Where things stand
 
-- **Stopped after the Euler step sweep, as asked (09-30).** The session did the user's 09-30 list in order:
-  - D40 kept (D44);
-  - the last-0.4 s criterion reset to 15 dB from 36 final chunks (B34);
-  - the protected branches pushed once, fast-forward, as authorized;
-  - the two drafts written;
-  - the firmware restart recorded (B33);
-  - the Stage 3 plan, steps 1–3 (B35, B36, B37).
+- **Stopped after lever (b)'s proposal, as asked (09-30, D45).** This round did, in order:
+  - the protected branches pushed once, fast-forward, confirmed by the user;
+  - the stage A end gate's last-0.1 s check at 12 dB, and all three end checks shown both ways (B38);
+  - the "Generated with Claude Code" line removed from the PR draft. No attribution lines anywhere (the user's
+    rule, kept in memory);
+  - the Euler step count as a config option, default 10, with the sweep in PERF.md (B39);
+  - lever (a): the CFM's heads merged by `nlp_concat_heads` (B40);
+  - lever (b): the traced CFM during streaming, proposed with a tracker proof and measured in a prototype (B41).
 - **PR #56651** (`bringup/cosyvoice2-istft`), `models/experimental/cosyvoice2/`.
-  - The local HEAD is `33aa3601eb`, and all of it is on the fork's `backup/2026-09-29-pr`.
-  - GitHub's `bringup/cosyvoice2-istft` is at `d2a2439e05`, fast-forwarded from the backup on 09-30 under the
+  - The local HEAD is `213afe7909`, and all of it is on the fork's `backup/2026-09-29-pr`.
+  - GitHub's `bringup/cosyvoice2-istft` is at `33aa3601eb`, fast-forwarded from the backup on 09-30 under the
     user's one-time authorization. The user pushes it (D34).
 - **The PR commits of 09-29 and 09-30**, in order:
 
@@ -38,11 +39,16 @@ items, X = fixed. Older narrative lives in `history/`.
   | `3ab7d78bf0` | Stage 3 step 1: which utterance streams above RTF 1.0, and why (docs) | B35 |
   | `7be3b2aa48` | Stage 3 step 2: one CFM Euler step profiled on the device (docs) | B36 |
   | `33aa3601eb` | Stage 3 step 3: the Euler step sweep, 10/8/6/5 (docs) | B37 |
+  | `ea95ce1d66` | stage A's end gate adds the last 0.1 s at 12 dB | B38 |
+  | `1dcdc10059` | the Euler step count as a config option (`flow_n_timesteps`, default 10) | B39 |
+  | `213afe7909` | the CFM's heads merged by `nlp_concat_heads`, bit-identical | B40 |
 
-- **Notes commits:** `9db66f07d0`, `2f0b029596`, `b7106ce85d`, `d0f5cb94fe`, `50857575e6`, `7c90cc8e67`,
-  `8401e5b6b0`, `3b111b1688`, `cb60112fbe`, `ef284f8e25`, `75e2ca04fd`, `51b0719cca`, and the one carrying this file.
+- **Notes commits:**
+  - `9db66f07d0`, `2f0b029596`, `b7106ce85d`, `d0f5cb94fe`, `50857575e6`, `7c90cc8e67`, `8401e5b6b0`, `3b111b1688`,
+    `cb60112fbe`, `ef284f8e25`, `75e2ca04fd`, `51b0719cca`, `045d09dc43`, `f6a63fef2e`, `531f703808`,
+    `a5c0782036`, and the one carrying this file.
   - All are on `backup/2026-09-29-notes`.
-  - GitHub's `notes/cosyvoice2` is at `3b111b1688` (the same one-time push); the user pushes it.
+  - GitHub's `notes/cosyvoice2` is at `045d09dc43` (this round's one-time push); the user pushes it.
 
 ## The figures (masked HiFT, 09-30)
 
@@ -55,6 +61,11 @@ items, X = fixed. Older narrative lives in `history/`.
 | first packet < 500 ms | 1.31–1.50 s (two demo runs); perf test worst 1,469 ms | missed, held in band |
 | streaming RTF < 0.4 | worst 1.10–1.12, aggregate 0.84–0.85; perf test worst 1.110 | missed, held in band |
 
+- **These headline runs predate the head merge (B40).** On the five-draw protocol, the merge moved:
+  - Stage 1 RTF: worst 0.648–0.667 → 0.620–0.664, aggregate 0.477–0.484 → 0.458–0.470;
+  - streaming RTF: worst 1.082–1.128 → 1.061–1.086.
+
+  The output is bit-identical.
 - **Streaming quality:** WER 0.68 % in every draw, similarity 95.83 (95.81–95.87); upstream's streaming 0.68 % and
   95.89 (B30).
 - **Start-up:** 3.1 min warm and 31.4 min cold for the buckets, plus 2.5 and 13.0 min for the streaming set (B32).
@@ -62,17 +73,21 @@ items, X = fixed. Older narrative lives in `history/`.
 
 ## Stage 3, measured (09-30)
 
-- **RTF above 1.0 (B35):** only 121-127105-0015. Its tokens spill into a third chunk: 13 tokens that pay a full
-  non-streaming flow for 0.52 s of audio. A chunk's flow costs at least 0.82 s, and the flows alone take 0.47–0.74 of
-  every utterance's duration.
-- **One CFM Euler step (B36):** host-bound at the first chunk's size.
-  - 64.7 ms eager, of which the host spends 62.6 ms enqueueing 1,158 ops; 49.2 ms traced.
-  - The device's 47.8 ms of kernel time includes 18.5 ms (39 %) of attention head merging.
-- **The Euler step count (B37):**
-  - WER 0.68 % and SIM within 0.2, at 10, 8, 6 and 5 steps, TT and reference.
-  - The audio moves as much on upstream as on TT: at 5 steps, 1.6–1.9 times the port's own distance from upstream.
-  - At 5 steps, first audio 0.98–1.14 s and worst streaming RTF 0.82–0.84, so neither target is met.
-  - The wavs are in `~/listening/steps/`.
+- **RTF above 1.0 (B35):** only 121-127105-0015, a 13-token third chunk paying a full non-streaming flow. The flows
+  alone take 0.47–0.74 of every utterance.
+- **One CFM Euler step (B36, B40):**
+  - host-bound at the first chunk's size: 62.4 ms eager, of which ~61 ms is the host enqueueing 1,102 ops;
+  - 31.3 ms traced;
+  - device kernel time 30.0 ms, 47.8 before the merge.
+- **The Euler step count (B37):** WER and SIM are flat at 10, 8, 6 and 5 steps, TT and reference, but the audio moves
+  as much on upstream as on TT. At 5 steps first audio is 0.98–1.14 s. The default stays 10, as a config option
+  (B39, D45).
+- **The traced CFM during streaming, a prototype (B41):**
+  - 16 of 17 buckets traceable; the 5,120-frame one has a raw-weight conv verdict (#36487);
+  - under the tracker, all traces alive with no failure;
+  - trace region 123.6 MB;
+  - first audio 1.337–1.443 → 0.955–1.046 s, streaming RTF aggregate 0.805 → 0.725;
+  - audio within log-mel L1 0.067–0.100 of eager.
 
 ## This pod
 
@@ -87,31 +102,26 @@ items, X = fixed. Older narrative lives in `history/`.
   the reference side (locked, D35). See RUNBOOK §1–2.
 - **Data:** under `/home/user/data`:
   - the inputs, the references and the runs (`cosyvoice2_runs/0929`, `0930`);
-  - the noise draws (`cosyvoice2_draws`) and the step sweep (`cosyvoice2_steps`);
+  - the noise draws (`cosyvoice2_draws`), the step sweep (`cosyvoice2_steps`) and the merge's draws
+    (`cosyvoice2_merge`);
   - two kernel caches R6 used (`kc_r6_startup`, `kc_r6_first`);
-  - the device profiler's raw logs (`cosyvoice2_runs/0930/cfm_tracy`, 3.2 GB).
+  - the device profiler's raw logs (`cosyvoice2_runs/0930/cfm_tracy`, `merge_tracy`, 3.2 GB each).
 
   They go when the pod goes; the notes keep the logs.
 
 ## Open questions for the user
 
-1. **Pushing:** `bringup/cosyvoice2-istft` (to `33aa3601eb`) and `notes/cosyvoice2`, from the backup branches (D34).
-2. **D41, the last 0.1 s** (offered, B34): a criterion there at 12 dB would separate the fix from the old padding by
-   10 dB each way. The 0.4 s window cannot separate them on two utterances; the 20 ms level check does.
-3. **The step count (B37).** WER and SIM are flat to 5 steps, but the audio moves, as much on upstream as on TT. Keep
-   upstream's 10, or listen (`~/listening/steps/`) and choose? Either way it is a maintainers' question too (the
-   draft for #54104 asks it).
-4. **The CFM's next lever (B36):**
-   - the head merge in one op (`nlp_concat_heads`), 18.5 ms of the step's device time now;
-   - a traced CFM step in streaming, which needs a design for two live traces (the LLM's and the CFM's);
-   - or memory configs, as the plan had it.
-5. **Drafts, not posted:**
-   - the #54104 streaming update and the #56651 description (`drafts/2026-09-30_*`, refreshed with B35–B37);
-   - the #36487 comment (`drafts/2026-09-29_comment_36487_prepare_conv_weights_dram_slicing.md`);
-   - the kernel-cache issue (`drafts/2026-09-27_ttnn_issue_conv_dram_config_kernel_hash.md`).
+1. **Pushing:** `bringup/cosyvoice2-istft` (to `213afe7909`) and `notes/cosyvoice2`, from the backup branches (D34).
+2. **The step count:** listen (`~/listening/steps/`) and choose; the default stays 10 until then (D45).
+3. **Lever (b), the traced CFM:** build it? Before building:
+   - WER/SIM over five draws for the traced configuration;
+   - whether to trace the final chunk too (17 more traces);
+   - the pipeline's trace region raised to at least 124 MB.
+4. **Drafts, not posted:**
+   - the #54104 streaming update and the #56651 description (`drafts/2026-09-30_*`; they predate B38–B41);
+   - the #36487 comment;
+   - the kernel-cache issue.
 
 ## Next
 
-The Stage 3 plan's steps 1–3 are done (`REBUILD_2026-09-29.md`, "After the rebuild"). What follows depends on the
-answers to 3 and 4: memory configs (the plan's step 4), per-bucket CFM traces (its step 5, now shown to matter at
-the first chunk's size), or the head merge.
+Lever (c) in the user's order (D45): re-profile before any memory-config work, then build (b) if approved.

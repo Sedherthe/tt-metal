@@ -1,0 +1,109 @@
+{
+ "order": "cfm-first",
+ "llm_output": "preallocated",
+ "tracking": true,
+ "trace_region_size": 400000000,
+ "warmups_s": 320.7,
+ "dram_free_before_slots": 10350897792,
+ "untraceable_buckets": {
+  "5120": [
+   "estimator.down_resnet.block1.conv Conv1d(320->256, k=3)"
+  ]
+ },
+ "dram_free_after_slots": 10195894656,
+ "compile_bodies_s": 6.0,
+ "traces": [
+  {
+   "trace": "cfm T=128",
+   "bytes": 6488064,
+   "capture_s": 0.09
+  },
+  {
+   "trace": "cfm T=256",
+   "bytes": 7176192,
+   "capture_s": 0.19
+  },
+  {
+   "trace": "cfm T=384",
+   "bytes": 6979584,
+   "capture_s": 0.19
+  },
+  {
+   "trace": "cfm T=512",
+   "bytes": 7372800,
+   "capture_s": 0.19
+  },
+  {
+   "trace": "cfm T=640",
+   "bytes": 7372800,
+   "capture_s": 0.19
+  },
+  {
+   "trace": "cfm T=768",
+   "bytes": 7569408,
+   "capture_s": 0.19
+  },
+  {
+   "trace": "cfm T=896",
+   "bytes": 7569408,
+   "capture_s": 0.2
+  },
+  {
+   "trace": "cfm T=1024",
+   "bytes": 7766016,
+   "capture_s": 0.2
+  },
+  {
+   "trace": "cfm T=1280",
+   "bytes": 7766016,
+   "capture_s": 0.21
+  },
+  {
+   "trace": "cfm T=1536",
+   "bytes": 7766016,
+   "capture_s": 0.2
+  },
+  {
+   "trace": "cfm T=1792",
+   "bytes": 7766016,
+   "capture_s": 0.2
+  },
+  {
+   "trace": "cfm T=2048",
+   "bytes": 7766016,
+   "capture_s": 0.21
+  },
+  {
+   "trace": "cfm T=2560",
+   "bytes": 7471104,
+   "capture_s": 0.21
+  },
+  {
+   "trace": "cfm T=3072",
+   "bytes": 7569408,
+   "capture_s": 0.21
+  },
+  {
+   "trace": "cfm T=3584",
+   "bytes": 7667712,
+   "capture_s": 0.22
+  },
+  {
+   "trace": "cfm T=4096",
+   "bytes": 7766016,
+   "capture_s": 0.22
+  },
+  {
+   "trace": "llm decode",
+   "bytes": 3735552
+  }
+ ],
+ "trace_region_used": 123568128,
+ "utterances": [
+  {
+   "case": "zero_shot_121-127105-0003",
+   "traced_ok": false,
+   "error": "RuntimeError: Found 3 device buffer(s) still alive before trace replay. These will be corrupted on replay.\nBuffer 1199754 [op: ttnn.to_device]\n  allocated at:\n  File \"/home/user/cosyvoice2-notes-wt/scripts/2026-09-30/traced_cfm_prototype.py\", line 354, in <module>\n    sys.exit(main())\n  File \"/home/user/cosyvoice2-notes-wt/scripts/2026-09-30/traced_cfm_prototype.py\", line 315, in main\n    traced = stream_six(pipe, ctxs, \"traced\")\n  File \"/home/user/cosyvoice2-notes-wt/scripts/2026-09-30/traced_cfm_prototype.py\", line 229, in stream_six\n    syn = pipe.synthesize_stream(ctx, case[\"text\"], rng=RandomSources(llm_seed=1986, noise_seed=1))\n  File \"/home/user/tt-metal/models/experimental/cosyvoice2/tt/pipeline.py\", line 659, in synthesize_stream\n    tokens = self._clock.wrap(\"llm\", self.text_to_tokens)(\n  File \"/home/user/tt-metal/models/experimental/cosyvoice2/tt/pipeline.py\", line 380, in timed\n    return fn(*args, **kwargs)\n  File \"/home/user/tt-metal/models/experimental/cosyvoice2/tt/pipeline.py\", line 501, in text_to_tokens\n    tokens = self.llm.generate(\n  File \"/home/user/tt-metal/models/experimental/cosyvoice2/tt/llm/qwen2lm.py\", line 709, in generate\n    on_token(token)\n  File \"/home/user/tt-metal/models/experimental/cosyvoice2/tt/streaming.py\", line 205, in push\n    self._emit(StreamChunk(self.offset, hop, False))\n  File \"/home/user/tt-metal/models/experimental/cosyvoice2/tt/streaming.py\", line 219, in _emit\n    mel = flow_chunk(self.pipeline, self.ctx, self.tokens, chunk)\n  File \"/home/user/tt-metal/models/experimental/cosyvoice2/tt/streaming.py\", line 174, in flow_chunk\n    mel = pipeline.flow.inference_streaming(\n  File \"/home/user/tt-metal/models/experimental/cosyvoice2/tt/flow/flow.py\", line 326, in inference_streaming\n    ids_dev = ttnn.from_torch(\nBuffer 1199756 [op: ttnn.allocate_tensor_on_device]\n  allocated at:\n  File \"/home/user/cosyvoice2-notes-wt/scripts/2026-09-30/traced_cfm_prototype.py\", line 354, in <module>\n    sys.exit(main())\n  File \"/home/user/cosyvoice2-notes-wt/scripts/2026-09-30/traced_cfm_prototype.py\", line 315, in main\n    traced = stream_six(pipe, ctxs, \"traced\")\n  File \"/home/user/cosyvoice2-notes-wt/scripts/2026-09-30/traced_cfm_prototype.py\", line 229, in stream_six\n    syn = pipe.synthesize_stream(ctx, case[\"text\"], rng=RandomSources(llm_seed=1986, noise_seed=1))\n  File \"/home/user/tt-metal/models/experimental/cosyvoice2/tt/pipeline.py\", line 659, in synthesize_stream\n    tokens = self._clock.wrap(\"llm\", self.text_to_tokens)(\n  File \"/home/user/tt-metal/models/experimental/cosyvoice2/tt/pipeline.py\", line 380, in timed\n    return fn(*args, **kwargs)\n  File \"/home/user/tt-metal/models/experimental/cosyvoice2/tt/pipeline.py\", line 501, in text_to_tokens\n    tokens = self.llm.generate(\n  File \"/home/user/tt-metal/models/experimental/cosyvoice2/tt/llm/qwen2lm.py\", line 709, in generate\n    on_token(token)\n  File \"/home/user/tt-metal/models/experimental/cosyvoice2/tt/streaming.py\", line 205, in push\n    self._emit(StreamChunk(self.offset, hop, False))\n  File \"/home/user/tt-metal/models/experimental/cosyvoice2/tt/streaming.py\", line 219, in _emit\n    mel = flow_chunk(self.pipeline, self.ctx, self.tokens, chunk)\n  File \"/home/user/tt-metal/models/experimental/cosyvoice2/tt/streaming.py\", line 174, in flow_chunk\n    mel = pipeline.flow.inference_streaming(\n  File \"/home/user/tt-metal/models/experimental/cosyvoice2/tt/flow/flow.py\", line 332, in inference_streaming\n    tok_emb_dev = self.input_embedding(ids_dev)\n  File \"/home/user/tt-metal/models/common/lightweightmodule.py\", line 12, in __call__\n    return self.forward(*args, **kwargs)\n  File \"/home/user/tt-metal/models/experimental/cosyvoice2/tt/llm/qwen2lm.py\", line 127, in forward\n    return ttnn.embedding(ids, self.weights, layout=ttnn.TILE_LAYOUT)\nBuffer 1200593 [op: ttnn.allocate_tensor_on_device]\n  allocated at:\n  File \"/home/user/cosyvoice2-notes-wt/scripts/2026-09-30/traced_cfm_prototype.py\", line 354, in <module>\n    sys.exit(main())\n  File \"/home/user/cosyvoice2-notes-wt/scripts/2026-09-30/traced_cfm_prototype.py\", line 315, in main\n    traced = stream_six(pipe, ctxs, \"traced\")\n  File \"/home/user/cosyvoice2-notes-wt/scripts/2026-09-30/traced_cfm_prototype.py\", line 229, in stream_six\n    syn = pipe.synthesize_stream(ctx, case[\"text\"], rng=RandomSources(llm_seed=1986, noise_seed=1))\n  File \"/home/user/tt-metal/models/experimental/cosyvoice2/tt/pipeline.py\", line 659, in synthesize_stream\n    tokens = self._clock.wrap(\"llm\", self.text_to_tokens)(\n  File \"/home/user/tt-metal/models/experimental/cosyvoice2/tt/pipeline.py\", line 380, in timed\n    return fn(*args, **kwargs)\n  File \"/home/user/tt-metal/models/experimental/cosyvoice2/tt/pipeline.py\", line 501, in text_to_tokens\n    tokens = self.llm.generate(\n  File \"/home/user/tt-metal/models/experimental/cosyvoice2/tt/llm/qwen2lm.py\", line 709, in generate\n    on_token(token)\n  File \"/home/user/tt-metal/models/experimental/cosyvoice2/tt/streaming.py\", line 205, in push\n    self._emit(StreamChunk(self.offset, hop, False))\n  File \"/home/user/tt-metal/models/experimental/cosyvoice2/tt/streaming.py\", line 219, in _emit\n    mel = flow_chunk(self.pipeline, self.ctx, self.tokens, chunk)\n  File \"/home/user/tt-metal/models/experimental/cosyvoice2/tt/streaming.py\", line 174, in flow_chunk\n    mel = pipeline.flow.inference_streaming(\n  File \"/home/user/tt-metal/models/experimental/cosyvoice2/tt/flow/flow.py\", line 339, in inference_streaming\n    h_dev = ttnn.linear(h_dev, self.encoder_proj_w, bias=self.encoder_proj_b)\n\n--- Python referrer analysis ---\n\n[scan stats] threads=2, frames=23, locals=270, objects_traversed=43060, tensors_seen=3227, uid_ok=2864, uid_none=363, uid_exc=0, matched=3\n[buffer IDs seen (2864 unique)] [72, 74, 76, 78, 80, 96, 108, 114, 120, 122, 125, 127, 129, 131, 133, 135, 137, 139, 141, 143, 145, 147, 149, 152, 154, 156, 158, 160, 162, 164]\n[looking for IDs (3)] [1199754, 1199756, 1200593]...\n\nBuffer 1199754: found in 1 Python reference(s)\n  'ids_dev', shape=Shape([1, 1, 1, 256])\n\nBuffer 1199756: found in 1 Python reference(s)\n  'tok_emb_dev', shape=Shape([1, 256, 512])\n\nBuffer 1200593: found in 1 Python reference(s)\n  'h_dev', shape=Shape([1, 512, 80])\nUse corruptible_allocation_scope() for acknowledged-corruptible tensors, or ensure temporary tensors are freed before replay."
+  }
+ ]
+}

@@ -1,0 +1,283 @@
+{
+ "order": "cfm-first",
+ "llm_output": "preallocated",
+ "tracking": true,
+ "trace_region_size": 400000000,
+ "warmups_s": 314.3,
+ "dram_free_before_slots": 10350897792,
+ "untraceable_buckets": {
+  "5120": [
+   "estimator.down_resnet.block1.conv Conv1d(320->256, k=3)"
+  ]
+ },
+ "dram_free_after_slots": 10195894656,
+ "compile_bodies_s": 5.9,
+ "traces": [
+  {
+   "trace": "cfm T=128",
+   "bytes": 6488064,
+   "capture_s": 0.08
+  },
+  {
+   "trace": "cfm T=256",
+   "bytes": 7176192,
+   "capture_s": 0.09
+  },
+  {
+   "trace": "cfm T=384",
+   "bytes": 6979584,
+   "capture_s": 0.09
+  },
+  {
+   "trace": "cfm T=512",
+   "bytes": 7372800,
+   "capture_s": 0.09
+  },
+  {
+   "trace": "cfm T=640",
+   "bytes": 7372800,
+   "capture_s": 0.1
+  },
+  {
+   "trace": "cfm T=768",
+   "bytes": 7569408,
+   "capture_s": 0.1
+  },
+  {
+   "trace": "cfm T=896",
+   "bytes": 7569408,
+   "capture_s": 0.1
+  },
+  {
+   "trace": "cfm T=1024",
+   "bytes": 7766016,
+   "capture_s": 0.11
+  },
+  {
+   "trace": "cfm T=1280",
+   "bytes": 7766016,
+   "capture_s": 0.11
+  },
+  {
+   "trace": "cfm T=1536",
+   "bytes": 7766016,
+   "capture_s": 0.11
+  },
+  {
+   "trace": "cfm T=1792",
+   "bytes": 7766016,
+   "capture_s": 0.12
+  },
+  {
+   "trace": "cfm T=2048",
+   "bytes": 7766016,
+   "capture_s": 0.12
+  },
+  {
+   "trace": "cfm T=2560",
+   "bytes": 7471104,
+   "capture_s": 0.12
+  },
+  {
+   "trace": "cfm T=3072",
+   "bytes": 7569408,
+   "capture_s": 0.12
+  },
+  {
+   "trace": "cfm T=3584",
+   "bytes": 7667712,
+   "capture_s": 0.12
+  },
+  {
+   "trace": "cfm T=4096",
+   "bytes": 7766016,
+   "capture_s": 0.12
+  },
+  {
+   "trace": "llm decode",
+   "bytes": 3735552
+  }
+ ],
+ "trace_region_used": 123568128,
+ "cfm_checks": [],
+ "utterances": [
+  {
+   "case": "zero_shot_121-127105-0003",
+   "traced_ok": true,
+   "tokens_equal": true,
+   "samples_equal": true,
+   "logmel_l1": 0.0873,
+   "waveform_pcc": 0.2004,
+   "first_audio_s": [
+    8.0869,
+    9.7338
+   ],
+   "rtf": [
+    5.7545,
+    6.3012
+   ],
+   "cfm_s": [
+    [
+     0.694,
+     0.699,
+     0.738,
+     0.749
+    ],
+    [
+     2.347,
+     2.3,
+     2.524,
+     0.764
+    ]
+   ]
+  },
+  {
+   "case": "zero_shot_121-127105-0015",
+   "traced_ok": true,
+   "tokens_equal": true,
+   "samples_equal": true,
+   "logmel_l1": 0.0784,
+   "waveform_pcc": -0.1424,
+   "first_audio_s": [
+    8.0566,
+    9.7912
+   ],
+   "rtf": [
+    6.0517,
+    6.932
+   ],
+   "cfm_s": [
+    [
+     0.705,
+     0.715,
+     0.739
+    ],
+    [
+     2.324,
+     2.3,
+     0.754
+    ]
+   ]
+  },
+  {
+   "case": "zero_shot_121-127105-0024",
+   "traced_ok": true,
+   "tokens_equal": true,
+   "samples_equal": true,
+   "logmel_l1": 0.0957,
+   "waveform_pcc": 0.0104,
+   "first_audio_s": [
+    8.0107,
+    9.8749
+   ],
+   "rtf": [
+    5.716,
+    6.2672
+   ],
+   "cfm_s": [
+    [
+     0.703,
+     0.713,
+     0.713,
+     0.729,
+     0.951
+    ],
+    [
+     2.357,
+     2.316,
+     2.543,
+     2.635,
+     0.955
+    ]
+   ]
+  },
+  {
+   "case": "zero_shot_260-123286-0014",
+   "traced_ok": true,
+   "tokens_equal": true,
+   "samples_equal": true,
+   "logmel_l1": 0.0668,
+   "waveform_pcc": 0.4351,
+   "first_audio_s": [
+    6.5433,
+    8.459
+   ],
+   "rtf": [
+    5.8489,
+    6.8552
+   ],
+   "cfm_s": [
+    [
+     0.735,
+     0.755
+    ],
+    [
+     2.328,
+     0.763
+    ]
+   ]
+  },
+  {
+   "case": "zero_shot_260-123440-0002",
+   "traced_ok": true,
+   "tokens_equal": true,
+   "samples_equal": true,
+   "logmel_l1": 0.1002,
+   "waveform_pcc": -0.0096,
+   "first_audio_s": [
+    6.5558,
+    8.3319
+   ],
+   "rtf": [
+    5.7333,
+    6.2785
+   ],
+   "cfm_s": [
+    [
+     0.715,
+     0.702,
+     0.723,
+     0.726,
+     0.766
+    ],
+    [
+     2.304,
+     2.332,
+     2.519,
+     2.626,
+     0.739
+    ]
+   ]
+  },
+  {
+   "case": "zero_shot_260-123440-0010",
+   "traced_ok": true,
+   "tokens_equal": true,
+   "samples_equal": true,
+   "logmel_l1": 0.0917,
+   "waveform_pcc": 0.0544,
+   "first_audio_s": [
+    6.618,
+    8.3365
+   ],
+   "rtf": [
+    5.8527,
+    6.421
+   ],
+   "cfm_s": [
+    [
+     0.711,
+     0.756,
+     0.731,
+     0.736
+    ],
+    [
+     2.305,
+     2.32,
+     2.539,
+     0.781
+    ]
+   ]
+  }
+ ]
+}
