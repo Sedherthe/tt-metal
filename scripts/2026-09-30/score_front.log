@@ -1,0 +1,21 @@
+[asr] loading whisper large-v3 (cpu)
+[sim] loading microsoft/wavlm-base-plus-sv (cpu)
+  zero_shot_121-127105-0003          WER   0.00%  SIM  94.70   There was a unanimous groan at this, and much reproach, afte
+  zero_shot_121-127105-0015          WER   0.00%  SIM  93.71   He quitted the fire and dropped back into his chair.
+  zero_shot_121-127105-0024          WER   0.00%  SIM  93.50   poor douglas before his death when it was in sight committed
+  zero_shot_260-123286-0014          WER   0.00%  SIM  96.03   Truly, this sea is of infinite width.
+  zero_shot_260-123440-0002          WER   2.27%  SIM  98.51   It was the white Rathor returning, splendidly dressed, with 
+  zero_shot_260-123440-0010          WER   0.00%  SIM  98.34   How cheerfully he seems to grin, how neatly spread his claws
+
+/home/user/data/cosyvoice2_runs/0930/tail_ab/front_1987: {"n": 6, "corpus_wer_percent": 0.68, "corpus_word_errors": 1, "corpus_ref_words": 147, "sim_mean": 95.8, "sim_campplus_diagnostic_mean": 83.54}
+wrote /home/user/data/cosyvoice2_runs/0930/tail_ab/front_1987/scores.json
+
+| case | words | WER % pytorch-reference-streaming | WER % ttnn-streaming-offline-front-final | SIM pytorch-reference-streaming | SIM ttnn-streaming-offline-front-final | audio s pytorch-reference-streaming / ttnn-streaming-offline-front-final |
+|---|---|---|---|---|---|---|
+| zero_shot_121-127105-0003 | 18 | 0.00 | 0.00 | 95.07 | 94.70 | 8.52 / 8.52 |
+| zero_shot_121-127105-0015 | 10 | 0.00 | 0.00 | 93.74 | 93.71 | 3.80 / 3.80 |
+| zero_shot_121-127105-0024 | 48 | 0.00 | 0.00 | 93.42 | 93.50 | 13.88 / 13.88 |
+| zero_shot_260-123286-0014 | 7 | 0.00 | 0.00 | 96.10 | 96.03 | 3.00 / 3.00 |
+| zero_shot_260-123440-0002 | 44 | 2.27 | 2.27 | 98.61 | 98.51 | 12.68 / 12.68 |
+| zero_shot_260-123440-0010 | 20 | 0.00 | 0.00 | 98.45 | 98.34 | 8.08 / 8.08 |
+| **corpus (6 utterances)** | 147 | **0.68** (1 errors) | **0.68** (1 errors) | **95.90** | **95.80** | |

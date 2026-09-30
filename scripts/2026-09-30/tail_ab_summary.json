@@ -1,0 +1,343 @@
+{
+  "sanity": {
+    "zero_shot_121-127105-0003": {
+      "equals_r5": false,
+      "sha1": "613a7d3a3682"
+    },
+    "zero_shot_121-127105-0015": {
+      "equals_r5": false,
+      "sha1": "ebb0cab0c99d"
+    },
+    "zero_shot_121-127105-0024": {
+      "equals_r5": false,
+      "sha1": "d2fcb6d94507"
+    },
+    "zero_shot_260-123286-0014": {
+      "equals_r5": false,
+      "sha1": "ce98986fc1fe"
+    },
+    "zero_shot_260-123440-0002": {
+      "equals_r5": false,
+      "sha1": "06843e896d87"
+    },
+    "zero_shot_260-123440-0010": {
+      "equals_r5": false,
+      "sha1": "57aba83a3b21"
+    },
+    "upnoise_equals_r3": false
+  },
+  "mech": {
+    "padded/zero_shot_121-127105-0003": {
+      "last_0.4s_signal_dbfs": -71.3,
+      "last_0.4s_diff_dbfs": -70.4,
+      "last_20ms_dbfs": -117.6,
+      "upstream_last_20ms_dbfs": -64.9,
+      "quiet_samples_at_end": 506
+    },
+    "padded/zero_shot_121-127105-0015": {
+      "last_0.4s_signal_dbfs": -70.9,
+      "last_0.4s_diff_dbfs": -81.5,
+      "last_20ms_dbfs": -103.8,
+      "upstream_last_20ms_dbfs": -88.8,
+      "quiet_samples_at_end": 537
+    },
+    "padded/zero_shot_121-127105-0024": {
+      "last_0.4s_signal_dbfs": -67.8,
+      "last_0.4s_diff_dbfs": -76.2,
+      "last_20ms_dbfs": -112.3,
+      "upstream_last_20ms_dbfs": -68.0,
+      "quiet_samples_at_end": 515
+    },
+    "padded/zero_shot_260-123286-0014": {
+      "last_0.4s_signal_dbfs": -47.7,
+      "last_0.4s_diff_dbfs": -65.5,
+      "last_20ms_dbfs": -138.7,
+      "upstream_last_20ms_dbfs": -63.4,
+      "quiet_samples_at_end": 621
+    },
+    "padded/zero_shot_260-123440-0002": {
+      "last_0.4s_signal_dbfs": -36.7,
+      "last_0.4s_diff_dbfs": -60.1,
+      "last_20ms_dbfs": -113.9,
+      "upstream_last_20ms_dbfs": -81.6,
+      "quiet_samples_at_end": 564
+    },
+    "padded/zero_shot_260-123440-0010": {
+      "last_0.4s_signal_dbfs": -52.9,
+      "last_0.4s_diff_dbfs": -55.4,
+      "last_20ms_dbfs": -131.1,
+      "upstream_last_20ms_dbfs": -51.9,
+      "quiet_samples_at_end": 619
+    },
+    "exact/zero_shot_121-127105-0003": {
+      "last_0.4s_signal_dbfs": -71.3,
+      "last_0.4s_diff_dbfs": -100.4,
+      "last_20ms_dbfs": -64.7,
+      "upstream_last_20ms_dbfs": -64.9,
+      "quiet_samples_at_end": 0
+    },
+    "exact/zero_shot_121-127105-0015": {
+      "last_0.4s_signal_dbfs": -70.9,
+      "last_0.4s_diff_dbfs": -93.0,
+      "last_20ms_dbfs": -88.5,
+      "upstream_last_20ms_dbfs": -88.8,
+      "quiet_samples_at_end": 301
+    },
+    "exact/zero_shot_121-127105-0024": {
+      "last_0.4s_signal_dbfs": -67.8,
+      "last_0.4s_diff_dbfs": -93.7,
+      "last_20ms_dbfs": -67.7,
+      "upstream_last_20ms_dbfs": -68.0,
+      "quiet_samples_at_end": 9
+    },
+    "exact/zero_shot_260-123286-0014": {
+      "last_0.4s_signal_dbfs": -47.7,
+      "last_0.4s_diff_dbfs": -74.9,
+      "last_20ms_dbfs": -63.2,
+      "upstream_last_20ms_dbfs": -63.4,
+      "quiet_samples_at_end": 0
+    },
+    "exact/zero_shot_260-123440-0002": {
+      "last_0.4s_signal_dbfs": -36.7,
+      "last_0.4s_diff_dbfs": -61.4,
+      "last_20ms_dbfs": -81.0,
+      "upstream_last_20ms_dbfs": -81.6,
+      "quiet_samples_at_end": 62
+    },
+    "exact/zero_shot_260-123440-0010": {
+      "last_0.4s_signal_dbfs": -52.9,
+      "last_0.4s_diff_dbfs": -82.2,
+      "last_20ms_dbfs": -51.8,
+      "upstream_last_20ms_dbfs": -51.9,
+      "quiet_samples_at_end": 0
+    }
+  },
+  "you_sweep": {
+    "padded/seed1": {
+      "last_0.4s_signal_dbfs": -52.9,
+      "last_0.4s_diff_dbfs": -54.4,
+      "last_20ms_dbfs": -130.2,
+      "upstream_last_20ms_dbfs": -51.9,
+      "quiet_samples_at_end": 615
+    },
+    "padded/seed2": {
+      "last_0.4s_signal_dbfs": -52.9,
+      "last_0.4s_diff_dbfs": -54.5,
+      "last_20ms_dbfs": -130.0,
+      "upstream_last_20ms_dbfs": -51.9,
+      "quiet_samples_at_end": 615
+    },
+    "padded/seed3": {
+      "last_0.4s_signal_dbfs": -52.9,
+      "last_0.4s_diff_dbfs": -54.5,
+      "last_20ms_dbfs": -130.1,
+      "upstream_last_20ms_dbfs": -51.9,
+      "quiet_samples_at_end": 615
+    },
+    "padded/seed4": {
+      "last_0.4s_signal_dbfs": -52.9,
+      "last_0.4s_diff_dbfs": -54.5,
+      "last_20ms_dbfs": -130.3,
+      "upstream_last_20ms_dbfs": -51.9,
+      "quiet_samples_at_end": 615
+    },
+    "padded/seed5": {
+      "last_0.4s_signal_dbfs": -52.9,
+      "last_0.4s_diff_dbfs": -54.5,
+      "last_20ms_dbfs": -130.3,
+      "upstream_last_20ms_dbfs": -51.9,
+      "quiet_samples_at_end": 615
+    },
+    "padded/seed6": {
+      "last_0.4s_signal_dbfs": -52.9,
+      "last_0.4s_diff_dbfs": -54.5,
+      "last_20ms_dbfs": -130.2,
+      "upstream_last_20ms_dbfs": -51.9,
+      "quiet_samples_at_end": 615
+    },
+    "padded/seed7": {
+      "last_0.4s_signal_dbfs": -52.9,
+      "last_0.4s_diff_dbfs": -54.5,
+      "last_20ms_dbfs": -130.4,
+      "upstream_last_20ms_dbfs": -51.9,
+      "quiet_samples_at_end": 615
+    },
+    "padded/seed8": {
+      "last_0.4s_signal_dbfs": -52.9,
+      "last_0.4s_diff_dbfs": -54.4,
+      "last_20ms_dbfs": -130.2,
+      "upstream_last_20ms_dbfs": -51.9,
+      "quiet_samples_at_end": 615
+    },
+    "padded/seed9": {
+      "last_0.4s_signal_dbfs": -52.9,
+      "last_0.4s_diff_dbfs": -54.5,
+      "last_20ms_dbfs": -130.4,
+      "upstream_last_20ms_dbfs": -51.9,
+      "quiet_samples_at_end": 615
+    },
+    "padded/upnoise": {
+      "last_0.4s_signal_dbfs": -52.9,
+      "last_0.4s_diff_dbfs": -54.5,
+      "last_20ms_dbfs": -130.1,
+      "upstream_last_20ms_dbfs": -51.9,
+      "quiet_samples_at_end": 615
+    },
+    "exact/seed1": {
+      "last_0.4s_signal_dbfs": -52.9,
+      "last_0.4s_diff_dbfs": -60.9,
+      "last_20ms_dbfs": -51.4,
+      "upstream_last_20ms_dbfs": -51.9,
+      "quiet_samples_at_end": 0
+    },
+    "exact/seed2": {
+      "last_0.4s_signal_dbfs": -52.9,
+      "last_0.4s_diff_dbfs": -61.9,
+      "last_20ms_dbfs": -51.6,
+      "upstream_last_20ms_dbfs": -51.9,
+      "quiet_samples_at_end": 0
+    },
+    "exact/seed3": {
+      "last_0.4s_signal_dbfs": -52.9,
+      "last_0.4s_diff_dbfs": -62.0,
+      "last_20ms_dbfs": -51.6,
+      "upstream_last_20ms_dbfs": -51.9,
+      "quiet_samples_at_end": 0
+    },
+    "exact/seed4": {
+      "last_0.4s_signal_dbfs": -52.9,
+      "last_0.4s_diff_dbfs": -61.9,
+      "last_20ms_dbfs": -51.7,
+      "upstream_last_20ms_dbfs": -51.9,
+      "quiet_samples_at_end": 0
+    },
+    "exact/seed5": {
+      "last_0.4s_signal_dbfs": -52.9,
+      "last_0.4s_diff_dbfs": -62.0,
+      "last_20ms_dbfs": -51.7,
+      "upstream_last_20ms_dbfs": -51.9,
+      "quiet_samples_at_end": 0
+    },
+    "exact/seed6": {
+      "last_0.4s_signal_dbfs": -52.9,
+      "last_0.4s_diff_dbfs": -61.8,
+      "last_20ms_dbfs": -51.6,
+      "upstream_last_20ms_dbfs": -51.9,
+      "quiet_samples_at_end": 0
+    },
+    "exact/seed7": {
+      "last_0.4s_signal_dbfs": -52.9,
+      "last_0.4s_diff_dbfs": -62.2,
+      "last_20ms_dbfs": -51.6,
+      "upstream_last_20ms_dbfs": -51.9,
+      "quiet_samples_at_end": 0
+    },
+    "exact/seed8": {
+      "last_0.4s_signal_dbfs": -52.9,
+      "last_0.4s_diff_dbfs": -61.6,
+      "last_20ms_dbfs": -51.6,
+      "upstream_last_20ms_dbfs": -51.9,
+      "quiet_samples_at_end": 0
+    },
+    "exact/seed9": {
+      "last_0.4s_signal_dbfs": -52.9,
+      "last_0.4s_diff_dbfs": -62.3,
+      "last_20ms_dbfs": -51.6,
+      "upstream_last_20ms_dbfs": -51.9,
+      "quiet_samples_at_end": 0
+    },
+    "exact/upnoise": {
+      "last_0.4s_signal_dbfs": -52.9,
+      "last_0.4s_diff_dbfs": -61.9,
+      "last_20ms_dbfs": -51.7,
+      "upstream_last_20ms_dbfs": -51.9,
+      "quiet_samples_at_end": 0
+    }
+  },
+  "corpus": {
+    "padded/zero_shot_121-127105-0003": {
+      "last_0.4s_signal_dbfs": -71.3,
+      "last_0.4s_diff_dbfs": -69.5,
+      "last_20ms_dbfs": -117.8,
+      "upstream_last_20ms_dbfs": -64.9,
+      "quiet_samples_at_end": 507
+    },
+    "padded/zero_shot_121-127105-0015": {
+      "last_0.4s_signal_dbfs": -70.9,
+      "last_0.4s_diff_dbfs": -75.9,
+      "last_20ms_dbfs": -104.1,
+      "upstream_last_20ms_dbfs": -88.8,
+      "quiet_samples_at_end": 537
+    },
+    "padded/zero_shot_121-127105-0024": {
+      "last_0.4s_signal_dbfs": -67.8,
+      "last_0.4s_diff_dbfs": -75.1,
+      "last_20ms_dbfs": -110.0,
+      "upstream_last_20ms_dbfs": -68.0,
+      "quiet_samples_at_end": 513
+    },
+    "padded/zero_shot_260-123286-0014": {
+      "last_0.4s_signal_dbfs": -47.7,
+      "last_0.4s_diff_dbfs": -52.1,
+      "last_20ms_dbfs": -139.0,
+      "upstream_last_20ms_dbfs": -63.4,
+      "quiet_samples_at_end": 622
+    },
+    "padded/zero_shot_260-123440-0002": {
+      "last_0.4s_signal_dbfs": -36.7,
+      "last_0.4s_diff_dbfs": -42.7,
+      "last_20ms_dbfs": -111.9,
+      "upstream_last_20ms_dbfs": -81.6,
+      "quiet_samples_at_end": 559
+    },
+    "padded/zero_shot_260-123440-0010": {
+      "last_0.4s_signal_dbfs": -52.9,
+      "last_0.4s_diff_dbfs": -54.5,
+      "last_20ms_dbfs": -130.3,
+      "upstream_last_20ms_dbfs": -51.9,
+      "quiet_samples_at_end": 615
+    },
+    "exact/zero_shot_121-127105-0003": {
+      "last_0.4s_signal_dbfs": -71.3,
+      "last_0.4s_diff_dbfs": -73.9,
+      "last_20ms_dbfs": -64.2,
+      "upstream_last_20ms_dbfs": -64.9,
+      "quiet_samples_at_end": 0
+    },
+    "exact/zero_shot_121-127105-0015": {
+      "last_0.4s_signal_dbfs": -70.9,
+      "last_0.4s_diff_dbfs": -77.0,
+      "last_20ms_dbfs": -88.2,
+      "upstream_last_20ms_dbfs": -88.8,
+      "quiet_samples_at_end": 300
+    },
+    "exact/zero_shot_121-127105-0024": {
+      "last_0.4s_signal_dbfs": -67.8,
+      "last_0.4s_diff_dbfs": -81.2,
+      "last_20ms_dbfs": -66.8,
+      "upstream_last_20ms_dbfs": -68.0,
+      "quiet_samples_at_end": 9
+    },
+    "exact/zero_shot_260-123286-0014": {
+      "last_0.4s_signal_dbfs": -47.7,
+      "last_0.4s_diff_dbfs": -52.1,
+      "last_20ms_dbfs": -64.0,
+      "upstream_last_20ms_dbfs": -63.4,
+      "quiet_samples_at_end": 0
+    },
+    "exact/zero_shot_260-123440-0002": {
+      "last_0.4s_signal_dbfs": -36.7,
+      "last_0.4s_diff_dbfs": -42.7,
+      "last_20ms_dbfs": -75.7,
+      "upstream_last_20ms_dbfs": -81.6,
+      "quiet_samples_at_end": 88
+    },
+    "exact/zero_shot_260-123440-0010": {
+      "last_0.4s_signal_dbfs": -52.9,
+      "last_0.4s_diff_dbfs": -61.9,
+      "last_20ms_dbfs": -51.7,
+      "upstream_last_20ms_dbfs": -51.9,
+      "quiet_samples_at_end": 0
+    }
+  }
+}

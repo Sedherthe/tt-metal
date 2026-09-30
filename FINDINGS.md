@@ -525,6 +525,32 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
 - **Recorded as `Misses()`** in `tests/perf/gates.py`: `ttfp_ms` at 1470 ± 15 %, `rtf_streaming` at 1.09 ± 20 %.
   No device test enforces them yet.
 
+### B28 — Streaming WER 1.36 %: the final HiFT call's end padding silences the last ~25 ms, and Whisper adds "you" (confirmed, 09-30). Status: open; fix proposed, not built
+- **The flip:** stage A (R3) and R5's live audio both end 260-123440-0010 in "... gently smiling jaws you" (WER 5.00 % there; corpus 0.68 → 1.36 %). Upstream's streaming of the same tokens and our Stage 1 don't. `scripts/2026-09-30/`.
+- **Not lengths:** all six utterances match upstream's streamed audio sample for sample in length, whole and per
+  chunk. The "new frames only" slicing and the trim are exact.
+- **Not the scorer:**
+  - it already decodes greedily with one temperature (`temperature=0.0` as a float: no fallback), the call CosyVoice1's scorer makes;
+  - 12 runs per clip (5 as run, 5 seeded with deterministic algorithms, 24 and 1 threads) gave one transcript and the same per-step log-probabilities to three decimals.
+- **Where Whisper decides:** at the first text token. " how" (lowercase mode) beats " How" by 0.13 nats on ours; upstream's goes 0.54 the other way. In lowercase mode the first segment ends at 8.06 s, and a second decode over the remaining 20 ms produces " you".
+- **The trigger is our last 0.1 s:** ours with upstream's last 0.1 s spliced in is clean; upstream with ours says "you".
+- **What is there:** our last ~500–620 samples fall to −104 to −139 dBFS where upstream's run on at −52 to −89. The rest of the last second matches to 1–2 dB per 20 ms frame.
+  - It happens in every streamed utterance. The final call is padded at its end with silence mel (`FINAL_CALL_BUCKETS`: the spec's design, D38), and HiFT's look-ahead sees the silence.
+  - Stage 1 has it too wherever its single HiFT call is end-padded to a bucket: clearly in 121-127105-0003, 260-123286-0014 and 260-123440-0010. The two chunked utterances, anchored to the end, are clean. Whisper happens not to trip there (" How" by 0.27 on this clip).
+- **The proof** (`you_tail_ab.py`: the final call at its exact length, nothing else changed; the padded variant reproduces R5's and R3's audio sample for sample):
+  - **Mechanism** (upstream's mel, F0 and noise, so only the padding differs from upstream):
+    - padded: the last 20 ms collapse; the tail difference is 0.9–23 dB below the signal; Whisper says "you" (lowercase by 0.55 nats);
+    - exact: the last 20 ms within 1.3 dB of upstream's; the tail 20–29 dB below the signal; seams unchanged; no "you" (" How" by 0.575; upstream's own 0.541).
+  - **Our pipeline on the clip, over 11 noise realizations:** padded says "you" 5 of 11 times, with the first token always within ±0.16 nats of a tie. Exact: 0 of 11, 0.78–1.04 nats clear.
+  - **Corpus:** exact 0.68 % / 95.88; upstream 0.68 % / 95.90; padded (= R5) 1.36 % / 95.85.
+- **Why 09-28 scored 0.68 %:** most likely the same end padding (the spec pads the final chunk with silence, and singles out only the first chunk for front padding), landing on the other side of the coin: 6 of 11 realizations don't tip. It can't be proven, because the lost code and its audio are gone. Either way the audio did not match upstream at the end, and the gates allowed it: D38's −50 dBFS floor passed this clip's tail at 2.5 dB below the signal.
+- **Exact length isn't the product fix:** it compiled 4,046 kernels for five new final lengths (~800 each on first sight), and the final lengths are unbounded.
+- **Front padding (`you_tail_front.py`) isn't either.**
+  - The tails are fixed and nothing new compiles, and "you" goes (0 of 11 realizations; corpus 0.68 %).
+  - But the silence under the crossfade degrades the final seam: PCC 0.9923–0.9997, five of six below the gate's 0.998. A 13-token final chunk's body falls to 0.978, and corpus SIM to 95.80.
+  - That it removes "you" as well confirms the tail as the trigger.
+- **Proposed** (not built; the user's call): masked end padding in HiFT, i.e. activations beyond the valid length zeroed after every layer: upstream's zero padding at the bucket geometry. It would fix the Stage 1 tails as well. It needs a gate: in the mechanism test, the final chunk's last 20 ms within 3 dB of upstream's (padded misses by 15–79 dB, exact is within 1.3), with no absolute floor.
+
 ## O: older open items
 
 - **O1 — HiFT dtype crash.** Status: **fixed `544d588018`** (09-27). `TtHiFTDecoder.decode` converts `mel` and

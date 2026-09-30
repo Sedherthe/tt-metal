@@ -1,0 +1,23 @@
+2026-09-30 00:38:38 started tail_front (log /home/user/data/cosyvoice2_runs/0930/tail_front.log)
+2026-09-30 00:49:08 tail_front exited 0
+binaries compiled by tail_front: 0
+front zero_shot_121-127105-0003: ours {'last_0.4s_signal_dbfs': -71.3, 'last_0.4s_diff_dbfs': -73.9, 'last_20ms_dbfs': -64.1, 'upstream_last_20ms_dbfs': -64.9, 'quiet_samples_at_end': 0}; mech {'last_0.4s_signal_dbfs': -71.3, 'last_0.4s_diff_dbfs': -98.7, 'last_20ms_dbfs': -64.6, 'upstream_last_20ms_dbfs': -64.9, 'quiet_samples_at_end': 0, 'final_seam_pcc': 0.99973, 'final_chunk_pcc_before_tail': 
+front zero_shot_121-127105-0015: ours {'last_0.4s_signal_dbfs': -70.9, 'last_0.4s_diff_dbfs': -77.0, 'last_20ms_dbfs': -88.1, 'upstream_last_20ms_dbfs': -88.8, 'quiet_samples_at_end': 300}; mech {'last_0.4s_signal_dbfs': -70.9, 'last_0.4s_diff_dbfs': -92.1, 'last_20ms_dbfs': -88.4, 'upstream_last_20ms_dbfs': -88.8, 'quiet_samples_at_end': 301, 'final_seam_pcc': 0.99785, 'final_chunk_pcc_before_tai
+front zero_shot_121-127105-0024: ours {'last_0.4s_signal_dbfs': -67.8, 'last_0.4s_diff_dbfs': -81.2, 'last_20ms_dbfs': -66.8, 'upstream_last_20ms_dbfs': -68.0, 'quiet_samples_at_end': 0}; mech {'last_0.4s_signal_dbfs': -67.8, 'last_0.4s_diff_dbfs': -93.6, 'last_20ms_dbfs': -67.7, 'upstream_last_20ms_dbfs': -68.0, 'quiet_samples_at_end': 9, 'final_seam_pcc': 0.99737, 'final_chunk_pcc_before_tail': 
+front zero_shot_260-123286-0014: ours {'last_0.4s_signal_dbfs': -47.7, 'last_0.4s_diff_dbfs': -51.7, 'last_20ms_dbfs': -64.4, 'upstream_last_20ms_dbfs': -63.4, 'quiet_samples_at_end': 0}; mech {'last_0.4s_signal_dbfs': -47.7, 'last_0.4s_diff_dbfs': -74.9, 'last_20ms_dbfs': -63.2, 'upstream_last_20ms_dbfs': -63.4, 'quiet_samples_at_end': 0, 'final_seam_pcc': 0.99359, 'final_chunk_pcc_before_tail': 
+front zero_shot_260-123440-0002: ours {'last_0.4s_signal_dbfs': -36.7, 'last_0.4s_diff_dbfs': -43.0, 'last_20ms_dbfs': -74.7, 'upstream_last_20ms_dbfs': -81.6, 'quiet_samples_at_end': 0}; mech {'last_0.4s_signal_dbfs': -36.7, 'last_0.4s_diff_dbfs': -61.0, 'last_20ms_dbfs': -81.0, 'upstream_last_20ms_dbfs': -81.6, 'quiet_samples_at_end': 62, 'final_seam_pcc': 0.99227, 'final_chunk_pcc_before_tail':
+front zero_shot_260-123440-0010: ours {'last_0.4s_signal_dbfs': -52.9, 'last_0.4s_diff_dbfs': -64.1, 'last_20ms_dbfs': -51.6, 'upstream_last_20ms_dbfs': -51.9, 'quiet_samples_at_end': 0}; mech {'last_0.4s_signal_dbfs': -52.9, 'last_0.4s_diff_dbfs': -80.0, 'last_20ms_dbfs': -51.8, 'upstream_last_20ms_dbfs': -51.9, 'quiet_samples_at_end': 0, 'final_seam_pcc': 0.99269, 'final_chunk_pcc_before_tail': 
+2026-09-30 00:49:10 started score_front (log /home/user/data/cosyvoice2_runs/0930/score_front.log)
+2026-09-30 00:51:40 score_front exited 0
+/home/user/data/cosyvoice2_runs/0930/tail_ab/front_1987: {"n": 6, "corpus_wer_percent": 0.68, "corpus_word_errors": 1, "corpus_ref_words": 147, "sim_mean": 95.8, "sim_campplus_diagnostic_mean": 83.54}
+wrote /home/user/data/cosyvoice2_runs/0930/tail_ab/front_1987/scores.json
+
+| case | words | WER % pytorch-reference-streaming | WER % ttnn-streaming-offline-front-final | SIM pytorch-reference-streaming | SIM ttnn-streaming-offline-front-final | audio s pytorch-reference-streaming / ttnn-streaming-offline-front-final |
+|---|---|---|---|---|---|---|
+| zero_shot_121-127105-0003 | 18 | 0.00 | 0.00 | 95.07 | 94.70 | 8.52 / 8.52 |
+| zero_shot_121-127105-0015 | 10 | 0.00 | 0.00 | 93.74 | 93.71 | 3.80 / 3.80 |
+| zero_shot_121-127105-0024 | 48 | 0.00 | 0.00 | 93.42 | 93.50 | 13.88 / 13.88 |
+| zero_shot_260-123286-0014 | 7 | 0.00 | 0.00 | 96.10 | 96.03 | 3.00 / 3.00 |
+| zero_shot_260-123440-0002 | 44 | 2.27 | 2.27 | 98.61 | 98.51 | 12.68 / 12.68 |
+| zero_shot_260-123440-0010 | 20 | 0.00 | 0.00 | 98.45 | 98.34 | 8.08 / 8.08 |
+| **corpus (6 utterances)** | 147 | **0.68** (1 errors) | **0.68** (1 errors) | **95.90** | **95.80** | |

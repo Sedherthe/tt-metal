@@ -1,4 +1,4 @@
-# CosyVoice2 bring-up — STATUS (2026-09-29, end of session)
+# CosyVoice2 bring-up — STATUS (2026-09-30)
 
 Rewrite this file each session; don't append to it. Every claim here cites a commit, a command, or an ID in
 FINDINGS.md or DECISIONS.md (D*). FINDINGS prefixes: R = the 09-27 review, B = build findings, O = older open
@@ -6,7 +6,11 @@ items, X = fixed. Older narrative lives in `history/`.
 
 ## Where things stand
 
-- **Stopped after R5, as planned (D33).** R6 and the Stage 3 plan come next.
+- **Stopped after R5, as planned (D33).** Then, on 09-30, before R6: the streaming WER's rise from 0.68 % (09-28)
+  to 1.36 % (B28). The final HiFT call's end padding silences the last ~25 ms of every streamed utterance, and on
+  260-123440-0010 Whisper then adds "you" (5 of 11 noise realizations). The final call at its exact length restores
+  0.68 % / 95.88. No PR code changed: the fix is the user's call. The spec-against-today table is
+  `reviews/2026-09-30_rebuild_spec_vs_today.md`.
 - **PR #56651** (`bringup/cosyvoice2-istft`), `models/experimental/cosyvoice2/`.
   - The local HEAD is `6a2ab97dde`, and all of it is on the fork's `backup/2026-09-29-pr`.
   - GitHub's `bringup/cosyvoice2-istft` is still at `7bd094cc3e`. The user pushes it (D34).
@@ -63,13 +67,17 @@ items, X = fixed. Older narrative lives in `history/`.
 
 ## Open questions for the user
 
+0. **B28's fix.** Proposed: masked end padding in HiFT (upstream's zero padding at the bucket geometry). It would fix
+   the Stage 1 tails as well, and needs a gate on the final chunk's last 20 ms against upstream's. Measured and
+   rejected: exact-length final calls (~800 kernels per new length) and front padding (final seams down to 0.992).
+
 1. **D40, the streaming guard.** The 09-29 report left it to the user; it was built before an answer came. Keep
    it, or revert to documenting the restriction?
 2. **Pushing:** `bringup/cosyvoice2-istft` and `notes/cosyvoice2`, from the backup branches (D34).
 3. **The #36487 comment** (`drafts/2026-09-29_comment_36487_prepare_conv_weights_dram_slicing.md`) is drafted, not
    posted.
 
-## Next: R6, then the Stage 3 plan
+## Next: B28's fix once decided, then R6, then the Stage 3 plan
 
 - **R6, the numbers D37 left open:**
   - cold start-up (an empty kernel-cache directory) and warm start-up, re-measured (PERF.md's 30.5 and 3.2 min;

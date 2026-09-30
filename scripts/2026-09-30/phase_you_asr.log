@@ -1,0 +1,92 @@
+2026-09-30 00:05:53 started you_normal1 (log /home/user/data/cosyvoice2_runs/0930/you_normal1.log)
+2026-09-30 00:08:38 you_normal1 exited 0
+2026-09-30 00:08:38 started you_normal2 (log /home/user/data/cosyvoice2_runs/0930/you_normal2.log)
+2026-09-30 00:09:53 you_normal2 exited 0
+2026-09-30 00:09:53 started you_normal3 (log /home/user/data/cosyvoice2_runs/0930/you_normal3.log)
+2026-09-30 00:11:08 you_normal3 exited 0
+2026-09-30 00:11:08 started you_normal4 (log /home/user/data/cosyvoice2_runs/0930/you_normal4.log)
+2026-09-30 00:12:23 you_normal4 exited 0
+2026-09-30 00:12:23 started you_normal5 (log /home/user/data/cosyvoice2_runs/0930/you_normal5.log)
+2026-09-30 00:13:53 you_normal5 exited 0
+2026-09-30 00:13:53 started you_seeded1 (log /home/user/data/cosyvoice2_runs/0930/you_seeded1.log)
+2026-09-30 00:15:08 you_seeded1 exited 0
+2026-09-30 00:15:08 started you_seeded2 (log /home/user/data/cosyvoice2_runs/0930/you_seeded2.log)
+2026-09-30 00:16:23 you_seeded2 exited 0
+2026-09-30 00:16:23 started you_seeded3 (log /home/user/data/cosyvoice2_runs/0930/you_seeded3.log)
+2026-09-30 00:17:38 you_seeded3 exited 0
+2026-09-30 00:17:38 started you_seeded4 (log /home/user/data/cosyvoice2_runs/0930/you_seeded4.log)
+2026-09-30 00:18:53 you_seeded4 exited 0
+2026-09-30 00:18:53 started you_seeded5 (log /home/user/data/cosyvoice2_runs/0930/you_seeded5.log)
+2026-09-30 00:20:08 you_seeded5 exited 0
+2026-09-30 00:20:08 started you_threads24 (log /home/user/data/cosyvoice2_runs/0930/you_threads24.log)
+2026-09-30 00:21:23 you_threads24 exited 0
+2026-09-30 00:21:23 started you_threads1 (log /home/user/data/cosyvoice2_runs/0930/you_threads1.log)
+2026-09-30 00:26:24 you_threads1 exited 0
+[asr] loading whisper large-v3 (cpu)
+[normal1 normal] ours_live        'how cheerfully he seems to grin how neatly spread his claws and welcome little fishes in with gently smiling jaws you'
+[normal1 normal] ours_offline     'how cheerfully he seems to grin how neatly spread his claws and welcome little fishes in with gently smiling jaws you'
+[normal1 normal] upstream_stream  'How cheerfully he seems to grin, how neatly spread his claws, and welcome little fishes in, with gently smiling jaws.'
+[normal1 normal] ours_stage1      'How cheerfully he seems to grin, how neatly spread his claws, and welcome little fishes in, with gently smiling jaws.'
+[normal1 normal] ours+upstream_last_0.1s    'How cheerfully he seems to grin, how neatly spread his claws, and welcome little fishes in, with gently smiling jaws.'
+[normal1 normal] upstream+ours_last_0.1s    'how cheerfully he seems to grin how neatly spread his claws and welcome little fishes in with gently smiling jaws you'
+[normal1 normal] ours+upstream_last_0.2s    'How cheerfully he seems to grin, how neatly spread his claws, and welcome little fishes in, with gently smiling jaws.'
+[normal1 normal] upstream+ours_last_0.2s    'how cheerfully he seems to grin how neatly spread his claws and welcome little fishes in with gently smiling jaws you'
+[normal1 normal] ours+upstream_last_0.4s    'How cheerfully he seems to grin, how neatly spread his claws, and welcome little fishes in, with gently smiling jaws.'
+[normal1 normal] upstream+ours_last_0.4s    'how cheerfully he seems to grin how neatly spread his claws and welcome little fishes in with gently smiling jaws you'
+[normal1 normal] ours+upstream_last_0.8s    'How cheerfully he seems to grin, how neatly spread his claws, and welcome little fishes in, with gently smiling jaws.'
+[normal1 normal] upstream+ours_last_0.8s    'how cheerfully he seems to grin how neatly spread his claws and welcome little fishes in with gently smiling jaws you'
+[asr] loading whisper large-v3 (cpu)
+[normal2 normal] ours_live        'how cheerfully he seems to grin how neatly spread his claws and welcome little fishes in with gently smiling jaws you'
+[normal2 normal] ours_offline     'how cheerfully he seems to grin how neatly spread his claws and welcome little fishes in with gently smiling jaws you'
+[normal2 normal] upstream_stream  'How cheerfully he seems to grin, how neatly spread his claws, and welcome little fishes in, with gently smiling jaws.'
+[normal2 normal] ours_stage1      'How cheerfully he seems to grin, how neatly spread his claws, and welcome little fishes in, with gently smiling jaws.'
+[asr] loading whisper large-v3 (cpu)
+[normal3 normal] ours_live        'how cheerfully he seems to grin how neatly spread his claws and welcome little fishes in with gently smiling jaws you'
+[normal3 normal] ours_offline     'how cheerfully he seems to grin how neatly spread his claws and welcome little fishes in with gently smiling jaws you'
+[normal3 normal] upstream_stream  'How cheerfully he seems to grin, how neatly spread his claws, and welcome little fishes in, with gently smiling jaws.'
+[normal3 normal] ours_stage1      'How cheerfully he seems to grin, how neatly spread his claws, and welcome little fishes in, with gently smiling jaws.'
+[asr] loading whisper large-v3 (cpu)
+[normal4 normal] ours_live        'how cheerfully he seems to grin how neatly spread his claws and welcome little fishes in with gently smiling jaws you'
+[normal4 normal] ours_offline     'how cheerfully he seems to grin how neatly spread his claws and welcome little fishes in with gently smiling jaws you'
+[normal4 normal] upstream_stream  'How cheerfully he seems to grin, how neatly spread his claws, and welcome little fishes in, with gently smiling jaws.'
+[normal4 normal] ours_stage1      'How cheerfully he seems to grin, how neatly spread his claws, and welcome little fishes in, with gently smiling jaws.'
+[asr] loading whisper large-v3 (cpu)
+[normal5 normal] ours_live        'how cheerfully he seems to grin how neatly spread his claws and welcome little fishes in with gently smiling jaws you'
+[normal5 normal] ours_offline     'how cheerfully he seems to grin how neatly spread his claws and welcome little fishes in with gently smiling jaws you'
+[normal5 normal] upstream_stream  'How cheerfully he seems to grin, how neatly spread his claws, and welcome little fishes in, with gently smiling jaws.'
+[normal5 normal] ours_stage1      'How cheerfully he seems to grin, how neatly spread his claws, and welcome little fishes in, with gently smiling jaws.'
+[asr] loading whisper large-v3 (cpu)
+[seeded1 seeded] ours_live        'how cheerfully he seems to grin how neatly spread his claws and welcome little fishes in with gently smiling jaws you'
+[seeded1 seeded] ours_offline     'how cheerfully he seems to grin how neatly spread his claws and welcome little fishes in with gently smiling jaws you'
+[seeded1 seeded] upstream_stream  'How cheerfully he seems to grin, how neatly spread his claws, and welcome little fishes in, with gently smiling jaws.'
+[seeded1 seeded] ours_stage1      'How cheerfully he seems to grin, how neatly spread his claws, and welcome little fishes in, with gently smiling jaws.'
+[asr] loading whisper large-v3 (cpu)
+[seeded2 seeded] ours_live        'how cheerfully he seems to grin how neatly spread his claws and welcome little fishes in with gently smiling jaws you'
+[seeded2 seeded] ours_offline     'how cheerfully he seems to grin how neatly spread his claws and welcome little fishes in with gently smiling jaws you'
+[seeded2 seeded] upstream_stream  'How cheerfully he seems to grin, how neatly spread his claws, and welcome little fishes in, with gently smiling jaws.'
+[seeded2 seeded] ours_stage1      'How cheerfully he seems to grin, how neatly spread his claws, and welcome little fishes in, with gently smiling jaws.'
+[asr] loading whisper large-v3 (cpu)
+[seeded3 seeded] ours_live        'how cheerfully he seems to grin how neatly spread his claws and welcome little fishes in with gently smiling jaws you'
+[seeded3 seeded] ours_offline     'how cheerfully he seems to grin how neatly spread his claws and welcome little fishes in with gently smiling jaws you'
+[seeded3 seeded] upstream_stream  'How cheerfully he seems to grin, how neatly spread his claws, and welcome little fishes in, with gently smiling jaws.'
+[seeded3 seeded] ours_stage1      'How cheerfully he seems to grin, how neatly spread his claws, and welcome little fishes in, with gently smiling jaws.'
+[asr] loading whisper large-v3 (cpu)
+[seeded4 seeded] ours_live        'how cheerfully he seems to grin how neatly spread his claws and welcome little fishes in with gently smiling jaws you'
+[seeded4 seeded] ours_offline     'how cheerfully he seems to grin how neatly spread his claws and welcome little fishes in with gently smiling jaws you'
+[seeded4 seeded] upstream_stream  'How cheerfully he seems to grin, how neatly spread his claws, and welcome little fishes in, with gently smiling jaws.'
+[seeded4 seeded] ours_stage1      'How cheerfully he seems to grin, how neatly spread his claws, and welcome little fishes in, with gently smiling jaws.'
+[asr] loading whisper large-v3 (cpu)
+[seeded5 seeded] ours_live        'how cheerfully he seems to grin how neatly spread his claws and welcome little fishes in with gently smiling jaws you'
+[seeded5 seeded] ours_offline     'how cheerfully he seems to grin how neatly spread his claws and welcome little fishes in with gently smiling jaws you'
+[seeded5 seeded] upstream_stream  'How cheerfully he seems to grin, how neatly spread his claws, and welcome little fishes in, with gently smiling jaws.'
+[seeded5 seeded] ours_stage1      'How cheerfully he seems to grin, how neatly spread his claws, and welcome little fishes in, with gently smiling jaws.'
+[asr] loading whisper large-v3 (cpu)
+[threads1 normal] ours_live        'how cheerfully he seems to grin how neatly spread his claws and welcome little fishes in with gently smiling jaws you'
+[threads1 normal] ours_offline     'how cheerfully he seems to grin how neatly spread his claws and welcome little fishes in with gently smiling jaws you'
+[threads1 normal] upstream_stream  'How cheerfully he seems to grin, how neatly spread his claws, and welcome little fishes in, with gently smiling jaws.'
+[threads1 normal] ours_stage1      'How cheerfully he seems to grin, how neatly spread his claws, and welcome little fishes in, with gently smiling jaws.'
+[asr] loading whisper large-v3 (cpu)
+[threads24 normal] ours_live        'how cheerfully he seems to grin how neatly spread his claws and welcome little fishes in with gently smiling jaws you'
+[threads24 normal] ours_offline     'how cheerfully he seems to grin how neatly spread his claws and welcome little fishes in with gently smiling jaws you'
+[threads24 normal] upstream_stream  'How cheerfully he seems to grin, how neatly spread his claws, and welcome little fishes in, with gently smiling jaws.'
+[threads24 normal] ours_stage1      'How cheerfully he seems to grin, how neatly spread his claws, and welcome little fishes in, with gently smiling jaws.'
