@@ -323,3 +323,7 @@ This session stops after R5, with the streaming numbers. R1 must land before R4.
 - **The "you" clip is a regression test:** 260-123440-0010 streamed over 11 draws.
   - `test_streaming.py::test_device_you_clip_noise_draws` renders them and checks each ending's level;
   - `tests/reference/test_you_clip.py`, in the reference venv, fails on any trailing "you".
+
+### D44 — D40 kept: streaming refuses to run without its warm-up (user, 09-30)
+- `synthesize_stream` keeps raising unless `warmup_streaming()` has run, and `demo.py --stream` keeps requiring
+  `--warmup buckets`. The user's earlier answer to D40 had not arrived.

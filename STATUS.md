@@ -57,9 +57,8 @@ items, X = fixed. Older narrative lives in `history/`.
   - card n150 L at `0000:01:00.0` (`/dev/tenstorrent/2`), KMD 2.9.0, firmware 19.11.0.0.
 - **Health:** every 09-30 job ran without a fault. At 09:15 the card was healthy: DRAM OK, heartbeat 116,472
   (`scripts/2026-09-30/tt_smi_end.json`).
-  - That heartbeat is below 09-29's 158,131, so the card's firmware restarted overnight. The host did not reboot
-    (uptime 92 days), and no reset was issued here.
-  - KMD 2.9.0 powers the card down after 5 s idle (`power_policy=Y`), which would explain it. Not confirmed (O2).
+  - All seven cards on the host restarted their firmware together at ~16:55 on 09-29, while this card was idle
+    (B33). The host did not reboot. The cause is unknown (a driver reload or a reset of every card).
 - **Environments:** `/opt/venv` for the device side (no `python_env`; `inflect` added), `~/cosyvoice2_ref_env` for
   the reference side (locked, D35). See RUNBOOK §1–2.
 - **Data:** under `/home/user/data`:
@@ -72,8 +71,7 @@ items, X = fixed. Older narrative lives in `history/`.
 ## Open questions for the user
 
 1. **Pushing:** `bringup/cosyvoice2-istft` and `notes/cosyvoice2`, from the backup branches (D34).
-2. **D40, the streaming guard** (built on 09-29 before an answer): keep it, or revert to documenting the
-   restriction? Not answered yet.
+2. **D40, the streaming guard:** kept (user, 09-30; D44).
 3. **D41's additions** (Claude): the stage A end also gates the last 0.4 s's difference, 20 dB below the signal
    with no floor, and keeps the final chunk's PCC before those 0.4 s. On a quiet ending, PCC measures the port's own
    floor.

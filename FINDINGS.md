@@ -627,6 +627,34 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
 - **Docs:** PERF.md, VALIDATION and the README carry all of it; the README got a reviewer pass (tests, layout,
   references).
 
+### B33 — All seven N150s on this host restarted their firmware at ~16:55 on 09-29, while this card sat idle (confirmed, 09-30). Status: recorded (infra; cause unknown)
+- **tt-smi's `heartbeat` for this card** (0000:01:00.0; `scripts/2026-09-29/tt_smi*.json`, `r5_tt_smi.json`,
+  `scripts/2026-09-30/tt_smi_end.json`, `tt_smi_0946.json`):
+
+  | time | heartbeat |
+  |---|---|
+  | 09-29 09:26:31 | 117,882 |
+  | 09-29 10:00:27 | 121,913 |
+  | 09-29 15:05:19 | 158,131 |
+  | 09-30 09:15:09 | 116,472 |
+  | 09-30 09:46:53 | 120,243 |
+
+  It advanced at a steady 1.98/s through 09-29, idle gaps between jobs included. So 09-29's power-downs, if any,
+  did not reset it.
+- **The driver's counter** (`/sys/class/tenstorrent/tenstorrent!N/tt_heartbeat`) runs at 9.91/s. At 09:46:37 it read
+  601,027 on this card and 601,045–601,047 on the host's six other N150s, which this session never opened.
+- **Both counters date their start to ~16:55 on 09-29, ±5 min:** 601,328 / 9.91 s and 120,243 / 1.98 s back from
+  09:47. Every card on the host restarted at the same moment.
+- **What it rules out:** a fault of this card, and anything this session did. The last job before it ended at
+  15:05 (the tt-smi check), and the next device job started at 00:13 on 09-30.
+  - The host did not reboot: uptime 92 days (`/proc/uptime`).
+  - The kernel log is not readable here.
+  - The driver runs with `power_policy=Y`, `idle_power_down_grace_ms=5000`, `auto_reset_timeout=10` and
+    `reset_limit=10`.
+- **Likely a driver reload, or a reset of every card on the host. Unconfirmed.** 09-30's STATUS blamed the idle
+  power-down; the steady counter through 09-29's idle gaps argues against that.
+- **No job was affected.** Every 09-30 device job ran clean after it. Related to O2 only as another infra event.
+
 ## O: older open items
 
 - **O1 — HiFT dtype crash.** Status: **fixed `544d588018`** (09-27). `TtHiFTDecoder.decode` converts `mel` and
