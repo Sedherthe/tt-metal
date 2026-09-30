@@ -1,0 +1,60 @@
+2026-09-30 06:46:26 started suite (log /home/user/data/cosyvoice2_runs/0930/suite.log)
+2026-09-30 07:13:41 suite exited 0
+binaries compiled by suite: 1103
+  capture failed -> eager fallback PCC 0.9993872375555415
+models/experimental/cosyvoice2/tests/pcc/test_flow_decoder.py::test_device_cfm_traces_pass_allocation_tracker SKIPPED
+  the no-crossfade control failed the seam gate at 9 seams, passed it at: []
+models/experimental/cosyvoice2/tests/reference/test_reference_env.py::test_fp32_shim_loads_the_backbone_in_fp32 SKIPPED
+models/experimental/cosyvoice2/tests/reference/test_reference_env.py::test_shimmed_decode_matches_a_no_cache_forward SKIPPED
+models/experimental/cosyvoice2/tests/reference/test_you_clip.py::test_no_draw_of_the_you_clip_ends_in_you SKIPPED
+SKIPPED [1] models/experimental/cosyvoice2/tests/pcc/test_flow_decoder.py:396: opt-in: set COSYVOICE2_RUN_TRACE_ALLOC_TRACKER=1 and run this test in its own pytest invocation
+SKIPPED [2] models/experimental/cosyvoice2/tests/reference/test_reference_env.py:60: reference venv only (No module named 'torchaudio')
+SKIPPED [1] models/experimental/cosyvoice2/tests/reference/test_you_clip.py:38: set COSYVOICE2_YOU_OUT (the device half's output)
+==== 228 passed, 4 skipped, 1 deselected, 11 warnings in 1615.80s (0:26:55) ====
+2026-09-30 07:13:45 started perf (log /home/user/data/cosyvoice2_runs/0930/perf.log)
+2026-09-30 07:17:46 perf exited 0
+binaries compiled by perf: 0
+  start-up: warmed every bucket in 184.5 s
+  | zero_shot_121-127105-0003 | 8.52 | 213 | 3.806 | 0.447 |
+  | zero_shot_121-127105-0015 | 3.80 | 95 | 2.311 | 0.608 |
+  | zero_shot_121-127105-0024 | 13.88 | 347 | 6.630 | 0.478 |
+  | zero_shot_260-123286-0014 | 3.00 | 75 | 2.025 | 0.675 |
+  | zero_shot_260-123440-0002 | 12.68 | 317 | 5.607 | 0.442 |
+  | zero_shot_260-123440-0010 | 8.08 | 202 | 3.669 | 0.454 |
+    rtf_nonstreaming < 1.0           measured    0.675   PASS  [worst of 6; aggregate 0.481]
+================== 1 passed, 4 warnings in 220.51s (0:03:40) ===================
+2026-09-30 07:17:50 started stage1 (log /home/user/data/cosyvoice2_runs/0930/stage1.log)
+2026-09-30 07:21:50 stage1 exited 0
+binaries compiled by stage1: 0
+| zero_shot_260-123440-0010 | 8.08 | 202 | 0.031 | 2.104 | 96.0 | 0.312 | 0.865 | 0.378 | 3.691 | 0.457 |  DRAM 146.6 MiB/bank, L1_SMALL 0 B/bank
+| zero_shot_121-127105-0003 | 8.52 | 213 | 0.030 | 2.179 | 97.8 | 0.297 | 0.862 | 0.382 | 3.761 | 0.441 |
+| zero_shot_121-127105-0015 | 3.80 | 95 | 0.031 | 1.043 | 91.1 | 0.229 | 0.784 | 0.215 | 2.304 | 0.606 |
+| zero_shot_121-127105-0024 | 13.88 | 347 | 0.033 | 3.581 | 96.9 | 0.976 | 1.358 | 0.726 | 6.677 | 0.481 |
+| zero_shot_260-123286-0014 | 3.00 | 75 | 0.031 | 0.841 | 89.2 | 0.185 | 0.690 | 0.214 | 1.963 | 0.654 |
+| zero_shot_260-123440-0002 | 12.68 | 317 | 0.032 | 3.270 | 96.9 | 0.696 | 1.012 | 0.707 | 5.719 | 0.451 |
+| zero_shot_260-123440-0010 | 8.08 | 202 | 0.031 | 2.104 | 96.0 | 0.312 | 0.865 | 0.378 | 3.691 | 0.457 |
+Distinct utterances: 6, audio 49.96 s, wall 24.11 s, aggregate RTF 0.483, worst 0.654. Config: reported, HiFT F0/source float32, bucketing True, warm-up buckets (185.4 s), seed 1986.
+2026-09-30 07:21:54 started stream1 (log /home/user/data/cosyvoice2_runs/0930/stream1.log)
+2026-09-30 07:28:39 stream1 exited 0
+binaries compiled by stream1: 0
+| zero_shot_260-123440-0002 | 12.68 | 317 | 5 | 25 | 0.389 | 0.875 | 0.692 | 0.123 | **1.387** | 10.310 | 0.813 |  DRAM 169.2 MiB/bank, L1_SMALL 0 B/bank
+| zero_shot_260-123440-0010 | 8.08 | 202 | 4 | 25 | 0.384 | 0.848 | 0.677 | 0.120 | **1.353** | 6.780 | 0.839 |  DRAM 169.2 MiB/bank, L1_SMALL 0 B/bank
+| zero_shot_121-127105-0003 | 8.52 | 213 | 4 | 32 | 0.473 | 0.891 | 0.714 | 0.127 | **1.491** | 6.939 | 0.814 |
+| zero_shot_121-127105-0015 | 3.80 | 95 | 3 | 32 | 0.464 | 0.912 | 0.739 | 0.126 | **1.502** | 4.261 | 1.121 |
+| zero_shot_121-127105-0024 | 13.88 | 347 | 5 | 32 | 0.459 | 0.843 | 0.691 | 0.121 | **1.423** | 11.378 | 0.820 |
+| zero_shot_260-123286-0014 | 3.00 | 75 | 2 | 25 | 0.383 | 0.865 | 0.687 | 0.124 | **1.373** | 2.872 | 0.957 |
+| zero_shot_260-123440-0002 | 12.68 | 317 | 5 | 25 | 0.389 | 0.875 | 0.692 | 0.123 | **1.387** | 10.310 | 0.813 |
+| zero_shot_260-123440-0010 | 8.08 | 202 | 4 | 25 | 0.384 | 0.848 | 0.677 | 0.120 | **1.353** | 6.780 | 0.839 |
+Distinct utterances: 6, audio 49.96 s, wall 42.54 s, aggregate RTF 0.851, worst 1.121. Config: reported, HiFT F0/source float32, bucketing True, warm-up buckets (184.6 s), seed 1986. Streaming: first audio 1.353-1.502 s; streaming warm-up 149.0 s.
+2026-09-30 07:28:43 started stream2 (log /home/user/data/cosyvoice2_runs/0930/stream2.log)
+2026-09-30 07:35:28 stream2 exited 0
+binaries compiled by stream2: 0
+| zero_shot_260-123440-0002 | 12.68 | 317 | 5 | 25 | 0.380 | 0.872 | 0.684 | 0.121 | **1.374** | 10.018 | 0.790 |  DRAM 169.2 MiB/bank, L1_SMALL 0 B/bank
+| zero_shot_260-123440-0010 | 8.08 | 202 | 4 | 25 | 0.382 | 0.880 | 0.689 | 0.122 | **1.384** | 6.750 | 0.835 |  DRAM 169.2 MiB/bank, L1_SMALL 0 B/bank
+| zero_shot_121-127105-0003 | 8.52 | 213 | 4 | 32 | 0.441 | 0.866 | 0.682 | 0.123 | **1.430** | 6.736 | 0.791 |
+| zero_shot_121-127105-0015 | 3.80 | 95 | 3 | 32 | 0.441 | 0.869 | 0.683 | 0.122 | **1.432** | 4.192 | 1.103 |
+| zero_shot_121-127105-0024 | 13.88 | 347 | 5 | 32 | 0.434 | 0.864 | 0.676 | 0.121 | **1.420** | 11.379 | 0.820 |
+| zero_shot_260-123286-0014 | 3.00 | 75 | 2 | 25 | 0.370 | 0.823 | 0.676 | 0.120 | **1.314** | 2.716 | 0.905 |
+| zero_shot_260-123440-0002 | 12.68 | 317 | 5 | 25 | 0.380 | 0.872 | 0.684 | 0.121 | **1.374** | 10.018 | 0.790 |
+| zero_shot_260-123440-0010 | 8.08 | 202 | 4 | 25 | 0.382 | 0.880 | 0.689 | 0.122 | **1.384** | 6.750 | 0.835 |
+Distinct utterances: 6, audio 49.96 s, wall 41.79 s, aggregate RTF 0.836, worst 1.103. Config: reported, HiFT F0/source float32, bucketing True, warm-up buckets (184.3 s), seed 1986. Streaming: first audio 1.313-1.432 s; streaming warm-up 149.4 s.

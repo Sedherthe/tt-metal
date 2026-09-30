@@ -1,4 +1,4 @@
-# CosyVoice2 bring-up — STATUS (2026-09-30)
+# CosyVoice2 bring-up — STATUS (2026-09-30, end of session)
 
 Rewrite this file each session; don't append to it. Every claim here cites a commit, a command, or an ID in
 FINDINGS.md or DECISIONS.md (D*). FINDINGS prefixes: R = the 09-27 review, B = build findings, O = older open
@@ -6,15 +6,13 @@ items, X = fixed. Older narrative lives in `history/`.
 
 ## Where things stand
 
-- **Stopped after R5, as planned (D33).** Then, on 09-30, before R6: the streaming WER's rise from 0.68 % (09-28)
-  to 1.36 % (B28). The final HiFT call's end padding silences the last ~25 ms of every streamed utterance, and on
-  260-123440-0010 Whisper then adds "you" (5 of 11 noise realizations). The final call at its exact length restores
-  0.68 % / 95.88. No PR code changed: the fix is the user's call. The spec-against-today table is
-  `reviews/2026-09-30_rebuild_spec_vs_today.md`.
+- **Stopped after R6, as asked (09-30).** The lost work is rebuilt (R1–R5) and R6 is done. B28's streaming
+  WER regression is found and fixed: HiFT's padded calls are masked (B29). Every gate was re-run on the fixed code
+  (B31).
 - **PR #56651** (`bringup/cosyvoice2-istft`), `models/experimental/cosyvoice2/`.
-  - The local HEAD is `6a2ab97dde`, and all of it is on the fork's `backup/2026-09-29-pr`.
+  - The local HEAD is `d2a2439e05`, and all of it is on the fork's `backup/2026-09-29-pr`.
   - GitHub's `bringup/cosyvoice2-istft` is still at `7bd094cc3e`. The user pushes it (D34).
-- **This session's PR commits**, in order:
+- **The PR commits of 09-29 and 09-30**, in order:
 
   | commit | what | record |
   |---|---|---|
@@ -26,70 +24,66 @@ items, X = fixed. Older narrative lives in `history/`.
   | `082fad43d6` | R3: streaming stage A, offline from fixed tokens | B25, D38 |
   | `fa4eca1213` | R4: streaming stage B, interleaved with the LLM | B26, D36 |
   | `8ca78aa5a1` | R5: streaming measured; streaming refused without its warm-up | B27, D40 |
-  | `6a2ab97dde` | R5: what the 1,259 buffers are (corrects `8ca78aa5a1`'s wording) | B27 |
+  | `6a2ab97dde` | R5: what the 1,259 buffers are | B27 |
+  | `ed1c3ad1c5` | HiFT's padded calls masked; D41's end gate; the "you" clip's regression test | B28, B29, D41, D42 |
+  | `5317572d0c` | WER/SIM over five noise draws, TT and reference, Stage 1 and streaming | B30, D43 |
+  | `ba56920c77` | the Stage 1 and streaming gates re-run on the masked HiFT | B31 |
+  | `d2a2439e05` | R6: the streaming figures enforced by a device test; start-up and the cold first request | B32 |
 
-- **Notes commits:** `9db66f07d0`, `2f0b029596`, `b7106ce85d`, `d0f5cb94fe`, and the one carrying this file. All are
-  on the fork's `backup/2026-09-29-notes`. The user pushes `notes/cosyvoice2`.
-- **The lost work is rebuilt** (R1–R5 of `REBUILD_2026-09-29.md`), each piece re-measured rather than copied.
-  - Didn't reproduce: #36487's reproducer (0.000768, not 0.225; B22) and the "5 of 9 seams agree" caveat (B24).
-  - Not re-measured: the spec's cold streaming request (172 s to first audio, RTF 65). That path now raises
-    (B27, D40).
+- **Notes commits:** `9db66f07d0`, `2f0b029596`, `b7106ce85d`, `d0f5cb94fe`, `50857575e6`, `7c90cc8e67`,
+  `8401e5b6b0`, and the one carrying this file. All are on `backup/2026-09-29-notes`; the user pushes
+  `notes/cosyvoice2`.
 
-## The streaming numbers (R5; B27)
+## The figures (masked HiFT, 09-30)
 
-| | run 1 | run 2 | target |
-|---|---|---|---|
-| time to first audio | 1.365–1.455 s | 1.336–1.479 s | < 0.5 s: missed |
-| streaming RTF, per utterance | 0.806–1.057 | 0.787–1.122 | < 0.4: missed |
-| streaming RTF, aggregate | 0.853 | 0.843 | |
+| target | measured | status |
+|---|---|---|
+| RTF < 1.0, non-streaming | worst 0.654 (demo) / 0.675 (perf test), aggregate 0.483 / 0.481 | met, enforced |
+| token accuracy > 95 % | 95.94 %; the LLM is unchanged | met, enforced |
+| WER < 5 % | 0.68 % in each of five noise draws; the reference also 0.68 % in each | met |
+| similarity > 0.60 | 95.88 (95.84–95.92) over the draws; the reference 95.22 | met |
+| first packet < 500 ms | 1.31–1.50 s (two demo runs); perf test worst 1,469 ms | missed, held in band |
+| streaming RTF < 0.4 | worst 1.10–1.12, aggregate 0.84–0.85; perf test worst 1.110 | missed, held in band |
 
-- **The first chunk:**
-  - 0.37–0.47 s until it starts;
-  - flow 0.81–0.92 s, of which the CFM takes 0.67–0.73 s;
-  - HiFT 0.12 s.
-
-  With a free flow, first audio would be at 0.51–0.59 s.
-- **Quality:** WER/SIM 1.36 % / 95.85; upstream's streaming of the same tokens gets 0.68 % / 95.90.
-- **Recorded, not enforced:** both targets are `Misses()` in `tests/perf/gates.py`, and no device test enforces
-  them yet.
+- **Streaming quality:** WER 0.68 % in every draw, similarity 95.83 (95.81–95.87); upstream's streaming 0.68 % and
+  95.89 (B30).
+- **Start-up:** 3.1 min warm and 31.4 min cold for the buckets, plus 2.5 and 13.0 min for the streaming set (B32).
+- **The cold first request:** RTF 66.1 on an empty kernel cache, 2.04 on one already holding its binaries (B32).
 
 ## This pod
 
 - **Host and card:**
   - host `app-5ddf2d9d-deployment-5545b7c7f8-c4vpz`;
   - card n150 L at `0000:01:00.0` (`/dev/tenstorrent/2`), KMD 2.9.0, firmware 19.11.0.0.
-- **Health:** healthy after every run. The last check was at 15:05 (heartbeat 158,131;
-  `scripts/2026-09-29/r5_tt_smi.json`). No drop this session (O2).
+- **Health:** every 09-30 job ran without a fault. At 09:15 the card was healthy: DRAM OK, heartbeat 116,472
+  (`scripts/2026-09-30/tt_smi_end.json`).
+  - That heartbeat is below 09-29's 158,131, so the card's firmware restarted overnight. The host did not reboot
+    (uptime 92 days), and no reset was issued here.
+  - KMD 2.9.0 powers the card down after 5 s idle (`power_policy=Y`), which would explain it. Not confirmed (O2).
 - **Environments:** `/opt/venv` for the device side (no `python_env`; `inflect` added), `~/cosyvoice2_ref_env` for
   the reference side (locked, D35). See RUNBOOK §1–2.
-- **Data:** under `/home/user/data`: the inputs, the references, and the runs in `cosyvoice2_runs/0929`. They
-  go when the pod goes; the notes keep the logs that back each finding.
+- **Data:** under `/home/user/data`:
+  - the inputs, the references and the runs (`cosyvoice2_runs/0929`, `0930`);
+  - the noise draws (`cosyvoice2_draws`);
+  - two kernel caches R6 used (`kc_r6_startup`, `kc_r6_first`).
+
+  They go when the pod goes; the notes keep the logs.
 
 ## Open questions for the user
 
-0. **B28's fix.** Proposed: masked end padding in HiFT (upstream's zero padding at the bucket geometry). It would fix
-   the Stage 1 tails as well, and needs a gate on the final chunk's last 20 ms against upstream's. Measured and
-   rejected: exact-length final calls (~800 kernels per new length) and front padding (final seams down to 0.992).
-
-1. **D40, the streaming guard.** The 09-29 report left it to the user; it was built before an answer came. Keep
-   it, or revert to documenting the restriction?
-2. **Pushing:** `bringup/cosyvoice2-istft` and `notes/cosyvoice2`, from the backup branches (D34).
-3. **The #36487 comment** (`drafts/2026-09-29_comment_36487_prepare_conv_weights_dram_slicing.md`) is drafted, not
+1. **Pushing:** `bringup/cosyvoice2-istft` and `notes/cosyvoice2`, from the backup branches (D34).
+2. **D40, the streaming guard** (built on 09-29 before an answer): keep it, or revert to documenting the
+   restriction? Not answered yet.
+3. **D41's additions** (Claude): the stage A end also gates the last 0.4 s's difference, 20 dB below the signal
+   with no floor, and keeps the final chunk's PCC before those 0.4 s. On a quiet ending, PCC measures the port's own
+   floor.
+4. **The #36487 comment** (`drafts/2026-09-29_comment_36487_prepare_conv_weights_dram_slicing.md`) is drafted, not
    posted.
 
-## Next: B28's fix once decided, then R6, then the Stage 3 plan
+## Next: the Stage 3 plan (`REBUILD_2026-09-29.md`, "After the rebuild")
 
-- **R6, the numbers D37 left open:**
-  - cold start-up (an empty kernel-cache directory) and warm start-up, re-measured (PERF.md's 30.5 and 3.2 min;
-    B22);
-  - the non-streaming cold first request on chunked HiFT (the spec's RTF 32.5, unverified; B22). It still runs,
-    as `demo.py --warmup none` without `--stream` (D40);
-  - a cold streaming start: the two warm-ups on an empty kernel cache;
-  - then PERF.md's cold figures. Its streaming section is in `8ca78aa5a1`, the README was rewritten in
-    `e441e8ad6a`, and P1 is closed as won't-do (D27).
-- **The Stage 3 plan** (`REBUILD_2026-09-29.md`, "After the rebuild"):
-  1. per-chunk timings of the utterances with RTF above 1;
-  2. a profile of one CFM step;
-  3. an Euler-step sweep with WER/SIM;
-  4. memory configs;
-  5. per-bucket CFM traces, only if dispatch dominates.
+1. Per-chunk timings of the utterances with streaming RTF above 1.
+2. A profile of one CFM step.
+3. An Euler-step sweep with WER/SIM over noise draws (D43's protocol).
+4. Memory configs.
+5. Per-bucket CFM traces, only if dispatch dominates.

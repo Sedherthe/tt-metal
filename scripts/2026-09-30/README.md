@@ -1,4 +1,4 @@
-# 2026-09-30: the "you" clip (B28), its fix (B29) and the noise draws (B30); not part of the PR
+# 2026-09-30: the "you" clip (B28), its fix (B29), the noise draws (B30), the re-run (B31) and R6 (B32); not part of the PR
 
 Stage A's streaming WER was 0.68 % on 09-28 and 1.36 % on 09-29: Whisper appends "you" to 260-123440-0010. The user
 asked where the rebuild differs before R6, with no PR code changed until that is known. Nothing here changes the PR:
@@ -24,4 +24,8 @@ The spec-against-today table is `../../reviews/2026-09-30_rebuild_spec_vs_today.
 | `phase_gate_final.sh` (+ `.log`) | yes | Stage A with D41's final criteria (the last 0.4 s's difference 21–27 dB below the signal; PCC before it 0.99921–0.99979) and the "you" device half at 3 dB: 2 passed. |
 | `phase_ref_draws.sh` (+ `.log`) | no (reference venv) | D43's reference draws, seeds 1–5: `run_reference.py --noise-seed` and `streaming_reference.py --noise-seed`; the Stage 1 tokens identical to the 09-29 reference run in every draw. |
 | `phase_tt_draws.sh` (+ `.log`, `draws.json`) | yes, then reference venv | D43's TT draws (`scripts/noise_draws.py`, 0 kernels compiled, the demo's tokens in every draw) and `eval_draws.py` over all four groups: corpus WER 0.68 % in every draw of every group. |
+| `phase_regate.sh` (+ `.log`, `stage1_masked_timings.md`, `stream_masked1_timings.md`, `stream_masked2_timings.md`) | yes | B31. On the masked HiFT: the suite (228 passed, 4 skipped), the Stage 1 perf test (worst 0.675), the Stage 1 demo (worst 0.654), the streaming demo twice (first audio 1.313–1.502 s, worst RTF 1.103–1.121). Nothing else on the host. |
+| `phase_r6.sh` (+ `.log`) | yes | B32. The streaming perf test (1,469 ms, RTF 1.110, in band), start-up cold and warm, the cold first request on an empty and on a filled kernel cache. |
+| `startup_measure.py` (+ `startup_cold.json`, `startup_warm.json`) | yes | B32. Construction and both warm-ups timed in a fresh process, kernels counted, the conv checks' and weight preparation's share: 1,885 + 779 s cold, 188 + 150 s warm. |
+| `first_request_empty_cache_timings.md`, `first_request_filled_cache_timings.md` | yes | B32. The non-streaming cold first request: RTF 66.1 on an empty kernel cache, 2.04 on one already holding its binaries. |
 

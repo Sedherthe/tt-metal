@@ -1,0 +1,27 @@
+{
+  "label": "cold",
+  "kernel_cache": "/home/user/data/kc_r6_startup/tt-metal-cache*",
+  "build_s": 15.4,
+  "warmup_buckets": {
+    "s": 1884.7,
+    "binaries": 9910,
+    "by_stage_s": {
+      "llm": 151.9,
+      "flow": 1158.5,
+      "hift": 574.3
+    },
+    "conv_safety_check_s": 451.8,
+    "conv_weight_prep_s": 9.9
+  },
+  "warmup_streaming": {
+    "s": 778.7,
+    "binaries": 2766,
+    "by_stage_s": {
+      "flow_stream": 124.6,
+      "hift_stream": 654.1
+    },
+    "conv_safety_check_s": 281.4,
+    "conv_weight_prep_s": 4.3
+  },
+  "binaries_compiled": 12729
+}

@@ -373,7 +373,7 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
 - **The conv checks in the suite** fired 37 times and rejected the prepared weight 25 times. These were random-weight
   unit tests at short lengths, plus the deliberate corrupted-weight test.
 
-### B22 — Two numbers in the rebuild spec conflict with the record (confirmed, 09-29). Status: open (R1, R6)
+### B22 — Two numbers in the rebuild spec conflict with the record (confirmed, 09-29). Status: **closed** (R1: B23; R6: B32)
 - **#36487's own reproducer:** the spec says prepared PCC 0.225 under TILE. The pushed log
   (`scripts/2026-09-28b/repro_36487.log`) says 0.000352 for the reproducer as written.
   - **Re-measured 09-29** (`scripts/2026-09-29/r1_repro_36487.py`):
@@ -597,6 +597,35 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
   Per utterance it varies by at most 0.3.
 - **Before the fix, the streamed clip was a coin flip:** 5 of 11 draws ended in "you" (B28). On the masked HiFT, 0
   of 11 do, and the five-draw corpus figures above hold.
+
+### B31 — Stage 1 and streaming re-run on the masked HiFT (confirmed, 09-30). Status: **built, `ba56920c77`**
+- **The device suite:** 228 passed and 4 skipped (the opt-in tracker and three reference-venv tests), in 27 min,
+  with 1,103 kernels compiled.
+- **The Stage 1 perf test:** worst RTF 0.675, aggregate 0.481 (Meets).
+- **The Stage 1 demo:** the same tokens as 09-28/09-29; RTF 0.441–0.654, aggregate 0.483.
+  - The masked padded call costs 0.07 s of HiFT at the 256 bucket and 0.10 s at 512 (about 80 masks and a host
+    round trip of the source).
+  - The chunked calls are unchanged.
+- **The streaming demo, twice:** first audio 1.353–1.502 and 1.313–1.432 s; RTF aggregate 0.851 and 0.836, worst
+  1.121 and 1.103. That is within the spread of 09-29's runs on the old padding. Both Stage 3 targets are still
+  missed; the recorded bands hold every figure.
+
+### B32 — R6: the streaming figures enforced; start-up and the cold first request re-measured (confirmed, 09-30). Status: **built, `d2a2439e05`**
+- **The streaming perf test** (`tests/perf/test_pipeline_perf.py`, own process) enforces both Stage 3 figures
+  through the gates: worst first audio 1,469 ms (best 1,404), worst RTF 1.110 (aggregate 0.867), both in band.
+- **Start-up** (`scripts/2026-09-30/startup_measure.py`, twice against one new `TT_METAL_CACHE`):
+  - `warmup_buckets()`: 1,885 s cold (9,910 kernels) and 188 s warm. That reproduces 09-28's 1,831 s (9,959) and
+    195 s.
+  - `warmup_streaming()`: 779 s cold (2,766 kernels) and 150 s warm.
+  - So a streaming start takes 44 min cold and 5.6 min warm. Builds took 15 and 12 s.
+- **The cold first request** (`demo.py --warmup none`, 121-127105-0003, 8.52 s):
+  - an empty kernel cache: RTF 66.1 (563 s, 2,929 kernels; HiFT 386 s). The spec said 64.3.
+  - a cache already holding its binaries (the day's earlier runs had compiled them): RTF 2.04 (17.4 s, nothing
+    compiled; HiFT's first-sight conv checks 10.7 s).
+  - The spec's "RTF 32.5 on a filled cache" was 09-28's cache that still lacked 706 binaries. A filled cache gives
+    no fixed figure, and that closes B22.
+- **Docs:** PERF.md, VALIDATION and the README carry all of it; the README got a reviewer pass (tests, layout,
+  references).
 
 ## O: older open items
 
