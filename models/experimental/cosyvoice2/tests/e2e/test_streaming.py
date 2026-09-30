@@ -11,9 +11,9 @@ streaming run on the same tokens (`COSYVOICE2_STREAM_REF`, scripts/streaming_ref
 - **HiFT, mechanism**: `HiFTStream` fed upstream's mel pieces with upstream's F0 and noise for each call. Every chunk's
   emitted audio (the padded first and final ones included) and every seam against upstream's. The final call is
   padded to a bucket at its end and masked (tt/hifigan/valid_length.py), so it must end as upstream's does. The
-  utterance's last 20 ms are gated on level, within 3 dB of upstream's, and its last 0.4 s on the difference, 15 dB
-  below the signal, neither with an absolute floor (notes: D41); the final chunk's PCC is gated before those 0.4 s,
-  where a quiet ending (-71 dBFS) would make PCC measure the port's own noise floor;
+  utterance's last 20 ms are gated on level, within 3 dB of upstream's, and its last 0.4 s and last 0.1 s on the
+  difference, 15 and 12 dB below the signal, none with an absolute floor (notes: D41); the final chunk's PCC is gated
+  before those 0.4 s, where a quiet ending (-71 dBFS) would make PCC measure the port's own noise floor;
 - **HiFT, own F0**: the same with our F0 predictor, judged on log-mel L1 (F0 differences drift the sine phase).
 `COSYVOICE2_STREAM_OUT`, if set, also gets the fully offline-streamed audio (our flow and our HiFT) as wavs and a
 results.json, for scripts/eval_wer_sim.py.
@@ -75,6 +75,11 @@ def test_stream_schedule_is_upstreams():
 #   The criterion before (D38) had a -50 dBFS floor, and it let the end-padded final call silence
 #   the last ~25 ms of every utterance: it passed 260-123440-0010's ending with the difference 2.5 dB below the
 #   signal (B28).
+#   Over the last LAST_S, too, the difference at least 12 dB below the signal. The padding's effect reaches back
+#   120-200 ms, and in this window the fix measured 22.0-29.0 dB over the same 36 final chunks, the old silence
+#   padding -3.1 to 0.4 (B34). So 12 dB sits 10 dB from both. On two utterances louder speech before the padding's
+#   reach dominates the 0.4 s window, and the old padding passes it at 17.8 and 23.4-24.8 dB. This check fails that
+#   padding on every utterance by itself.
 #   The whole final chunk's PCC is not gated: 121-127105-0015's, 13 tokens ending near -71 dBFS, is 0.9975 even with
 #   the call at its exact length (0.9970 masked), the port's own error at that level;
 # - own F0: whole-utterance log-mel L1 <= 0.13 (measured 0.069-0.088).
@@ -82,6 +87,7 @@ FLOW_REL = 0.03
 HIFT_CHUNK_PCC, HIFT_SEAM_PCC = 0.999, 0.998
 END_S, END_DB = 0.02, 3.0
 TAIL_S, TAIL_DB_BELOW = 0.4, 15.0
+LAST_S, LAST_DB_BELOW = 0.1, 12.0
 YOU_END_DB = END_DB  # the "you" clip's 11 draws (their own noise) against upstream's ending: measured 0.2-0.6 dB
 OWN_F0_LOGMEL_L1 = 0.13
 SEAM_PAD = 960
@@ -151,11 +157,13 @@ def test_device_offline_streaming_matches_upstream_streaming(device):
             tail_note = ""
             got_body, want_body = got, want
             if chunk.final:  # the utterance's end, against upstream's, with no floor (D41)
-                n, tail = int(END_S * 24000), int(TAIL_S * 24000)
+                n, tail, last = int(END_S * 24000), int(TAIL_S * 24000), int(LAST_S * 24000)
                 got_db, want_db = _dbfs(got[-n:]), _dbfs(want[-n:])
                 sig_db, diff_db = _dbfs(want[-tail:]), _dbfs(got[-tail:] - want[-tail:])
+                last_sig_db, last_diff_db = _dbfs(want[-last:]), _dbfs(got[-last:] - want[-last:])
                 tail_note = (f"; last {END_S * 1000:.0f} ms: {got_db:.1f} dBFS, upstream {want_db:.1f}; last {TAIL_S} s: "
-                             f"signal {sig_db:.1f}, difference {diff_db:.1f} dBFS")  # fmt: skip
+                             f"signal {sig_db:.1f}, difference {diff_db:.1f} dBFS; last {LAST_S} s: signal "
+                             f"{last_sig_db:.1f}, difference {last_diff_db:.1f} dBFS")  # fmt: skip
                 if abs(got_db - want_db) > END_DB:
                     failures.append(
                         f"{case_id} final chunk: last {END_S * 1000:.0f} ms at {got_db:.1f} dBFS, upstream's {want_db:.1f}"
@@ -163,6 +171,11 @@ def test_device_offline_streaming_matches_upstream_streaming(device):
                 if sig_db - diff_db < TAIL_DB_BELOW:
                     failures.append(
                         f"{case_id} final chunk: last {TAIL_S} s difference {diff_db:.1f} dBFS, signal {sig_db:.1f}"
+                    )
+                if last_sig_db - last_diff_db < LAST_DB_BELOW:
+                    failures.append(
+                        f"{case_id} final chunk: last {LAST_S} s difference {last_diff_db:.1f} dBFS, signal "
+                        f"{last_sig_db:.1f}"
                     )
                 got_body, want_body = got[:-tail], want[:-tail]
             chunk_pcc = _pcc(got_body, want_body) if len(want_body) > 2 * SEAM_PAD else float("nan")

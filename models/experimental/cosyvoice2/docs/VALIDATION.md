@@ -846,6 +846,7 @@ docstring) over a fixed token list, as if the LLM had finished.
 | HiFT, mechanism: each seam (the crossfade ±40 ms) | PCC 0.99900–0.99989 | ≥ 0.998 |
 | HiFT, the utterance's last 20 ms: level against upstream's (the masked final call, 2026-09-30) | within 0.2–0.5 dB | within 3 dB, no floor (D41) |
 | HiFT, the final chunk's last 0.4 s: difference below the signal (masked) | 21–27 dB; 19.5–27.5 dB over six noise draws | at least 15 dB, no floor |
+| HiFT, the final chunk's last 0.1 s: difference below the signal (masked) | 23.5–28.7 dB; 22.0–29.0 dB over six noise draws | at least 12 dB, no floor |
 | HiFT, own F0: log-mel L1 vs upstream's streamed audio | 0.069–0.088 | ≤ 0.13 |
 
 - **The final chunk's end.** Until 2026-09-30 the final call was padded with silence. Its last ~25 ms went silent
@@ -873,6 +874,20 @@ docstring) over a fixed token list, as if the LLM had finished.
     260-123286-0014 (17.8 dB) and 260-123440-0002 (23.4–24.8) pass it. The padding's effect reaches back 120–200 ms,
     and their last 0.4 s is dominated by louder speech before that. Their last 20 ms fail the level check by 75 and
     32 dB, so the end gate as a whole still fails the old padding on every utterance.
+- **The last 0.1 s, 12 dB below the signal** (2026-09-30, the user's choice; notes: D41). This window is where the
+  padding acts. Over the same 36 final chunks the fix measures 22.0–29.0 dB and the old padding −3.1 to 0.4 dB, so
+  12 dB sits 10 dB from both.
+- **All three end checks, on the fix and on the old padding.** The old padding's run swaps in only
+  `HiFTStream.step` as it was before the fix (notes: `scripts/2026-09-30/old_padding_plugin.py`, a pytest plugin that
+  compiles that commit's method verbatim), and runs this test unchanged:
+
+  | check | the old padding fails it on | the fix |
+  |---|---|---|
+  | the last 20 ms within 3 dB of upstream's level | 6 of 6 (15–79 dB off) | 0.2–0.5 dB |
+  | the last 0.4 s's difference 15 dB below the signal | 4 of 6 (−0.9 to 10.6 dB; 0014 and 0002 pass) | 21.2–27.2 dB |
+  | the last 0.1 s's difference 12 dB below the signal | 6 of 6 (−3.1 to 0.4 dB) | 23.5–28.7 dB |
+
+  No other check fails on the old padding.
 - **WER and SIM** (`scripts/eval_wer_sim.py`) of our offline-streamed audio (our flow, our HiFT, own F0), against
   upstream's streaming of the same tokens:
   - WER 1.36 % vs 0.68 %; SIM 95.83 vs 95.90.
