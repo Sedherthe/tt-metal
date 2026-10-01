@@ -1,4 +1,4 @@
-<!-- DRAFT for the user. The description for tenstorrent/tt-metal#56651 while it sits in the merge queue: main
+<!-- POSTED by the user, 2026-10-01 15:09 UTC, with "### Next (follow-up PR)" renamed "### Next possible experiments"; the comment block not included. Was: DRAFT for the user. The description for tenstorrent/tt-metal#56651 while it sits in the merge queue: main
 squash-merges with the PR's title and description as the commit message, and today's description is the 09-15 text
 ("This is a draft ... not a final submission"). Every figure is the merged head's, `33aa3601eb` (README.md, PERF.md,
 docs/VALIDATION.md at that commit), N150, 2026-09-30. Nothing from the backup's three later commits is claimed. -->
