@@ -1,0 +1,30 @@
+{
+ "matmul_bf16_hifi4": {
+  "repeats": 200,
+  "mismatching_repeats": 0,
+  "mismatching_elements": 0,
+  "max_abs_diff": 0.0,
+  "seconds": 1.8
+ },
+ "matmul_bfp8_hifi2": {
+  "repeats": 200,
+  "mismatching_repeats": 0,
+  "mismatching_elements": 0,
+  "max_abs_diff": 0.0,
+  "seconds": 1.7
+ },
+ "softmax": {
+  "repeats": 200,
+  "mismatching_repeats": 0,
+  "mismatching_elements": 0,
+  "max_abs_diff": 0.0,
+  "seconds": 0.1
+ },
+ "rms_norm": {
+  "repeats": 200,
+  "mismatching_repeats": 0,
+  "mismatching_elements": 0,
+  "max_abs_diff": 0.0,
+  "seconds": 2.1
+ }
+}

@@ -963,6 +963,60 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
   - Any process-state check after the kill (`/proc/<pid>/status`, one scan) was a one-off, to find out whether the
     demo and its chain were gone. Waits stay on sentinels (D25).
 
+### B44 — The 10-01 card's LLM decode is not bitwise reproducible: the same forced sequence gives different logits on a repeat, traced or eager (confirmed, 10-01). Status: **open; device work stopped for the user's call**
+- **How it showed up** (`scripts/2026-10-01/b44_runs.log`):
+  - The Stage 1 demo at 11:05 (after B43's kill) sampled different tokens from the record for all six utterances:
+    194/102/323/78/291/195 against 213/95/347/75/317/202.
+  - In the suite, `test_pipeline_api.py` failed: the same request in one process gave different tokens on its
+    second call, diverging at the 5th token (11:25). Its first four calls had sampled exactly the record's tokens.
+  - The stage A gate failed at 11:38 on the demo's tokens: the first chunk's flow error was 0.0357 and 0.0316,
+    against a bound of 0.03 (09-29: 0.0085–0.0182). It also failed one tail check at digital silence (B45).
+  - Everything from 13:11 to 13:44 sampled exactly the record's tokens: the Stage 1 and streaming perf tests, the
+    demo, and the API test, whose repeats were bit-identical. That is four processes and 27 syntheses.
+- **Teacher-forced token accuracy, no sampling, four runs:**
+
+  | run | accuracy | disagreements |
+  |---|---|---|
+  | suite, 12:04 | 96.342 % | 183 |
+  | 13:37 | 96.182 % | 191 |
+  | 13:56 | 95.902 % | 205 |
+  | 13:58 | 95.942 % | 203 |
+
+  The record is 95.94 % with 203 disagreements, reproduced exactly on the 09-28 and 09-29 pods (B19, B21).
+- **The probes:**
+  - `determinism_probe.py`: a bf16 HiFi4 matmul, a bfp8 HiFi2 matmul, softmax and rms_norm, 200 repeats each on
+    fixed inputs. All bit-identical.
+  - `llm_determinism_probe.py`: `teacher_forced_topk` on 121-127105-0015 (93 positions), 8 repeats traced, then 8
+    eager, in one process (`llm_determinism_probe.json`):
+    - every repeat differs from the first, in both paths;
+    - row 0, the prefill's output, never differs. The decode steps do, from step 1 to 82;
+    - top-5 logits differ by up to 0.24–0.47, with 0–2 top-1 flips per repeat.
+  - The repeats differ from each other in different places. So this is not a history effect, such as a stale KV
+    cache, which would make every repeat after the first alike.
+- **What it is not:**
+  - the code: the three backup commits touch only the flow and the demo, and no LLM or RNG path;
+  - the inputs: the reference side reproduced exactly (B42), and the record's tokens came back from 13:11;
+  - the kernel cache: the JIT build renames finished files into place (B43).
+- **What it may be:**
+  - the card, with intermittent compute errors. Its silicon is a slower corner than the 09-29 card's (ring
+    oscillator `0x2c7a7` against `0x2f923`; leakage `ASIC_IDD` `0x942` against `0xdc3`), at the same AICLK of
+    1000 MHz;
+  - or a timing-sensitive race in a decode op (sharded or DRAM-sharded matmuls at M=32, SDPA decode, the cache
+    update, the decode head ops), which this card's timing exposes.
+  - The 09-28 and 09-29 cards never showed it. Without a second card here, the two can't be told apart.
+- **What it means:**
+  - nothing measured on this card can be re-verified bit for bit against the record;
+  - the timings are unaffected. Stage 1 worst RTF 0.631, aggregate 0.457 (perf test); streaming first audio worst
+    1,437 ms, RTF worst 1.073, aggregate 0.813 (perf test, in band). Both are within B40's spread.
+
+### B45 — Stage A's last-0.1 s check fails at digital silence (confirmed, 10-01). Status: open (the user's call)
+- On B44's tokens, 121-127105-0015's final chunk ends in digital silence: the signal over the last 0.1 s is
+  −138.9 dBFS, and the difference from upstream is −149.5 dBFS. That is 10.6 dB below the signal, so the 12 dB check
+  fails (B38, D41).
+- D41 dropped every absolute floor on purpose (D38's −50 dBFS floor let B28 through). But at −139 dBFS both signals
+  are float32 rounding, and a relative check there measures nothing.
+- A floor far below any audible level would keep D41's intent, for example −120 dBFS. Not changed.
+
 ## O: older open items
 
 - **O1 — HiFT dtype crash.** Status: **fixed `544d588018`** (09-27). `TtHiFTDecoder.decode` converts `mel` and

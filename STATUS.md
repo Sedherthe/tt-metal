@@ -8,9 +8,18 @@ items, X = fixed. Older narrative lives in `history/`.
 
 - **The 09-30 pod ended overnight.** Nothing in git was lost: everything below is on `backup/2026-09-29-pr`
   (`213afe7909`) and `backup/2026-09-29-notes`. Backups continue on those two branches (the user, 10-01).
-- **The new pod** (B42): n150 L at `0000:e1:00.0`, healthy. The environment is rebuilt, and the reference venv
-  equals the lock. The reference side is being regenerated; then the backup tip gets re-verified on this card
-  (`scripts/2026-10-01/`).
+- **The new pod** (B42): n150 L at `0000:e1:00.0`. The environment is rebuilt, the reference venv equals the lock,
+  and the reference side reproduces the record exactly (`scripts/2026-10-01/`).
+- **The harness killed the first device run** at its 30-minute limit. The card survived, and chains now start
+  detached (B43).
+- **Stopped for the user: this card's LLM decode is not bitwise reproducible** (B44).
+  - The same forced sequence gives different logits on a repeat, traced or eager. The prefill and basic ops are
+    bit-identical.
+  - Teacher-forced token accuracy measured 95.90–96.34 % over four runs; the record is 95.94 % on two pods.
+  - Sampled tokens diverged from the record from 11:05 to ~11:40, and matched it from 13:11.
+  - The suite: 227 passed, 2 failed (the API test's repeat check; stage A on the diverged tokens, plus B45). Both
+    perf tests passed, in their bands.
+  - Open: a faulty card, or a decode race this card exposes. Ask for another card, or localize the op.
 - **Found on GitHub, not in these notes** (R1): #56651 is ready for review, not a draft, and mtairum **approved**
   it on 09-30 on `33aa3601eb` after Tier-3 CI. The backup's three later commits would move the head past it. Pushing
   is the user's call (D34).

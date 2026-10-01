@@ -13,3 +13,8 @@ pod's: data under `/home/user/data`, logs under `/home/user/data/cosyvoice2_runs
 | `phase_device.sh` | yes, and the reference venv | The Stage 1 demo once the inputs exist (it fills the empty kernel cache; the reference chain shares the CPU, so its timings are not measurements). Then upstream's streaming of its tokens (stage A's reference), the device suite with every reference, the demo's WER/SIM, and the two perf tests, each in its own process. |
 | `detach.sh` | | Starts a chain with `setsid`, out of the harness's reach, writing `NAME.exit` as its last action (B43). |
 | `run_all.sh` (superseded by `detach.sh`) | | Its harness command was stopped at 30 minutes, and the device chain with it (B43). The restart: `RUN_DIR=... detach.sh phase_device phase_device.sh`. |
+| `phase_recheck.sh` | yes | B44: the op probe, `tt-smi -s`, the token-accuracy test alone, the demo again (the record's tokens), the API test alone (6 passed). |
+| `determinism_probe.py` (+ `determinism_probe.json`) | yes | B44: four ops, 200 repeats each on fixed inputs, compared bit for bit. All identical. |
+| `llm_determinism_probe.py` (+ `llm_determinism_probe.json`) | yes | B44: `teacher_forced_topk` on one case, 8 repeats traced and 8 eager. Every repeat differs from the first in its decode steps; the prefill never does. |
+| `phase_llm_probe.sh` | yes | B44: the op probe again, the LLM probe, then the token-accuracy test twice (95.902 % and 95.942 %). |
+| `b44_runs.log`, `tt_smi5_end.json` | yes | B44's evidence from the pod's logs: the diverged demo and the suite's failures, the clean perf tests, demo and API test, the four token-accuracy runs; the card at 13:43 (DRAM OK, no faults, AICLK 500 idle). |
