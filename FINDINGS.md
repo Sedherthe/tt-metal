@@ -940,6 +940,29 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
   step sweep and the merge's draws. Also the kernel caches, the profiler's raw logs and `~/listening`. The notes keep
   the scripts and logs.
 
+### B43 — The harness killed a device job: a chain started from a background command dies with it at the command's limit (confirmed, 10-01). Status: **fixed in the tooling** (`scripts/2026-10-01/detach.sh`)
+- **What happened:**
+  - `run_all.sh` ran as a harness background command, with the default 30-minute limit. It started the reference
+    and device chains with `start_job`, so both were in its process group.
+  - At the limit (~10:58) the harness stopped the command and its whole tree. That included the Stage 1 demo,
+    28 minutes into its cold warm-up, in the HiFT conv checks.
+  - The demo became a zombie under PID 1, with no sentinel. Its log stops at 10:57:49 (`stage1_killed.log` on the
+    pod). The reference chain had finished 52 s earlier.
+  - The signal isn't known. The RUNBOOK's fear is SIGKILL (D10).
+- **The card survived:**
+  - `tt-smi -s` at 11:01: heartbeat continuous (296,201 → 300,189, 1.98/s), DRAM OK, `FAULTS` 0, PCIe status
+    unchanged. AICLK read 1000 MHz where it had idled at 500: the killed process never closed the device.
+  - The smoke test at 11:02 passed as before (opened in 1.0 s, max |diff| 0.0078).
+- **The kernel cache is safe to keep.** The JIT build writes into temp files and renames them into place
+  (`tt_metal/jit_build/jit_build_utils.cpp:297`), so a kill leaves no truncated binary. The killed run had compiled
+  8,858 binaries, and the restart reuses them.
+- **The fix:** `detach.sh NAME cmd...` runs a chain with `setsid`, in its own session, and writes `NAME.exit` as its
+  last action. The harness then runs only short sentinel waiters, which may be stopped at their limit without
+  harm.
+  - Tested at 11:02: a `setsid` job survived its harness command's kill, and a plain child did not.
+  - Any process-state check after the kill (`/proc/<pid>/status`, one scan) was a one-off, to find out whether the
+    demo and its chain were gone. Waits stay on sentinels (D25).
+
 ## O: older open items
 
 - **O1 — HiFT dtype crash.** Status: **fixed `544d588018`** (09-27). `TtHiFTDecoder.decode` converts `mel` and

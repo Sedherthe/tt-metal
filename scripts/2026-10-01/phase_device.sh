@@ -5,6 +5,7 @@
 # 2. after the reference chain: upstream's streaming of the demo's tokens (reference venv), the suite's stage A reference;
 # 3. the device suite with every reference (the perf file deselected), the demo's WER/SIM scored on the CPU alongside;
 # 4. the Stage 1 perf test, then the streaming perf test, each in its own process, nothing else on the host.
+# Restarted 10:58 after the harness killed the first run (B43); start it with detach.sh.
 # No timeouts: wait_job only reports. Each device job's pid goes to <name>.pid, for SIGINT only.
 source /home/user/cosyvoice2-notes-wt/scripts/2026-09-28/jobs.sh
 RUN_DIR=/home/user/data/cosyvoice2_runs/1001

@@ -96,6 +96,11 @@ The 10-01 pod (`app-7a544cdc-deployment-65d799ff57-9l4dj`) is set up the same wa
 - **Job control:** `scripts/2026-09-28/jobs.sh` (`start_job` / `wait_job`, sentinel files; D25).
   - Each device job writes its pid to `<name>.pid`, for SIGINT only.
   - `scripts/2026-09-29/watch_chains.sh` streams a chain's job lines.
+  - **Start every chain with `scripts/2026-10-01/detach.sh NAME <chain>`** (`setsid`; it writes `NAME.exit`).
+    - Claude Code's harness stops a background command's whole process group at its limit: 30 min by default,
+      2 h at most. On 10-01 that killed a device job mid-warm-up (B43).
+    - Wait from the harness with `wait_job`, in a background command with a long timeout. A waiter stopped at
+      its limit costs nothing; start another.
 - **The suite:** on 09-29 it took 1 h 13 min on a cold kernel cache; on 09-28 it took 15:39 on a warm one. The perf
   test is deselected here and runs in its own process afterwards:
   ```bash
