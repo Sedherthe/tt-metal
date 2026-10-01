@@ -1,0 +1,6 @@
+2026-10-01 10:25:49.379 | info     |             UMD | Established firmware bundle version: 19.11.0 (topology_discovery.cpp:576)
+2026-10-01 10:25:49.559 | info     |             UMD | KMD version: 2.9.0 (cluster.cpp:150)
+opened device in 5.0 s; arch Arch.WORMHOLE_B0, grid 8-8
+shape (64, 64), max|diff| 0.00781, finite True, all-ones bit pattern present False, bit-identical False
+closed; total 6.1 s
+SMOKE OK

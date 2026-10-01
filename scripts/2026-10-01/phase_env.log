@@ -1,0 +1,11 @@
+2026-10-01 10:26:31 started inflect (log /home/user/data/cosyvoice2_runs/1001/inflect.log)
+2026-10-01 10:26:31 started ref_venv (log /home/user/data/cosyvoice2_runs/1001/ref_venv.log)
+2026-10-01 10:26:31 started upstream (log /home/user/data/cosyvoice2_runs/1001/upstream.log)
+2026-10-01 10:26:31 started checkpoints (log /home/user/data/cosyvoice2_runs/1001/checkpoints.log)
+2026-10-01 10:26:31 started librispeech (log /home/user/data/cosyvoice2_runs/1001/librispeech.log)
+2026-10-01 10:26:46 inflect exited 0
+2026-10-01 10:27:01 ref_venv exited 0
+2026-10-01 10:27:01 upstream exited 0
+2026-10-01 10:27:01 checkpoints exited 0
+2026-10-01 10:27:31 librispeech exited 0
+env chain done, rc=0

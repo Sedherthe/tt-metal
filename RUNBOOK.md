@@ -1,6 +1,8 @@
 # CosyVoice2 bring-up — runbook (new pod, running, safety)
 
 Written for the 09-29 pod (`app-5ddf2d9d-deployment-5545b7c7f8-c4vpz`). Where an older pod differed, it says so.
+The 10-01 pod (`app-7a544cdc-deployment-65d799ff57-9l4dj`) is set up the same way. It is most likely the same host
+(uptime 93 days, the same seven N150 BDFs), with a different card. Its differences are noted below.
 
 ## 1. New pod: check the card before anything else
 
@@ -17,7 +19,8 @@ Written for the 09-29 pod (`app-5ddf2d9d-deployment-5545b7c7f8-c4vpz`). Where an
   ```
   - Expect 16.0 GT/s x16.
   - To map the card this container uses, read `ls -l /dev/tenstorrent/` together with
-    `/sys/class/tenstorrent/*/device`. On 09-29 that was `/dev/tenstorrent/2` = `0000:01:00.0`.
+    `/sys/class/tenstorrent/*/device`. On 09-29 that was `/dev/tenstorrent/2` = `0000:01:00.0`; on 10-01,
+    `/dev/tenstorrent/4` = `0000:e1:00.0`.
 - **`tt-smi -s`, twice, a few minutes apart.** Check the firmware version, DRAM status, and that the heartbeat
   advances between the two. There must be no `0xffffffff`.
   - On the 09-29 pod, tt-smi is `~/.local/bin/tt-smi` (the tt-installer venv), not in `/opt/venv`. `-s` prints the
@@ -35,7 +38,7 @@ Written for the 09-29 pod (`app-5ddf2d9d-deployment-5545b7c7f8-c4vpz`). Where an
   - It has ttnn installed editable from `~/tt-metal` (`uv pip install -e .`, run by `~/setup_instance.sh`).
   - It also has torch 2.11.0+cpu, transformers 5.12.1, graphviz 0.21, pytest 9.0.3 and pre-commit 3.5.0.
   - The package adds one requirement, `inflect==7.5.0` (it pulls `typeguard`). It was installed here on 09-29 with
-    the user's OK.
+    the user's OK, and again on the 10-01 pod (`scripts/2026-10-01/phase_env.sh`).
   - Use `/opt/venv/bin/python`. Where the package's docs say `python_env`, this venv plays that role here.
   - Older pods had a `python_env` made by `./create_venv.sh`. Don't create one without asking.
 - **`~/.bashrc` on this pod:**
@@ -53,6 +56,11 @@ Written for the 09-29 pod (`app-5ddf2d9d-deployment-5545b7c7f8-c4vpz`). Where an
   - `snapshot_download(..., local_files_only=True)` with no revision resolves `refs/main` in the cache.
   - A snapshot downloaded by commit hash alone has no `refs/main`, so pass the revision. On 09-29, one plain
     `snapshot_download` wrote the ref.
+  - **Since D35 the code passes the revision everywhere** (`tt/text.py`, `tt/checkpoint.py`,
+    `scripts/reference_env.py`), so no `refs/main` is needed. On 10-01 only the pinned revision was downloaded. A
+    plain `snapshot_download` could fetch a newer `main`.
+  - **The LLM tests also need `Qwen/Qwen2-0.5B-Instruct`** (954 MB, `tests/pcc/test_qwen2lm*.py`). It is not pinned;
+    on 10-01 it resolved to `c540970f9e29518b1d8f06ab8b24cba66ad77b6d`.
 - **The reference venv:** `~/cosyvoice2_ref_env`.
   - Build it with `docs/security.md`'s two steps: torch alone from the CPU index, then PyPI. Step 2 goes under the
     lock file (D35).

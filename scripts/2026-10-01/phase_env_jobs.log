@@ -1,0 +1,50 @@
+== ref_venv
+Using CPython 3.10.19
+Creating virtual environment at: /home/user/cosyvoice2_ref_env
+Activate with: source /home/user/cosyvoice2_ref_env/bin/activate
+Using Python 3.10.19 environment at: /home/user/cosyvoice2_ref_env
+ Downloaded setuptools
+ Downloaded networkx
+Using Python 3.10.19 environment at: /home/user/cosyvoice2_ref_env
+   Building openai-whisper==20250625
+   Building antlr4-python3-runtime==4.9.3
+   Building wget==3.2
+      Built wget==3.2
+ Downloaded tiktoken
+      Built antlr4-python3-runtime==4.9.3
+ Downloaded soundfile
+ Downloaded setuptools
+ Downloaded fonttools
+      Built openai-whisper==20250625
+ Downloaded pillow
+ Downloaded onnxruntime
+ Downloaded modelscope
+ Downloaded matplotlib
+ Downloaded numpy
+ Downloaded pyarrow
+ Downloaded triton
+Uninstalled 1 package in 36ms
+ - setuptools==78.1.0
+Using Python 3.10.19 environment at: /home/user/cosyvoice2_ref_env
+Name: torch
+Version: 2.11.0+cpu
+Name: torchaudio
+Version: 2.11.0+cpu
+Using Python 3.10.19 environment at: /home/user/cosyvoice2_ref_env
+nvidia packages: 0
+Using Python 3.10.19 environment at: /home/user/cosyvoice2_ref_env
+frozen: 109 packages
+== upstream
+If you want to create a new branch to retain commits you create, you may
+HEAD is now at 074ca6d Add FunAudioLLM ecosystem section with links to ASR projects
+upstream 074ca6dc9e80a2f424f1f74b48bdd7d3fea531cc 2026-05-26 02:15:40 +0800
+ dd9105b34bf2be2230f4aa1e4769fb586a3c824e third_party/Matcha-TTS (v0.0.5-2-gdd9105b)
+== checkpoints
+CosyVoice2-0.5B /home/user/models/hub/models--FunAudioLLM--CosyVoice2-0.5B/snapshots/eec1ae6c79877dbd9379285cf8789c9e0879293d
+Qwen2-0.5B-Instruct /home/user/models/hub/models--Qwen--Qwen2-0.5B-Instruct/snapshots/c540970f9e29518b1d8f06ab8b24cba66ad77b6d
+4.0K	/home/user/models/hub/CACHEDIR.TAG
+4.6G	/home/user/models/hub/models--FunAudioLLM--CosyVoice2-0.5B
+954M	/home/user/models/hub/models--Qwen--Qwen2-0.5B-Instruct
+== librispeech
+md5 32fa31d27d2e1cad72775fee3f4849a9
+40

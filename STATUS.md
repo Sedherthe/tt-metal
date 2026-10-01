@@ -4,7 +4,18 @@ Rewrite this file each session; don't append to it. Every claim here cites a com
 FINDINGS.md or DECISIONS.md (D*). FINDINGS prefixes: R = the 09-27 review, B = build findings, O = older open
 items, X = fixed. Older narrative lives in `history/`.
 
-## Where things stand
+## 2026-10-01, in progress (this block is replaced by the end-of-session rewrite)
+
+- **The 09-30 pod ended overnight.** Nothing in git was lost: everything below is on `backup/2026-09-29-pr`
+  (`213afe7909`) and `backup/2026-09-29-notes`. Backups continue on those two branches (the user, 10-01).
+- **The new pod** (B42): n150 L at `0000:e1:00.0`, healthy. The environment is rebuilt, and the reference venv
+  equals the lock. The reference side is being regenerated; then the backup tip gets re-verified on this card
+  (`scripts/2026-10-01/`).
+- **Found on GitHub, not in these notes** (R1): #56651 is ready for review, not a draft, and mtairum **approved**
+  it on 09-30 on `33aa3601eb` after Tier-3 CI. The backup's three later commits would move the head past it. Pushing
+  is the user's call (D34).
+
+## Where things stand (09-30, end of session)
 
 - **Stopped after lever (b)'s proposal, as asked (09-30, D45).** This round did, in order:
   - the protected branches pushed once, fast-forward, confirmed by the user;

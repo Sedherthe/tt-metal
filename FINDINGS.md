@@ -13,12 +13,23 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
 
 ## R: the 09-27 end-to-end review (numbering kept; the user's adjustments noted)
 
-### R1 — The bounty assignment is at risk (confirmed). Status: open
+### R1 — The bounty assignment is at risk (confirmed). Status: open; the PR is approved (10-01, read from GitHub)
 - Our last comment on #54104 was 09-09. The takeover request came on 09-13, and nobody replied as of 09-27.
 - Bounty terms: an issue can be reassigned after "over two (2) weeks" unresponsive, and the PR must be
   submitted while still assigned.
 - The draft PR #56651 description is stale.
 - Action: push, post the progress comment, and apply the PR description. Drafts are in `drafts/`.
+- **On GitHub, 10-01** (none of this was in the notes):
+  - #56651 has not been a draft since 09-27 08:52 (the user marked it ready for review). It was renamed "Add
+    CosyVoice2-0.5B on TTNN (N150)" on 09-28 and labelled `pr-complexity:high`, `pr-priority:p2`, `pr-risk:medium`.
+  - The user's progress comment went on the PR (09-28 05:52), not on #54104. On #54104 the user's last comment is
+    still 09-09, and the 09-13 takeover request is unanswered. The user is still the assignee.
+  - **mtairum approved #56651 on 09-30 17:51**, on `33aa3601eb`. Before that, mtairum ran it on Tier-3 CI, merged
+    onto main, on `wh_n150` (run 36746885220, success). The four real-checkpoint PCC files passed (18 tests); e2e
+    and perf were not run, because CI has no `COSYVOICE2_INPUTS`.
+  - The PR's description is still the 09-15 text ("This is a draft ...").
+  - The backup's three later commits (`ea95ce1d66`, `1dcdc10059`, `213afe7909`) would move the head past the
+    approved commit.
 
 ### R2 — No streaming pipeline, which is the core deliverable (confirmed). Status: non-streaming built `0dbe9c44f4`; streaming planned after bucketing (D17)
 - There is no pipeline or text-to-speech entry point in `tt/`.
@@ -905,6 +916,29 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
   - WER/SIM over five draws for the traced configuration;
   - a decision on the final chunk: eager, which is still 0.69–0.95 s of CFM, or 17 more traces;
   - the pipeline's trace region raised to at least 124 MB.
+
+### B42 — The 10-01 pod: most likely the same host, another card, healthy; that card's firmware last started at ~16:55 on 09-29 (confirmed, 10-01). Status: recorded
+- **Pod:** `app-7a544cdc-deployment-65d799ff57-9l4dj`.
+  - n150 L at `0000:e1:00.0` (`/dev/tenstorrent/4`), firmware 19.11.0.0;
+  - KMD 2.9.0, with 09-29's parameters (`power_policy=Y`, `idle_power_down_grace_ms=5000`, `auto_reset_timeout=10`,
+    `reset_limit=10`);
+  - all seven N150s at 16 GT/s x16.
+- **Most likely the same host as 09-29/30:**
+  - uptime 93 days 9:49 at 09:53 on 10-01, and 92 days on 09-30 (B33);
+  - the same seven BDFs.
+- **Health** (`scripts/2026-10-01/`):
+  - `tt-smi -s` at 10:25:31 and 10:28:01: DRAM OK, `FAULTS` 0, no throttling, heartbeat 295,904 → 296,201
+    (1.98/s);
+  - the smoke test: max |diff| 0.0078, one bf16 ulp, as on 09-29.
+- **When this card's firmware last started:** 295,904 / 1.98 s back from 10:25 is ~16:55 on 09-29. That is B33's
+  host-wide restart, so this card has not restarted since. Nothing here says what ended the 09-30 pod or its card
+  (`0000:01:00.0`).
+- **The environment, rebuilt in about a minute** (uv's cache held the packages):
+  - the reference venv equals the lock file and 09-29's freeze, 109 packages, `+cpu`, no `nvidia-*`;
+  - the shim self-test: 8.09e-6 against 1.8 for the control, as in B21.
+- **Lost with the 09-30 pod:** `/home/user/data`, i.e. the inputs, the references, the runs, the noise draws, the
+  step sweep and the merge's draws. Also the kernel caches, the profiler's raw logs and `~/listening`. The notes keep
+  the scripts and logs.
 
 ## O: older open items
 
