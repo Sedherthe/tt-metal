@@ -1,0 +1,37 @@
+2026-10-02 02:28:40 started stage1_a (log /home/user/data/cosyvoice2_runs/1002/stage1_a.log)
+2026-10-02 02:43:41 stage1_a exited 0
+stage1 attempt a: tokens 92/109/83/183/264/202/115/272/343/272/234/116/172/78/102/157/288/234/301/245/218/98/91/292/175/255 (record 213/95/347/75/317/202)
+Distinct utterances: 27, audio 205.68 s, wall 99.78 s, aggregate RTF 0.485, worst 0.638. Config: reported, HiFT F0/source float32, bucketing True, warm-up buckets (769.9 s), seed 1986.
+2026-10-02 02:43:41 started stage1_b (log /home/user/data/cosyvoice2_runs/1002/stage1_b.log)
+2026-10-02 02:48:56 stage1_b exited 0
+stage1 attempt b: tokens 99/98/88/206/252/213/95/250/347/294/236/81/158/75/100/159/274/227/317/252/202/105/74/290/164/250 (record 213/95/347/75/317/202)
+Distinct utterances: 27, audio 202.48 s, wall 99.95 s, aggregate RTF 0.494, worst 0.673. Config: reported, HiFT F0/source float32, bucketing True, warm-up buckets (183.2 s), seed 1986.
+stage1: tokens differ from the record in both attempts; keeping attempt b
+2026-10-02 02:48:56 started stream_a (log /home/user/data/cosyvoice2_runs/1002/stream_a.log)
+2026-10-02 03:04:12 stream_a exited 0
+stream attempt a: tokens 213/95/347/75/317/202 (record 213/95/347/75/317/202)
+Distinct utterances: 6, audio 49.96 s, wall 42.00 s, aggregate RTF 0.841, worst 1.067. Config: reported, HiFT F0/source float32, bucketing True, warm-up buckets (185.6 s), seed 1986. Streaming: first audio 1.376-1.464 s; streaming warm-up 654.3 s.
+2026-10-02 03:04:12 started score_stage1 (log /home/user/data/cosyvoice2_runs/1002/score_stage1.log)
+2026-10-02 03:10:27 score_stage1 exited 0
+| case | words | WER % pytorch-reference | WER % ttnn | SIM pytorch-reference | SIM ttnn | audio s pytorch-reference / ttnn |
+|---|---|---|---|---|---|---|
+| zero_shot_260-123286-0014 | 7 | 14.29 | 0.00 | 95.82 | 95.95 | 3.12 / 3.00 |
+| zero_shot_260-123440-0010 | 20 | 0.00 | 0.00 | 96.85 | 98.26 | 8.32 / 8.08 |
+| zero_shot_260-123440-0002 | 44 | 0.00 | 2.27 | 97.74 | 98.30 | 12.04 / 12.68 |
+| zero_shot_121-127105-0015 | 10 | 0.00 | 0.00 | 92.61 | 94.72 | 3.68 / 3.80 |
+| zero_shot_121-127105-0003 | 18 | 0.00 | 0.00 | 94.32 | 94.73 | 7.64 / 8.52 |
+| zero_shot_121-127105-0024 | 48 | 0.00 | 0.00 | 93.94 | 93.52 | 12.84 / 13.88 |
+| zero_shot_parity_cosyvoice1_en | 15 | 0.00 | 6.67 | 94.86 | 93.91 | 6.04 / 6.24 |
+| **corpus (7 utterances)** | 162 | **0.62** (1 errors) | **1.23** (2 errors) | **95.16** | **95.63** | |
+2026-10-02 03:10:27 started score_stream (log /home/user/data/cosyvoice2_runs/1002/score_stream.log)
+2026-10-02 03:12:12 score_stream exited 0
+| case | words | WER % pytorch-reference | WER % ttnn | SIM pytorch-reference | SIM ttnn | audio s pytorch-reference / ttnn |
+|---|---|---|---|---|---|---|
+| zero_shot_260-123286-0014 | 7 | 14.29 | 0.00 | 95.82 | 96.34 | 3.12 / 3.00 |
+| zero_shot_260-123440-0010 | 20 | 0.00 | 0.00 | 96.85 | 98.35 | 8.32 / 8.08 |
+| zero_shot_260-123440-0002 | 44 | 0.00 | 2.27 | 97.74 | 98.49 | 12.04 / 12.68 |
+| zero_shot_121-127105-0015 | 10 | 0.00 | 0.00 | 92.61 | 93.77 | 3.68 / 3.80 |
+| zero_shot_121-127105-0003 | 18 | 0.00 | 0.00 | 94.32 | 94.44 | 7.64 / 8.52 |
+| zero_shot_121-127105-0024 | 48 | 0.00 | 0.00 | 93.94 | 93.87 | 12.84 / 13.88 |
+| **corpus (6 utterances)** | 147 | **0.68** (1 errors) | **0.68** (1 errors) | **95.21** | **95.88** | |
+audio chain done

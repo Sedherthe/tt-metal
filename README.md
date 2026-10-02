@@ -14,6 +14,8 @@ Also here:
 - `REBUILD_2026-09-29.md`: the spec for rebuilding the work lost with the 09-28 pod. Its numbers are claims until
   re-measured (B22, D33).
 - `drafts/`: unposted texts (issue comments, the PR description).
+- `audio/`: rendered audio kept for listening. `2026-10-02_merged_33aa3601eb/` is the merged PR head's Stage 1 and
+  streaming output on the six corpus utterances, next to the PyTorch reference's, with the prompts.
 - `design/`: design proposals. `2026-09-27_pipeline_nonstreaming.md` (rev 2) is approved and built through step 5.
 - `reviews/`: checks of documents we were handed (`2026-09-27_cosyvoice1_lessons_verification.md`).
 - `scripts/2026-09-27/`, `2026-09-28/`, `2026-09-28b/`, `2026-09-29/`: the one-off checks and job chains behind each
