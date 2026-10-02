@@ -13,7 +13,7 @@ Each entry also says whether it is **confirmed** (checked) or a **suspicion** (n
 
 ## R: the 09-27 end-to-end review (numbering kept; the user's adjustments noted)
 
-### R1 — The bounty assignment is at risk (confirmed). Status: open; the PR is approved (10-01, read from GitHub)
+### R1 — The bounty assignment is at risk (confirmed). Status: **closed: #56651 merged (`98a19fd851`, 10-01), #54104 closed and the bounty completed (10-01)**
 - Our last comment on #54104 was 09-09. The takeover request came on 09-13, and nobody replied as of 09-27.
 - Bounty terms: an issue can be reassigned after "over two (2) weeks" unresponsive, and the PR must be
   submitted while still assigned.
