@@ -1,0 +1,7 @@
+tt-metal 213afe7909 (C++ base 1f29f312fa), KMD 2.9.0
+config tensors in DRAM, 0 MiB allocated first: conv1d 4.58 s, 27 new kernel binaries ['conv_bmm_tilize', 'halo_gather', 'pack_untilize', 'reader_conv_activations_padded_with_halo_3x3_weights_v2', 'reader_unary_local_l1_copy_backwards', 'reader_unary_sharded_blocks_interleaved_start_id', 'reader_unary_sharded_metal2', 'reader_writer_tiled_out_1d_mcast_receiver_conv_weights_tiled_col_to_rm_blocks', 'reader_writer_tiled_out_1d_mcast_sender_conv_weights_tiled_col_to_rm_blocks', 'writer_unary_sharded', 'writer_unary_sharded_blocks_interleaved_start_id_metal2']
+config tensors in DRAM, 0 MiB allocated first: conv1d 0.05 s, 0 new kernel binaries []
+config tensors in DRAM, 1 MiB allocated first: conv1d 1.50 s, 4 new kernel binaries ['halo_gather', 'reader_conv_activations_padded_with_halo_3x3_weights_v2']
+config tensors in L1, 0 MiB allocated first: conv1d 1.49 s, 8 new kernel binaries ['halo_gather', 'reader_conv_activations_padded_with_halo_3x3_weights_v2', 'reader_writer_tiled_out_1d_mcast_receiver_conv_weights_tiled_col_to_rm_blocks', 'reader_writer_tiled_out_1d_mcast_sender_conv_weights_tiled_col_to_rm_blocks']
+config tensors in L1, 1 MiB allocated first: conv1d 0.06 s, 0 new kernel binaries []
+binaries in /home/user/data/kc_repro_1002_issue: 53
