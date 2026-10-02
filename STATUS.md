@@ -27,6 +27,10 @@ FINDINGS.md or DECISIONS.md (D*). The previous STATUS (09-30, with 10-01's in-pr
 - Lever (b), the traced CFM during streaming, is a proposal with a prototype (B41,
   `design/2026-09-30_traced_cfm_streaming.md`).
 - B45, stage A's last-0.1 s check at digital silence, is open.
+- **The kernel-cache issue is ready to file** (`drafts/2026-10-02_ttnn_issue_conv_dram_config_kernel_hash.md`).
+  - Its reproducer was re-run on 10-02 with the same verdicts, and the cited lines are unchanged on main at
+    `6a39ae0a22`.
+  - No existing upstream issue covers it. The user files it.
 
 ## The 10-01 pod
 

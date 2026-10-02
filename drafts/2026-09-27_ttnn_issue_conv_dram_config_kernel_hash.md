@@ -1,4 +1,4 @@
-<!-- DRAFT, not filed. For tenstorrent/tt-metal, label suggestion: ttnn, conv, performance. -->
+<!-- SUPERSEDED by 2026-10-02_ttnn_issue_conv_dram_config_kernel_hash.md (re-verified 10-02). DRAFT, not filed. For tenstorrent/tt-metal, label suggestion: ttnn, conv, performance. -->
 
 # [ttnn][conv][halo] `config_tensors_in_dram=True` puts DRAM buffer addresses in compile-time args, so compiled kernels aren't reused across processes
 
